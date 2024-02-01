@@ -6,13 +6,13 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:50:21 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/01 15:06:25 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/01 17:10:45 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
-
+# include "../srcs/libft/libft.h"
 // 이 파일에는 미니셸 구조체들을 선언한다
 
 enum	e_type
@@ -55,10 +55,10 @@ typedef struct s_env				// 환경변수 연결리스트
 {
 	char			*name;			// 환경변수 Key값 ($USER=yusekim 에서 'USER' 부분)
 	char			*value;			// 환경변수 Value값 ($USER=yusekim 에서 'yusekim' 부분)
-	struct s_env	*origin_prev;	// envp 들어온 순서대로
-	struct s_env	*origin_next;
-	struct s_env	*sorted_prev;
-	struct s_env	*sorted_next;
+	struct s_env	*origin_prev;	// envp 들어온 순서대로 prev node
+	struct s_env	*origin_next;	// envp 들어온 순서대로 next node
+	struct s_env	*sorted_prev;	// name 기준으로 정렬하였을때의 prev node
+	struct s_env	*sorted_next;	// name 기준으로 정렬하였을때의 next node
 }	t_env;
 
 typedef struct s_env_pack
