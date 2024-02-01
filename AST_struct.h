@@ -1,3 +1,6 @@
+#ifndef AST_STRUCT_H
+# define AST_STRUCT_H
+
 enum	e_exp
 {
 // ...	
@@ -91,3 +94,7 @@ typedef struct s_script
 	t_pipeline			*pipeline;
 	t_command			*cmd;
 } t_script;
+
+// value는 현재는 char *로 표현되어 있지만 struct { "value":key } 형태로 갈 듯.
+
+#endif

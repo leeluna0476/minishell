@@ -1,3 +1,6 @@
+#ifndef PARSE_STRUCT_H
+# define PARSE_STRUCT_H
+
 // lexer: metacharacter를 기준으로 line을 분할.
 struct s_piece
 {
@@ -14,3 +17,5 @@ struct s_token
 	struct s_token	*prev;
 	struct s_token	*next;
 };
+
+#endif
