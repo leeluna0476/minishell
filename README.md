@@ -1,2 +1,2 @@
 # minishell
-seojilee &amp;&amp; yusekim's minishell
+yusekim &amp;&amp; seojilee's minishell
