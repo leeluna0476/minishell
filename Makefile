@@ -18,7 +18,7 @@ CC = cc
 CFLAGS = -I./includes -Wall -Wextra -Werror
 SRCS = ./test_main.c \
 		./srcs/envs/build_env_pack.c \
-		./srcs/envs/env_util.c
+		./srcs/envs/env_utils.c
 
 OBJS = $(SRCS:.c=.o)
 LIBFT = ./srcs/libft/libft.a

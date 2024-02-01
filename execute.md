@@ -1,7 +1,7 @@
 # Minis"hell" 실행부 기록
 
 뽀오나쓰 까지 진행되는 미니셸의 실행부 파트를 맡게 되었다..
-일단 이전에 mandatory 파트 부분에서 써먹을 수 있는 부분은 다 긁어왔다.
+일단 이전에 mandatory 파트 부분에서 써먹을 수 있는 부분은 다 긁어왔다(코드 재활용 최고~~).
 
 ### 환경변수 Environment variables
 터미널에서 `env`를 치거나 인자없이 `export`를 치면 해당 터미널의 환경변수 목록이 나오는데 둘이 약간의 차이가 있다.
@@ -35,7 +35,6 @@ typedef struct s_env_pack
 
 ### 확장과 따옴표 처리 Expension and quoting
 
-
 ### 빌트인 builtins
 **- echo**
 **- cd**
@@ -45,5 +44,6 @@ typedef struct s_env_pack
 **- env**
 **- exit**
 
-
 ### 시그널 처리 / 종료 코드 Signal handling / exit code
+
+### AST 순회 및 파이프/리다이렉션 executing, pipe, and redirection
