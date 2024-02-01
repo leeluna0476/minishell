@@ -69,15 +69,20 @@ typedef struct s_pipeline
 } t_pipeline;
 
 // &&, || 등의 서브 스크립트 구분.
-typedef struct s_logical_expansion
+typedef struct s_logical_expression
 {
 	e_type		type;
 	char		*value;
 	e_operator	operator;
 	t_script	*left;
 	t_script	*right;
-} t_logical_expansion;
+} t_logical_expression;
 
+// lexer에서 정리해준 순서를 보고 판단.
+// 우선순위:
+	// 1. logical expression
+	// 2. pipeline
+	// 3. command
 typedef struct s_script
 {
 	e_type				type;
