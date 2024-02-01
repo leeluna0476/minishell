@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojilee <seojilee@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 02:22:08 by seojilee          #+#    #+#             */
-/*   Updated: 2023/10/17 12:56:49 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/02 00:08:13 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	size_t		dst_len;
+//	size_t		dst_len;
 	size_t		src_len;
 	size_t		i;
 
 	if (!dst || !src)
 		return (0);
-	dst_len = ft_strlen(dst);
+//	dst_len = ft_strlen(dst);
 	src_len = ft_strlen(src);
 	if (!dstsize)
 		return (src_len);

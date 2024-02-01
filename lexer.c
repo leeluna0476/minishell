@@ -104,8 +104,17 @@ int	get_meta1(char *line, char **string)
 
 int	get_meta2(char *line, char **string)
 {
-	*string = ft_substr(line, 0, 1);
-	return (1);
+	int	i;
+
+	i = 1;
+	if (line[0] == '\"' || line[0] == '\"')
+	{
+		while (line[i] && line[i] != line[0])
+			i++;
+		i++;
+	}
+	*string = ft_substr(line, 0, i);
+	return (i);
 }
 
 int	remove_space(char *line)
@@ -166,7 +175,7 @@ int	main(void)
 	t_piece	*curr;
 
 	atexit(leaks);
-	pieces = lexer("echo \"$USER\"; (ls -l | wc -l) > outfile");
+	pieces = lexer("echo (\"   $USER\"); (ls -l | wc -l) > outfile");
 
 	curr = pieces;
 	while (curr)
