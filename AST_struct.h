@@ -78,7 +78,7 @@ typedef struct s_logical_expression
 	t_script	*right;
 } t_logical_expression;
 
-// lexer에서 정리해준 순서를 보고 판단.
+// parser에서 정리해준 순서를 보고 판단.
 // 우선순위:
 	// 1. logical expression
 	// 2. pipeline
