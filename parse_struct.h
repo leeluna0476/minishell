@@ -5,6 +5,7 @@
 struct s_piece
 {
 	char			*string;
+//	enum e_type		type;
 	struct s_piece	*next;
 };
 
@@ -18,24 +19,17 @@ struct s_piece
 //	struct s_token	*next;
 //};
 
-# define GREATER 60,
-# define LESSER 62,
-# define AND 38,
-# define OR 124,
-# define SEMICOLON 59,
-# define PARENTHESIS1 40,
-# define PARENTHESIS2 41,
-# define DOUBLE_QUOTE 34,
-# define QUOTE 39
-
-enum e_bool
-{
-	FALSE = 0,
-	TRUE
-};
+//# define GREATER 60,
+//# define LESSER 62,
+//# define AND 38,
+//# define OR 124,
+//# define SEMICOLON 59,
+//# define PARENTHESIS1 40,
+//# define PARENTHESIS2 41,
+//# define DOUBLE_QUOTE 34,
+//# define QUOTE 39
 
 typedef struct s_piece t_piece;
 typedef enum e_characters t_chars;
-typedef enum e_bool t_bool;
 
 #endif

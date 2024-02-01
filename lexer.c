@@ -61,7 +61,7 @@ void	free_piece(t_piece *piece)
 	free(piece);
 }
 
-t_bool	is_meta1(char c)
+int	is_meta1(char c)
 {
 	const char	*meta1 = "><&|;";
 	int			i;
@@ -70,13 +70,13 @@ t_bool	is_meta1(char c)
 	while (meta1[i])
 	{
 		if (c == meta1[i])
-			return (TRUE);
+			return (1);
 		i++;
 	}
-	return (FALSE);
+	return (0);
 }
 
-t_bool	is_meta2(char c)
+int	is_meta2(char c)
 {
 	const char	*meta2 = "()\"\'";
 	int			i;
@@ -85,10 +85,10 @@ t_bool	is_meta2(char c)
 	while (meta2[i])
 	{
 		if (c == meta2[i])
-			return (TRUE);
+			return (1);
 		i++;
 	}
-	return (FALSE);
+	return (0);
 }
 
 int	get_meta1(char *line, char **string)
@@ -140,13 +140,13 @@ int	get_word(char *line, char **string)
 
 t_piece	*lexer(char *line)
 {
-	t_piece		*pieces;
+	t_piece		*list;
 	t_piece		*node;
 	char		*string;
 	int			i;
 	int			temp;
 
-	pieces = NULL;
+	list = NULL;
 	i = 0;
 	while (line[i] && line[i] != '\n')
 	{
@@ -157,11 +157,11 @@ t_piece	*lexer(char *line)
 		else
 			i += get_word(&(line[i]), &string);
 		node = new_piece(string);
-		add_piece(&pieces, node);
+		add_piece(&list, node);
 		free(string);
 		i += remove_space(&(line[i]));
 	}
-	return (pieces);
+	return (list);
 }
 
 void	leaks(void)
@@ -175,7 +175,7 @@ int	main(void)
 	t_piece	*curr;
 
 	atexit(leaks);
-	pieces = lexer("echo (\"   $USER\"); (ls -l | wc -l) > outfile");
+	pieces = lexer("<<<<<<<<<<<echo (\"   $USER\"); (ls -l | wc -l) > outfile");
 
 	curr = pieces;
 	while (curr)
