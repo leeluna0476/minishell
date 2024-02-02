@@ -30,3 +30,6 @@
 
 // redirection rule 다시 짜기.
 // pipeline이랑 redirection 조화를 잘... 어떻게...
+
+// 이것은 예시일 뿐이다.
+// 진짜 .bnf는 서브젝트에 맞게 적절하게 작성할 것.
