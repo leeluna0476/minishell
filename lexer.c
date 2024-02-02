@@ -9,25 +9,25 @@ int	is_space(char c)
 	return (0);
 }
 
-t_piece	*new_piece(char *string)
+t_token	*new_token(char *string)
 {
-	t_piece	*piece;
+	t_token	*token;
 
 	if (string)
 	{
-		piece = ft_calloc(1, sizeof(t_piece));
-		if (piece)
+		token = ft_calloc(1, sizeof(t_token));
+		if (token)
 		{
-			piece->string = ft_strdup(string);
+			token->string = ft_strdup(string);
 		}
-		return (piece);
+		return (token);
 	}
 	return (NULL);
 }
 
-t_piece	*last_piece(t_piece *list)
+t_token	*last_token(t_token *list)
 {
-	t_piece	*curr;
+	t_token	*curr;
 
 	curr = list;
 	while (curr->next != NULL)
@@ -37,28 +37,28 @@ t_piece	*last_piece(t_piece *list)
 	return (curr);
 }
 
-void	add_piece(t_piece **list, t_piece *piece)
+void	add_token(t_token **list, t_token *token)
 {
-	t_piece	*last;
+	t_token	*last;
 
 	if (list)
 	{
 		if (*list)
 		{
-			last = last_piece(*list);
-			last->next = piece;
+			last = last_token(*list);
+			last->next = token;
 		}
 		else
 		{
-			*list = piece;
+			*list = token;
 		}
 	}
 }
 
-void	free_piece(t_piece *piece)
+void	free_token(t_token *token)
 {
-	free(piece->string);
-	free(piece);
+	free(token->string);
+	free(token);
 }
 
 int	is_meta1(char c)
@@ -107,7 +107,7 @@ int	get_meta2(char *line, char **string)
 	int	i;
 
 	i = 1;
-	if (line[0] == '\"' || line[0] == '\"')
+	if (line[0] == '\"' || line[0] == '\'')
 	{
 		while (line[i] && line[i] != line[0])
 			i++;
@@ -138,10 +138,10 @@ int	get_word(char *line, char **string)
 	return (i);
 }
 
-t_piece	*lexer(char *line)
+t_token	*lexer(char *line)
 {
-	t_piece		*list;
-	t_piece		*node;
+	t_token		*list;
+	t_token		*node;
 	char		*string;
 	int			i;
 	int			temp;
@@ -156,8 +156,8 @@ t_piece	*lexer(char *line)
 			i += get_meta2(&(line[i]), &string);
 		else
 			i += get_word(&(line[i]), &string);
-		node = new_piece(string);
-		add_piece(&list, node);
+		node = new_token(string);
+		add_token(&list, node);
 		free(string);
 		i += remove_space(&(line[i]));
 	}
@@ -171,22 +171,22 @@ void	leaks(void)
 
 int	main(void)
 {
-	t_piece	*pieces;
-	t_piece	*curr;
+	t_token	*tokens;
+	t_token	*curr;
 
 	atexit(leaks);
-	pieces = lexer("<<<<<<<<<<<echo (\"   $USER\"); (ls -l | wc -l) > outfile");
+	tokens = lexer("<<<<<<<<<<<echo .... ---(()\'\"   $USER\"\');; (ls -l | wc -l) > outfile");
 
-	curr = pieces;
+	curr = tokens;
 	while (curr)
 	{
 		printf("%s\n", curr->string);
 		curr = curr->next;
 	}
-	while (pieces)
+	while (tokens)
 	{
-		curr = pieces;
-		pieces = pieces->next;
-		free_piece(curr);
+		curr = tokens;
+		tokens = tokens->next;
+		free_token(curr);
 	}
 }

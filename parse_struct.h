@@ -2,11 +2,12 @@
 # define PARSE_STRUCT_H
 
 // lexer: metacharacter를 기준으로 line을 분할.
-struct s_piece
+struct s_token
 {
 	char			*string;
-//	enum e_type		type;
-	struct s_piece	*next;
+	enum e_type		type;
+	struct s_token	*prev;
+	struct s_token	*next;
 };
 
 // tokenizer: string에 type 부여.
@@ -15,7 +16,6 @@ struct s_piece
 //{
 //	char			*string;
 //	enum e_type		type;
-//	struct s_token	*prev;
 //	struct s_token	*next;
 //};
 
@@ -29,7 +29,7 @@ struct s_piece
 //# define DOUBLE_QUOTE 34,
 //# define QUOTE 39
 
-typedef struct s_piece t_piece;
+typedef struct s_token t_token;
 typedef enum e_characters t_chars;
 
 #endif
