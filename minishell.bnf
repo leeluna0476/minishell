@@ -1,0 +1,29 @@
+<script>                ::= <command> ';'?
+
+<command>               ::= <simple-command> | <pipeline>
+
+<simple-command>        ::= <word> <redirection>?
+
+<pipeline>              ::= <command> '|' <command>
+
+<redirection>           ::= '<' <word> | '>' <word> |'2>' <word>
+
+<word>                  ::= <string> | <variable>
+
+<variable>              ::= '$' <identifier>
+
+<string>                ::= "'" <character> { <character> } "'" | '"' <character> { <character> } '"'
+
+<identifier>            ::= <capital character> { <capital character> }
+
+<character>             ::= <capital letter> | <small letter> | <number> | <metacharacter> | <other ASCII character>
+
+<capital letter>        ::= A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
+
+<small letter>          ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z
+
+<number>                ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+
+<metacharacter>         ::= '-' | '|' | '&' | ';' | '(' | ')' | '<' | '>' | { spaces }
+
+<other ASCII character> ::= { ASCII characters }
