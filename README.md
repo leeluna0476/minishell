@@ -26,8 +26,3 @@ seojilee &amp;&amp; yusekim's minishell
 - Script에 Logical expression이 없다면 Pipeline이 있는지 확인한다. 있다면 첫번째 파이프를 기준으로 왼쪽은 Command, 오른쪽은 다시 파이프라인으로 분할한다.
 - Command는 Parser에서 형식에 맞춰서 정렬한 순서를 따라 name, prefix, suffix로 분할한다.
 ...
-
-
-lexer: ((ls)) -> (, (, ls, ), )
-tokenizer: (:괄호1, (:괄호1, ls:단어, ):괄호2 ):괄호2
-parser: 괄호 = 0; 괄호 = 1; 괄호 = 2; 단어; 괄호 = 1; 괄호 = 0;
