@@ -37,6 +37,7 @@ t_token	*new_token(char *string, t_type type);
 t_token	*last_token(t_token *list);
 void	add_token(t_token **list, t_token *token);
 void	free_token(t_token *token);
+void	free_tokens(t_token **tokens);
 
 // meta
 int		is_meta1(char c);

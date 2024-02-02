@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:25:20 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/02 10:49:49 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:05:28 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@ t_token	*last_token(t_token *list)
 {
 	t_token	*curr;
 
-	curr = list;
-	while (curr->next != NULL)
+	if (list)
 	{
-		curr = curr->next;
+		curr = list;
+		while (curr->next != NULL)
+			curr = curr->next;
+		return (curr);
 	}
-	return (curr);
+	return (NULL);
 }
 
 void	add_token(t_token **list, t_token *token)
@@ -64,4 +66,20 @@ void	free_token(t_token *token)
 {
 	free(token->string);
 	free(token);
+	token = NULL;
+}
+
+void	free_tokens(t_token **tokens)
+{
+	t_token	**head;
+	t_token	*curr;
+
+	head = tokens;
+	while (*tokens)
+	{
+		curr = *tokens;
+		*tokens = (*tokens)->next;
+		free_token(curr);
+	}
+	*head = NULL;
 }

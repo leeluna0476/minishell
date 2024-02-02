@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:24:18 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/02 10:49:49 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:22:28 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,14 @@ int	get_word(char *line, char **string, t_type *type)
 	return (i);
 }
 
+void	syntax_error(char *string, t_token **list)
+{
+	// print error
+	printf("syntax error: `%s`\n", string);
+	free(string);
+	free_tokens(list);
+}
+
 t_token	*tokenizer(char *line)
 {
 	t_token		*list;
@@ -78,6 +86,11 @@ t_token	*tokenizer(char *line)
 			i += get_meta2(&(line[i]), &string, &type);
 		else
 			i += get_word(&(line[i]), &string, &type);
+		if (type == T_ERROR)
+		{
+			syntax_error(string, &list);
+			break ;
+		}
 		node = new_token(string, type);
 		add_token(&list, node);
 		free(string);
@@ -97,18 +110,13 @@ int	main(void)
 	t_token	*curr;
 
 	atexit(leaks);
-	tokens = tokenizer("<<<<<&&&<<<<<<echo .... ---(()\'\"   $USER\"\');; (ls -l | wc -l) > outfile");
-	curr = last_token(tokens);
+	tokens = tokenizer("<<eof ls -l | wc -l >> out");
+	curr = tokens;
 	while (curr)
 	{
 		printf("%s  ", curr->string);
 		printf("%d\n", curr->type);
-		curr = curr->prev;
+		curr = curr->next;
 	}
-	while (tokens)
-	{
-		curr = tokens;
-		tokens = tokens->next;
-		free_token(curr);
-	}
+	free_tokens(&tokens);
 }

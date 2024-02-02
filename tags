@@ -4,7 +4,6 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-AND	parse_struct.h	/^# define AND /;"	d
 AR	libft/Makefile	/^AR=ar$/;"	m
 ARFLAGS	libft/Makefile	/^ARFLAGS=rc$/;"	m
 AST_STRUCT_H	AST_struct.h	/^# define AST_STRUCT_H$/;"	d
@@ -14,44 +13,46 @@ CC	libft/Makefile	/^CC=cc$/;"	m
 CFLAGS	libft/Makefile	/^CFLAGS=-Wall -Wextra -Werror$/;"	m
 DIR_HEADER	libft/Makefile	/^DIR_HEADER=.\/$/;"	m
 DIR_SRCS	libft/Makefile	/^DIR_SRCS=.\/$/;"	m
-DOUBLE_QUOTE	parse_struct.h	/^# define DOUBLE_QUOTE /;"	d
-FALSE	parse_struct.h	/^	FALSE = 0,$/;"	e	enum:e_bool
 FT_PRINTF_H	libft/ft_printf.h	/^# define FT_PRINTF_H$/;"	d
-GREATER	parse_struct.h	/^# define GREATER /;"	d
 HEADER	libft/Makefile	/^HEADER=libft.h$/;"	m
 INDEX	libft/libft.h	/^# define INDEX	/;"	d
 JNDEX	libft/libft.h	/^# define JNDEX	/;"	d
 KNDEX	libft/libft.h	/^# define KNDEX	/;"	d
-LESSER	parse_struct.h	/^# define LESSER /;"	d
 LIBFT_H	libft/libft.h	/^# define LIBFT_H$/;"	d
 MAN_OBJS	libft/Makefile	/^MAN_OBJS=$(MAN_SRCS:.c=.o)$/;"	m
 MAN_SRCS	libft/Makefile	/^MAN_SRCS=ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c$/;"	m
 NAME	libft/Makefile	/^NAME=libft.a$/;"	m
 OBJS	libft/Makefile	/^OBJS=$(BONUS_OBJS) $(MAN_OBJS) $(PRINTF_OBJS)$/;"	m
-OR	parse_struct.h	/^# define OR /;"	d
-PARENTHESIS1	parse_struct.h	/^# define PARENTHESIS1 /;"	d
-PARENTHESIS2	parse_struct.h	/^# define PARENTHESIS2 /;"	d
 PARSE_STRUCT_H	parse_struct.h	/^# define PARSE_STRUCT_H$/;"	d
 PRINTF_OBJS	libft/Makefile	/^PRINTF_OBJS=$(PRINTF_SRCS:.c=.o)$/;"	m
 PRINTF_SRCS	libft/Makefile	/^PRINTF_SRCS=ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_puthex_l_fd.c ft_putint_fd.c ft_puts.c ft_putunbr_fd.c ft_printf.c ft_putchar_fd.c ft_puthex_s_fd.c ft_putmem_fd.c ft_putstr_fd.c$/;"	m
-QUOTE	parse_struct.h	/^# define QUOTE /;"	d
 RM	libft/Makefile	/^RM=rm -fr$/;"	m
-SEMICOLON	parse_struct.h	/^# define SEMICOLON /;"	d
-TRUE	parse_struct.h	/^	TRUE$/;"	e	enum:e_bool
-add_piece	lexer.c	/^void	add_piece(t_piece **list, t_piece *piece)$/;"	f
+T_AND	parse_struct.h	/^	T_AND,				\/\/ 논리 연산 AND "&&"$/;"	e	enum:e_type
+T_CLOSE_BRACKET	parse_struct.h	/^	T_CLOSE_BRACKET		\/\/ 논리 연산 괄호 닫힘 ')'$/;"	e	enum:e_type
+T_D_GREATER	parse_struct.h	/^	T_D_GREATER,		\/\/ 리다이렉션 append ">>"$/;"	e	enum:e_type
+T_D_LESSER	parse_struct.h	/^	T_D_LESSER,			\/\/ 리다이렉션 Here_doc "<<"$/;"	e	enum:e_type
+T_ERROR	parse_struct.h	/^	T_ERROR = -1,		\/\/ 기본값 (syntax check때의 초깃값)$/;"	e	enum:e_type
+T_GREATER	parse_struct.h	/^	T_GREATER,			\/\/ 리다이렉션 '>'$/;"	e	enum:e_type
+T_LESSER	parse_struct.h	/^	T_LESSER,			\/\/ 리다이렉션 '<'$/;"	e	enum:e_type
+T_OPEN_BRACKET	parse_struct.h	/^	T_OPEN_BRACKET,		\/\/ 논리 연산 괄호 열림 '('$/;"	e	enum:e_type
+T_OR	parse_struct.h	/^	T_OR,				\/\/ 논리 연산 OR "||"$/;"	e	enum:e_type
+T_PIPE	parse_struct.h	/^	T_PIPE,				\/\/ Pipe문자 '|'$/;"	e	enum:e_type
+T_SPACE	parse_struct.h	/^	T_SPACE,			\/\/ 공백문자(보통 space)$/;"	e	enum:e_type
+T_WORD	parse_struct.h	/^	T_WORD,				\/\/ 문자$/;"	e	enum:e_type
+add_token	token_utils.c	/^void	add_token(t_token **list, t_token *token)$/;"	f
 cmd	AST_struct.h	/^	t_command			*cmd;$/;"	m	struct:s_script
 cmd	AST_struct.h	/^	t_command	*cmd;$/;"	m	struct:s_pipeline
 content	libft/libft.h	/^	void			*content;$/;"	m	struct:s_list
 count_words	libft/ft_split.c	/^static size_t	count_words(char const *str, char c)$/;"	f	file:
-e_bool	parse_struct.h	/^enum e_bool$/;"	g
 e_exp	AST_struct.h	/^enum	e_exp$/;"	g
 e_operator	AST_struct.h	/^enum	e_operator$/;"	g
-e_type	AST_struct.h	/^enum	e_type$/;"	g
+e_type	parse_struct.h	/^enum	e_type$/;"	g
 exp	AST_struct.h	/^	t_exp		*exp;$/;"	m	struct:s_word
 fd_from	AST_struct.h	/^	int	fd_from;$/;"	m	struct:s_io
 fd_to	AST_struct.h	/^	int	fd_to;$/;"	m	struct:s_io
 file	AST_struct.h	/^	t_word	*file;$/;"	m	struct:s_redirect
-free_piece	lexer.c	/^void	free_piece(t_piece *piece)$/;"	f
+free_token	token_utils.c	/^void	free_token(t_token *token)$/;"	f
+free_tokens	token_utils.c	/^void	free_tokens(t_token **tokens)$/;"	f
 ft_atoi	libft/ft_atoi.c	/^int	ft_atoi(const char *str)$/;"	f
 ft_bzero	libft/ft_bzero.c	/^void	ft_bzero(void *s, size_t n)$/;"	f
 ft_calloc	libft/ft_calloc.c	/^void	*ft_calloc(size_t count, size_t size)$/;"	f
@@ -107,34 +108,40 @@ ft_substr	libft/ft_substr.c	/^char	*ft_substr(char const *s, unsigned int start,
 ft_tolower	libft/ft_tolower.c	/^int	ft_tolower(int c)$/;"	f
 ft_toupper	libft/ft_toupper.c	/^int	ft_toupper(int c)$/;"	f
 get_len	libft/ft_itoa.c	/^static void	get_len(int nb, int *len, int *sign)$/;"	f	file:
+get_meta1	meta.c	/^int	get_meta1(char *line, char **string, t_type *type)$/;"	f
+get_meta2	meta.c	/^int	get_meta2(char *line, char **string, t_type *type)$/;"	f
+get_type	tokenizer.c	/^t_type	get_type(char *string, int i)$/;"	f
+get_word	tokenizer.c	/^int	get_word(char *line, char **string, t_type *type)$/;"	f
 greater	libft/ft_memmove.c	/^static void	greater(unsigned char *dst, unsigned char *src, size_t len)$/;"	f	file:
 greater_address	libft/ft_memmove.c	/^static int	greater_address(void *dst, const void *src)$/;"	f	file:
 i	libft/ft_printf.h	/^	int		i;$/;"	m	struct:s_variable
 insert_num	libft/ft_itoa.c	/^static void	insert_num(int nb, char *num_string, int *i)$/;"	f	file:
 io	AST_struct.h	/^	t_io	*io;$/;"	m	struct:s_redirect
-is_meta1	lexer.c	/^t_bool	is_meta1(char c)$/;"	f
-is_meta2	lexer.c	/^t_bool	is_meta2(char c)$/;"	f
+is_meta1	meta.c	/^int	is_meta1(char c)$/;"	f
+is_meta2	meta.c	/^int	is_meta2(char c)$/;"	f
 is_set	libft/ft_strtrim.c	/^static int	is_set(char const *set, char c)$/;"	f	file:
-is_space	lexer.c	/^int	is_space(char c)$/;"	f
 is_space	libft/ft_atoi.c	/^static int	is_space(char c)$/;"	f	file:
+is_space	tokenizer.c	/^int	is_space(char c)$/;"	f
 kind	AST_struct.h	/^	e_exp	kind; \/\/ 어떤 확장인지.$/;"	m	struct:s_exp
-last_piece	lexer.c	/^t_piece	*last_piece(t_piece *list)$/;"	f
+last_token	token_utils.c	/^t_token	*last_token(t_token *list)$/;"	f
+leaks	tokenizer.c	/^void	leaks(void)$/;"	f
 left	AST_struct.h	/^	t_script	*left;$/;"	m	struct:s_logical_expression
-lexer	lexer.c	/^t_piece	*lexer(char *line)$/;"	f
 loc	AST_struct.h	/^	int		loc[2]; \/\/ 어디부터 어디까지 확장해야 하는지.$/;"	m	struct:s_exp
 log_exp	AST_struct.h	/^	t_logical_expression *log_exp;$/;"	m	struct:s_script
-main	lexer.c	/^int	main(void)$/;"	f
+main	tokenizer.c	/^int	main(void)$/;"	f
 name	AST_struct.h	/^	t_word		*name;$/;"	m	struct:s_command
-new_piece	lexer.c	/^t_piece	*new_piece(char *string)$/;"	f
+new_token	token_utils.c	/^t_token	*new_token(char *string, t_type type)$/;"	f
 next	libft/libft.h	/^	struct s_list	*next;$/;"	m	struct:s_list	typeref:struct:s_list::s_list
-next	parse_struct.h	/^	struct s_piece	*next;$/;"	m	struct:s_piece	typeref:struct:s_piece::s_piece
+next	parse_struct.h	/^	struct	s_token	*next;$/;"	m	struct:s_token	typeref:struct:s_token::s_token
 operator	AST_struct.h	/^	e_operator	operator;$/;"	m	struct:s_logical_expression
-operator	AST_struct.h	/^	e_type	operator;$/;"	m	struct:s_redirect
+operator	AST_struct.h	/^	t_type	operator;$/;"	m	struct:s_redirect
 p_ret	libft/ft_printf.h	/^	int		p_ret;$/;"	m	struct:s_variable
 pipeline	AST_struct.h	/^	struct s_pipeline	*pipeline;$/;"	m	struct:s_pipeline	typeref:struct:s_pipeline::s_pipeline
 pipeline	AST_struct.h	/^	t_pipeline			*pipeline;$/;"	m	struct:s_script
 prefix	AST_struct.h	/^	t_fix		*prefix;$/;"	m	struct:s_command
+prev	parse_struct.h	/^	struct	s_token	*prev;$/;"	m	struct:s_token	typeref:struct:s_token::s_token
 redirect	AST_struct.h	/^	t_redirect	*redirect;$/;"	m	struct:s_fix
+remove_space	tokenizer.c	/^int	remove_space(char *line)$/;"	f
 ret	libft/ft_printf.h	/^	ssize_t	ret;$/;"	m	struct:s_variable
 right	AST_struct.h	/^	t_script	*right;$/;"	m	struct:s_logical_expression
 s_command	AST_struct.h	/^typedef struct s_command$/;"	s
@@ -144,17 +151,16 @@ s_fix	AST_struct.h	/^typedef struct s_fix$/;"	s
 s_io	AST_struct.h	/^typedef struct s_io$/;"	s
 s_list	libft/libft.h	/^typedef struct s_list$/;"	s
 s_logical_expression	AST_struct.h	/^typedef struct s_logical_expression$/;"	s
-s_piece	parse_struct.h	/^struct s_piece$/;"	s
 s_pipeline	AST_struct.h	/^typedef struct s_pipeline$/;"	s
 s_redirect	AST_struct.h	/^typedef struct	s_redirect$/;"	s
 s_script	AST_struct.h	/^typedef struct s_script$/;"	s
+s_token	parse_struct.h	/^struct s_token$/;"	s
 s_variable	libft/ft_printf.h	/^typedef struct s_variable {$/;"	s
 s_word	AST_struct.h	/^typedef struct s_word$/;"	s
+set_type_meta1	meta.c	/^void	set_type_meta1(char c, int i, t_type *type)$/;"	f
 smaller	libft/ft_memmove.c	/^static void	smaller(unsigned char *dst, unsigned char *src, size_t len)$/;"	f	file:
-string	parse_struct.h	/^	char			*string;$/;"	m	struct:s_piece
+string	parse_struct.h	/^	char			*string;$/;"	m	struct:s_token
 suffix	AST_struct.h	/^	t_fix		*suffix;$/;"	m	struct:s_command
-t_bool	parse_struct.h	/^typedef enum e_bool t_bool;$/;"	t	typeref:enum:e_bool
-t_chars	parse_struct.h	/^typedef enum e_characters t_chars;$/;"	t	typeref:enum:e_characters
 t_command	AST_struct.h	/^} t_command;$/;"	t	typeref:struct:s_command
 t_exp	AST_struct.h	/^} t_exp;$/;"	v	typeref:enum:e_exp
 t_fix	AST_struct.h	/^} t_fix;$/;"	t	typeref:struct:s_fix
@@ -162,20 +168,24 @@ t_io	AST_struct.h	/^} t_io;$/;"	t	typeref:struct:s_io
 t_list	libft/libft.h	/^}					t_list;$/;"	t	typeref:struct:s_list
 t_logical_expression	AST_struct.h	/^} t_logical_expression;$/;"	t	typeref:struct:s_logical_expression
 t_operator	AST_struct.h	/^} t_operator;$/;"	v	typeref:enum:e_operator
-t_piece	parse_struct.h	/^typedef struct s_piece t_piece;$/;"	t	typeref:struct:s_piece
 t_pipeline	AST_struct.h	/^} t_pipeline;$/;"	t	typeref:struct:s_pipeline
 t_script	AST_struct.h	/^} t_script;$/;"	t	typeref:struct:s_script
-t_type	AST_struct.h	/^} t_type;$/;"	v	typeref:enum:e_type
+t_token	parse_struct.h	/^typedef struct s_token		t_token;$/;"	t	typeref:struct:s_token
+t_type	AST_struct.h	/^enum	t_type$/;"	g
+t_type	AST_struct.h	/^} t_type;$/;"	v	typeref:enum:t_type
+t_type	parse_struct.h	/^typedef enum e_type			t_type;$/;"	t	typeref:enum:e_type
 t_variable	libft/ft_printf.h	/^}	t_variable;$/;"	t	typeref:struct:s_variable
 t_word	AST_struct.h	/^} t_word;$/;"	t	typeref:struct:s_word
-type	AST_struct.h	/^	e_type				type;$/;"	m	struct:s_script
-type	AST_struct.h	/^	e_type		type;$/;"	m	struct:s_command
-type	AST_struct.h	/^	e_type		type;$/;"	m	struct:s_fix
-type	AST_struct.h	/^	e_type		type;$/;"	m	struct:s_logical_expression
-type	AST_struct.h	/^	e_type		type;$/;"	m	struct:s_pipeline
-type	AST_struct.h	/^	e_type		type;$/;"	m	struct:s_word
-type	AST_struct.h	/^	e_type	type;$/;"	m	struct:s_exp
-type	AST_struct.h	/^	e_type	type;$/;"	m	struct:s_redirect
+tokenizer	tokenizer.c	/^t_token	*tokenizer(char *line)$/;"	f
+type	AST_struct.h	/^	t_type				type;$/;"	m	struct:s_script
+type	AST_struct.h	/^	t_type		type;$/;"	m	struct:s_command
+type	AST_struct.h	/^	t_type		type;$/;"	m	struct:s_fix
+type	AST_struct.h	/^	t_type		type;$/;"	m	struct:s_logical_expression
+type	AST_struct.h	/^	t_type		type;$/;"	m	struct:s_pipeline
+type	AST_struct.h	/^	t_type		type;$/;"	m	struct:s_word
+type	AST_struct.h	/^	t_type	type;$/;"	m	struct:s_exp
+type	AST_struct.h	/^	t_type	type;$/;"	m	struct:s_redirect
+type	parse_struct.h	/^	enum	e_type	type;$/;"	m	struct:s_token	typeref:enum:s_token::e_type
 value	AST_struct.h	/^	char				*value;$/;"	m	struct:s_script
 value	AST_struct.h	/^	char		*value;$/;"	m	struct:s_command
 value	AST_struct.h	/^	char		*value;$/;"	m	struct:s_fix

@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:34:40 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/02 10:49:49 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:08:56 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,7 @@ int	get_meta2(char *line, char **string, t_type *type)
 	}
 	*string = ft_substr(line, 0, i);
 	*type = get_type(*string, i);
+	if ((*string)[0] != (*string)[i - 1])
+		*type = T_ERROR;
 	return (i);
 }
