@@ -1,20 +1,20 @@
 <script>                ::= <command> ';'?
 
-<command>               ::= <simple-command> | <pipeline>
+<command>               ::= <simple command> | <pipeline>
 
-<simple-command>        ::= <word> <redirection>?
+<simple-command>        ::= <word> | <redirection>?
 
-<pipeline>              ::= <command> '|' <command>
+<pipeline>              ::= <command> <command>
 
-<redirection>           ::= '<' <word> | '>' <word> |'2>' <word>
+<redirection>           ::= '<' <word> | '>' <word> |'2>' <word> | <word> '|' | '|' <word>
 
-<word>                  ::= <string> | <variable>
+<word>                  ::= <string> { <string> }? | <variable>
 
-<variable>              ::= '$' <identifier>
+<variable>              ::= '$'<identifier>
 
-<string>                ::= "'" <character> { <character> } "'" | '"' <character> { <character> } '"'
+<string>                ::= "'"? <character>{ <character> }? "'"? | '"'? <character>{ <character> }? '"'?
 
-<identifier>            ::= <capital character> { <capital character> }
+<identifier>            ::= <capital character> { <capital character> }?
 
 <character>             ::= <capital letter> | <small letter> | <number> | <metacharacter> | <other ASCII character>
 

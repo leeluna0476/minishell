@@ -1,0 +1,38 @@
+ls -l | cat -e
+
+<script>
+<command>
+<pipeline>
+<command> <command>
+<simple command> <command>
+<redirection> <command>
+<word> '|' <command>
+<string> { <string> } '|' <command>
+<character>{ <character> } { <string> } '|' <command>
+<small letter>{ <character> } { <string> } '|' <command>
+<small letter><character> { <string> } '|' <command>
+<small letter><small letter> { <string> } '|' <command>
+ls { <string> } '|' <command>
+ls <string> '|' <command>
+ls <character> { <character> } '|' <command>
+ls <character><character> '|' <command>
+ls -l '|' <command>
+ls -l '|' <simple command>
+ls -l '|' <word>
+ls -l '|' <string> { <string> }
+ls -l '|' <character>{ <character> } { <string> }
+ls -l '|' <small letter>{ <character> } { <string> }
+ls -l '|' c{ <character> } { <string> }
+ls -l '|' c<character> { <string> }
+ls -l '|' c<small letter>{ <character> } { <string> }
+ls -l '|' ca{ <character> } { <string> }
+ls -l '|' ca<character> { <string> }
+ls -l '|' ca<small letter> { <string> }
+ls -l '|' cat { <string> }
+ls -l '|' cat <character>{ <character> }
+ls -l '|' cat <other ASCII character>{ <character> }
+ls -l '|' cat -{ <character> }
+ls -l '|' cat -<character>
+ls -l '|' cat -<small letter>
+ls -l '|' cat -e
+
