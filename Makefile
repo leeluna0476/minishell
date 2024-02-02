@@ -15,10 +15,17 @@ LINE_CLEAR  =   "\x1b[1A\x1b[M"
 
 NAME = minishell
 CC = cc
-CFLAGS = -I./includes -Wall -Wextra -Werror
+CFLAGS = -I./includes
+# -Wall -Wextra -Werror
 SRCS = ./test_main.c \
 		./srcs/envs/build_env_pack.c \
-		./srcs/envs/env_utils.c
+		./srcs/envs/env_utils.c \
+		./srcs/execute/do_heredoc.c \
+		./srcs/execute/execute_utils.c \
+		./srcs/execute/open_redirs.c \
+		./srcs/builtins/builtin_exec.c \
+		./srcs/builtins/builtin_utils.c \
+
 
 OBJS = $(SRCS:.c=.o)
 LIBFT = ./srcs/libft/libft.a

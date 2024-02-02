@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:50:21 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/02 11:20:59 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/02 13:44:44 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 # include "../srcs/libft/libft.h"
 // 이 파일에는 미니셸 구조체들을 선언한다
 
-typedef enum e_type			t_type;
 typedef struct s_token		t_toekn;
 typedef struct s_tree		t_tree;
 typedef struct s_env		t_env;
 typedef struct s_env_pack	t_env_pack;
 typedef struct s_cmd_pack	t_cmd_pack;
 typedef struct s_redir		t_redir;
+
+int							g_exit_status;
+// exit code(전역변수)
 
 enum	e_type
 {
@@ -53,7 +55,7 @@ struct s_token
 struct s_tree
 {
 	enum e_type	this_type;		// 현재 노드의 타입 (아마 e_type 열거형으로 퉁칠 수 있을듯?)
-	void		*this_ptr;		// 현재 노드가 가지고 있는 데이터, type에 따라 해당 구조체로 캐스팅하고 사용한다
+	void		*this_ptr;		// 현재 노드가 가지고 있는 데이터, cmd타입일때만 내용이 있고 나머지는 NULL
 	void		*left_ptr;		// 왼쪽 branch
 	void		*right_ptr;		// 오른쪽 branch
 };
@@ -80,7 +82,7 @@ struct s_env_pack
 
 struct s_cmd_pack
 {
-	char		**cmd_args;		// builtin, systemcall, options를 담고 있는 캐릭터 이중 포인터
+	char		**cmd_args;		// builtin/systemcall, arguments/options를 담고 있는 캐릭터 이중 포인터
 	t_redir		*all_redirs;	// 해당 커맨드 블럭(pipe로 구분됨)의 모든 리다이렉션을 기록한 연결리스트, 실행부로 들어올 때, 모든 cmd_pack 구조체의 리다이렉션을 훑고 파일들을 열어야한다
 	t_redir		*in_redirs;		// 최종적으로 사용될 input redirection('<', "<<")
 	t_redir		*out_redirs;	// 최종적으로 사용될 output redirection('>', ">>")
