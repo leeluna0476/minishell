@@ -6,7 +6,7 @@ enum	e_exp
 // ...	
 } t_exp;
 
-enum	e_type
+enum	t_type
 {
 // ...	
 } t_type;
@@ -18,7 +18,7 @@ enum	e_operator
 
 typedef struct s_exp
 {
-	e_type	type;
+	t_type	type;
 	char	*value;
 	e_exp	kind; // 어떤 확장인지.
 	int		loc[2]; // 어디부터 어디까지 확장해야 하는지.
@@ -26,7 +26,7 @@ typedef struct s_exp
 
 typedef struct s_word
 {
-	e_type		type;
+	t_type		type;
 	char		*value;
 	t_exp		*exp;
 } t_word;
@@ -39,16 +39,16 @@ typedef struct s_io
 
 typedef struct	s_redirect
 {
-	e_type	type;
+	t_type	type;
 	char	*value;
-	e_type	operator;
+	t_type	operator;
 	t_word	*file;
 	t_io	*io;
 }
 
 typedef struct s_fix
 {
-	e_type		type;
+	t_type		type;
 	char		*value;
 	t_word		*word;
 	t_redirect	*redirect;
@@ -56,7 +56,7 @@ typedef struct s_fix
 
 typedef struct s_command
 {
-	e_type		type;
+	t_type		type;
 	char		*value;
 	t_word		*name;
 	t_fix		*prefix;
@@ -65,7 +65,7 @@ typedef struct s_command
 
 typedef struct s_pipeline
 {
-	e_type		type;
+	t_type		type;
 	char		*value;
 	t_command	*cmd;
 	struct s_pipeline	*pipeline;
@@ -74,7 +74,7 @@ typedef struct s_pipeline
 // &&, || 등의 서브 스크립트 구분.
 typedef struct s_logical_expression
 {
-	e_type		type;
+	t_type		type;
 	char		*value;
 	e_operator	operator;
 	t_script	*left;
@@ -88,7 +88,7 @@ typedef struct s_logical_expression
 	// 3. command
 typedef struct s_script
 {
-	e_type				type;
+	t_type				type;
 	char				*value;
 	t_logical_expression *log_exp;
 	t_pipeline			*pipeline;
