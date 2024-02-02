@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:24:18 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/02 11:22:28 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/02 12:55:57 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	main(void)
 	t_token	*curr;
 
 	atexit(leaks);
-	tokens = tokenizer("<<eof ls -l | wc -l >> out");
+	tokens = tokenizer("<<<<<<<<<<<<<<<eof ls -l | wc -l >> out");
 	curr = tokens;
 	while (curr)
 	{

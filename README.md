@@ -24,5 +24,6 @@ seojilee &amp;&amp; yusekim's minishell
 - Script를 Logical expression, Pipeline, Command 3가지 중 하나로 정의한다.
 - Script에 Logical expression이 포함되는지 가장 먼저 확인하고, 포함된다면 해당 부분을 기준으로 다시 2개의 Script로 분할한다.
 - Script에 Logical expression이 없다면 Pipeline이 있는지 확인한다. 있다면 첫번째 파이프를 기준으로 왼쪽은 Command, 오른쪽은 다시 파이프라인으로 분할한다.
+<!-- Redirection을 한꺼번에 모아놓는 방식으로 바꾸기.
 - Command는 Parser에서 형식에 맞춰서 정렬한 순서를 따라 name, prefix, suffix로 분할한다.
-...
+...-->
