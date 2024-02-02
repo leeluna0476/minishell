@@ -61,7 +61,7 @@
          -> A = <digit> + <expr>
          -> A = 3 + <expr>
          -> A = 3 + (<expr>)
-		 -> A = 3 + (<expr> - <expr>)
+         -> A = 3 + (<expr> - <expr>)
          -> A = 3 + (<number> - <expr>)
          -> A = 3 + (<digit> - <expr>)
          -> A = 3 + (5 - <expr>)
