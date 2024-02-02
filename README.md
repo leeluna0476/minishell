@@ -1,7 +1,7 @@
 # minishell
 seojilee &amp;&amp; yusekim's minishell
 
-## Lexer
+## Tokenizer
 - metacharacters와 따옴표를 기준으로 line 분할.
   - | & ; ( ) < > (space)
 - 분할 규칙:
@@ -9,14 +9,12 @@ seojilee &amp;&amp; yusekim's minishell
     - 연달아 들어오면 하나로 묶음.
 	- 무조건 1개, 2개로 묶는다.
   - ( ) " '
-    - 쌍을 찾음.
+    - 짝을 찾음.
 	- ()는 안에서 다시 분할한다.
+	  - 짝이 맞는지는 파서에서 확인.
 	- "", ''는 안에서 분할하지 않는다. ($ 등은 나중에.)
-	- 하나가 들어오면 변수++, 쌍을 찾으면 --. line이 끝날 때 변수가 0이면 성공.
-	  - 파서에서 확인.
-
-## Tokenizer
-- Lexer가 분할한 단어들에 type 부여.
+	  - 따옴표 짝이 맞는지 확인.
+- 분할하면서 type 부여.
 
 ## Parser
 - Tokenizer가 형성한 튜플형 리스트가 원래 순서 그대로 문법에 맞는지 확인.
