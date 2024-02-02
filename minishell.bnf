@@ -2,11 +2,11 @@
 
 <command>               ::= <simple command> | <pipeline>
 
-<simple-command>        ::= <word> | <redirection>?
+<simple-command>        ::= <word> | <redirection> <word>? | <word> <redirection>
 
 <pipeline>              ::= <command> <command>
 
-<redirection>           ::= '<' <word> | '>' <word> |'2>' <word> | <word> '|' | '|' <word>
+<redirection>           ::= '<' <word> | '>' <word> |'2>' <word> | <redirection> '|' | '|' <word> <redirection>
 
 <word>                  ::= <string> { <string> }? | <variable>
 
@@ -27,3 +27,5 @@
 <metacharacter>         ::= '-' | '|' | '&' | ';' | '(' | ')' | '<' | '>' | { spaces }
 
 <other ASCII character> ::= { ASCII characters }
+
+// redirection rule 다시 짜기.
