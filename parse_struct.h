@@ -1,6 +1,22 @@
 #ifndef PARSE_STRUCT_H
 # define PARSE_STRUCT_H
 
+enum	e_type
+{
+	T_ERROR = -1,		// 기본값 (syntax check때의 초깃값)
+	T_WORD,				// 문자
+	T_SPACE,			// 공백문자(보통 space)
+	T_PIPE,				// Pipe문자 '|'
+	T_LESSER,			// 리다이렉션 '<'
+	T_GREATER,			// 리다이렉션 '>'
+	T_D_LESSER,			// 리다이렉션 Here_doc "<<"
+	T_D_GREATER,		// 리다이렉션 append ">>"
+	T_AND,				// 논리 연산 AND "&&"
+	T_OR,				// 논리 연산 OR "||"
+	T_OPEN_BRACKET,		// 논리 연산 괄호 열림 '('
+	T_CLOSE_BRACKET		// 논리 연산 괄호 닫힘 ')'
+};
+
 // lexer: metacharacter를 기준으로 line을 분할.
 struct s_token
 {
@@ -10,26 +26,9 @@ struct s_token
 	struct s_token	*next;
 };
 
-// tokenizer: string에 type 부여.
-// parser: tokenize 된 데이터를 가지고 구문 분석 후 AST script 형식으로 정렬.
-//struct s_token
-//{
-//	char			*string;
-//	enum e_type		type;
-//	struct s_token	*next;
-//};
-
-//# define GREATER 60,
-//# define LESSER 62,
-//# define AND 38,
-//# define OR 124,
-//# define SEMICOLON 59,
-//# define PARENTHESIS1 40,
-//# define PARENTHESIS2 41,
-//# define DOUBLE_QUOTE 34,
-//# define QUOTE 39
 
 typedef struct s_token t_token;
 typedef enum e_characters t_chars;
+typedef enum e_type		t_type;
 
 #endif

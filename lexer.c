@@ -9,7 +9,7 @@ int	is_space(char c)
 	return (0);
 }
 
-t_token	*new_token(char *string)
+t_token	*new_token(char *string, t_type type)
 {
 	t_token	*token;
 
@@ -19,6 +19,7 @@ t_token	*new_token(char *string)
 		if (token)
 		{
 			token->string = ft_strdup(string);
+			token->type = type;
 		}
 		return (token);
 	}
@@ -47,6 +48,7 @@ void	add_token(t_token **list, t_token *token)
 		{
 			last = last_token(*list);
 			last->next = token;
+			token->prev = last;
 		}
 		else
 		{
@@ -91,18 +93,63 @@ int	is_meta2(char c)
 	return (0);
 }
 
-int	get_meta1(char *line, char **string)
+t_type	get_type(char *string, int i)
+{
+	t_type	type;
+
+	type = T_WORD;
+	if (is_meta1(string[0]))
+	{
+		if (string[0] == '<')
+		{
+			if (i == 2)
+				type = T_D_LESSER;
+			else
+				type = T_LESSER;
+		}
+		else if (string[0] == '>')
+		{
+			if (i == 2)
+				type = T_D_GREATER;
+			else
+				type = T_GREATER;
+		}
+		else if (string[0] == '&')
+		{
+			if (i == 2)
+				type = T_AND;
+		}
+		else if (string[0] == '|')
+		{
+			if (i == 2)
+				type = T_OR;
+			else
+				type = T_PIPE;
+		}
+	}
+	else if (is_meta2(string[0]))
+	{
+		if (string[0] == '(')
+			type = T_OPEN_BRACKET;
+		else if (string[0] == ')')
+			type = T_CLOSE_BRACKET;
+	}
+	return (type);
+}
+
+int	get_meta1(char *line, char **string, t_type *type)
 {
 	int		i;
 
 	i = 0;
-	while (line[i] && is_meta1(line[i]) && i < 2 && !is_space(line[i]))
+	while (line[i] && line[0] == line[i] && i < 2 && !is_space(line[i]))
 		i++;
 	*string = ft_substr(line, 0, i);
+	*type = get_type(*string, i);
 	return (i);
 }
 
-int	get_meta2(char *line, char **string)
+int	get_meta2(char *line, char **string, t_type *type)
 {
 	int	i;
 
@@ -114,6 +161,7 @@ int	get_meta2(char *line, char **string)
 		i++;
 	}
 	*string = ft_substr(line, 0, i);
+	*type = get_type(*string, i);
 	return (i);
 }
 
@@ -127,7 +175,7 @@ int	remove_space(char *line)
 	return (i);
 }
 
-int	get_word(char *line, char **string)
+int	get_word(char *line, char **string, t_type *type)
 {
 	int	i;
 
@@ -135,6 +183,7 @@ int	get_word(char *line, char **string)
 	while (line[i] && !is_space(line[i]) && !is_meta1(line[i]) && !is_meta2(line[i]))
 		i++;
 	*string = ft_substr(line, 0, i);
+	*type = get_type(*string, i);
 	return (i);
 }
 
@@ -144,19 +193,19 @@ t_token	*lexer(char *line)
 	t_token		*node;
 	char		*string;
 	int			i;
-	int			temp;
+	t_type		type;
 
 	list = NULL;
 	i = 0;
 	while (line[i] && line[i] != '\n')
 	{
 		if (is_meta1(line[i]))
-			i += get_meta1(&(line[i]), &string);
+			i += get_meta1(&(line[i]), &string, &type);
 		else if (is_meta2(line[i]))
-			i += get_meta2(&(line[i]), &string);
+			i += get_meta2(&(line[i]), &string, &type);
 		else
-			i += get_word(&(line[i]), &string);
-		node = new_token(string);
+			i += get_word(&(line[i]), &string, &type);
+		node = new_token(string, type);
 		add_token(&list, node);
 		free(string);
 		i += remove_space(&(line[i]));
@@ -175,13 +224,14 @@ int	main(void)
 	t_token	*curr;
 
 	atexit(leaks);
-	tokens = lexer("<<<<<<<<<<<echo .... ---(()\'\"   $USER\"\');; (ls -l | wc -l) > outfile");
+	tokens = lexer("<<<<<&&&<<<<<<echo .... ---(()\'\"   $USER\"\');; (ls -l | wc -l) > outfile");
 
-	curr = tokens;
+	curr = last_token(tokens);
 	while (curr)
 	{
-		printf("%s\n", curr->string);
-		curr = curr->next;
+		printf("%s  ", curr->string);
+		printf("%d\n", curr->type);
+		curr = curr->prev;
 	}
 	while (tokens)
 	{
