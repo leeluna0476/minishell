@@ -29,3 +29,4 @@
 <other ASCII character> ::= { ASCII characters }
 
 // redirection rule 다시 짜기.
+// pipeline이랑 redirection 조화를 잘... 어떻게...
