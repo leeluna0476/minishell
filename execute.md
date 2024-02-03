@@ -33,7 +33,9 @@ typedef struct s_env_pack
 }	t_env_pack;
 ```
 
-### 확장과 따옴표 처리 Expension and quoting
+### 확장, 따옴표, 와일드카드 처리 Expension and quoting
+확장, 따옴표, 와일드카드는 결과적으로 동시에 처리되어야 한다..
+
 
 ### 빌트인 builtins
 미니셸 과제에서는 총 7개의 내장 기능(built-in)을 구현하여야 한다. 두 번째 미니셸인 만큼, 더욱 깔@쌈하게 코드를 짜고 싶은 욕심이 있어 피신때 한번 쓰고 쳐다도 안본 함수 포인터 배열을 써보기로 했다

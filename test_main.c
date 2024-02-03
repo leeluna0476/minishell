@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:13:02 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/02 15:19:26 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/02 22:52:33 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	main(int argc, char **argv, char **envp)
 	t_env		*temp;
 
 	build_envp(&package, envp);
-	temp = package.origin_head;
-	// ft_printf("\n==========================================================\n");
-	// ft_printf("                     Printing envs\n");
-	// ft_printf("==========================================================\n\n");
+	// temp = package.origin_head;
+	// ft_printf("\n===================================================================================\n");
+	// ft_printf("                                   Printing envs\n");
+	// ft_printf("======================================================================================\n\n");
 	// while (temp)
 	// {
 	// 	ft_printf("%s=", temp->name);
@@ -31,9 +31,9 @@ int	main(int argc, char **argv, char **envp)
 	// 	temp = temp->origin_next;
 	// }
 
-	ft_printf("\n\n\n==========================================================\n");
-	ft_printf("                     Printing envs in order\n");
-	ft_printf("==========================================================\n\n");
+	ft_printf("\n\n\n===================================================================================\n");
+	ft_printf("                               Printing envs in order\n");
+	ft_printf("===================================================================================\n\n");
 	temp = package.sorted_head;
 	while (temp)
 	{
@@ -43,9 +43,21 @@ int	main(int argc, char **argv, char **envp)
 	}
 
 
-	ft_printf("\n\n\n==========================================================\n");
-	ft_printf("                      Builtin check\n");
-	ft_printf("==========================================================\n\n");
+	ft_printf("\n\n\n===================================================================================\n");
+	ft_printf("                                   Builtin check\n");
+	ft_printf("===================================================================================\n\n");
 	exec_builtin(++argv, &package);
+
+	temp = package.origin_head;
+	ft_printf("\n===================================================================================\n");
+	ft_printf("                                   Printing envs\n");
+	ft_printf("======================================================================================\n\n");
+	while (temp)
+	{
+		ft_printf("%s=", temp->name);
+		ft_printf("%s\n", temp->value);
+		temp = temp->origin_next;
+	}
+
 	return (0);
 }
