@@ -2,31 +2,32 @@
 
 <command>               ::= <simple command> | <pipeline>
 
-<simple-command>        ::= <word> | <redirection> <word>? | <word> <redirection>
+<simple-command>        ::= "'"?<word>"'"? | '"'?<word>'"'? | <redirection> <simple-command>? | <simple-command> <redirection>
 
 <pipeline>              ::= <command> '|' <command>
 
-<redirection>           ::= '<' <word> | '>' <word> |'2>' <word>
+<redirection>           ::= '<' "'"?<word>"'"? | '>' '"'?<word>'"'? |'2>' "'"?<word>"'"? | '2>' '"'?<word>'"'?
 
 <word>                  ::= <string> { <string> }? | <variable>
 
-<variable>              ::= '$'<identifier>
+<variable>              ::= '$'<string>
 
-<string>                ::= "'"? <character>{ <character> }? "'"? | '"'? <character>{ <character> }? '"'?
+// <string>                ::= "'"? <character>{ <character> }? "'"? | '"'? <character>{ <character> }? '"'?
 
-<identifier>            ::= <capital character> { <capital character> }?
+// <identifier>            ::= <capital character> { <capital character> }?
 
-<character>             ::= <capital letter> | <small letter> | <number> | <metacharacter> | <other ASCII character>
+// 얘네는 tokenize할 때만 필요함.
+// <character>             ::= <capital letter> | <small letter> | <number> | <metacharacter> | <other ASCII character>
 
-<capital letter>        ::= 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z'
+// <capital letter>        ::= 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z'
 
-<small letter>          ::= 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z'
+// <small letter>          ::= 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z'
 
-<number>                ::= '0' | '1' | '2' | 3' | '4' | '5' | '6' | '7' | '8' | '9'
+// <number>                ::= '0' | '1' | '2' | 3' | '4' | '5' | '6' | '7' | '8' | '9'
 
-<metacharacter>         ::= '-' | '|' | '&' | ';' | '(' | ')' | '<' | '>' | { spaces }
+// <metacharacter>         ::= '-' | '|' | '&' | ';' | '(' | ')' | '<' | '>' | { spaces }
 
-<other ASCII character> ::= { ASCII characters }
+// <other ASCII character> ::= { ASCII characters }
 
 // redirection rule 다시 짜기.
 // pipeline이랑 redirection 조화를 잘... 어떻게...

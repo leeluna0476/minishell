@@ -1,0 +1,16 @@
+< infile cat < infile2
+
+<script>
+<command>
+<simple command>
+<redirection> <simple-command>
+< <word> <simple-command>
+< <string> <simple-command>
+< infile <simple-command>
+< infile <simple-command> <redirection>
+< infile <word> <redirection>
+< infile <string> <redirection>
+< infile cat <redirection>
+< infile cat < <word>
+< infile cat < <string>
+< infile cat < infile2
