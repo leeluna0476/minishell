@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:24 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/03 16:34:18 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/05 10:16:40 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	print_export(t_env_pack *pack)
 	}
 	return (1);
 }
+// 인자가 없는 export를 입력하였을때 bash의 출력에 맞춰 출력해준다.
 
 int	check_env_name(char *name)
 {

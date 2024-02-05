@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:46:43 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/02 16:02:33 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/05 10:28:24 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ void	add_env_node(t_env_pack *pack, char *name, char *value)
 	if (new)
 	{
 		if (!value)
+		{
+			new->value = NULL;
 			return ;
+		}
 		free(new->value);
 		new->value = ft_strdup(value);
 		return ;

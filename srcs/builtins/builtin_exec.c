@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:28 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/03 16:31:52 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/05 11:06:41 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,13 +143,39 @@ int	do_export(char **args, t_env_pack *pack)
 
 int	do_unset(char **args, t_env_pack *pack)
 {
+	int		i;
+
+	g_exit_status = 0;
+	i = 0;
+	while (args[++i])
+	{
+		if (check_env_name(args[i]))
+		{
+			ft_printf("not"); // 미완성...
+		}
+	}
 	ft_printf("unset\n");
 	return (1);
 }
 
 int	do_env(char **args, t_env_pack *pack)
 {
-	ft_printf("env\n");
+	t_env	*temp;
+
+	if (split_len(args) > 1)
+	{
+		ft_printf("%s: %s: No such file or directory\n");
+		g_exit_status = 127;
+		return (1);
+	}
+	g_exit_status = 0;
+	temp = pack->origin_head;
+	while (temp)
+	{
+		ft_printf("%s=", temp->name);
+		ft_printf("%s\n", temp->value);
+		temp = temp->origin_next;
+	}
 	return (1);
 }
 
