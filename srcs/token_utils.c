@@ -6,12 +6,13 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:25:20 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/02 11:05:28 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/07 21:23:59 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_struct.h"
 
+// 새로운 토큰 생성.
 t_token	*new_token(char *string, t_type type)
 {
 	t_token	*token;
@@ -29,20 +30,15 @@ t_token	*new_token(char *string, t_type type)
 	return (NULL);
 }
 
+// list의 마지막 토큰 구하기. (NULL 바로 전)
 t_token	*last_token(t_token *list)
 {
-	t_token	*curr;
-
-	if (list)
-	{
-		curr = list;
-		while (curr->next != NULL)
-			curr = curr->next;
-		return (curr);
-	}
-	return (NULL);
+	while (list && list->next)
+		list = list->next;
+	return (list);
 }
 
+// list에 토큰 붙이기.
 void	add_token(t_token **list, t_token *token)
 {
 	t_token	*last;
@@ -62,24 +58,26 @@ void	add_token(t_token **list, t_token *token)
 	}
 }
 
-void	free_token(t_token *token)
+// 토큰 메모리 해제 && 댕글링 포인터 방지.
+void	free_token(t_token **token)
 {
-	free(token->string);
-	free(token);
-	token = NULL;
+	free((*token)->string);
+	free((*token));
+	*token = NULL;
 }
 
+// 토큰 리스트 메모리 해제 && 댕글링 포인터 방지.
 void	free_tokens(t_token **tokens)
 {
-	t_token	**head;
-	t_token	*curr;
+	t_token	*head;
+	t_token	*temp;
 
-	head = tokens;
-	while (*tokens)
+	head = *tokens;
+	while (head)
 	{
-		curr = *tokens;
-		*tokens = (*tokens)->next;
-		free_token(curr);
+		temp = head->next;
+		free_token(&head);
+		head = temp;
 	}
-	*head = NULL;
+	*tokens = NULL;
 }

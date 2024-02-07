@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:24:18 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/05 10:49:04 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/07 21:27:26 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 int	is_space(char c)
 
 {
-	if (c == ' ' || (c >= '\t' && c <= '\r'))
+	if (c != '\n' && (c == ' ' || (c >= '\t' && c <= '\r')))
 		return (1);
 	return (0);
 }
 
+// 토큰의 타입 가져오기.
 t_type	get_type(char *string, int i)
 {
 	t_type	type;
@@ -33,10 +34,13 @@ t_type	get_type(char *string, int i)
 			type = T_OPEN_BRACKET;
 		else if (string[0] == ')')
 			type = T_CLOSE_BRACKET;
+		else if (string[0] == '\n')
+			type = T_NEWLINE;
 	}
 	return (type);
 }
 
+// 공백 건너뛰기.
 int	remove_space(char *line)
 {
 	int	i;
@@ -47,6 +51,9 @@ int	remove_space(char *line)
 	return (i);
 }
 
+// 메타문자가 아닌 일반 단어.
+// = 할당연산자의 경우 앞이나 뒤에 공백이 있으면 오류로 처리.
+// 예쁜 코드 실패.
 int	get_word(char *line, char **string, t_type *type)
 {
 	int	i;
@@ -54,16 +61,33 @@ int	get_word(char *line, char **string, t_type *type)
 	i = 0;
 	while (line[i] && !is_space(line[i]) \
 		&& !is_meta1(line[i]) && !is_meta2(line[i]))
+	{
+		if (line[i] == '=')
+		{
+			if (i == 0 || is_space(line[i + 1]))
+			{
+				*string = ft_substr(line, i, 1);
+				*type = T_ERROR;
+				return (i);
+			}
+			if (line[i + 1] == '\"')
+			{
+				i += 2;
+				while (line[i] && line[i] != '\"')
+					i++;
+			}
+		}
 		i++;
+	}
 	*string = ft_substr(line, 0, i);
 	*type = get_type(*string, i);
 	return (i);
 }
 
-void	syntax_error(char *string, t_token **list)
+void	syntax_error_tokenizer(char *string, t_token **list)
 {
 	// print error
-	printf("syntax error: `%s`\n", string);
+	printf("syntax error near unexpected token: `%s`\n", string);
 	free(string);
 	free_tokens(list);
 }
@@ -78,7 +102,7 @@ t_token	*tokenizer(char *line)
 
 	list = NULL;
 	i = 0;
-	while (line[i] && line[i] != '\n')
+	while (line[i])
 	{
 		if (is_meta1(line[i]))
 			i += get_meta1(&(line[i]), &string, &type);
@@ -88,7 +112,7 @@ t_token	*tokenizer(char *line)
 			i += get_word(&(line[i]), &string, &type);
 		if (type == T_ERROR)
 		{
-			syntax_error(string, &list);
+			syntax_error_tokenizer(string, &list);
 			break ;
 		}
 		node = new_token(string, type);
@@ -97,26 +121,4 @@ t_token	*tokenizer(char *line)
 		i += remove_space(&(line[i]));
 	}
 	return (list);
-}
-
-void	leaks(void)
-{
-	system("leaks -q a.out");
-}
-
-int	main(void)
-{
-	t_token	*tokens;
-	t_token	*curr;
-
-	atexit(leaks);
-	tokens = tokenizer("<<<<<<<<<<<<<<<eof \"       $USER\"ls -l | wc -l >> out");
-	curr = tokens;
-	while (curr)
-	{
-		printf("%s  ", curr->string);
-		printf("%d\n", curr->type);
-		curr = curr->next;
-	}
-	free_tokens(&tokens);
 }
