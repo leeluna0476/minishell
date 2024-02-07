@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: youwin0802 <youwin0802@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:32:39 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/07 13:31:25 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/07 17:50:16 by youwin0802       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	do_cmd_expand(t_c_expand *expand, t_env_pack *pack);
 char	*search_expand(t_exp_pair *pair, t_env_pack *pack);
 
 // expand_utils.c
-void	build_exp_pair(t_c_expand *expand);
+void	build_exp_pair(t_c_expand *expand, char *ptr);
 char	*find_env_name(char *ptr);
 char	*appand_string(char *result, char *original, int *start, int end);
 

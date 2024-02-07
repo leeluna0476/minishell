@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: youwin0802 <youwin0802@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/07 14:25:00 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/07 17:50:44 by youwin0802       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	**cmd_expand(char *data, t_env_pack *package)
 	ft_printf("Expanding\n");
 	while (i < expand.exp_num)
 	{
-		ft_printf("exp_pos num [%d]: [%s], [%c]\n", i, find_env_name(expand.exp_ptrs[i]->exp_pos), (char)expand.exp_ptrs[i]->q_flag);
+		ft_printf("exp_pos num [%d]: [%s], [%c]\n", i, expand.exp_ptrs[i]->exp_name, (char)expand.exp_ptrs[i]->q_flag);
 		i++;
 	}
 // 테스트용 코드
@@ -50,7 +50,7 @@ void	scan_n_setup(t_c_expand *expand, char *data)
 		else if (expand->q_flag == data[i])
 			expand->q_flag = 0;
 		if (data[i] == '$')
-			build_exp_pair(expand);		// t_exp_pair 구조체 생성 후 따옴표 정보 기입
+			build_exp_pair(expand, data[i]);		// t_exp_pair 구조체 생성 후 따옴표 정보 기입
 		i++;
 	}
 }

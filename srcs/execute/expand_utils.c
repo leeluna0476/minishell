@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: youwin0802 <youwin0802@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 14:57:36 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/07 14:12:17 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/07 17:50:06 by youwin0802       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 
-void	build_exp_pair(t_c_expand *expand)
+void	build_exp_pair(t_c_expand *expand, char *ptr)
 {
 	t_exp_pair	*new;
 	int			i;
@@ -21,6 +21,7 @@ void	build_exp_pair(t_c_expand *expand)
 	if (!new)
 		exit (1);
 	new->q_flag = expand->q_flag;
+	new->exp_name = find_env_name(ptr);
 	if (!expand->exp_num)
 	{
 		expand->exp_ptrs = malloc(sizeof(t_c_expand *) * 2);
