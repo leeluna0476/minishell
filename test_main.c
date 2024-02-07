@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:13:02 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/07 14:27:36 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/07 14:40:19 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@
 int	main()
 {
 	char *expand = ft_strdup("'$single' \"$double\" $1invaild@ \'$muyahoo\'");
-	char *quote = ft_strdup("Hello\"\" \'this is a str\"ing for quote\' t\'es   \'t");
+	// char *quote = ft_strdup("Hello\"\" \'this is a str\"ing for quote\' t\'es   \'t");
+	char *quote = ft_strdup("echo \"\"$PWD\"\"qwere\"qwqwer$P$P$PWD\"\'$PWD\'\"\"");
 
-	ft_printf("original: [%s]\n", expand);
-	cmd_expand(expand, 0);
+	ft_printf("original: [%s]\n", quote);
+	cmd_expand(quote, 0);
 }			// 확장 테스트용 코드
