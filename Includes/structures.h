@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:50:21 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/02 13:44:44 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/06 10:20:08 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ typedef struct s_env		t_env;
 typedef struct s_env_pack	t_env_pack;
 typedef struct s_cmd_pack	t_cmd_pack;
 typedef struct s_redir		t_redir;
+typedef struct s_expand		t_c_expand;		// 명령어 확장
+typedef struct s_expand		t_r_expand;		// 리다이렉션 파일 확장
+typedef struct s_exp_pair	t_exp_pair;
 
 int							g_exit_status;
 // exit code(전역변수)
@@ -43,6 +46,17 @@ enum	e_type
 // 따옴표 같은 경우 같은 짝(ascii코드로 판별)이 나올때까지 값을 모두 WORD로 해야한다..
 // 괄호는 일단 넣었는데, 짝이 안맞을 경우 따옴표와 똑같이 토큰 클리어를 해야하기 때문에 이 부분은 고민 필요
 
+enum	e_b_type
+{
+	B_FALSE = -1,
+	B_ECHO,
+	B_CD,
+	B_PWD,
+	B_EXPORT,
+	B_UNSET,
+	B_ENV,
+	B_EXIT
+};
 
 struct s_token
 {
@@ -97,5 +111,21 @@ struct s_redir
 	int			fd;				// filename[0] 을 open했을때 반환받는 fd값, type == T_D_LESSER ("<<") 일 경우에는 filename[0]을 DELIMITER로 설정하고 heredoc을 실행한다.
 	t_redir		*next;			// next node
 };
+
+struct s_expand
+{
+	char		q_flag;
+	char		*original;
+	t_exp_pair	**exp_ptrs;		// original을 돌면서 찾은 '$' 위치들과
+	int			exp_num;		// '$' 갯수(확장여부 상관없이)
+	char		**result;		// 확장을 완료한 최종 결과물
+};
+
+struct s_exp_pair
+{
+	char	q_flag;			// 따옴표 플래그
+	char	*exp_pos;		// 확장문자 위치
+};
+
 
 #endif

@@ -4,6 +4,8 @@
 		"structures.h": "c",
 		"utils.h": "c",
 		"builtin.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"complex": "c",
+		"expand.h": "c"
 	}
 }

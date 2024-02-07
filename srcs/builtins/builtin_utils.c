@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:24 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/05 10:16:40 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/05 14:19:04 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,37 @@ int	print_export(t_env_pack *pack)
 	temp = pack->sorted_head;
 	while (temp)
 	{
-		printf("declare -x %s=\"%s\"\n", temp->name, temp->value);
+		ft_printf("declare -x %s", temp->name);
+		if (temp->value)
+			ft_printf("=\"%s\"\n", temp->value);
+		else
+			ft_printf("\n");
 		temp = temp->sorted_next;
 	}
 	return (1);
 }
 // 인자가 없는 export를 입력하였을때 bash의 출력에 맞춰 출력해준다.
 
-int	check_env_name(char *name)
+int	check_env_name(char **args, int i)
 {
-	int	i;
+	int	idx;
 
-	if (ft_isdigit(*name))
-		return (1);
-	i = 0;
-	while (name[i])
+	if (ft_isdigit(*args[i]))
 	{
-		if (!(ft_isalnum(name[i]) || name[i] == '_'))
+		g_exit_status = 1;
+		ft_printf("%s: '%s': not a vaild identifier\n", args[0], args[i]);
+		return (1);
+	}
+	idx = 0;
+	while (args[i][idx])
+	{
+		if (!(ft_isalnum(args[i][idx]) || args[i][idx] == '_'))
+		{
+			g_exit_status = 1;
+			ft_printf("%s: '%s': not a vaild identifier\n", args[0], args[i]);
 			return (1);
-		i++;
+		}
+		idx++;
 	}
 	return (0);
 }

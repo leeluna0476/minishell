@@ -6,11 +6,12 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/02 17:30:19 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/07 13:08:36 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structures.h"
+#include "utils.h"
 
 void	split_free(char **split)
 {
