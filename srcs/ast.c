@@ -45,6 +45,7 @@ t_token	*get_center(t_ast *ast, t_token *start, t_token *end)
 	return (NULL);
 }
 
+// check_error에 문제 있음.
 // 가지 분할의 기준점이 되는 논리 연산자 또는 파이프를 확인.
 // 기준점이 없다면 simple command.
 void	generate_ast(t_ast **ast, t_token *start, t_token *end)
@@ -52,6 +53,7 @@ void	generate_ast(t_ast **ast, t_token *start, t_token *end)
 	t_token	*center;
 
 	center = get_center(*ast, start, end);
+
 	if (check_error(*ast))
 		return ;
 	if (center)
