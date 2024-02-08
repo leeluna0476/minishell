@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:00:13 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/02 16:02:34 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/08 13:21:34 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ t_env	*find_env(char *name, t_env_pack *package)
 {
 	t_env	*temp;
 
+	if (*name == '$')
+		name++;
 	temp = package->sorted_head;
 	while (temp && (ft_strcmp(temp->name, name)))
 		temp = temp->sorted_next;

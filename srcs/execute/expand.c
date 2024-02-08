@@ -3,38 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youwin0802 <youwin0802@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/07 17:50:44 by youwin0802       ###   ########.fr       */
+/*   Updated: 2024/02/08 17:58:16 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 
-char	**cmd_expand(char *data, t_env_pack *package)
+char	**expand(char *data, t_env_pack *package)
 {
 	t_c_expand	expand;
 
 	ft_memset(&expand, 0, sizeof(t_c_expand));
 	scan_n_setup(&expand, data);
 	delete_quotes(&expand);
+	ft_printf("after quoting: [%s]\n", expand.original); // test code
 	find_position(&expand);
-	// do_cmd_expand(&expand, package);
 
 
 
 
 
 	int	i = 0;
-	ft_printf("after quoting: [%s]\n", expand.original);
-	ft_printf("Expanding\n");
-	while (i < expand.exp_num)
-	{
-		ft_printf("exp_pos num [%d]: [%s], [%c]\n", i, expand.exp_ptrs[i]->exp_name, (char)expand.exp_ptrs[i]->q_flag);
-		i++;
-	}
+	// ft_printf("Expanding\n");
+	// while (i < expand.exp_num)
+	// {
+	// 	ft_printf("exp_pos num [%d]: [%s], [%c]\n", i, expand.exp_ptrs[i]->exp_name, (char)expand.exp_ptrs[i]->q_flag);
+	// 	i++;
+	// }
+	// ft_printf("\n");
 // 테스트용 코드
+
+	cmd_expand(&expand, package);
 }
 
 void	scan_n_setup(t_c_expand *expand, char *data)
@@ -50,7 +52,7 @@ void	scan_n_setup(t_c_expand *expand, char *data)
 		else if (expand->q_flag == data[i])
 			expand->q_flag = 0;
 		if (data[i] == '$')
-			build_exp_pair(expand, data[i]);		// t_exp_pair 구조체 생성 후 따옴표 정보 기입
+			build_exp_pair(expand, data + i);		// t_exp_pair 구조체 생성 후 따옴표 정보 기입
 		i++;
 	}
 }
@@ -88,24 +90,26 @@ void	delete_quotes(t_c_expand *exp)
 
 void	find_position(t_c_expand *expand)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	*new_orig;
 
 	i = 0;
-	j = 0;
+	j = -1;
 	while (expand->original[i])
 	{
 		if (expand->original[i] == '$')
-		{
-			expand->exp_ptrs[j]->exp_pos = expand->original + i;
-			j++;
-		}
+			expand->exp_ptrs[++j]->exp_pos = expand->original + i;
 		i++;
 	}
 	i = 0;
 	while (expand->original[i] && expand->original[i] != '$')	// 첫 확장문자 이전까지의 문자열을 result에 저장
 		i++;
 	expand->result = add_str(expand->result, ft_substr(expand->original, 0, i));
+	new_orig = ft_substr(expand->original, i, ft_strlen(expand->original) - i);
+	// ft_printf("new_orig: [%s]\n", new_orig);
+	free(expand->original);
+	expand->original = new_orig;
 	if (!*expand->result[0])
 	{
 		split_free(expand->result);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youwin0802 <youwin0802@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:50:21 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/07 17:48:44 by youwin0802       ###   ########.fr       */
+/*   Updated: 2024/02/08 09:11:58 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ struct s_expand
 struct s_exp_pair
 {
 	char	q_flag;			// 따옴표 플래그
-	char	*exp_name;		// 환경변수 이름!
+	char	*exp_name;		// 환경변수 이름!(나 좀 짱인듯)
 	char	*exp_pos;		// 확장문자 위치
 };
 
