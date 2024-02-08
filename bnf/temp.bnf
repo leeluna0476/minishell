@@ -4,7 +4,7 @@
 
 <pipeline>              ::= <simple-command> | <simple-command> '|' <pipeline>
 
-<logical-expression>    ::= <script> <logical-expression> <script>
+<logical-expression>    ::= <script> <logical-symbol> <script>
 
 <redirection>           ::= '<' "'"?<word>"'"? | '<' '"'?<word>'"'? | '>' "'"?<word>"'"? | '>' '"'?<word>'"'? | '2>' "'"?<word>"'"? | '2>' '"'?<word>'"'?
 

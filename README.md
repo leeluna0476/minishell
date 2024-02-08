@@ -17,13 +17,12 @@ seojilee &amp;&amp; yusekim's minishell
 - 분할하면서 type 부여.
 
 ## Parser
-- Tokenizer가 형성한 튜플형 리스트가 원래 순서 그대로 문법에 맞는지 확인.
-- 문법 검사를 통과하면 AST script 형식으로 정렬.
+- Tokenizer가 형성한 튜플형 리스트가 문법에 맞는지 확인하면서 AST 형성.
+- 문법 검사를 통과하면 AST를 반환.
 
-## Abstract Syntax Tree
-- Script를 Logical expression, Pipeline, Command 3가지 중 하나로 정의한다.
-- Script에 Logical expression이 포함되는지 가장 먼저 확인하고, 포함된다면 해당 부분을 기준으로 다시 2개의 Script로 분할한다.
-- Script에 Logical expression이 없다면 Pipeline이 있는지 확인한다. 있다면 첫번째 파이프를 기준으로 왼쪽은 Command, 오른쪽은 다시 파이프라인으로 분할한다.
-<!-- Redirection을 한꺼번에 모아놓는 방식으로 바꾸기.
-- Command는 Parser에서 형식에 맞춰서 정렬한 순서를 따라 name, prefix, suffix로 분할한다.
-...-->
+### Abstract Syntax Tree
+- 가지 분할 기준 문자: &&, ||, |
+- &&, || 등의 논리 연산자를 기준으로 가지를 나눈다.
+- 논리 연산자가 없다면 | 를 기준으로 가지를 나눈다.
+- 논리 연산자, 파이프 둘 다 없다면 하나의 simple command로 유지하는데, 리다이렉션이 존재한다면 리다이렉션을 왼쪽 가지로, 명령어와 인자들을 오른쪽 가지로 나눈다.
+- 괄호가 있다면 바깥쪽에 있는 기준 문자를 먼저 확인한다.
