@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:24:18 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/07 21:27:26 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/08 19:33:50 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,24 +101,27 @@ t_token	*tokenizer(char *line)
 	t_type		type;
 
 	list = NULL;
-	i = 0;
-	while (line[i])
+	if (line)
 	{
-		if (is_meta1(line[i]))
-			i += get_meta1(&(line[i]), &string, &type);
-		else if (is_meta2(line[i]))
-			i += get_meta2(&(line[i]), &string, &type);
-		else
-			i += get_word(&(line[i]), &string, &type);
-		if (type == T_ERROR)
+		i = 0;
+		while (line[i])
 		{
-			syntax_error_tokenizer(string, &list);
-			break ;
+			if (is_meta1(line[i]))
+				i += get_meta1(&(line[i]), &string, &type);
+				else if (is_meta2(line[i]))
+				i += get_meta2(&(line[i]), &string, &type);
+				else
+				i += get_word(&(line[i]), &string, &type);
+			if (type == T_ERROR)
+			{
+				syntax_error_tokenizer(string, &list);
+				break ;
+			}
+			node = new_token(string, type);
+			add_token(&list, node);
+			free(string);
+			i += remove_space(&(line[i]));
 		}
-		node = new_token(string, type);
-		add_token(&list, node);
-		free(string);
-		i += remove_space(&(line[i]));
 	}
 	return (list);
 }

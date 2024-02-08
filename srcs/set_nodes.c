@@ -1,41 +1,5 @@
 #include "AST.h"
 
-int	check_if_single_pair(t_token *start, t_token *end)
-{
-	t_token	*curr;
-	int		flag;
-
-	curr = start;
-	flag = 0;
-	while (curr && curr <= end)
-	{
-		if (curr->type == T_OPEN_BRACKET)
-			flag++;
-		else if (curr->type == T_CLOSE_BRACKET)
-			flag--;
-		if (curr->type == T_CLOSE_BRACKET && !flag)
-			break ;
-		curr = curr->next;
-	}
-	if (curr == end)
-		return (1);
-	return (0);
-}
-
-// start, end를 할당할 때 앞뒤로 소괄호가 있다면 건너뜀.
-// 예: (ls | cat -e)
-void	remove_bracket(t_token **start, t_token **end)
-{
-	if ((*start)->type == T_OPEN_BRACKET && (*end)->type == T_CLOSE_BRACKET)
-	{
-		if (check_if_single_pair(*start, *end))
-		{
-			*start = (*start)->next;
-			*end = (*end)->prev;
-		}
-	}
-}
-
 // 괄호 짝 확인.
 t_token	*check_bracket(t_token *start, t_token *end)
 {
@@ -78,6 +42,46 @@ t_token	*check_bracket(t_token *start, t_token *end)
 	return (NULL);
 }
 
+// 지워도 되는 괄호 유무 판단.
+// ex: (ls || (ls && cat file))
+	// -> ls || (ls && cat file)
+int	check_if_single_pair(t_token *start, t_token *end)
+{
+	t_token	*curr;
+	int		flag;
+
+	curr = start;
+	flag = 0;
+	while (curr && curr <= end)
+	{
+		if (curr->type == T_OPEN_BRACKET)
+			flag++;
+		else if (curr->type == T_CLOSE_BRACKET)
+			flag--;
+		if (curr->type == T_CLOSE_BRACKET && !flag)
+			break ;
+		curr = curr->next;
+	}
+	if (curr == end)
+		return (1);
+	return (0);
+}
+
+// 지워도 되는 괄호가 있다면 지운다. (건너뛴다)
+void	remove_bracket(t_token **start, t_token **end)
+{
+	if ((*start)->type == T_OPEN_BRACKET && (*end)->type == T_CLOSE_BRACKET)
+	{
+		if (check_if_single_pair(*start, *end))
+		{
+			*start = (*start)->next;
+			*end = (*end)->prev;
+		}
+	}
+}
+
+// 괄호 안에 파이프가 있는지 확인.
+// 있다면 오류임.
 t_token	*check_pipe_in_bracket(t_token *start, t_token *end)
 {
 	t_token	*curr;
@@ -123,7 +127,8 @@ void	set_start_end(t_ast **ast, t_token *start, t_token *end)
 		remove_bracket(&start, &end);
 		if (err_token)
 			(*ast)->error = ft_strdup(err_token->string);
-		else if (single_pair && start->type == T_OPEN_BRACKET \
+		else if (single_pair && check_if_single_pair(start, end) \
+				&& start->type == T_OPEN_BRACKET \
 				&& end->type == T_CLOSE_BRACKET)
 			(*ast)->error = ft_strdup(start->string);
 		(*ast)->start = start;
@@ -194,11 +199,16 @@ void	set_cmds_redirs(t_ast **ast, t_token *start, t_token *end)
 	if (redirs)
 	{
 		cmds = set_commands(start, end);
-		set_start_end(&((*ast)->left), redirs, last_token(redirs));
-		if ((*ast)->left)
-			(*ast)->left->type = redirs->type;
-		set_start_end(&((*ast)->right), cmds, last_token(cmds));
-		if ((*ast)->right)
-			(*ast)->right->type = T_CMD;
+		if (cmds)
+		{
+			set_start_end(&((*ast)->left), redirs, last_token(redirs));
+			if ((*ast)->left)
+				(*ast)->left->type = redirs->type;
+			set_start_end(&((*ast)->right), cmds, last_token(cmds));
+			if ((*ast)->right)
+				(*ast)->right->type = T_CMD;
+		}
+		else
+			free_tokens(&redirs);
 	}
 }

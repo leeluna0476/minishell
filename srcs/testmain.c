@@ -27,6 +27,5 @@ int	main(int ac, char *av[], char *envp[])
 			free_ast(&ast);
 		}
 		free(str);
-//		system("leaks -q a.out");
 	}
 }
