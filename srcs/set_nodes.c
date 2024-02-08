@@ -37,10 +37,20 @@ t_token	*check_bracket(t_token *start, t_token *end)
 		}
 		start = start->next;
 	}
+
 	if (flag > 0)
 		return (first);
 	else if (flag < 0)
 		return (last);
+
+	if (first->prev \
+		&& (first->prev->type != T_AND || first->prev->type != T_OR \
+		|| first->prev->type != T_PIPE))
+		return (first->prev);
+	else if (last->next \
+		&& (last->next->type != T_AND || last->next->type != T_OR \
+		|| last->next->type != T_PIPE))
+		return (last->next);
 	return (NULL);
 }
 

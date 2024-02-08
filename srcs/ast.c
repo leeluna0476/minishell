@@ -104,7 +104,7 @@ void	leaks(void)
 //	t_token	*tokens;
 //
 //	atexit(leaks);
-//	tokens = tokenizer("<a>b<c>d<e>f<g>h\'cat\'");
+//	tokens = tokenizer("ls && (ls && ls && ( ls && ls ) && (ls && ls) && ls) && ls");
 //
 //	if (tokens)
 //	{
