@@ -28,6 +28,8 @@ void	set_start_end(t_ast **ast, t_token *start, t_token *end);
 void	set_cmds_redirs(t_ast **ast, t_token *start, t_token *end);
 
 t_token	*get_center(t_ast *ast, t_token *start, t_token *end);
+t_ast	*init_ast(t_token *tokens)
 void	generate_ast(t_ast **ast, t_token *start, t_token *end);
+void	syntax_error_parser(char *string, t_token **list)
 
 #endif

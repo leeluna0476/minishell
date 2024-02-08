@@ -44,6 +44,23 @@ t_token	*check_bracket(t_token *start, t_token *end)
 	return (NULL);
 }
 
+t_token	*check_pipe_in_bracket(t_token *start, t_token *end)
+{
+	t_token	*curr;
+
+	if (start->type == T_OPEN_BRACKET && end->type == T_CLOSE_BRACKET)
+	{
+		curr = start;
+		while (curr && curr <= end)
+		{
+			if (curr->type == T_PIPE)
+				return (curr);
+			curr = curr->next;
+		}
+	}
+	return (NULL);
+}
+
 // 현재 노드에 start, end 할당.
 // 괄호 짝이 맞지 않는 경우는 에러 처리. 예: (ls
 // 괄호가 중첩되는 경우는 에러 처리. 예: ((ls))
@@ -55,6 +72,8 @@ void	set_start_end(t_ast **ast, t_token *start, t_token *end)
 	if (*ast)
 	{
 		err_token = check_bracket(start, end);
+		if (!err_token)
+			err_token = check_pipe_in_bracket(start, end);
 		remove_bracket(&start, &end);
 		if (err_token)
 			(*ast)->error = ft_strdup(err_token->string);

@@ -5,7 +5,8 @@
 // 우선순위: 1. (), 2. &&, ||, 3. |
 t_token	*get_center(t_ast *ast, t_token *start, t_token *end)
 {
-	t_token	*curr; int		flag;
+	t_token	*curr;
+	int		flag;
 
 	curr = end;
 	while (curr && curr >= start)
@@ -88,7 +89,7 @@ t_ast	*init_ast(t_token *tokens)
 void	syntax_error_parser(char *string, t_token **list)
 {
 	// print error
-	printf("syntax error near unexpected token: `%s`\n", string);
+	printf("parse error near unexpected token: `%s`\n", string);
 	free_tokens(list);
 }
 
@@ -97,31 +98,31 @@ void	leaks(void)
 	system("leaks -q a.out");
 }
 
-int	main(void)
-{
-	t_ast	*ast;
-	t_token	*tokens;
-
-	atexit(leaks);
-	tokens = tokenizer("A=a || ((ls && ls) | cat -e)");
-
-	if (tokens)
-	{
-		ast = init_ast(tokens);
-		if (ast)
-		{
-			generate_ast(&ast, ast->start, ast->end);
-
-			if (!(ast->error))
-			{
-				print_ast(ast);
-				printf("\n");
-			}
-			else
-				syntax_error_parser(ast->error, &tokens);
-
-			free_ast(&ast);
-		}
-		free_tokens(&tokens);
-	}
-}
+//int	main(void)
+//{
+//	t_ast	*ast;
+//	t_token	*tokens;
+//
+//	atexit(leaks);
+//	tokens = tokenizer("<a>b<c>d<e>f<g>h\'cat\'");
+//
+//	if (tokens)
+//	{
+//		ast = init_ast(tokens);
+//		if (ast)
+//		{
+//			generate_ast(&ast, ast->start, ast->end);
+//
+//			if (!(ast->error))
+//			{
+//				print_ast(ast);
+//				printf("\n");
+//			}
+//			else
+//				syntax_error_parser(ast->error, &tokens);
+//
+//			free_ast(&ast);
+//		}
+//		free_tokens(&tokens);
+//	}
+//}
