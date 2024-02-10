@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youwin0802 <youwin0802@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 14:57:36 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/07 17:50:06 by youwin0802       ###   ########.fr       */
+/*   Updated: 2024/02/10 21:04:10 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ void	append_exp_ptr(t_c_expand *expand, t_exp_pair *newpair)
 		i++;
 	}
 	res[i] = newpair;
-	if (expand->exp_ptrs)
-		free(expand->exp_ptrs);
+	free(expand->exp_ptrs);
 	expand->exp_ptrs = res;
 }
 // 만들어진 pair구조체를 t_c_expand의 포인터 배열에 추가해주는 함수..
@@ -66,7 +65,7 @@ char	*find_env_name(char *ptr)
 
 	i = 1;
 	if (ft_isdigit(ptr[i]))
-		return (ft_substr(ptr, 0, i));
+		return (ft_substr(ptr, 0, i + 1));
 	while (ptr[i])
 	{
 		if (!(ft_isalnum(ptr[i]) || ptr[i] == '_'))
@@ -86,7 +85,7 @@ char	*appand_string(char *result, char *original, int *start, int end)
 	if (!*start)
 	{
 		out = ft_substr(original, *start, end);		// 첫 따옴표를 만났을시
-		*start = end + 1;
+		*start = end + 1;							// start를 따옴표 다음까지로 밀어준다.
 		return (out);
 	}
 	else
@@ -98,4 +97,21 @@ char	*appand_string(char *result, char *original, int *start, int end)
 		*start = end + 1;
 		return (out);
 	}
+}
+
+void	free_expand(t_c_expand *expand)
+{
+	int	i;
+
+	free(expand->original);
+	if (!expand->exp_num)
+		return ;
+	i = 0;
+	while (expand->exp_ptrs && expand->exp_ptrs[i])
+	{
+		free(expand->exp_ptrs[i]->exp_name);
+		free(expand->exp_ptrs[i]);
+		i++;
+	}
+	free(expand->exp_ptrs);
 }

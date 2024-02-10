@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:00:13 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/08 13:21:34 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/10 16:53:35 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,49 +55,18 @@ void	delete_env(char *name, t_env_pack *package)
 }
 // unset에 사용될 함수, name값을 key값으로 가지는 node를 찾고 적절히 연결 후 free하는 함수이다..
 
-void	set_new_env(t_env_pack *pack, t_env *new)
-{
-	new->origin_next = 0;
-	new->sorted_next = 0;
-	new->origin_prev = 0;
-	new->sorted_prev = 0;
-	if (!(pack->origin_head))
-	{
-		pack->origin_head = new;
-		pack->origin_last = new;
-		pack->sorted_head = new;
-	}
-	else
-	{
-		new->origin_prev = pack->origin_last;
-		pack->origin_last->origin_next = new;
-		pack->origin_last = new;
-		add_sorted_node(&(pack->sorted_head), new);
-	}
-}
-// new를 초기화하고 t_env_pack을 검사하며 orgin_next/prev를 연결하는 함수
-
-void	add_sorted_node(t_env **sorted_head, t_env *new)
+void	free_envs(t_env *head)
 {
 	t_env	*temp;
-	t_env	*temp_next;
+	t_env	*next;
 
-	temp = *sorted_head;
-	if (ft_strcmp(new->name, temp->name) < 0)
+	temp = head;
+	while (temp)
 	{
-		*sorted_head = new;
-		new->sorted_next = temp;
-		temp->sorted_prev = new;
-		return ;
+		next = temp->origin_next;
+		free(temp->name);
+		free(temp->value);
+		free(temp);
+		temp = next;
 	}
-	while (temp->sorted_next && \
-	ft_strcmp(new->name, temp->sorted_next->name) > 0)
-		temp = temp->sorted_next;
-	temp_next = temp->sorted_next;
-	temp->sorted_next = new;
-	if (temp_next)
-		temp_next->sorted_prev = new;
-	new->sorted_prev = temp;
-	new->sorted_next = temp_next;
 }
-// new노드의 sort_next/prev를 적절히 연결하는 함수

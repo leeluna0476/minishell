@@ -6,6 +6,7 @@
 		"builtin.h": "c",
 		"stdlib.h": "c",
 		"complex": "c",
-		"expand.h": "c"
+		"expand.h": "c",
+		"env.h": "c"
 	}
 }

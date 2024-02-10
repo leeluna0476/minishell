@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:13:02 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/08 17:58:28 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/10 21:04:51 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,28 @@
 // 	return (0);
 // }
 
+void	leaks()
+{
+	system("leaks minishell");
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_env_pack	package;
+	char		**expand_out;
 
 	build_envp(&package, envp);
-	if (argc > 1)
-		exec_builtin(++argv, &package);
-	// char *expandstr = ft_strdup("'$single' \"$double\" $1invaild@ \'$muyahoo\'");
-	// char *expandstr = ft_strdup("hello '$sing' \"$double\" $1invaild@ \'$muyahoo\'");
+	// if (argc > 1)
+		// exec_builtin(++argv, &package);
+	// char *quote = ft_strdup("'$single' \"$double\" $1invaild@ \'$muyahoo\'");
 	// char *quote = ft_strdup("Hello\"\" \'this is a str\"ing for quote\' t\'es   \'t");
-	// char *quote = ft_strdup("echo $a\"\"$PWD\"\"qwere\"qwqwer$P$P$PWD\"\'$PWD\'\"\"");
-	char *quote = ft_strdup("$a\"\"hello");
-	// char *quote = ft_strdup("ABC$USER\"\"1\'$HOME\'12$LESS 123"); // ABC$USER""1'$HOME'12$LESS 123
+	// char *quote = ft_strdup("echo \"\"$PWD\"\"qwere\"qwqwer$P$P$PWD\"\'$PWD\'\"\"");
+	// char *quote = ft_strdup("$USER\"\"hello$USER");
+	char *quote = ft_strdup("ABC\'$USER$a\'$a\"\"1\'$HOME\'12$LESS 123"); // ABC$USER""1'$HOME'12$LESS 123
 
 	ft_printf("original: [%s]\n", quote);
-	expand(quote, &package);
+	expand_out = expand(quote, &package);
+	free_envs(package.origin_head);
+	split_free(expand_out);
+	atexit(leaks);
 }			// 확장 테스트용 코드

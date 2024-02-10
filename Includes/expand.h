@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:32:39 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/08 17:04:12 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/10 21:05:34 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void	join_remain(t_c_expand *expand, int len);
 void	build_exp_pair(t_c_expand *expand, char *ptr);
 char	*find_env_name(char *ptr);
 char	*appand_string(char *result, char *original, int *start, int end);
+void	free_expand(t_c_expand *expand);
 
 #endif

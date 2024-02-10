@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:47:35 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/02 13:21:01 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/10 16:53:50 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ void	add_sorted_node(t_env **sorted_head, t_env *new);
 // env_util.c
 t_env	*find_env(char *name, t_env_pack *package);
 void	delete_env(char *name, t_env_pack *package);
+void	free_envs(t_env *head);
 
 #endif
