@@ -22,9 +22,9 @@ SRCS = ./srcs/envs/build_env_pack.c \
 		./srcs/execute/do_heredoc.c \
 		./srcs/execute/execute_utils.c \
 		./srcs/execute/open_redirs.c \
-		./srcs/execute/expand.c \
-		./srcs/execute/cmd_expand.c \
-		./srcs/execute/expand_utils.c \
+		./srcs/expand/expand.c \
+		./srcs/expand/cmd_expand.c \
+		./srcs/expand/expand_utils.c \
 		./srcs/builtins/builtin_exec.c \
 		./srcs/builtins/builtin_utils.c \
 		./srcs/builtins/do_builtin.c \
