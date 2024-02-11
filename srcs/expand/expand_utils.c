@@ -6,13 +6,13 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 14:57:36 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/11 14:26:13 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/11 19:37:27 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 
-void	build_exp_pair(t_c_expand *expand, char *ptr)
+void	build_exp_pair(t_c_expand *expand, char *ptr, int q_flag)
 {
 	t_exp_pair	*new;
 	int			i;
@@ -20,7 +20,7 @@ void	build_exp_pair(t_c_expand *expand, char *ptr)
 	new = malloc(sizeof(t_exp_pair));
 	if (!new)
 		exit (1);
-	new->q_flag = expand->q_flag;
+	new->q_flag = q_flag;
 	new->exp_name = find_env_name(ptr);
 	if (!expand->exp_num)
 	{

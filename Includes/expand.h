@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:32:39 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/11 17:23:00 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/11 19:37:48 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	expand_join(t_c_expand *expand, char *temp);
 void	join_remain(t_c_expand *expand, int len);
 
 // expand_utils.c
-void	build_exp_pair(t_c_expand *expand, char *ptr);
+void	build_exp_pair(t_c_expand *expand, char *ptr, int q_flag);
 void	append_exp_ptr(t_c_expand *expand, t_exp_pair *newpair);
 char	*find_env_name(char *ptr);
 char	*appand_string(char *result, char *original, int *start, int end);

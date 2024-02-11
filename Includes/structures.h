@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:50:21 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/08 09:11:58 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/11 19:37:53 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "../srcs/libft/libft.h"
 // 이 파일에는 미니셸 구조체들을 선언한다
 
-typedef struct s_token		t_toekn;
+typedef struct s_token		t_token;
 typedef struct s_tree		t_tree;
 typedef struct s_env		t_env;
 typedef struct s_env_pack	t_env_pack;
@@ -24,6 +24,7 @@ typedef struct s_redir		t_redir;
 typedef struct s_expand		t_c_expand;		// 명령어 확장
 typedef struct s_expand		t_r_expand;		// 리다이렉션 파일 확장
 typedef struct s_exp_pair	t_exp_pair;
+typedef struct s_ast		t_ast;
 
 int							g_exit_status;
 // exit code(전역변수)
@@ -114,7 +115,6 @@ struct s_redir
 
 struct s_expand
 {
-	char		q_flag;
 	char		*original;
 	t_exp_pair	**exp_ptrs;		// original을 돌면서 찾은 '$' 위치들과
 	int			exp_num;		// '$' 갯수(확장여부 상관없이)
@@ -128,5 +128,14 @@ struct s_exp_pair
 	char	*exp_pos;		// 확장문자 위치
 };
 
+struct s_ast
+{
+	enum e_type		type;
+	struct s_token	*start;
+	struct s_token	*end;
+	char			*error;
+	struct s_ast	*left;
+	struct s_ast	*right;
+};
 
 #endif
