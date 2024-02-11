@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:05 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/05 15:30:08 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/11 13:07:03 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	do_export(char **args, t_env_pack *pack)
 	}
 	return (1);
 }
+// 인자가 있는 export 빌트인을 처리하는 함수.
+// 모든 인자에 대해 이름 유효성 검사를 진행 후 유효한 이름에 대해 환경변수 구조체 노드를 만들어 준다.
 
 int	do_unset(char **args, t_env_pack *pack)
 {
@@ -54,6 +56,7 @@ int	do_unset(char **args, t_env_pack *pack)
 	}
 	return (1);
 }
+// unset구현함수, 이름 유효성 검사를 먼저 한 뒤 유효한 이름일시 환경변수 구조체에서 지워준다.
 // 하하 전위연산자가 필요합니당!
 
 int	do_env(char **args, t_env_pack *pack)
@@ -76,9 +79,31 @@ int	do_env(char **args, t_env_pack *pack)
 	}
 	return (1);
 }
+// env구현함수, bash에 출력에 맞게 출력해주면 된다.
 
 int	do_exit(char **args, t_env_pack *pack)
 {
-	ft_printf("exit\n");
-	return (1);
+	int		args_len;
+
+	args_len = split_len(args);
+	g_exit_status = 0;
+	if (args_len > 2)
+	{
+		ft_printf("%s: too many arguments\n", args[0]);
+		g_exit_status = 1;
+		return (1);
+	}
+	if (args_len == 2)
+	{
+		if (check_sign(args[1]))
+		{
+			ft_printf("%s: %s: numeric argument required\n", args[0], args[1]);
+			g_exit_status = 255;
+			exit(g_exit_status);
+		}
+		else
+			g_exit_status = ft_atoi(args[1]) % 256;
+	}
+	exit(g_exit_status);
 }
+// exit해주는 함수 bash의 동작과 맞춰주었다..

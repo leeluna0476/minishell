@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/10 21:05:25 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/11 14:19:44 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,3 +109,20 @@ void	find_position(t_c_expand *expand)
 }
 // 확장할때 따옴표정보를 미리 알고있어야 하기때문에 따옴표 제거 전 확장문자 정보(플래그)를 생성하고
 // 다시 순회하여 확장문자의 위치를 저장한다..
+
+void	free_expand(t_c_expand *expand)
+{
+	int	i;
+
+	free(expand->original);
+	if (!expand->exp_num)
+		return ;
+	i = 0;
+	while (expand->exp_ptrs && expand->exp_ptrs[i])
+	{
+		free(expand->exp_ptrs[i]->exp_name);
+		free(expand->exp_ptrs[i]);
+		i++;
+	}
+	free(expand->exp_ptrs);
+}

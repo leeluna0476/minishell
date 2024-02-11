@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:31:56 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/10 21:01:37 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/11 14:26:41 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,31 +117,16 @@ void	expand_add(t_c_expand *expand, char *temp)
 	i = 0;
 	while (expand->result[i])
 		i++;
-	if (split_l == 1)
-	{
-		if (!expand->result)
-			expand->result = add_str(expand->result, temp);
-		else
-		{
-			out = ft_strjoin(expand->result[i - 1], temp);
-			free(expand->result[i - 1]);
-			expand->result[i - 1] = out;
-			free(temp);
-		}
-		return (split_free(split));
-	}
 	if (!expand->result)
 		expand->result = split;
-	else
+	else if (split_l == 1)
 	{
-		out = ft_strjoin(expand->result[i - 1], split[0]);
-		free(split[0]);
+		out = ft_strjoin(expand->result[i - 1], temp);
 		free(expand->result[i - 1]);
 		expand->result[i - 1] = out;
-		i = 0;
-		while (++i < split_l)
-			expand->result = add_str(expand->result, split[i]);
-		free(split);
+		split_free(split);
 	}
+	else
+		add_split(expand, split, split_l, i - 1);
 	return (free(temp));
 }

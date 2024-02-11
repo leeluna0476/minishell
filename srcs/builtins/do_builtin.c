@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   do_builtin2.c                                      :+:      :+:    :+:   */
+/*   do_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:22 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/05 13:09:16 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/11 12:43:38 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	do_cd(char **args, t_env_pack *pack)
 	check_res(result, pack, temp, args);
 	return (1);
 }
+// 빌트인 cd 실행시켜주는 함수. '~'와 '-' 도 구현되어있다
 
 int	do_echo(char **args, t_env_pack *pack)
 {
@@ -55,7 +56,7 @@ int	do_echo(char **args, t_env_pack *pack)
 		n_flag = 1;
 	while (args[i])
 	{
-		ft_printf("%s", args[i]);
+		ft_printf("%s ", args[i]);
 		i++;
 	}
 	if (!n_flag)
