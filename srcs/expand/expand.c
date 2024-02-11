@@ -6,24 +6,26 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/11 14:19:44 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/11 17:26:19 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 
-char	**expand(char *data, t_env_pack *package)
+char	**expand(char *data, t_env_pack *package, int flag)
 {
 	t_c_expand	expand;
 
 	ft_memset(&expand, 0, sizeof(t_c_expand));
 	scan_n_setup(&expand, data);
+	if (flag)
+		expand.result = add_str(expand.result, ft_strdup(data));
 	delete_quotes(&expand);
 	ft_printf("after quoting: [%s]\n", expand.original); // test code
 	find_position(&expand);
-	cmd_expand(&expand, package);
+	do_expand(&expand, package);
 
-	ft_printf("out: ");
+	ft_printf("out: \n");
 	for (int j = 0; j < split_len(expand.result); j++)
 		ft_printf("[%s]\n", expand.result[j]);
 	free_expand(&expand);
@@ -83,7 +85,7 @@ void	find_position(t_c_expand *expand)
 {
 	int		i;
 	int		j;
-	char	*new_orig;
+	char	*new_o;
 
 	i = 0;
 	j = -1;
@@ -101,10 +103,9 @@ void	find_position(t_c_expand *expand)
 	expand->result = add_str(expand->result, ft_substr(expand->original, 0, i));
 	if (i)
 	{
-		new_orig = ft_substr(expand->original, i, ft_strlen(expand->original) - i);
-		// ft_printf("new_orig: [%s]\n", new_orig);
+		new_o = ft_substr(expand->original, i, ft_strlen(expand->original) - i);
 		free(expand->original);
-		expand->original = new_orig;
+		expand->original = new_o;
 	}
 }
 // 확장할때 따옴표정보를 미리 알고있어야 하기때문에 따옴표 제거 전 확장문자 정보(플래그)를 생성하고

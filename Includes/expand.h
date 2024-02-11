@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:32:39 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/11 14:19:47 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/11 17:23:00 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 # include "env.h"
 
 // expand.c
-char	**expand(char *data, t_env_pack *package);
+char	**expand(char *data, t_env_pack *package, int flag);
 void	scan_n_setup(t_c_expand *expand, char *data);
 void	delete_quotes(t_c_expand *exp);
 void	find_position(t_c_expand *expand);
 void	free_expand(t_c_expand *expand);
 
 // cmd_expand.c
-void	cmd_expand(t_c_expand *expand, t_env_pack *pack);
+void	do_expand(t_c_expand *expand, t_env_pack *pack);
 char	*search_value(t_exp_pair *pair, t_env_pack *pack);
 void	expand_add(t_c_expand *expand, char *temp);
 void	expand_join(t_c_expand *expand, char *temp);

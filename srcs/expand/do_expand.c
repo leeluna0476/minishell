@@ -6,13 +6,13 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:31:56 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/11 14:26:41 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/11 17:22:48 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 
-void	cmd_expand(t_c_expand *expand, t_env_pack *pack)
+void	do_expand(t_c_expand *expand, t_env_pack *pack)
 {
 	int		i;
 	char	*temp;
@@ -115,7 +115,7 @@ void	expand_add(t_c_expand *expand, char *temp)
 	split = ft_split(temp, ' ');
 	split_l = split_len(split);
 	i = 0;
-	while (expand->result[i])
+	while (expand->result && expand->result[i])
 		i++;
 	if (!expand->result)
 		expand->result = split;
