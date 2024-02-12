@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 02:23:03 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/01 22:23:33 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:32:57 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	unsigned int	i;
 	unsigned int	j;
 
-	if (!s)
+	if (!s || !len)
 		return (NULL);
 	s_len = ft_strlen(s);
 	if (start > s_len)
