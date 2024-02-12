@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:24:18 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/08 19:33:50 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/12 08:27:28 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,25 +56,26 @@ int	remove_space(char *line)
 // 예쁜 코드 실패.
 int	get_word(char *line, char **string, t_type *type)
 {
-	int	i;
+	int		i;
+	char	quote;
 
 	i = 0;
 	while (line[i] && !is_space(line[i]) \
 		&& !is_meta1(line[i]) && !is_meta2(line[i]))
 	{
 		if (line[i] == '=')
+			i++;
+		if (line[i] == '\"' || line[i] == '\'')
 		{
-			if (i == 0 || is_space(line[i + 1]))
+			quote = line[i];
+			i++;
+			while (line[i] && line[i] != quote)
+				i++;
+			if (line[i] != quote)
 			{
-				*string = ft_substr(line, i, 1);
+				*string = ft_strdup(&quote);
 				*type = T_ERROR;
 				return (i);
-			}
-			if (line[i + 1] == '\"')
-			{
-				i += 2;
-				while (line[i] && line[i] != '\"')
-					i++;
 			}
 		}
 		i++;
