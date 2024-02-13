@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../libft/libft.h"
+#include <unistd.h>
 
 char	**add_str(char **str, char *add)
 {
@@ -30,12 +31,16 @@ char	**add_str(char **str, char *add)
 	return (new);
 }
 
-int	check_wildfixes(char *filename, char *pattern)
+// 디렉토리 여부는 d_type == DT_DIR으로 확인.
+int	check_wildfixes(char *filename, __uint8_t type, char *pattern)
 {
 	char	*substr;
-	int	start;
-	int	end;
-	int	i;
+	int		filename_len;
+	int		remains;
+	int		start;
+	int		end;
+	int		i;
+
 
 	start = 0;
 	end = ft_strlen(pattern) - 1;
@@ -45,30 +50,34 @@ int	check_wildfixes(char *filename, char *pattern)
 		start = 1;
 		i = 1;
 	}
-	while (pattern[i])
+	while (pattern[i] && pattern[i] != '/')
 	{
-		// a*
-		if (start == 0 && i != 0 && pattern[i] == '*')
+		if (start != i)
 		{
-			end = i - 1;
-			if (ft_strncmp(filename, pattern, i))
-				return (0);
-			start = i + 1;
-		}
-		else if (pattern[i] == '*')
-		{
-			end = i - 1;
-			substr = ft_substr(pattern, start, end - start + 1);
-			if (!ft_strnstr(filename, substr, ft_strlen(filename)))
+			if (start == 0 && i != 0 && pattern[i] == '*')
 			{
-				free(substr);
-				return (0);
+				end = i - 1;
+				if (ft_strncmp(filename, pattern, i))
+					return (0);
+				start = i + 1;
 			}
-			free(substr);
-			start = i + 1;
+			else if (pattern[i] == '*')
+			{
+				end = i - 1;
+				substr = ft_substr(pattern, start, end - start + 1);
+				if (!ft_strnstr(filename, substr, ft_strlen(filename)))
+				{
+					free(substr);
+					return (0);
+				}
+				free(substr);
+				start = i + 1;
+			}
 		}
 		i++;
 	}
+	if (pattern[i] == '/' && type != DT_DIR)
+		return (0);
 	if (!start && end == (int)ft_strlen(pattern) - 1)
 	{
 		if (ft_strncmp(filename, &(pattern[start]), ft_strlen(filename)))
@@ -76,14 +85,12 @@ int	check_wildfixes(char *filename, char *pattern)
 	}
 	else if (start < i)
 	{
-		int	remains;
-		int	filename_len;
 		remains = ft_strlen(&(pattern[start]));
 		filename_len = ft_strlen(filename);
 		if (ft_strncmp(&(filename[filename_len - remains]), &(pattern[start]), remains))
 			return (0);
 	}
-	return (1);
+	return (i);
 }
 
 char	**expand_wildcard(char *arg)
@@ -91,6 +98,7 @@ char	**expand_wildcard(char *arg)
 	DIR				*dp;
 	struct dirent	*entry;
 	char			**args;
+	int				i;
 
 	args = NULL;
 	dp = opendir(".");
@@ -99,29 +107,55 @@ char	**expand_wildcard(char *arg)
 	entry = readdir(dp);
 	while (entry)
 	{
-		if (check_wildfixes(entry->d_name, arg))
-			args = add_str(args, ft_strdup(entry->d_name));
+		i = check_wildfixes(entry->d_name, entry->d_type, arg);
+		if (i)
+			args = add_str(args, ft_strjoin(entry->d_name, &(arg[i])));
 		entry = readdir(dp);
 	}
-	if (!args)
-		args = add_str(args, ft_strdup(arg));
 	closedir(dp);
 	return (args);
 }
 
-int	main(void)
+int	main(int ac, char *av[], char *envp[])
 {
 	char	**expanded_arg;
+//	char	**final_arg;
+//	pid_t	pid;
 
-	expanded_arg = expand_wildcard("a*");
-	
-	if (expanded_arg)
-	{
-		int	i = 0;
-		while (expanded_arg[i])
-		{
-			printf("%s\n", expanded_arg[i]);
-			i++;
-		}
-	}
+	(void)ac;
+	(void)av;
+	(void)envp;
+	expanded_arg = expand_wildcard("*");
+
+//	if (expanded_arg)
+//	{
+//		final_arg = NULL;
+//		final_arg = add_str(final_arg, ft_strdup("ls"));
+//		final_arg = add_str(final_arg, ft_strdup("-1G"));
+//
+//		int	i = 0;
+//		while (expanded_arg[i])
+//		{
+//			final_arg = add_str(final_arg, ft_strdup(expanded_arg[i]));
+//			free(expanded_arg[i]);
+//			i++;
+//		}
+//		free(expanded_arg);
+//
+//		pid = fork();
+//		if (pid == 0)
+//			execve("/bin/ls", final_arg, envp);
+//		else
+//			wait(NULL);
+//		i = 0;
+//		while (final_arg[i])
+//		{
+//			free(final_arg[i]);
+//			i++;
+//		}
+//		free(final_arg);
+//	}
+//	else
+//		printf("no matches found: %s\n", "*");
+	system("leaks -q a.out");
 }
