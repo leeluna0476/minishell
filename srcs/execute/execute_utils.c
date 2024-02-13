@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/11 13:32:29 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/13 13:09:44 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,3 +64,57 @@ char	**add_str(char **str, char *add)
 // 예를 들어 str[0] = "ls", str[1] = "-l", str[2] = NULL 이고 add = "-a" 일 때
 // 재할당과 해제를 통해 new를 리턴한다
 // 이때 new[0] = "ls", new[1] = "-l", new[2] = "-a", new[3] = NULL
+
+char	**merge_strs(char **orig, char **new_strs)
+{
+	int		orig_len;
+	int		new_len;
+	int		idx;
+	char	**out;
+
+	if (!orig)
+		return (new_strs);
+	if (!new_strs)
+		return (orig);
+	orig_len = split_len(orig);
+	new_len = split_len(new_strs);
+	out = malloc(sizeof(char *) * (orig_len + new_len + 1));
+	if (!out)
+		exit(1);
+	idx = -1;
+	while (++idx < orig_len)
+		out[idx] = orig[idx];
+	idx = -1;
+	while (++idx < new_len)
+		out[idx + orig_len] = new_strs[idx];
+	free(orig);
+	free(new_strs);
+	return (out);
+}
+
+char	*itoa(int n)
+{
+	int		size;
+	int		temp;
+	char	*out;
+
+	if (n == 0)
+		return (ft_strdup("0"));
+	size = 0;
+	temp = n;
+	while (temp)
+	{
+		temp /= 10;
+		size++;
+	}
+	out = malloc(sizeof(char) * (size + 1));
+	if (!out)
+		exit(1);
+	out[size] = '\0';
+	while (n)
+	{
+		out[--size] = (n % 10) + '0';
+		n /= 10;
+	}
+	return (out);
+}

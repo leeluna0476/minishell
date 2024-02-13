@@ -20,8 +20,10 @@ CFLAGS = -I./includes
 SRCS = ./srcs/envs/build_env_pack.c \
 		./srcs/envs/env_utils.c \
 		./srcs/execute/do_heredoc.c \
+		./srcs/execute/execute.c \
 		./srcs/execute/execute_utils.c \
-		./srcs/execute/open_redirs.c \
+		./srcs/execute/redirections.c \
+		./srcs/execute/redir_utils.c \
 		./srcs/expand/expand.c \
 		./srcs/expand/do_expand.c \
 		./srcs/expand/expand_utils.c \

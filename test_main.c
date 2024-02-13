@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:13:02 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/11 17:22:32 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/12 16:17:23 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	main(int argc, char **argv, char **envp)
 	// char *quote = ft_strdup("'$single' \"$double\" $1invaild@ \'$muyahoo\'");
 	// char *quote = ft_strdup("Hello\"\" \'this is a str\"ing for quote\' t\'es   \'t");
 	// char *quote = ft_strdup("echo \"\"$PWD\"\"qwere\"qwqwer$P$P$PWD\"\'$PWD\'\"\"");
-	char *quote = ft_strdup("$USER\"\"hello$USER");
+	char *quote = ft_strdup("\'$USER\"\"hello$USER\'");
 	// char *quote = ft_strdup("ABC\'$USER$a\'$a\"\"1\'$HOME\'12$LESS 123"); // ABC$USER""1'$HOME'12$LESS 123
 
 	ft_printf("original: [%s]\n", quote);

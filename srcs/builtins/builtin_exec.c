@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:28 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/05 15:47:33 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/12 16:23:34 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ int	exec_builtin(char **args, t_env_pack *pack)
 
 	i = check_is_builtin(*args);
 	if (i == -1)
-	{
-		ft_printf("not a builtin\n");
 		return (0);
-	}
 	else
 		return (f_ptr_list[i](args, pack));
 }

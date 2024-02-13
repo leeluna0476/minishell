@@ -6,13 +6,13 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:36 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/11 17:40:53 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/12 13:56:51 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTE_H
 # define EXECUTE_H
-# include "utils.h"
 # include "structures.h"
+# include "utils.h"
 
 #endif
