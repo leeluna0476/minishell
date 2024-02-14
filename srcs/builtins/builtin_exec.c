@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:28 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/12 16:23:34 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/14 09:41:32 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,3 +47,54 @@ int	exec_builtin(char **args, t_env_pack *pack)
 		return (f_ptr_list[i](args, pack));
 }
 // 함수 포인터 배열을 사용하여 check_is_builtin의 리턴값에 맞는 함수를 실행시켜준다
+
+int	solo_builtin(t_cmd *cur, t_env_pack *pack)
+{
+	int	std_fd[2];
+	int	in_fd;
+	int	out_fd;
+	int	res;
+
+	res = 0;
+	builtin_fd_set(&in_fd, &out_fd, std_fd);
+	b_check_redir(cur, std_fd, &in_fd, &out_fd);
+	if (in_fd != 0)
+		close(in_fd);
+	if (out_fd != 1)
+		close(out_fd);
+	if (exec_builtin(cur->c_args, pack))
+		res = 1;
+	if (cur->in_redirs)
+	{
+		dup2(std_fd[0], 0);
+		close(std_fd[0]);
+	}
+	if (cur->out_redirs)
+	{
+		dup2(std_fd[1], 1);
+		close(std_fd[1]);
+	}
+	return (res);
+}
+// input 값이 단일 builtin일 경우, 리다이렉션 연결 후 바로 실행해준다.
+
+void	b_check_redir(t_cmd *cur, int *std_fd, int *in_fd, int *out_fd)
+{
+	if (cur->in_redirs)
+	{
+		std_fd[0] = dup(0);
+		*in_fd = open(cur->in_redirs->filename[1], O_RDONLY);
+		dup2(*in_fd, 0);
+	}
+	if (cur->out_redirs)
+	{
+		std_fd[1] = dup(1);
+		if (cur->out_redirs->type == T_D_GREATER)
+			*out_fd = open(cur->out_redirs->filename[1],
+					O_WRONLY | O_APPEND | O_CREAT, 0644);
+		else
+			*out_fd = open(cur->out_redirs->filename[1],
+					O_WRONLY | O_TRUNC | O_CREAT, 0644);
+		dup2(*out_fd, 1);
+	}
+}

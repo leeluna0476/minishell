@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:19 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/13 14:55:56 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/14 10:05:47 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	do_heredoc(t_redir *temp, char *f_name, t_env_pack *pack)
 	int		fd;
 
 	infile_fd = open(f_name, O_WRONLY | O_CREAT, 0644);
-	if (!infile_fd == -1)
+	if (infile_fd == -1)
 		exit (1);
 	fd = dup(0);
 	temp_exit_status = g_exit_status;

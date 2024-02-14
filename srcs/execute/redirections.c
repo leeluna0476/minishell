@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_redirs.c                                      :+:      :+:    :+:   */
+/*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 09:33:59 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/13 14:57:38 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/14 10:07:02 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirection.h"
 
-void	append_redir(t_cmd_pack *cmd, t_type type, char **fileinfo)
+void	append_redir(t_cmd *cmd, t_type type, char **fileinfo)
 {
 	t_redir	*new;
 	t_redir	*temp;
@@ -33,7 +33,7 @@ void	append_redir(t_cmd_pack *cmd, t_type type, char **fileinfo)
 	}
 }
 
-int	scan_n_set_redirs(t_cmd_pack *cmd, t_env_pack *pack)
+int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)
 {
 	t_redir	*temp;
 
@@ -46,7 +46,7 @@ int	scan_n_set_redirs(t_cmd_pack *cmd, t_env_pack *pack)
 			cmd->out_redirs = temp;
 		if (temp->type == T_D_LESSER)
 		{
-			if (heredoc(cmd, pack))
+			if (heredoc(temp, pack))
 				return (1);
 		}
 		temp = temp->next;

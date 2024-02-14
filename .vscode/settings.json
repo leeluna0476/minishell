@@ -12,6 +12,7 @@
 		"unistd.h": "c",
 		"redirection.h": "c",
 		"__locale": "c",
-		"ios": "c"
+		"ios": "c",
+		"get_next_line.h": "c"
 	}
 }

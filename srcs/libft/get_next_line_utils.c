@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youwin0802 <youwin0802@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:42:37 by youwin0802        #+#    #+#             */
-/*   Updated: 2023/05/29 16:48:25 by youwin0802       ###   ########.fr       */
+/*   Updated: 2024/02/14 10:05:04 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	gnl_strnlen(char *str, int type)
 	return (idx);
 }
 
-void	*ft_memcpy(void *dst, void *src, int n)
+void	*gnl_memcpy(void *dst, void *src, int n)
 {
 	unsigned char	*c_dst;
 	unsigned char	*c_src;

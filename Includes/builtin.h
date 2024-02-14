@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:38:38 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/11 13:05:55 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/14 10:01:21 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,15 @@ typedef int	(*t_builtin_ptr)(char **, t_env_pack *);
 // builtin_exec.c
 int				exec_builtin(char **args, t_env_pack *pack);
 enum e_b_type	check_is_builtin(char *arg);
+int				solo_builtin(t_cmd *cur, t_env_pack *pack);
+void			b_check_redir(t_cmd *cur, int *std_fd, int *in_fd, int *out_fd);
 
 // builtin_utils.c
 int				print_export(t_env_pack *pack);
 int				check_env_name(char **args, int i);
 void			check_res(int res, t_env_pack *pack, char *path, char **args);
 int				check_sign(char *str);
+void			builtin_fd_set(int *in_fd, int *out_fd, int *std_fd);
 
 // do_builtin.c
 int				do_echo(char **args, t_env_pack *pack);

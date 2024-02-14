@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:50:21 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/12 16:19:58 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/14 09:41:32 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef struct s_token		t_token;
 typedef struct s_tree		t_tree;
 typedef struct s_env		t_env;
 typedef struct s_env_pack	t_env_pack;
-typedef struct s_cmd_pack	t_cmd_pack;
+typedef struct s_cmd_pack	t_cmd;
 typedef struct s_redir		t_redir;
 typedef struct s_expand		t_c_expand;		// 명령어 확장
 typedef struct s_expand		t_r_expand;		// 리다이렉션 파일 확장

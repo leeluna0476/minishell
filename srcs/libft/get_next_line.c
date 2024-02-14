@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youwin0802 <youwin0802@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 15:42:42 by youwin0802        #+#    #+#             */
-/*   Updated: 2023/06/04 19:40:25 by youwin0802       ###   ########.fr       */
+/*   Updated: 2024/02/14 10:05:23 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_remain(char *remain, char **newline)
 			*newline = malloc(sizeof(char) * (t_len + 1));
 			if (!*newline)
 				return (-1);
-			ft_memcpy(*newline, remain, t_len + 1);
+			gnl_memcpy(*newline, remain, t_len + 1);
 		}
 		return (1);
 	}
@@ -36,7 +36,7 @@ int	check_remain(char *remain, char **newline)
 		if (!*newline)
 			return (-1);
 		(*newline)[nl_idx] = '\0';
-		ft_memcpy(*newline, remain, nl_idx);
+		gnl_memcpy(*newline, remain, nl_idx);
 		return (0);
 	}
 }
@@ -60,7 +60,7 @@ char	*build_remain(char *remain, char *str, int *ret)
 			return (NULL);
 		}
 		new_rem[t_len - nl_idx] = '\0';
-		ft_memcpy(new_rem, str + nl_idx, t_len - nl_idx);
+		gnl_memcpy(new_rem, str + nl_idx, t_len - nl_idx);
 	}
 	free(remain);
 	return (new_rem);
@@ -87,8 +87,8 @@ char	*buf_check_n_join(char *newline, char *buf, int *ret)
 		return (newline);
 	}
 	updated_line[t_len + nl_idx] = '\0';
-	ft_memcpy(updated_line, newline, t_len);
-	ft_memcpy(updated_line + t_len, buf, nl_idx);
+	gnl_memcpy(updated_line, newline, t_len);
+	gnl_memcpy(updated_line + t_len, buf, nl_idx);
 	free(newline);
 	return (updated_line);
 }

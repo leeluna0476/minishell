@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:59:01 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/13 14:57:48 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/14 10:03:07 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,32 @@ char	*trim_quotes(char *data)
 	}
 	out = appand_string(out, data, &start_pos, idx);
 	return (out);
+}
+
+int	heredoc_q_flag(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'' || str[i] == '\"')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	detact_exitcode(int temp)
+{
+	if (g_exit_status)
+	{
+		g_exit_status = temp;
+		return (1);
+	}
+	else
+	{
+		g_exit_status = temp;
+		return (0);
+	}
 }

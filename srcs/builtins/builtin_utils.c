@@ -6,12 +6,15 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:24 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/11 13:07:50 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/14 10:02:42 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structures.h"
 #include "builtin.h"
+#include "execute.h"
+
+int	is_space(char c);
 
 int	print_export(t_env_pack *pack)
 {
@@ -75,13 +78,6 @@ void	check_res(int res, t_env_pack *pack, char *path, char **args)
 // chdir함수의 리턴값을 활용하여 cd가 제대로 작동되었는지의 여부를 확인하는 함수
 // 또, 정상적으로 작동되었을 경우, 환경변수 "OLDPWD" 와 "PWD"를 업데이트해준다.
 
-int	is_space(char c)
-{
-	if (c != '\n' && (c == ' ' || (c >= '\t' && c <= '\r')))
-		return (1);
-	return (0);
-}	// 서진님 코드 훔치기..히히
-
 int	check_sign(char *str)
 {
 	int	i;
@@ -103,3 +99,19 @@ int	check_sign(char *str)
 }
 // 빌트인 exit에서 인자로 들어온 종료코드가 유효한지 체크해주는 함수
 // 피신때 atoi와 매우 닮아 있다
+
+void	builtin_fd_set(int *in_fd, int *out_fd, int *std_fd)
+{
+	*in_fd = 0;
+	*out_fd = 1;
+	std_fd[0] = 0;
+	std_fd[1] = 1;
+}
+// 나는 놈이 싫다2..
+
+int	is_space(char c)
+{
+	if (c != '\n' && (c == ' ' || (c >= '\t' && c <= '\r')))
+		return (1);
+	return (0);
+}	// 서진님 코드 훔치기..히히

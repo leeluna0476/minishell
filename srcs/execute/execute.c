@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/13 15:07:16 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/14 10:06:35 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	execute(t_ast *tree, t_env_pack *pack, int level)
 	if (!tree)
 		return ;
 	if (tree->type == T_PIPE)
-		return (execute_pipe(tree, pack, level));		// TODO
+		return /*(execute_pipe(tree, pack, level))*/;		// TODO
 	if (tree->type == T_OR || tree->type == T_AND)
-		return (logical_expression(tree, pack, level));	// TODO
+		return /*(logical_expression(tree, pack, level))*/;	// TODO
 	if (!tree->left && !tree->right)
 		do_execution(tree, pack, level);
 	execute(tree->left, pack, level + 1);
@@ -32,22 +32,22 @@ void	execute(t_ast *tree, t_env_pack *pack, int level)
 
 void	do_execution(t_ast *tree, t_env_pack *pack, int level)
 {
-	t_cmd_pack	*cmd;
+	t_cmd	*cmd;
 
 	build_cmd_pack(tree, pack, cmd);
 	if (scan_n_set_redirs(cmd, pack))
-		return (free_cmd(tree));		// TODO
-	if (level == 0 && exec_builtin(cmd->c_args, pack))
-		return (free_cmd(tree));
+		return /*(free_cmd(tree))*/;		// TODO
+	if (level == 0 && solo_builtin(cmd, pack))
+		return /*(free_cmd(tree))*/;
 }
 
-void	build_cmd_pack(t_ast *tree, t_env_pack *pack, t_cmd_pack *cmd)
+void	build_cmd_pack(t_ast *tree, t_env_pack *pack, t_cmd *cmd)
 {
 	t_token	*cur;
 	char	**limiter;
 
 	cur = tree->start;
-	cmd = ft_calloc(1, sizeof(t_cmd_pack));
+	cmd = ft_calloc(1, sizeof(t_cmd));
 	if (!cmd)
 		exit (1);
 	while (cur && cur <= tree->end)

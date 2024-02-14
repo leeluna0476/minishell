@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:14:38 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/13 12:16:40 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/14 09:59:37 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@
 # include <readline/history.h>
 # include "structures.h"
 
+// execute_utils.c
 char	**add_str(char **str, char *add);
 void	split_free(char **split);
 int		split_len(char **split);
 char	*itoa(int n);
+char	**merge_strs(char **orig, char **new_strs);
 
 #endif
