@@ -1,0 +1,18 @@
+{
+	"files.associations": {
+		"libft.h": "c",
+		"structures.h": "c",
+		"utils.h": "c",
+		"builtin.h": "c",
+		"stdlib.h": "c",
+		"complex": "c",
+		"expand.h": "c",
+		"env.h": "c",
+		"execute.h": "c",
+		"unistd.h": "c",
+		"redirection.h": "c",
+		"__locale": "c",
+		"ios": "c",
+		"get_next_line.h": "c"
+	}
+}
