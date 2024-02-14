@@ -30,8 +30,8 @@ void	print_ast(t_ast *ast)
 // 트리의 각 노드 메모리 해제.
 void	free_node(t_ast **node)
 {
-	if (is_redirection((*node)->type) || (*node)->type == T_CMD)
-		free_tokens(&((*node)->start));
+//	if (is_redirection((*node)->type) || (*node)->type == T_CMD)
+//		free_tokens(&((*node)->start));
 	free((*node)->error);
 	free(*node);
 	*node = NULL;

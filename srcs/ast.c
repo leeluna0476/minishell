@@ -73,7 +73,7 @@ void	generate_ast(t_ast **ast, t_token *start, t_token *end)
 	else
 	{
 		(*ast)->type = T_WORD;
-		set_cmds_redirs(ast, start, end);
+//		set_cmds_redirs(ast, start, end);
 		check_error(*ast);
 	}
 }
