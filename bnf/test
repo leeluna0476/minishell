@@ -1,0 +1,87 @@
+< infile ls -l | cat -e  > outfile
+
+<script>
+<command>
+<pipeline>
+<command> | <command>
+<redirection> <word> | <command>
+< <word> <word> | <command>
+< <string> <word> | <command>
+< <character>{ <character> } <word> | <command>
+< <small letter>{ <character> } <word> | <command>
+< i{ <character> } <word> | <command>
+< i<character>{ <character> } <word> | <command>
+< i<small letter>{ <character> } <word> | <command>
+< in{ <character> } <word> | <command>
+< in<character>{ <character> } <word> | <command>
+< in<small letter>{ <character> } <word> | <command>
+< inf{ <character> } <word> | <command>
+< inf<character>{ <character> } <word> | <command>
+< inf<small letter>{ <character> } <word> | <command>
+< infi{ <character> } <word> | <command>
+< infi<character>{ <character> } <word> | <command>
+< infi<small letter>{ <character> } <word> | <command>
+< infil{ <character> } <word> | <command>
+< infil<character> <word> | <command>
+< infil<small letter> <word> | <command>
+< infile <word> | <command>
+< infile <string> { <string> } | <command>
+< infile <character>{ <character> } { <string> } | <command>
+< infile <small letter>{ <character> } { <string> } | <command>
+< infile l{ <character> } { <string> } | <command>
+< infile l<character> { <string> } | <command>
+< infile l<small letter> { <string> } | <command>
+< infile ls { <string> } | <command>
+< infile ls <string> | <command>
+< infile ls <character>{ <character> } | <command>
+< infile ls <other ASCII character>{ <character> } | <command>
+< infile ls -{ <character> } | <command>
+< infile ls -<character> | <command>
+< infile ls -<small letter> | <command>
+< infile ls -l | <command>
+< infile ls -l | <simple command>
+< infile ls -l | <word> <redirection>
+< infile ls -l | <string> { <string> } <redirection>
+< infile ls -l | <character>{ <character> } { <string> } <redirection>
+< infile ls -l | <small letter>{ <character> } { <string> } <redirection>
+< infile ls -l | c{ <character> } { <string> } <redirection>
+< infile ls -l | c<character>{ <character> } { <string> } <redirection>
+< infile ls -l | c<small letter>{ <character> } { <string> } <redirection>
+< infile ls -l | ca{ <character> } { <string> } <redirection>
+< infile ls -l | ca<character> { <string> } <redirection>
+< infile ls -l | ca<small letter> { <string> } <redirection>
+< infile ls -l | cat { <string> } <redirection>
+< infile ls -l | cat <string> <redirection>
+< infile ls -l | cat <character>{ <character> } <redirection>
+< infile ls -l | cat <other ASCII character>{ <character> } <redirection>
+< infile ls -l | cat -{ <character> } <redirection>
+< infile ls -l | cat -<character> <redirection>
+< infile ls -l | cat -<small letter> <redirection>
+< infile ls -l | cat -e <redirection>
+< infile ls -l | cat -e > <word>
+< infile ls -l | cat -e > <string>
+< infile ls -l | cat -e > <character>{ <character> }
+< infile ls -l | cat -e > <small letter>{ <character> }
+< infile ls -l | cat -e > o{ <character> }
+< infile ls -l | cat -e > o<character>{ <character> }
+< infile ls -l | cat -e > o<small letter>{ <character> }
+< infile ls -l | cat -e > ou{ <character> }
+< infile ls -l | cat -e > ou<character>{ <character> }
+< infile ls -l | cat -e > ou<small letter>{ <character> }
+< infile ls -l | cat -e > out{ <character> }
+< infile ls -l | cat -e > out<character>{ <character> }
+< infile ls -l | cat -e > outf{ <character> }
+< infile ls -l | cat -e > outf<character>{ <character> }
+< infile ls -l | cat -e > outf<small letter>{ <character> }
+< infile ls -l | cat -e > outfi{ <character> }
+< infile ls -l | cat -e > outfi<small letter>{ <character> }
+< infile ls -l | cat -e > outfil{ <character> }
+< infile ls -l | cat -e > outfil<character>
+< infile ls -l | cat -e > outfil<small letter>
+
+< infile ls -l | cat -e > outfile
+
+<redirection> == < <word> == < <string> == < infile
+<word> == <string> <string> == ls -l
+<word> == <string> <string> == cat -e
+<redirection> == > <word> == > <string> == > outfile

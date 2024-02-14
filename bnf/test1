@@ -1,0 +1,86 @@
+< infile cat -e | wc -l > outfile
+
+<script>
+<command>
+<pipeline>
+<command> <command>
+<simple command> <command>
+<redirection> <word> <command>
+< <word> <word> <command>
+< <string> <word> <command>
+< <character>{ <character> } <word> <command>
+< <small letter>{ <character> } <word> <command>
+< i{ <character> } <word> <command>
+< i<character>{ <character> } <word> <command>
+< i<small letter>{ <character> } <word> <command>
+< in{ <character> } <word> <command>
+< in<character>{ <character> } <word> <command>
+< in<small letter>{ <character> } <word> <command>
+< inf{ <character> } <word> <command>
+< inf{ <character> } <word> <command>
+< inf<character>{ <character> } <word> <command>
+< inf<small letter>{ <character> } <word> <command>
+< infi{ <character> } <word> <command>
+< infi<character>{ <character> } <word> <command>
+< infi<small letter>{ <character> } <word> <command>
+< infil{ <character> } <word> <command>
+< infil<character> <word> <command>
+< infil<small letter> <word> <command>
+< infile <word> <command>
+< infile <string> { <string> } <command>
+< infile <character>{ <character> } { <string> } <command>
+< infile <small letter>{ <character> } { <string> } <command>
+< infile c{ <character> } { <string> } <command>
+< infile c<character>{ <character> } { <string> } <command>
+< infile c<small letter>{ <character> } { <string> } <command>
+< infile ca{ <character> } { <string> } <command>
+< infile ca<character> { <string> } <command>
+< infile ca<small letter> { <string> } <command>
+< infile cat { <string> } <command>
+< infile cat <string> <command>
+< infile cat <character>{ <character> } <command>
+< infile cat <other ASCII character>{ <character> } <command>
+< infile cat -{ <character> } <command>
+< infile cat -<character> <command>
+< infile cat -<small letter> <command>
+< infile cat -e <command>
+< infile cat -e <simple command>
+< infile cat -e <redirection>
+< infile cat -e | <word> <redirection>
+< infile cat -e | <string> { <string> } <redirection>
+< infile cat -e | <character>{ <character> } { <string> } <redirection>
+< infile cat -e | <small letter>{ <character> } { <string> } <redirection>
+< infile cat -e | w{ <character> } { <string> } <redirection>
+< infile cat -e | w<character> { <string> } <redirection>
+< infile cat -e | wc { <string> } <redirection>
+< infile cat -e | wc <string> <redirection>
+< infile cat -e | wc <character>{ <character> } <redirection>
+< infile cat -e | wc <other ASCII character>{ <character> } <redirection>
+< infile cat -e | wc -{ <character> } <redirection>
+< infile cat -e | wc -<character> <redirection>
+< infile cat -e | wc -<small letter> <redirection>
+< infile cat -e | wc -l <redirection>
+< infile cat -e | wc -l > <word>
+< infile cat -e | wc -l > <string>
+< infile cat -e | wc -l > <character>{ <character> }
+< infile cat -e | wc -l > <small letter>{ <character> }
+< infile cat -e | wc -l > o{ <character> }
+< infile cat -e | wc -l > o<character>{ <character> }
+< infile cat -e | wc -l > o<small letter>{ <character> }
+< infile cat -e | wc -l > ou{ <character> }
+< infile cat -e | wc -l > ou<character>{ <character> }
+< infile cat -e | wc -l > ou<small letter>{ <character> }
+< infile cat -e | wc -l > out{ <character> }
+< infile cat -e | wc -l > out<character>{ <character> }
+< infile cat -e | wc -l > out<small letter>{ <character> }
+< infile cat -e | wc -l > outf{ <character> }
+< infile cat -e | wc -l > outf<character>{ <character> }
+< infile cat -e | wc -l > outf<small letter>{ <character> }
+< infile cat -e | wc -l > outfi{ <character> }
+< infile cat -e | wc -l > outfi<character>{ <character> }
+< infile cat -e | wc -l > outfi<small letter>{ <character> }
+< infile cat -e | wc -l > outfil{ <character> }
+< infile cat -e | wc -l > outfil<character>
+< infile cat -e | wc -l > outfil<small letter>
+
+< infile cat -e | wc -l > outfile
