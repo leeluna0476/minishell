@@ -6,6 +6,7 @@
 
 typedef enum e_type			t_type;
 typedef struct s_token		t_token;
+typedef struct s_mark		t_mark;
 
 enum	e_type
 {
@@ -32,6 +33,12 @@ struct s_token
 	enum	e_type	type;
 	struct	s_token	*prev;
 	struct	s_token	*next;
+};
+
+struct s_mark
+{
+	int	start;
+	int	end;
 };
 
 // token_utils
