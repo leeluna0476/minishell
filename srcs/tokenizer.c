@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:24:18 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/12 08:27:28 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:33:09 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	get_word(char *line, char **string, t_type *type)
 
 	i = 0;
 	while (line[i] && !is_space(line[i]) \
-		&& !is_meta1(line[i]) && !is_meta2(line[i]))
+		&& !is_meta1(line[i]) && line[i] != '(' && line[i] != ')')
 	{
 		if (line[i] == '=')
 			i++;
@@ -109,9 +109,9 @@ t_token	*tokenizer(char *line)
 		{
 			if (is_meta1(line[i]))
 				i += get_meta1(&(line[i]), &string, &type);
-				else if (is_meta2(line[i]))
+			else if (is_meta2(line[i]))
 				i += get_meta2(&(line[i]), &string, &type);
-				else
+			else
 				i += get_word(&(line[i]), &string, &type);
 			if (type == T_ERROR)
 			{

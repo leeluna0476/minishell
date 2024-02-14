@@ -15,9 +15,9 @@ void	print_ast(t_ast *ast)
 	if (!ast)
 		return ;
 	curr = ast->start;
-	while (curr && curr <= ast->end)
+	while (curr && curr->prev != ast->end)
 	{
-		printf("%s ", curr->string);
+		printf("{%s} ", curr->string);
 		curr = curr->next;
 	}
 	printf("\n");

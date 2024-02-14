@@ -9,7 +9,7 @@ t_token	*get_center(t_ast *ast, t_token *start, t_token *end)
 	int		flag;
 
 	curr = end;
-	while (curr && curr >= start)
+	while (curr && curr->next != start)
 	{
 		if (curr->type == T_CLOSE_BRACKET)
 		{
@@ -24,16 +24,16 @@ t_token	*get_center(t_ast *ast, t_token *start, t_token *end)
 				curr = curr->prev;
 			}
 		}
-		if ((curr >= start && (curr->type == T_AND || curr->type == T_OR)))
+		if (curr && curr->next != start && (curr->type == T_AND || curr->type == T_OR))
 		{
 			check_center_error(ast, curr);
 			return (curr);
 		}
-		if (curr >= start)
+		if (curr && curr->next != start)
 			curr = curr->prev;
 	}
 	curr = end;
-	while (curr && curr >= start)
+	while (curr && curr->next != start)
 	{
 		if (curr->type == T_PIPE)
 		{

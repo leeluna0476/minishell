@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:34:40 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/07 20:48:20 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/14 21:35:39 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,17 +91,40 @@ int	get_meta1(char *line, char **string, t_type *type)
 int	get_meta2(char *line, char **string, t_type *type)
 {
 	int	i;
+	int	a;
+	int	flag;
 
+	flag = 0;
 	i = 1;
 	if (line[0] == '\"' || line[0] == '\'')
 	{
-		while (line[i] && line[i] != line[0])
+		i = 0;
+		while (line[i])
+		{
+			if (line[i] == ' ' && !flag)
+				break ;
+			if (line[i] == '\"' || line[i] == '\'')
+			{
+				flag++;
+				a = i++;
+				while (line[i] && flag)
+				{
+					if (line[i] == line[a])
+						flag--;
+					i++;
+				}
+				i--;
+			}
 			i++;
-		i++;
+		}
 	}
 	*string = ft_substr(line, 0, i);
 	*type = get_type(*string, i);
-	if ((*string)[0] != (*string)[i - 1])
+	if (flag % 2 != 0)
+	{
 		*type = T_ERROR;
+		free(*string);
+		*string = ft_substr(line, a, 1);
+	}
 	return (i);
 }

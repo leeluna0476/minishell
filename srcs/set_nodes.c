@@ -10,7 +10,7 @@ t_token	*check_bracket(t_token *start, t_token *end)
 	flag = 0;
 	first = NULL;
 	last = NULL;
-	while (start && start <= end)
+	while (start && start->prev != end)
 	{
 		if (start->type == T_OPEN_BRACKET)
 		{
@@ -31,11 +31,12 @@ t_token	*check_bracket(t_token *start, t_token *end)
 		return (first);
 	else if (flag < 0)
 		return (last);
-	if (first && first->prev && first->prev >= start \
+	// 주소 크기 비교.
+	if (first && first->prev /*&& first->prev >= start*/ \
 		&& first->prev->type != T_AND && first->prev->type != T_OR \
 		&& first->prev->type != T_PIPE)
 		return (first->prev);
-	else if (last && last->next && last->next <= end \
+	else if (last && last->next /*&& last->next <= end*/ \
 		&& last->next->type != T_AND && last->next->type != T_OR \
 		&& last->next->type != T_PIPE)
 		return (last->next);
@@ -52,7 +53,7 @@ int	check_if_single_pair(t_token *start, t_token *end)
 
 	curr = start;
 	flag = 0;
-	while (curr && curr <= end)
+	while (curr && curr->prev != end)
 	{
 		if (curr->type == T_OPEN_BRACKET)
 			flag++;
@@ -91,7 +92,7 @@ t_token	*check_pipe_in_bracket(t_token *start, t_token *end)
 	{
 		flag = 0;
 		curr = start;
-		while (curr && curr <= end)
+		while (curr && curr->prev != end)
 
 		{
 			if (curr->type == T_OPEN_BRACKET)
@@ -119,9 +120,6 @@ void	set_start_end(t_ast **ast, t_token *start, t_token *end)
 	if (*ast)
 	{
 		err_token = check_bracket(start, end);
-		if (err_token)
-		{
-		}
 		if (!err_token)
 			err_token = check_pipe_in_bracket(start, end);
 		remove_bracket(&start, &end);
