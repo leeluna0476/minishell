@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:50:21 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/14 09:41:32 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/14 15:27:56 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ enum	e_b_type
 struct s_token
 {
 	enum e_type		type;		// 열거형 type
-	char			*data;		// 해당 node의 data
+	char			*string;		// 해당 node의 data
 	struct s_token	*next;		// 다음 node
 	struct s_token	*prev;		// 이전 node (syntax error 체크때 유용했었음)
 };

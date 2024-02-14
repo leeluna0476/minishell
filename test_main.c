@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:13:02 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/14 10:09:37 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/14 15:25:16 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int argc, char **argv, char **envp)
 	// char *quote = ft_strdup("ABC\'$USER$a\'$a\"\"1\'$HOME\'12$LESS 123"); // ABC$USER""1'$HOME'12$LESS 123
 
 	ft_printf("original: [%s]\n", quote);
+	expand_out = expand(quote, &package, 0);
 	free_envs(package.origin_head);
 	split_free(expand_out);
 	// atexit(leaks);

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_expand.c                                       :+:      :+:    :+:   */
+/*   do_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:31:56 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/11 17:22:48 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/14 15:30:05 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 
-void	do_expand(t_c_expand *expand, t_env_pack *pack)
+void	do_expand(t_c_expand *expand, t_env_pack *pack, int flag)
 {
 	int		i;
 	char	*temp;

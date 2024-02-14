@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:55 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/14 09:59:01 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/14 15:26:35 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define TEMP_FILENAME "/Users/yusekim/goinfre/heredoc_tmp"
 
 // open_redirs.c
-void	append_redir(t_cmd *cmd, t_type type, char **fileinfo);
+void	append_redir(t_cmd **cmd, t_type type, char **fileinfo);
 int		scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack);
 int		open_check(t_redir *temp);
 

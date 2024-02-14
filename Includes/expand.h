@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:32:39 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/11 19:37:48 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/14 15:26:17 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	find_position(t_c_expand *expand);
 void	free_expand(t_c_expand *expand);
 
 // cmd_expand.c
-void	do_expand(t_c_expand *expand, t_env_pack *pack);
+void	do_expand(t_c_expand *expand, t_env_pack *pack, int flag);
 char	*search_value(t_exp_pair *pair, t_env_pack *pack);
 void	expand_add(t_c_expand *expand, char *temp);
 void	expand_join(t_c_expand *expand, char *temp);

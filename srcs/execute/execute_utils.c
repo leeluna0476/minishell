@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/13 13:09:44 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/14 15:28:35 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	split_len(char **split)
 	int	i;
 
 	i = 0;
-	while (split[i])
+	while (split && split[i])
 		i++;
 	return (i);
 }
