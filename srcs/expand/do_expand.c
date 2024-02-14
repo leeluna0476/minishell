@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   do_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:31:56 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/14 11:11:32 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:35:33 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/expand.h"
 
-void	do_expand(t_c_expand *expand, t_env_pack *pack)
+void	do_expand(t_c_expand *expand, t_env_pack *pack, int flag)
 {
 	int		i;
 	char	*temp;

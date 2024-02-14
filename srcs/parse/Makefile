@@ -10,7 +10,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C ../libft
-	$(CC) -o $(NAME) $(OBJS) -lft -L../libft/ -lreadline
+	$(CC) -g3 -o $(NAME) $(OBJS) -lft -L../libft/ -lreadline
 
 $(OBJS): $(SRCS) $(HEADERS)
 

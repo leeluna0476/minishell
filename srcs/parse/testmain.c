@@ -21,7 +21,10 @@ int	main(int ac, char *av[], char *envp[])
 			ast = init_ast(tokens);
 			generate_ast(&ast, ast->start, ast->end);
 			if (!(ast->error))
+			{
+				print_ast(ast);
 				execute(ast, &env, 0);
+			}
 			else
 				syntax_error_parser(ast->error, &tokens);
 			free_tokens(&tokens);

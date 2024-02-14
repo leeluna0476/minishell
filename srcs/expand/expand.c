@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/14 11:11:23 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:46:05 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@ char	**expand(char *data, t_env_pack *package, int flag)
 	if (flag)
 		expand.result = add_str(expand.result, ft_strdup(data));
 	delete_quotes(&expand);
-	ft_printf("after quoting: [%s]\n", expand.original); // test code
+	// ft_printf("after quoting: [%s]\n", expand.original); // test code
 	find_position(&expand);
-	do_expand(&expand, package);
+	if (expand.exp_num && flag && split_len(expand.result) == 1)
+		expand.result = add_str(expand.result, ft_strdup(""));
+	do_expand(&expand, package, flag);
 
-	ft_printf("out: \n");
-	for (int j = 0; j < split_len(expand.result); j++)
-		ft_printf("[%s]\n", expand.result[j]);
+	// ft_printf("out: \n");
+	// for (int j = 0; j < split_len(expand.result); j++)
+	// 	ft_printf("[%s]\n", expand.result[j]);
 	free_expand(&expand);
 	return (expand.result);
 }

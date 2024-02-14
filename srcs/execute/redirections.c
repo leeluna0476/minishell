@@ -3,30 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 09:33:59 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/14 11:13:42 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/14 13:28:41 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/redirection.h"
 
-void	append_redir(t_cmd *cmd, t_type type, char **fileinfo)
+void	append_redir(t_cmd **cmd, t_type type, char **fileinfo)
 {
 	t_redir	*new;
 	t_redir	*temp;
+
+	int	i = -1;
+	if (type == T_LESSER)
+		ft_printf("\ntype is <\n");
+	else if (type == T_GREATER)
+		ft_printf("\ntype is >\n");
+	else if (type == T_D_GREATER)
+		ft_printf("\ntype is >>\n");
+	ft_printf("print fileinfo\n");
+	while (fileinfo && fileinfo[++i])
+		ft_printf("[%s] ", fileinfo[i]);
+	ft_printf("\n");
 
 	new = ft_calloc(1, sizeof(t_redir));
 	if (!new)
 		exit(1);
 	new->type = type;
 	new->filename = fileinfo;
-	if (!cmd->all_redirs)
-		cmd->all_redirs = new;
+	if (!(*cmd)->all_redirs)
+	{
+
+		ft_printf("new!\n");
+
+
+		(*cmd)->all_redirs = new;
+	}
 	else
 	{
-		temp = cmd->all_redirs;
+		temp = (*cmd)->all_redirs;
 		while (temp && temp->next)
 			temp = temp->next;
 		temp->next = new;
@@ -37,6 +55,7 @@ int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)
 {
 	t_redir	*temp;
 
+	ft_printf("set_redirs\n");
 	temp = cmd->all_redirs;
 	while (temp)
 	{
@@ -52,12 +71,15 @@ int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)
 		temp = temp->next;
 	}
 	temp = cmd->all_redirs;
+	ft_printf("set_redirs2\n");
 	return (open_check(temp));
 }
 
 int	open_check(t_redir *temp)
 {
 	g_exit_status = 1;
+
+	ft_printf("open_check\n");
 	while (temp)
 	{
 		if (temp->type != T_D_LESSER && split_len(temp->filename) > 2)
@@ -78,6 +100,7 @@ int	open_check(t_redir *temp)
 			close(temp->fd);
 		temp = temp->next;
 	}
+	ft_printf("open_check2\n");
 	g_exit_status = 0;
 	return (0);
 }
