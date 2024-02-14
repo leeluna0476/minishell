@@ -1,0 +1,91 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AST_H	AST.h	/^# define AST_H$/;"	d
+CC	Makefile	/^CC=cc$/;"	m
+CFLAGS	Makefile	/^CFLAGS=-Wall -Wextra -Werror$/;"	m
+HEADERS	Makefile	/^HEADERS=parse_struct.h AST.h$/;"	m
+NAME	Makefile	/^NAME=minishell$/;"	m
+OBJS	Makefile	/^OBJS=$(SRCS:.c=.o)$/;"	m
+PARSE_STRUCT_H	parse_struct.h	/^# define PARSE_STRUCT_H$/;"	d
+RM	Makefile	/^RM=rm -fr$/;"	m
+SRCS	Makefile	/^SRCS=ast.c ast_utils.c check_ast_error.c meta.c set_nodes.c token_utils.c tokenizer.c testmain.c$/;"	m
+T_AND	parse_struct.h	/^	T_AND,				\/\/ 논리 연산 AND "&&"$/;"	e	enum:e_type
+T_CLOSE_BRACKET	parse_struct.h	/^	T_CLOSE_BRACKET,	\/\/ 논리 연산 괄호 닫힘 ')'$/;"	e	enum:e_type
+T_CMD	parse_struct.h	/^	T_CMD$/;"	e	enum:e_type
+T_D_GREATER	parse_struct.h	/^	T_D_GREATER,		\/\/ 리다이렉션 append ">>"$/;"	e	enum:e_type
+T_D_LESSER	parse_struct.h	/^	T_D_LESSER,			\/\/ 리다이렉션 Here_doc "<<"$/;"	e	enum:e_type
+T_ERROR	parse_struct.h	/^	T_ERROR = -1,		\/\/ 기본값 (syntax check때의 초깃값)$/;"	e	enum:e_type
+T_GREATER	parse_struct.h	/^	T_GREATER,			\/\/ 리다이렉션 '>'$/;"	e	enum:e_type
+T_LESSER	parse_struct.h	/^	T_LESSER,			\/\/ 리다이렉션 '<'$/;"	e	enum:e_type
+T_NEWLINE	parse_struct.h	/^	T_NEWLINE,$/;"	e	enum:e_type
+T_OPEN_BRACKET	parse_struct.h	/^	T_OPEN_BRACKET,		\/\/ 논리 연산 괄호 열림 '('$/;"	e	enum:e_type
+T_OR	parse_struct.h	/^	T_OR,				\/\/ 논리 연산 OR "||"$/;"	e	enum:e_type
+T_PIPE	parse_struct.h	/^	T_PIPE,				\/\/ Pipe문자 '|'$/;"	e	enum:e_type
+T_SPACE	parse_struct.h	/^	T_SPACE,			\/\/ 공백문자(보통 space)$/;"	e	enum:e_type
+T_WORD	parse_struct.h	/^	T_WORD,				\/\/ 문자$/;"	e	enum:e_type
+add_str	test.c	/^char	**add_str(char **str, char *add)$/;"	f
+add_token	token_utils.c	/^void	add_token(t_token **list, t_token *token)$/;"	f
+check_bracket	set_nodes.c	/^t_token	*check_bracket(t_token *start, t_token *end)$/;"	f
+check_center_error	check_ast_error.c	/^void	check_center_error(t_ast *ast, t_token *center)$/;"	f
+check_end	test.c	/^int	check_end(char *filename, char *pattern, t_mark mark, int i)$/;"	f
+check_error	check_ast_error.c	/^int	check_error(t_ast *ast)$/;"	f
+check_front_center	test.c	/^int	check_front_center(char *filename, char *pattern, t_mark *mark, int i)$/;"	f
+check_if_single_pair	set_nodes.c	/^int	check_if_single_pair(t_token *start, t_token *end)$/;"	f
+check_pipe_in_bracket	set_nodes.c	/^t_token	*check_pipe_in_bracket(t_token *start, t_token *end)$/;"	f
+check_redirection_error	check_ast_error.c	/^int	check_redirection_error(t_ast *ast, t_token *node)$/;"	f
+check_wildfixes	test.c	/^int	check_wildfixes(char *filename, __uint8_t type, char *pattern)$/;"	f
+e_type	parse_struct.h	/^enum	e_type$/;"	g
+end	AST.h	/^	t_token			*end;$/;"	m	struct:s_ast
+end	parse_struct.h	/^	int	end;$/;"	m	struct:s_mark
+error	AST.h	/^	char			*error;$/;"	m	struct:s_ast
+expand_wildcard	test.c	/^char	**expand_wildcard(char *arg)$/;"	f
+free_ast	ast_utils.c	/^void	free_ast(t_ast **ast)$/;"	f
+free_node	ast_utils.c	/^void	free_node(t_ast **node)$/;"	f
+free_token	token_utils.c	/^void	free_token(t_token **token)$/;"	f
+free_tokens	token_utils.c	/^void	free_tokens(t_token **tokens)$/;"	f
+generate_ast	ast.c	/^void	generate_ast(t_ast **ast, t_token *start, t_token *end)$/;"	f
+get_center	ast.c	/^t_token	*get_center(t_ast *ast, t_token *start, t_token *end)$/;"	f
+get_meta1	meta.c	/^int	get_meta1(char *line, char **string, t_type *type)$/;"	f
+get_meta2	meta.c	/^int	get_meta2(char *line, char **string, t_type *type)$/;"	f
+get_type	tokenizer.c	/^t_type	get_type(char *string, int i)$/;"	f
+get_word	tokenizer.c	/^int	get_word(char *line, char **string, t_type *type)$/;"	f
+init_ast	ast.c	/^t_ast	*init_ast(t_token *tokens)$/;"	f
+is_meta1	meta.c	/^int	is_meta1(char c)$/;"	f
+is_meta2	meta.c	/^int	is_meta2(char c)$/;"	f
+is_redirection	ast_utils.c	/^int	is_redirection(t_type type)$/;"	f
+is_space	tokenizer.c	/^int	is_space(char c)$/;"	f
+last_token	token_utils.c	/^t_token	*last_token(t_token *list)$/;"	f
+leaks	ast.c	/^void	leaks(void)$/;"	f
+left	AST.h	/^	struct s_ast	*left;$/;"	m	struct:s_ast	typeref:struct:s_ast::s_ast
+main	testmain.c	/^int	main(int ac, char *av[], char *envp[])$/;"	f
+new_token	token_utils.c	/^t_token	*new_token(char *string, t_type type)$/;"	f
+next	parse_struct.h	/^	struct	s_token	*next;$/;"	m	struct:s_token	typeref:struct:s_token::s_token
+prev	parse_struct.h	/^	struct	s_token	*prev;$/;"	m	struct:s_token	typeref:struct:s_token::s_token
+print_ast	ast_utils.c	/^void	print_ast(t_ast *ast)$/;"	f
+remove_bracket	set_nodes.c	/^void	remove_bracket(t_token **start, t_token **end)$/;"	f
+remove_space	tokenizer.c	/^int	remove_space(char *line)$/;"	f
+right	AST.h	/^	struct s_ast	*right;$/;"	m	struct:s_ast	typeref:struct:s_ast::s_ast
+s_ast	AST.h	/^struct s_ast$/;"	s
+s_mark	parse_struct.h	/^struct s_mark$/;"	s
+s_token	parse_struct.h	/^struct s_token$/;"	s
+set_cmds_redirs	set_nodes.c	/^void	set_cmds_redirs(t_ast **ast, t_token *start, t_token *end)$/;"	f
+set_commands	set_nodes.c	/^t_token	*set_commands(t_token *start, t_token *end)$/;"	f
+set_redirs	set_nodes.c	/^t_token	*set_redirs(t_ast **ast, t_token *start, t_token *end)$/;"	f
+set_start_end	set_nodes.c	/^void	set_start_end(t_ast **ast, t_token *start, t_token *end)$/;"	f
+set_type_meta1	meta.c	/^void	set_type_meta1(char c, int i, t_type *type)$/;"	f
+start	AST.h	/^	t_token			*start;$/;"	m	struct:s_ast
+start	parse_struct.h	/^	int	start;$/;"	m	struct:s_mark
+string	parse_struct.h	/^	char			*string;$/;"	m	struct:s_token
+syntax_error_parser	ast.c	/^void	syntax_error_parser(char *string, t_token **list)$/;"	f
+syntax_error_tokenizer	tokenizer.c	/^void	syntax_error_tokenizer(char *string, t_token **list)$/;"	f
+t_ast	AST.h	/^typedef struct s_ast t_ast;$/;"	t	typeref:struct:s_ast
+t_mark	parse_struct.h	/^typedef struct s_mark		t_mark;$/;"	t	typeref:struct:s_mark
+t_token	parse_struct.h	/^typedef struct s_token		t_token;$/;"	t	typeref:struct:s_token
+t_type	parse_struct.h	/^typedef enum e_type			t_type;$/;"	t	typeref:enum:e_type
+tokenizer	tokenizer.c	/^t_token	*tokenizer(char *line)$/;"	f
+type	AST.h	/^	enum e_type		type;$/;"	m	struct:s_ast	typeref:enum:s_ast::e_type
+type	parse_struct.h	/^	enum	e_type	type;$/;"	m	struct:s_token	typeref:enum:s_token::e_type
