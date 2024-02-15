@@ -29,6 +29,7 @@ struct s_token
 };
 ```
 **Token**: A sequence of characters considered a single unit by the shell. It is either a word or an operator.
+
 **토큰**: 쉘에 의해 단일 단위로 간주되는 일련의 문자. 그것은 단어이거나 연산자이다.
 - 따옴표 규칙을 지키면서 metacharacters를 기준으로 line을 토큰으로 분할.
   - `| & ; ( ) < > (space) (newline)`
