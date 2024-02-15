@@ -7,9 +7,9 @@
 
 ## 확장
 ```
-DIR	*opendir(const char *filename);
+DIR		*opendir(const char *filename);
 struct dirent	*readdir(DIR *dirp);
-int	closedir(DIR *dirp);
+int		closedir(DIR *dirp);
 ```
 1. 현재 디렉토리를 열어서 파일에 대한 정보를 하나씩 읽는다.
 2. 각 파일명이 주어진 패턴에 맞는지 확인한다. (`., ..` 제외.)
