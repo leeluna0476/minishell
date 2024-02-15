@@ -12,7 +12,6 @@ enum	e_type
 {
 	T_ERROR = -1,		// 기본값 (syntax check때의 초깃값)
 	T_WORD,				// 문자
-	T_SPACE,			// 공백문자(보통 space)
 	T_PIPE,				// Pipe문자 '|'
 	T_LESSER,			// 리다이렉션 '<'
 	T_GREATER,			// 리다이렉션 '>'
