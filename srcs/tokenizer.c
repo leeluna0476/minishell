@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:24:18 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/15 09:07:08 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/15 11:05:28 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	remove_space(char *line)
 }
 
 // 메타문자가 아닌 일반 단어.
-// = 할당연산자의 경우 앞이나 뒤에 공백이 있으면 오류로 처리.
 // 예쁜 코드 실패.
 int	get_word(char *line, char **string, t_type *type)
 {
@@ -61,10 +60,9 @@ int	get_word(char *line, char **string, t_type *type)
 
 	i = 0;
 	while (line[i] && !is_space(line[i]) \
-		&& !is_meta1(line[i]) && line[i] != '(' && line[i] != ')')
+		&& !is_meta1(line[i]) \
+		&& line[i] != '(' && line[i] != ')'/* && line[i] != '='*/)
 	{
-		if (line[i] == '=')
-			i++;
 		if (line[i] == '\"' || line[i] == '\'')
 		{
 			quote = line[i];
