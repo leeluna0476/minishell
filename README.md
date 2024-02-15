@@ -35,3 +35,6 @@ seojilee &amp;&amp; yusekim's minishell
 - **type**(노드의 타입):
   - center로 분할이 되는 시점에서는 center의 타입이 노드의 타입이 된다.
   - 더 이상 분할이 되지 않는다면 start 토큰의 타입이 노드의 타입이 된다.
+
+### 참고 자료
+- [Bash Reference Manual](https://www.gnu.org/software/bash/manual/bash.html)
