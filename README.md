@@ -22,10 +22,10 @@ enum	e_type
 
 struct s_token
 {
-	char		*string;
-	enum	e_type	type;
-	struct	s_token	*prev;
-	struct	s_token	*next;
+	char	*string;
+	enum e_type	type;
+	struct s_token	*prev;
+	struct s_token	*next;
 };
 ```
 **Token**: A sequence of characters considered a single unit by the shell. It is either a word or an operator.
