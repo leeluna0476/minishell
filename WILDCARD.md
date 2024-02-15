@@ -6,7 +6,7 @@
 ***Wildcards * should work for the current working directory.***
 
 ## 확장
-```
+```c
 DIR		*opendir(const char *filename);
 struct dirent	*readdir(DIR *dirp);
 int		closedir(DIR *dirp);
