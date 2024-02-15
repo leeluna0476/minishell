@@ -3,118 +3,82 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: youwin0802 <youwin0802@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/02 13:42:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/14 15:28:35 by yusekim          ###   ########.fr       */
+/*   Created: 2024/02/15 13:03:15 by youwin0802        #+#    #+#             */
+/*   Updated: 2024/02/15 14:57:52 by youwin0802       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structures.h"
-#include "utils.h"
+#include "execute.h"
 
-void	split_free(char **split)
+void	set_fd(t_cmd *cmd, int *pipe_fds, int *redir_fds)
+{
+	if (cmd->in_redirs)
+	{
+		redir_fds[0] = open(cmd->in_redirs->filename[1], O_RDONLY);
+		if (redir_fds[0] == -1)
+			ft_printf("open error[%s]\n", cmd->in_redirs->filename[1]); // exit status = 1
+	}
+	else
+		redir_fds[0] = pipe_fds[2];
+	if (cmd->out_redirs)
+	{
+		if (cmd->out_redirs->type == T_D_GREATER)
+			redir_fds[1] = open(cmd->out_redirs->filename[1], \
+			O_WRONLY | O_APPEND | O_CREAT, 0644);
+		else
+			redir_fds[1] = open(cmd->out_redirs->filename[1], \
+			O_WRONLY | O_TRUNC | O_CREAT, 0644);
+		if (redir_fds[1] == -1)
+			ft_printf("open error [%s]\n", cmd->out_redirs->filename[1]);
+	}
+	else if (pipe_fds)
+		redir_fds[1] = pipe_fds[1];
+}
+
+char	**make_envp(t_env_pack *envs)
+{
+	t_env	*cur;
+	char	*temp_str;
+	char	*envp_str;
+	char	**result;
+
+	result = 0;
+	cur = envs->origin_head;
+	while (cur)
+	{
+		temp_str = ft_strjoin(cur->name, "=");
+		envp_str = ft_strjoin(temp_str, cur->value);
+		free(temp_str);
+		result = add_str(result, envp_str);
+		cur = cur->origin_next;
+	}
+	return (result);
+}
+
+int	is_route(char *str)
 {
 	int	i;
 
-	i = -1;
-	while (split[++i])
-		free(split[i]);
-	free(split);
-}
-
-
-int	split_len(char **split)
-{
-	int	i;
-
 	i = 0;
-	while (split && split[i])
-		i++;
-	return (i);
-}
-
-char	**add_str(char **str, char *add)
-{
-	char	**new;
-	int		i;
-
-	if (!add)
-		return (str);
-	i = 0;
-	while (str && str[i])
-		i++;
-	new = malloc(sizeof(char *) * (i + 2));
-	if (!new)
-		exit(1);
-	i = 0;
-	while (str && str[i])
+	while (str[i])
 	{
-		new[i] = str[i];
+		if (str[i] == '/')
+			return (1);
 		i++;
 	}
-	new[i] = add;
-	i++;
-	new[i] = 0;
-	if (str)
-		free(str);
-	return (new);
-}
-// 이중 캐릭터 배열에 새 문자열을 넣어주는 함수
-// 예를 들어 str[0] = "ls", str[1] = "-l", str[2] = NULL 이고 add = "-a" 일 때
-// 재할당과 해제를 통해 new를 리턴한다
-// 이때 new[0] = "ls", new[1] = "-l", new[2] = "-a", new[3] = NULL
-
-char	**merge_strs(char **orig, char **new_strs)
-{
-	int		orig_len;
-	int		new_len;
-	int		idx;
-	char	**out;
-
-	if (!orig)
-		return (new_strs);
-	if (!new_strs)
-		return (orig);
-	orig_len = split_len(orig);
-	new_len = split_len(new_strs);
-	out = malloc(sizeof(char *) * (orig_len + new_len + 1));
-	if (!out)
-		exit(1);
-	idx = -1;
-	while (++idx < orig_len)
-		out[idx] = orig[idx];
-	idx = -1;
-	while (++idx < new_len)
-		out[idx + orig_len] = new_strs[idx];
-	free(orig);
-	free(new_strs);
-	return (out);
+	return (0);
 }
 
-char	*itoa(int n)
+int	is_dir(char *str)
 {
-	int		size;
-	int		temp;
-	char	*out;
+	struct stat	path_stat;
 
-	if (n == 0)
-		return (ft_strdup("0"));
-	size = 0;
-	temp = n;
-	while (temp)
-	{
-		temp /= 10;
-		size++;
-	}
-	out = malloc(sizeof(char) * (size + 1));
-	if (!out)
-		exit(1);
-	out[size] = '\0';
-	while (n)
-	{
-		out[--size] = (n % 10) + '0';
-		n /= 10;
-	}
-	return (out);
+	if (stat(str, &path_stat) != 0)
+		ft_perror(str, 128);
+	if (S_ISDIR(path_stat.st_mode))
+		return (1);
+	else
+		return (0);
 }

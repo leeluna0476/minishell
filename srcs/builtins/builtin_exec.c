@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: youwin0802 <youwin0802@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:28 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/14 15:27:13 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/15 14:39:33 by youwin0802       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	exec_builtin(char **args, t_env_pack *pack)
 	{do_echo, do_cd, do_pwd, do_export, do_unset, do_env, do_exit};
 
 	i = 0;
-	ft_printf("exec_builtin\n");
-	while (args[i])
-		ft_printf("[%s]\n", args[i++]);
+	// ft_printf("exec_builtin\n");
+	// while (args[i])
+	// 	ft_printf("[%s]\n", args[i++]);
 	i = check_is_builtin(*args);
 	if (i == -1)
 		return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: youwin0802 <youwin0802@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/14 15:27:41 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/15 14:58:30 by youwin0802       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,128 @@
 #include "redirection.h"
 #include "builtin.h"
 
-void	execute(t_ast *tree, t_env_pack *pack, int level)
+void	execute(t_ast *tree, t_env_pack *pack, int level, int *fds)
 {
 	if (!tree)
 		return ;
-	if (tree->type == T_PIPE)
-		return /*(execute_pipe(tree, pack, level))*/;		// TODO
-	if (tree->type == T_OR || tree->type == T_AND)
+	else if (tree->type == T_PIPE)
+		return (execute_pipe(tree, pack, level, fds));		// TODO
+	else if (tree->type == T_OR || tree->type == T_AND)
 		return /*(logical_expression(tree, pack, level))*/;	// TODO
-	if (!tree->left && !tree->right)
-	{
-		do_execution(tree, pack, level);
-	}
-	execute(tree->left, pack, level + 1);
-	execute(tree->right, pack, level + 1);
+	else
+		do_execution(tree, pack, level, fds);
+	execute(tree->left, pack, level + 1, fds);
+	execute(tree->right, pack, level + 1, fds);
 }
 // 트리 출력. 깊이우선탐색. 왼쪽부터 순회.
 
-void	do_execution(t_ast *tree, t_env_pack *pack, int level)
+int	*build_new_fds(void)
+{
+	int	*new_fds;
+
+	new_fds = malloc(sizeof(int) * 3);
+	if (!new_fds)
+		exit(1);
+	new_fds[2] = 0;
+	if (pipe(new_fds) == -1)
+		exit (1);
+	return (new_fds);
+}
+
+void	execute_pipe(t_ast *tree, t_env_pack *pack, int level, int *fds)
+{
+	if (!fds)
+		fds = build_new_fds();
+	if (tree->left->type != (T_AND || T_OR || T_PIPE))
+		do_execution(tree->left, pack, level + 1, fds);
+	else
+		execute(tree->left, pack, level + 1, fds);
+	if (tree->right->type != (T_AND || T_OR || T_PIPE))
+		do_execution(tree->right, pack, level + 1, fds);
+	else
+		execute(tree->right, pack, level + 1, fds);
+}
+
+pid_t	execute_cmd(t_cmd *cmd, t_env_pack *envs, int *pipe_fds)
+{
+	int		redir_fds[2];
+	pid_t	pid;
+
+	redir_fds[0] = 0;		// 초깃값 세팅
+	redir_fds[1] = 1;		// 초깃값 세팅2
+	set_fd(cmd, pipe_fds, redir_fds);
+	// signal(SIGINT, SIG_IGN);
+	// signal(SIGINT, exec_handler);
+	pid = fork();
+	if (pid == -1)
+	{
+		ft_printf("fork error!\n");
+		g_exit_status = 1;
+	}
+	if (pid == 0)
+	{
+		if (cmd->c_args)
+		{
+			ft_dup2(pipe_fds, redir_fds);
+			ft_execve(cmd, envs);				//TODO
+		}
+	}
+	else
+		exec_parent(pipe_fds, redir_fds);		//TODO
+	return (pid);
+}
+
+void	ft_execve(t_cmd *cmd, t_env_pack *envs)
+{
+	char	**envp;
+
+	if (exec_builtin(cmd->c_args, envs))
+		exit (0);
+	envp = make_envp(envs);
+	if (is_route(cmd->c_args[0]))
+	{
+		if (execve(cmd->c_args[0], cmd->c_args, envp) < 0)
+		{
+			if (is_dir(cmd->c_args[0]))
+				exit(1);// ft_perror(cmd->c_args[0], 126);	//TODO
+			else
+				exit(1);//ft_perror(cmd->c_args[0], 1);
+		}
+	}
+	do_execve(cmd->c_args, envs, envp);
+}
+
+void	ft_dup2(int *pipe_fds, int *redir_fds)
+{
+	if (redir_fds[0] != 0)
+	{
+		dup2(redir_fds[0], STDIN_FILENO);
+		close(redir_fds[0]);
+	}
+	if (redir_fds[1] != 1)
+	{
+		dup2(redir_fds[1], STDOUT_FILENO);
+		close(redir_fds[1]);
+	}
+	if (pipe_fds && pipe_fds[0])
+		close(pipe_fds);
+	if (pipe_fds && pipe_fds[1] != 1)
+		close(pipe_fds[1]);
+	free(pipe_fds);
+}
+
+void	do_execution(t_ast *tree, t_env_pack *pack, int level, int *fds)
 {
 	t_cmd	*cmd;
+	pid_t	pid;
 
 	cmd = build_cmd_pack(tree, pack);
 	if (scan_n_set_redirs(cmd, pack))
 		return /*(free_cmd(tree))*/;		// TODO
-
-
+	if (level == 0 && solo_builtin(cmd, pack))
+		return /*(free_cmd(tree))*/;
+	pid = execute_cmd(cmd, pack, fds);
+}
 	// ft_printf("print output cmd structure!\n");
 	// if (cmd->in_redirs && cmd->out_redirs)
 	// 	ft_printf("redirections:\nin: %s\nout:%s\n", cmd->in_redirs->filename[1], cmd->out_redirs->filename[1]);
@@ -51,10 +147,6 @@ void	do_execution(t_ast *tree, t_env_pack *pack, int level)
 	// while (cmd->c_args && cmd->c_args[++i])
 	// 	ft_printf("args %d: [%s]\n", i, cmd->c_args[i]);
 
-
-	if (level == 0 && solo_builtin(cmd, pack))
-		return /*(free_cmd(tree))*/;
-}
 
 t_cmd	*build_cmd_pack(t_ast *tree, t_env_pack *pack)
 {
