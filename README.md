@@ -2,7 +2,7 @@
 seojilee &amp;&amp; yusekim's minishell
 
 ## Tokenizer
-```
+```c
 enum	e_type
 {
 	T_ERROR = -1,		// 기본값 (syntax check때의 초깃값)
@@ -48,7 +48,7 @@ struct s_token
 - 분할하면서 type 부여.
 
 ## Parser
-```
+```c
 struct s_ast
 {
 	enum e_type	type;
