@@ -22,8 +22,7 @@ enum	e_type
 	T_OR,				// 논리 연산 OR "||"
 	T_OPEN_BRACKET,		// 논리 연산 괄호 열림 '('
 	T_CLOSE_BRACKET,	// 논리 연산 괄호 닫힘 ')'
-	T_NEWLINE,
-	T_CMD
+	T_NEWLINE
 };
 
 // tokenizer: metacharacter를 기준으로 line을 분할하고 type key를 부여.

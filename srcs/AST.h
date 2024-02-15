@@ -10,7 +10,6 @@ struct s_ast
 	enum e_type		type;
 	t_token			*start;
 	t_token			*end;
-	int				len;
 	char			*error;
 	struct s_ast	*left;
 	struct s_ast	*right;
