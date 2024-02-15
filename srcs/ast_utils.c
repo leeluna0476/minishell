@@ -17,7 +17,7 @@ void	print_ast(t_ast *ast)
 	curr = ast->start;
 	while (curr && curr->prev != ast->end)
 	{
-		printf("{%s} ", curr->string);
+		printf("[%s] ", curr->string);
 		curr = curr->next;
 	}
 	printf("\n");
