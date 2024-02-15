@@ -6,18 +6,18 @@ seojilee &amp;&amp; yusekim's minishell
 enum	e_type
 {
 	T_ERROR = -1,		// 기본값 (syntax check때의 초깃값)
-	T_WORD,				// 문자
-	T_SPACE,			// 공백문자(보통 space)
-	T_PIPE,				// Pipe문자 '|'
-	T_LESSER,			// 리다이렉션 '<'
-	T_GREATER,			// 리다이렉션 '>'
-	T_D_LESSER,			// 리다이렉션 Here_doc "<<"
+	T_WORD,			// 문자
+	T_SPACE,		// 공백문자(보통 space)
+	T_PIPE,			// Pipe문자 '|'
+	T_LESSER,		// 리다이렉션 '<'
+	T_GREATER,		// 리다이렉션 '>'
+	T_D_LESSER,		// 리다이렉션 Here_doc "<<"
 	T_D_GREATER,		// 리다이렉션 append ">>"
-	T_AND,				// 논리 연산 AND "&&"
-	T_OR,				// 논리 연산 OR "||"
+	T_AND,			// 논리 연산 AND "&&"
+	T_OR,			// 논리 연산 OR "||"
 	T_OPEN_BRACKET,		// 논리 연산 괄호 열림 '('
 	T_CLOSE_BRACKET,	// 논리 연산 괄호 닫힘 ')'
-	T_NEWLINE			// 개행. 실제로 사용은 안 되지만 metacharacters에 포함되기 때문에 포함시켰다.
+	T_NEWLINE		// 개행. 실제로 사용은 안 되지만 metacharacters에 포함되기 때문에 포함시켰다.
 };
 
 struct s_token
