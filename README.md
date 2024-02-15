@@ -22,7 +22,7 @@ enum	e_type
 
 struct s_token
 {
-	char	*string;
+	char		*string;
 	enum	e_type	type;
 	struct	s_token	*prev;
 	struct	s_token	*next;
