@@ -1,0 +1,96 @@
+<script>             ::= <logical expression> 
+                      | <script> '|' <script> 
+
+<logical expression> ::= <simple command> 
+                      | <script> <logical symbol> <script> 
+                      | '(' <logical expression> <logical symbol> <logical expression> ')'
+
+<simple command>     ::= <command> 
+                      | '(' <command> ')' 
+                      | <redirection> <simple command> 
+                      | <simple command> <redirection> 
+                      | '(' <redirection> <simple command> ')' 
+                      | '(' <simple command> <redirection> ')'
+
+<redirection>        ::= '<' <word> | '>' <word> | '<<' <word> | '>>' <word>
+
+<command>            ::= <word> | <word> <command>
+
+<word>               ::= (string) | '"'(string)'"' | "'"(string)"'"
+
+<logical symbol>     ::= "&&" | "||"
+
+
+echo "$A"''"hello"
+<script>
+<logical expression>
+<simple command>
+<command>
+<word> <command>
+<word> <word>
+echo "$A"''"hello"
+... success
+
+((ls && cat file) | cat -e)
+<script>
+<script> | <script>
+... fail: ls && cat file을 감싸는 괄호 외의 다른 괄호가 존재함.
+
+(ls && cat file) | wc -l
+<script>
+<script> | <script>
+<logical expression> | <simple command>
+( <logical expression> <logical symbol> <logical expression> ) | <simple command>
+( <simple command> && <simple command> ) | <simple command>
+( <command> && <command> ) | <word> <command>
+( <word> && <word> <command> ) | <word> <command>
+( <word> && <word> <word> ) | <word> <command>
+( <word> && <word> <word> ) | <word> <word>
+( ls && cat file ) | wc -l
+... success
+
+ls > outfile < infile < infile -> ok
+<script>
+<logical expression>
+<simple command>
+<simple command> <redirection>
+<simple command> <redirection> <redirection>
+<simple command> <redirection> <redirection> <redirection>
+<command> <redirection> <redirection> <redirection>
+<word> > <word> < <word> < <word>
+ls > outfile < infile < infile
+... success
+
+((ls)) -> error
+<script>
+<logical expression>
+<simple command>
+( <command> )
+... fail: <command>에는 괄호 생성 규칙이 없다.
+
+((ls) | ls) -> error
+<script>
+<script> | <script>
+<logical expression> | <logical expression>
+<simple command> | <simple command>
+... fail: <command>를 감싸는 괄호 외의 괄호가 들어왔다.
+
+((ls) && ls) -> ok
+<script>
+<logical expression>
+( <logical expression> <logical symbol> <logical expression> )
+( <simple command> <logical symbol> <simple command> )
+( ( <command> ) <logical symbol> <command> )
+( ( <word> ) <logical symbol> <word> )
+( ( ls ) && ls )
+... success
+
+(ls > outfile)
+<script>
+<logical expression>
+<simple command>
+( <simple command> <redirection> )
+( <command> > <word> )
+( <word> > <word> )
+( ls > outfile )
+... success

@@ -1,4 +1,0 @@
-ls -l && (cat -e || wc -l)
-
-<logical-expression>
-
