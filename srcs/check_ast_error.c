@@ -6,13 +6,16 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:01 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 12:05:36 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:16:47 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-//&& !is_redirection(center->next->type))
+// center 앞뒤로 오면 안 되는 type이 존재한다면 에러 반환.
+// ls && || -> error
+// ls | && -> error
+// ls && (ls) -> error
 void	check_center_error(t_ast *ast, t_token *center)
 {
 	if ((!(center->next) || !(center->prev)) \
@@ -23,22 +26,30 @@ void	check_center_error(t_ast *ast, t_token *center)
 		|| center->prev->type == T_PIPE \
 		|| center->prev->type == T_OPEN_BRACKET))
 	{
-		free(ast->error);
-		ast->error = ft_strdup(center->string);
+		set_parse_error(ast, center->string);
 	}
 }
 
-int	check_redirection_error(t_ast *ast, t_token *node)
+// 리다이렉션 뒤에 아무것도 없거나 T_WORD 외의 타입이 온다면 에러 설정.
+void	check_redirection_error(t_ast *ast)
 {
-	if (!(node->next))
+	t_token	*curr;
+
+	curr = ast->start;
+	while (curr && curr->prev != ast->end && !(ast->error))
 	{
-		free(ast->error);
-		ast->error = ft_strdup("newline");
-		return (1);
+		if (is_redirection(curr->type))
+		{
+			if (!(curr->next))
+				set_parse_error(ast, "newline");
+			else if (curr->next->type != T_WORD)
+				set_parse_error(ast, curr->next->string);
+		}
+		curr = curr->next;
 	}
-	return (0);
 }
 
+// 트리에 에러가 발생했는지 확인.
 int	check_error(t_ast *ast)
 {
 	if (ast->error)

@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:24:18 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 12:03:41 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:32:49 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ int	remove_space(char *line)
 	return (i);
 }
 
-// 메타문자가 아닌 일반 단어.
-// 예쁜 코드 실패.
+// 메타문자가 아닌 일반 문자로 시작하는 단어.
+// 중간부터 따옴표가 오면 함께 묶어준다.
+// 닫히지 않는다면 오류.
 int	get_word(char *line, char **string, t_type *type)
 {
 	int		i;
@@ -74,6 +75,7 @@ int	get_word(char *line, char **string, t_type *type)
 	return (i);
 }
 
+// 토큰을 생성하고 리스트에 추가한다.
 void	update_list(t_token **list, char *string, t_type type)
 {
 	t_token	*node;
@@ -82,6 +84,7 @@ void	update_list(t_token **list, char *string, t_type type)
 	add_token(list, node);
 }
 
+// 주어진 문자열을 토큰화한다.
 t_token	*tokenizer(char *line)
 {
 	t_token		*list;

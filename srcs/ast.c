@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:01 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 12:05:36 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:54:51 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	generate_ast(t_ast **ast, t_token *start, t_token *end)
 	else
 	{
 		(*ast)->type = T_WORD;
+		check_redirection_error(*ast);
 		check_error(*ast);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 12:03:35 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 14:10:51 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 #include "tokenizer.h"
 #include <unistd.h>
 
+// 자세한 로직은 WILDCARD.md 참고.
+
+// char *를 char **에 추가.
 char	**add_str(char **str, char *add)
 {
 	char	**new;
@@ -42,6 +45,7 @@ char	**add_str(char **str, char *add)
 	return (new);
 }
 
+// a*, *a* 등을 검사.
 int	check_front_center(char *filename, char *pattern, t_mark *mark, int i)
 {
 	char	*substr;
@@ -71,6 +75,7 @@ int	check_front_center(char *filename, char *pattern, t_mark *mark, int i)
 	return (ret);
 }
 
+// *a 등을 검사.
 int	check_end(char *filename, char *pattern, t_mark mark, int i)
 {
 	int		filename_len;
@@ -92,6 +97,7 @@ int	check_end(char *filename, char *pattern, t_mark mark, int i)
 	return (i);
 }
 
+// filename이 와일드카드 패턴에 맞는지 검사.
 int	check_wildfixes(char *filename, __uint8_t type, char *pattern)
 {
 	t_mark	mark;
@@ -113,6 +119,8 @@ int	check_wildfixes(char *filename, __uint8_t type, char *pattern)
 	return (check_end(filename, pattern, mark, i));
 }
 
+// 현재 디렉토리를 열어서 filename 확인. (., ..  제외)
+// filename이 와일드카드 패턴에 맞는다면 확장된 매개변수 리스트에 추가.
 char	**expand_wildcard(char *arg)
 {
 	DIR				*dp;

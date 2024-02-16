@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:06:48 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 12:11:19 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:21:54 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ t_token	*get_center(t_ast *ast, t_token *start, t_token *end);
 
 // check_ast_error.c
 void	check_center_error(t_ast *ast, t_token *center);
-int		check_redirection_error(t_ast *ast, t_token *node);
+void	check_redirection_error(t_ast *ast);
 int		check_error(t_ast *ast);
 
 // error.c
+void	set_parse_error(t_ast *ast, char *string);
 void	syntax_error_parser(char *string, t_token **list);
 
 // set_node.c

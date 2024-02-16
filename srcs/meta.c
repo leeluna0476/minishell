@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:34:40 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 12:03:40 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:27:17 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	is_meta1(char c)
 	return (0);
 }
 
-// meta2: 짝이 있어야 하는 메타문자.
+// meta2: meta1이 아닌 메타문자.
 // meta2인지 판별.
 int	is_meta2(char c)
 {

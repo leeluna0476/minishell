@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:36:46 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 12:03:40 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:26:32 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,13 @@ int	get_meta1(char *line, char **string, t_type *type)
 	return (i);
 }
 
-// a 반환.
+// 문자열이 따옴표로 묶여있다면, 짝이 맞는지 flag를 지정하고 범위를 반환.
+// a: 마지막으로 짝을 검사한 따옴표의 인덱스.
+	// line = "a"b'c'
+	// line[a] = '
+
+	// line = "ab'c'
+	// line[a] = "
 int	get_quote(char *line, int *flag, int *idx)
 {
 	int	a;
@@ -56,6 +62,8 @@ int	get_quote(char *line, int *flag, int *idx)
 }
 
 // meta2에 속하는 토큰 가져오기.
+// 괄호는 get_quote를 호출하지 않고 i = 1을 그대로 가져간다. 괄호 한 짝 == 토큰.
+// 따옴표가 존재하면 get_quote를 호출하여 오류를 검사하고 토큰 범위를 가져온다.
 int	get_meta2(char *line, char **string, t_type *type)
 {
 	int	i;

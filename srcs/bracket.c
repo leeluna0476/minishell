@@ -6,13 +6,15 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:57:56 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 12:05:36 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:34:53 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 // 괄호 짝 확인.
+// flag는 T_OPEN_BRACKET을 만나면 증가, T_CLOSE_BRACKET을 만나면 감소.
+// flag가 0이면 짝이 맞는다는 뜻. (또는 괄호가 없다는 뜻.)
 int	get_bracket_flag(t_token **start, t_token **end, \
 					t_token **first, t_token **last)
 {
@@ -41,7 +43,11 @@ int	get_bracket_flag(t_token **start, t_token **end, \
 	return (flag);
 }
 
-// 주소 크기 비교. 재차 확인.
+// (주소 크기 비교. 재차 확인.)
+// flag를 받아서 괄호 짝이 맞는지 확인. 맞지 않는다면 문제 토큰을 반환.
+// first, last: 가장 바깥쪽 괄호.
+	// ((ls) || (ls)). (ls) || (ls) 와 같은 경우에는 NULL.
+// 바깥 괄호 앞뒤로 허용되지 않는 type이 오는지 확인. 그렇다면 문제 토큰을 반환.
 t_token	*check_bracket(t_token *start, t_token *end)
 {
 	int		flag;
@@ -67,6 +73,7 @@ t_token	*check_bracket(t_token *start, t_token *end)
 }
 
 // 지워도 되는 괄호 유무 판단.
+// 첫번째 괄호 start에서 닫히는 괄호까지 도달했을 때 그것이 end라면 지운다.
 // ex: (ls || (ls && cat file))
 	// -> ls || (ls && cat file)
 int	check_if_single_pair(t_token *start, t_token *end)
@@ -91,7 +98,7 @@ int	check_if_single_pair(t_token *start, t_token *end)
 	return (0);
 }
 
-// 지워도 되는 괄호가 있다면 지운다. (건너뛴다)
+// 지워도 되는 가장 바깥쪽 괄호(single pair)가 있다면 지운다. (건너뛴다)
 void	remove_bracket(t_token **start, t_token **end)
 {
 	if ((*start)->type == T_OPEN_BRACKET && (*end)->type == T_CLOSE_BRACKET)

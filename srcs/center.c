@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 09:59:44 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 12:05:36 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:45:06 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 // 괄호를 만나면 짝을 만날 때까지 이동.
 // 우선순위: 1. (), 2. &&, ||, 3. |
 
+// 괄호를 기준으로 토큰 건너뛰기.
+// (ls && ls) | ls -> (ls && ls) 건너뛰기.
+// logical_exp 못 찾았으니 파이프라인 체크로 넘어감.
 t_token	*take_bracket(t_token *curr, t_token *start)
 {
 	int	flag;
@@ -32,6 +35,8 @@ t_token	*take_bracket(t_token *curr, t_token *start)
 	return (curr);
 }
 
+// 논리연산자 토큰이 존재하는지 검사하기. 있다면 해당 토큰 반환.
+// 괄호 속 내용은 건너뛰기.
 t_token	*get_logical_exp(t_ast *ast, t_token *start, t_token *end)
 {
 	t_token	*curr;
@@ -53,6 +58,7 @@ t_token	*get_logical_exp(t_ast *ast, t_token *start, t_token *end)
 	return (NULL);
 }
 
+// 파이프 토큰이 존재하는지 검사하기. 있다면 해당 토큰 반환.
 t_token	*get_pipeline(t_ast *ast, t_token *start, t_token *end)
 {
 	t_token	*curr;
@@ -70,6 +76,9 @@ t_token	*get_pipeline(t_ast *ast, t_token *start, t_token *end)
 	return (NULL);
 }
 
+// logical_exp 또는 pipeline인지 검사.
+// 논리연산자 토큰을 먼저 반환. 없다면 파이프 토큰 반환.
+// 괄호는 건너뛴다.
 t_token	*get_center(t_ast *ast, t_token *start, t_token *end)
 {
 	t_token	*curr;

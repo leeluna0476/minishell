@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 12:05:36 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:28:26 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 // 현재 노드에 start, end 할당.
 // 괄호 짝이 맞지 않는 경우는 에러 처리. 예: (ls
 // 괄호가 중첩되는 경우는 에러 처리. 예: ((ls))
+// 가장 바깥쪽 single pair 괄호는 제거.
 void	set_start_end(t_ast **ast, t_token *start, t_token *end)
 {
 	t_token	*err_token;
@@ -33,7 +34,9 @@ void	set_start_end(t_ast **ast, t_token *start, t_token *end)
 		else if (single_pair && check_if_single_pair(start, end) \
 				&& start->type == T_OPEN_BRACKET \
 				&& end->type == T_CLOSE_BRACKET)
+		{
 			(*ast)->error = ft_strdup(start->string);
+		}
 		(*ast)->start = start;
 		(*ast)->end = end;
 	}

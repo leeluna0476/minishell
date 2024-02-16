@@ -1,0 +1,49 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+add_str	wildcard.c	/^char	**add_str(char **str, char *add)$/;"	f
+add_token	token_utils.c	/^void	add_token(t_token **list, t_token *token)$/;"	f
+check_bracket	bracket.c	/^t_token	*check_bracket(t_token *start, t_token *end)$/;"	f
+check_center_error	check_ast_error.c	/^void	check_center_error(t_ast *ast, t_token *center)$/;"	f
+check_end	wildcard.c	/^int	check_end(char *filename, char *pattern, t_mark mark, int i)$/;"	f
+check_error	check_ast_error.c	/^int	check_error(t_ast *ast)$/;"	f
+check_front_center	wildcard.c	/^int	check_front_center(char *filename, char *pattern, t_mark *mark, int i)$/;"	f
+check_if_single_pair	bracket.c	/^int	check_if_single_pair(t_token *start, t_token *end)$/;"	f
+check_pipe_in_bracket	bracket.c	/^t_token	*check_pipe_in_bracket(t_token *start, t_token *end)$/;"	f
+check_redirection_error	check_ast_error.c	/^int	check_redirection_error(t_ast *ast, t_token *node)$/;"	f
+check_wildfixes	wildcard.c	/^int	check_wildfixes(char *filename, __uint8_t type, char *pattern)$/;"	f
+expand_wildcard	wildcard.c	/^char	**expand_wildcard(char *arg)$/;"	f
+free_ast	ast_utils.c	/^void	free_ast(t_ast **ast)$/;"	f
+free_node	ast_utils.c	/^void	free_node(t_ast **node)$/;"	f
+free_token	token_utils.c	/^void	free_token(t_token **token)$/;"	f
+free_tokens	token_utils.c	/^void	free_tokens(t_token **tokens)$/;"	f
+generate_ast	ast.c	/^void	generate_ast(t_ast **ast, t_token *start, t_token *end)$/;"	f
+get_bracket_flag	bracket.c	/^int	get_bracket_flag(t_token **start, t_token **end, \\$/;"	f
+get_center	center.c	/^t_token	*get_center(t_ast *ast, t_token *start, t_token *end)$/;"	f
+get_logical_exp	center.c	/^t_token	*get_logical_exp(t_ast *ast, t_token *start, t_token *end)$/;"	f
+get_meta1	get_token.c	/^int	get_meta1(char *line, char **string, t_type *type)$/;"	f
+get_meta2	get_token.c	/^int	get_meta2(char *line, char **string, t_type *type)$/;"	f
+get_pipeline	center.c	/^t_token	*get_pipeline(t_ast *ast, t_token *start, t_token *end)$/;"	f
+get_quote	get_token.c	/^int	get_quote(char *line, int *flag, int *idx)$/;"	f
+get_type	tokenizer.c	/^t_type	get_type(char *string, int i)$/;"	f
+get_word	tokenizer.c	/^int	get_word(char *line, char **string, t_type *type)$/;"	f
+init_ast	ast_utils.c	/^t_ast	*init_ast(t_token *tokens)$/;"	f
+is_meta1	meta.c	/^int	is_meta1(char c)$/;"	f
+is_meta2	meta.c	/^int	is_meta2(char c)$/;"	f
+is_redirection	ast_utils.c	/^int	is_redirection(t_type type)$/;"	f
+last_token	token_utils.c	/^t_token	*last_token(t_token *list)$/;"	f
+main	testmain.c	/^int	main(int ac, char *av[], char *envp[])$/;"	f
+new_token	token_utils.c	/^t_token	*new_token(char *string, t_type type)$/;"	f
+print_ast	ast_utils.c	/^void	print_ast(t_ast *ast)$/;"	f
+remove_bracket	bracket.c	/^void	remove_bracket(t_token **start, t_token **end)$/;"	f
+remove_space	tokenizer.c	/^int	remove_space(char *line)$/;"	f
+set_start_end	set_nodes.c	/^void	set_start_end(t_ast **ast, t_token *start, t_token *end)$/;"	f
+set_type_meta1	meta.c	/^void	set_type_meta1(char c, int i, t_type *type)$/;"	f
+syntax_error_parser	error.c	/^void	syntax_error_parser(char *string, t_token **list)$/;"	f
+syntax_error_tokenizer	error.c	/^void	syntax_error_tokenizer(char *string, t_token **list)$/;"	f
+take_bracket	center.c	/^t_token	*take_bracket(t_token *curr, t_token *start)$/;"	f
+tokenizer	tokenizer.c	/^t_token	*tokenizer(char *line)$/;"	f
+update_list	tokenizer.c	/^void	update_list(t_token **list, char *string, t_type type)$/;"	f
