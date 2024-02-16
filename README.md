@@ -79,7 +79,7 @@ struct s_ast
 ### 예시
 ***syntax error***: tokenizer에서 발생한 오류.
 
-***parser error***: parser에서 발생한 오류.
+***parse error***: parser에서 발생한 오류.
 ```
 minishell> ls | grep *.out && ls | wc
 [ls] [|] [grep] [*.out] [&&] [ls] [|] [wc]
