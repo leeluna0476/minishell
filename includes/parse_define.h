@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   define.h                                           :+:      :+:    :+:   */
+/*   parse_define.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:08:25 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 12:13:35 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:15:24 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINE_H
-# define DEFINE_H
+#ifndef PARSE_DEFINE_H
+# define PARSE_DEFINE_H
 
 typedef enum e_type		t_type;
 typedef struct s_token	t_token;

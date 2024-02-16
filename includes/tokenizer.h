@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:03:00 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 12:11:31 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:15:50 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdio.h>
 # include "../libft/libft.h"
-# include "define.h"
+# include "parse_define.h"
 # include "parse_struct.h"
 
 // error.c
