@@ -6,15 +6,16 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:57:56 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 12:34:53 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:50:27 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-// 괄호 짝 확인.
+// 괄호 짝 확인 및 괄호 내용 유무 확인.
 // flag는 T_OPEN_BRACKET을 만나면 증가, T_CLOSE_BRACKET을 만나면 감소.
 // flag가 0이면 짝이 맞는다는 뜻. (또는 괄호가 없다는 뜻.)
+// T_OPEN_BRACKET 바로 다음 토큰이 T_CLOSE_BRACKET이면 오류.
 int	get_bracket_flag(t_token **start, t_token **end, \
 					t_token **first, t_token **last)
 {
@@ -39,6 +40,8 @@ int	get_bracket_flag(t_token **start, t_token **end, \
 		}
 		curr = curr->next;
 	}
+	if (*first && *last && (*first)->next == (*end))
+		flag = -1;
 	*start = curr;
 	return (flag);
 }
