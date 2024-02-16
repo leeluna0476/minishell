@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 14:10:51 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 15:42:12 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,61 +129,67 @@ char	**expand_wildcard(char *arg)
 	int				i;
 
 	args = NULL;
-	dp = opendir(".");
-	entry = readdir(dp);
-	entry = readdir(dp);
-	entry = readdir(dp);
-	while (entry)
+	if (arg)
 	{
-		i = check_wildfixes(entry->d_name, entry->d_type, arg);
-		if (i)
-			args = add_str(args, ft_strjoin(entry->d_name, &(arg[i])));
+		dp = opendir(".");
 		entry = readdir(dp);
+		entry = readdir(dp);
+		entry = readdir(dp);
+		while (entry)
+		{
+			if (!(entry->d_name[0] == '.' && arg[0] != '.'))
+			{
+				i = check_wildfixes(entry->d_name, entry->d_type, arg);
+				if (i)
+					args = add_str(args, ft_strjoin(entry->d_name, &(arg[i])));
+			}
+			entry = readdir(dp);
+		}
+		closedir(dp);
 	}
-	closedir(dp);
 	return (args);
 }
-//
-//int	main(int ac, char *av[], char *envp[])
-//{
-//	char	**expanded_arg;
-//	char	**final_arg;
-//	pid_t	pid;
-//
-//	(void)ac;
-//	(void)av;
-//	(void)envp;
-//	expanded_arg = expand_wildcard("*.out*");
-//
-//	if (expanded_arg)
-//	{
-//		final_arg = NULL;
-//		final_arg = add_str(final_arg, ft_strdup("rm"));
-//		final_arg = add_str(final_arg, ft_strdup("-fr"));
-//
-//		int	i = 0;
-//		while (expanded_arg[i])
-//		{
-//			final_arg = add_str(final_arg, ft_strdup(expanded_arg[i]));
-//			free(expanded_arg[i]);
-//			i++;
-//		}
-//		free(expanded_arg);
-//
-//		pid = fork();
-//		if (pid == 0)
-//			execve("/bin/rm", final_arg, envp);
-//		else
-//			wait(NULL);
-//		i = 0;
-//		while (final_arg[i])
-//		{
-//			free(final_arg[i]);
-//			i++;
-//		}
-//		free(final_arg);
-//	}
-//	else
-//		printf("no matches found: %s\n", "*.out*");
-//	system("leaks -q a.out");
-//}
+
+int	main(int ac, char *av[], char *envp[])
+{
+	char	**expanded_arg;
+	char	**final_arg;
+	pid_t	pid;
+
+	(void)ac;
+	(void)av;
+	(void)envp;
+	expanded_arg = expand_wildcard("*/");
+
+	if (expanded_arg)
+	{
+		final_arg = NULL;
+		final_arg = add_str(final_arg, ft_strdup("ls"));
+		final_arg = add_str(final_arg, ft_strdup("-Ga"));
+
+		int	i = 0;
+		while (expanded_arg[i])
+		{
+			final_arg = add_str(final_arg, ft_strdup(expanded_arg[i]));
+			free(expanded_arg[i]);
+			i++;
+		}
+		free(expanded_arg);
+
+		pid = fork();
+		if (pid == 0)
+			execve("/bin/ls", final_arg, envp);
+		else
+			wait(NULL);
+		i = 0;
+		while (final_arg[i])
+		{
+			free(final_arg[i]);
+			i++;
+		}
+		free(final_arg);
+	}
+	else
+		printf("no matches found: %s\n", "*");
+	system("leaks -q a.out");
+}
