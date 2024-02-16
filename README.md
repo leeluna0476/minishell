@@ -77,9 +77,6 @@ struct s_ast
   - 더 이상 분할이 되지 않는다면 start 토큰의 타입이 노드의 타입이 된다.
 
 ### 예시
-***syntax error***: tokenizer에서 발생한 오류.
-
-***parse error***: parser에서 발생한 오류.
 ```
 minishell> ls | grep *.out && ls | wc
 [ls] [|] [grep] [*.out] [&&] [ls] [|] [wc]
@@ -110,6 +107,10 @@ parse error near unexpected token: `>`
 minishell> (ls | cat)
 parse error near unexpected token: `|`
 ```
+***syntax error***: tokenizer에서 발생한 오류.
+
+***parse error***: parser에서 발생한 오류.
+
 마지막 두 경우는 subshell을 구현해야 해서 구현하지 않았다.
 첫번째 경우 subshell과 상관없이 구현하려면 command과 redirection을 구분해야 하는데 그러면 실행부의 요구사항과 충돌하기 때문에 억지로 구현하지는 않았다.
 
