@@ -39,27 +39,31 @@ struct s_mark
 	int	end;
 };
 
-// token_utils
+// error.c
+void	syntax_error_tokenizer(char *string, t_token **list);
+
+// get_token.c
+int		get_meta1(char *line, char **string, t_type *type);
+int		get_quote(char *line, int *flag, int *idx);
+int		get_meta2(char *line, char **string, t_type *type);
+
+// meta.c
+int		is_meta1(char c);
+int		is_meta2(char c);
+void	set_type_meta1(char c, int i, t_type *type);
+
+// token_utils.c
 t_token	*new_token(char *string, t_type type);
 t_token	*last_token(t_token *list);
 void	add_token(t_token **list, t_token *token);
 void	free_token(t_token **token);
 void	free_tokens(t_token **tokens);
-void	syntax_error_tokenizer(char *string, t_token **list);
 
-// meta
-int		is_meta1(char c);
-int		is_meta2(char c);
-void	set_type_meta1(char c, int i, t_type *type);
-int		get_meta1(char *line, char **string, t_type *type);
-int		get_quote(char *line, int *flag, int *idx);
-int		get_meta2(char *line, char **string, t_type *type);
-
-// tokenizer
-int	is_space(char c);
+// tokenizer.c
 t_type	get_type(char *string, int i);
-int	remove_space(char *line);
-int	get_word(char *line, char **string, t_type *type);
+int		remove_space(char *line);
+int		get_word(char *line, char **string, t_type *type);
+void	update_list(t_token **list, char *string, t_type type);
 t_token	*tokenizer(char *line);
 
 #endif

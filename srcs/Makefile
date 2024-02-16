@@ -1,9 +1,9 @@
 NAME=minishell
 CC=cc
-CFLAGS=-Wall -Wextra -Werror -g3
+CFLAGS=-Wall -Wextra -Werror -g3 -I ../includes
 RM=rm -fr
 SRCS=center.c error.c get_token.c ast.c ast_utils.c check_ast_error.c meta.c set_nodes.c token_utils.c tokenizer.c testmain.c bracket.c
-HEADERS=parse_struct.h AST.h
+HEADERS=../includes/parse_struct.h ../includes/AST.h
 OBJS=$(SRCS:.c=.o)
 
 all: $(NAME)
