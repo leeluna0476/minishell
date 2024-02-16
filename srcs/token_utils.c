@@ -6,11 +6,11 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:25:20 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 08:53:39 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:03:40 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse_struct.h"
+#include "tokenizer.h"
 
 // 새로운 토큰 생성.
 t_token	*new_token(char *string, t_type type)

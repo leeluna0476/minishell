@@ -6,11 +6,11 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 11:21:09 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:05:36 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "AST.h"
+#include "parser.h"
 
 // 현재 노드에 start, end 할당.
 // 괄호 짝이 맞지 않는 경우는 에러 처리. 예: (ls

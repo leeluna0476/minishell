@@ -6,11 +6,11 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:34:40 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 10:37:25 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:03:40 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse_struct.h"
+#include "tokenizer.h"
 
 // meta1: 최대 2개까지 하나의 토큰이 될 수 있는 메타문자.
 // meta1인지 판별.

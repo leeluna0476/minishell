@@ -6,11 +6,11 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:03:51 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 10:05:52 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:05:36 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "AST.h"
+#include "parser.h"
 
 void	syntax_error_tokenizer(char *string, t_token **list)
 {

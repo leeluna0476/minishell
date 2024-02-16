@@ -6,11 +6,11 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:01 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 10:04:08 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:05:33 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "AST.h"
+#include "parser.h"
 
 // 현재 기호가 리다이렉션 문자인지 확인.
 int	is_redirection(t_type type)

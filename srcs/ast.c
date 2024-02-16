@@ -6,11 +6,11 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:01 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 10:01:46 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:05:36 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "AST.h"
+#include "parser.h"
 
 // 가지 분할의 기준점이 되는 논리 연산자 또는 파이프를 확인.
 // 기준점이 없다면 simple command.

@@ -1,19 +1,19 @@
-#ifndef AST_H
-# define AST_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/16 12:06:48 by seojilee          #+#    #+#             */
+/*   Updated: 2024/02/16 12:11:19 by seojilee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "parse_struct.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-typedef struct s_ast t_ast;
-
-struct s_ast
-{
-	enum e_type		type;
-	t_token			*start;
-	t_token			*end;
-	char			*error;
-	struct s_ast	*left;
-	struct s_ast	*right;
-};
+# include "tokenizer.h"
 
 // ast.c
 void	generate_ast(t_ast **ast, t_token *start, t_token *end);

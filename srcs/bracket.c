@@ -6,11 +6,11 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:57:56 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 10:58:21 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:05:36 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "AST.h"
+#include "parser.h"
 
 // 괄호 짝 확인.
 int	get_bracket_flag(t_token **start, t_token **end, \

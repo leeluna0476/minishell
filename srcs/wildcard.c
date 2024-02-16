@@ -6,13 +6,13 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 08:54:13 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:03:35 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <dirent.h>
 #include <stdlib.h>
-#include "parse_struct.h"
+#include "tokenizer.h"
 #include <unistd.h>
 
 char	**add_str(char **str, char *add)

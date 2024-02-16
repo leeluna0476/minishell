@@ -1,36 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_struct.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/16 12:06:36 by seojilee          #+#    #+#             */
+/*   Updated: 2024/02/16 12:11:01 by seojilee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSE_STRUCT_H
 # define PARSE_STRUCT_H
-
-#include <stdio.h>
-#include "../libft/libft.h"
-
-typedef enum e_type			t_type;
-typedef struct s_token		t_token;
-typedef struct s_mark		t_mark;
-
-enum	e_type
-{
-	T_ERROR = -1,		// 기본값 (syntax check때의 초깃값)
-	T_WORD,				// 문자
-	T_PIPE,				// Pipe문자 '|'
-	T_LESSER,			// 리다이렉션 '<'
-	T_GREATER,			// 리다이렉션 '>'
-	T_D_LESSER,			// 리다이렉션 Here_doc "<<"
-	T_D_GREATER,		// 리다이렉션 append ">>"
-	T_AND,				// 논리 연산 AND "&&"
-	T_OR,				// 논리 연산 OR "||"
-	T_OPEN_BRACKET,		// 논리 연산 괄호 열림 '('
-	T_CLOSE_BRACKET,	// 논리 연산 괄호 닫힘 ')'
-	T_NEWLINE
-};
 
 // tokenizer: metacharacter를 기준으로 line을 분할하고 type key를 부여.
 struct s_token
 {
 	char			*string;
-	enum	e_type	type;
-	struct	s_token	*prev;
-	struct	s_token	*next;
+	enum e_type		type;
+	struct s_token	*prev;
+	struct s_token	*next;
+};
+
+struct s_ast
+{
+	enum e_type		type;
+	t_token			*start;
+	t_token			*end;
+	char			*error;
+	struct s_ast	*left;
+	struct s_ast	*right;
 };
 
 struct s_mark
@@ -38,32 +37,5 @@ struct s_mark
 	int	start;
 	int	end;
 };
-
-// error.c
-void	syntax_error_tokenizer(char *string, t_token **list);
-
-// get_token.c
-int		get_meta1(char *line, char **string, t_type *type);
-int		get_quote(char *line, int *flag, int *idx);
-int		get_meta2(char *line, char **string, t_type *type);
-
-// meta.c
-int		is_meta1(char c);
-int		is_meta2(char c);
-void	set_type_meta1(char c, int i, t_type *type);
-
-// token_utils.c
-t_token	*new_token(char *string, t_type type);
-t_token	*last_token(t_token *list);
-void	add_token(t_token **list, t_token *token);
-void	free_token(t_token **token);
-void	free_tokens(t_token **tokens);
-
-// tokenizer.c
-t_type	get_type(char *string, int i);
-int		remove_space(char *line);
-int		get_word(char *line, char **string, t_type *type);
-void	update_list(t_token **list, char *string, t_type type);
-t_token	*tokenizer(char *line);
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:36:46 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 10:43:15 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:03:40 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse_struct.h"
+#include "tokenizer.h"
 
 // meta1에 속하는 토큰 가져오기.
 int	get_meta1(char *line, char **string, t_type *type)

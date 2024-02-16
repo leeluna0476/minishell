@@ -6,11 +6,11 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:24:18 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 11:13:31 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:03:41 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse_struct.h"
+#include "tokenizer.h"
 
 // 토큰의 타입 가져오기.
 t_type	get_type(char *string, int i)
