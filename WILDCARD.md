@@ -3,7 +3,7 @@
 
 주어진 패턴에 따라 파일명을 확장한다.
 
-***Wildcards * should work for the current working directory.***
+***Wildcards \* should work for the current working directory.***
 
 ## 확장
 ```c
