@@ -20,6 +20,8 @@
 
 <logical symbol>     ::= "&&" | "||"
 
+---
+
 (ls)=a
 <script>
 <logical expression>
