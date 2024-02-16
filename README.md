@@ -77,6 +77,8 @@ struct s_ast
   - 더 이상 분할이 되지 않는다면 start 토큰의 타입이 노드의 타입이 된다.
 
 ### 예시
+***syntax error***: tokenizer에서 발생한 오류.
+***parser error***: parser에서 발생한 오류.
 ```
 minishell> ls | grep *.out && ls | wc
 [ls] [|] [grep] [*.out] [&&] [ls] [|] [wc]
