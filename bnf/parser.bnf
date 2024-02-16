@@ -20,6 +20,11 @@
 
 <logical symbol>     ::= "&&" | "||"
 
+(ls)=a
+<script>
+<logical expression>
+<simple command>
+... fail: 명령어를 감싸는 괄호 바깥에 <logical symbol>도 아니고 pipe도 아닌 무언가 있다.
 
 echo "$A"''"hello"
 <script>
