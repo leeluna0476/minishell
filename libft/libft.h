@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 20:26:06 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/02 09:09:40 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:13:06 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
+int		is_space(char c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);

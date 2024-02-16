@@ -52,6 +52,7 @@ int		is_meta1(char c);
 int		is_meta2(char c);
 void	set_type_meta1(char c, int i, t_type *type);
 int		get_meta1(char *line, char **string, t_type *type);
+int		get_quote(char *line, int *flag, int *idx);
 int		get_meta2(char *line, char **string, t_type *type);
 
 // tokenizer

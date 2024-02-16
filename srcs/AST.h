@@ -24,8 +24,13 @@ void	check_center_error(t_ast *ast, t_token *center);
 int	check_redirection_error(t_ast *ast, t_token *node);
 int	check_error(t_ast *ast);
 
+int	get_bracket_flag(t_token **start, t_token **end, \
+					t_token **first, t_token **last);
+t_token	*check_bracket(t_token *start, t_token *end);
+int	check_if_single_pair(t_token *start, t_token *end);
+void	remove_bracket(t_token **start, t_token **end);
+t_token	*check_pipe_in_bracket(t_token *start, t_token *end);
 void	set_start_end(t_ast **ast, t_token *start, t_token *end);
-void	set_cmds_redirs(t_ast **ast, t_token *start, t_token *end);
 
 t_token	*get_center(t_ast *ast, t_token *start, t_token *end);
 t_ast	*init_ast(t_token *tokens);

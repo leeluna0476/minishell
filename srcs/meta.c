@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:34:40 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 08:53:39 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:37:25 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,59 +72,4 @@ void	set_type_meta1(char c, int i, t_type *type)
 		if (i == 2)
 			*type = T_OR;
 	}
-}
-
-// meta1에 속하는 토큰 가져오기.
-int	get_meta1(char *line, char **string, t_type *type)
-{
-	int		i;
-
-	i = 0;
-	while (line[i] && line[0] == line[i] && i < 2 && !is_space(line[i]))
-		i++;
-	*string = ft_substr(line, 0, i);
-	*type = get_type(*string, i);
-	return (i);
-}
-
-// meta2에 속하는 토큰 가져오기.
-int	get_meta2(char *line, char **string, t_type *type)
-{
-	int	i;
-	int	a;
-	int	flag;
-
-	flag = 0;
-	i = 1;
-	if (line[0] == '\"' || line[0] == '\'')
-	{
-		i = 0;
-		while (line[i])
-		{
-			if ((line[i] == ' ' || line[i] == '(' || line[i] == ')') && !flag)
-				break ;
-			if (line[i] == '\"' || line[i] == '\'')
-			{
-				flag++;
-				a = i++;
-				while (line[i] && flag)
-				{
-					if (line[i] == line[a])
-						flag--;
-					i++;
-				}
-				i--;
-			}
-			i++;
-		}
-	}
-	*string = ft_substr(line, 0, i);
-	*type = get_type(*string, i);
-	if (flag % 2 != 0)
-	{
-		*type = T_ERROR;
-		free(*string);
-		*string = ft_substr(line, a, 1);
-	}
-	return (i);
 }

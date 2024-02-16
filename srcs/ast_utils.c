@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:01 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 08:55:24 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:04:08 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,6 @@ t_ast	*init_ast(t_token *tokens)
 
 	set_start_end(&ast, tokens, last_token(tokens));
 	return (ast);
-}
-
-void	syntax_error_parser(char *string, t_token **list)
-{
-	// print error
-	printf("parse error near unexpected token: `%s`\n", string);
-	free_tokens(list);
 }
 
 // 트리 출력. 깊이우선탐색. 왼쪽부터 순회.
@@ -59,8 +52,6 @@ void	print_ast(t_ast *ast)
 // 트리의 각 노드 메모리 해제.
 void	free_node(t_ast **node)
 {
-//	if (is_redirection((*node)->type) || (*node)->type == T_CMD)
-//		free_tokens(&((*node)->start));
 	free((*node)->error);
 	free(*node);
 	*node = NULL;

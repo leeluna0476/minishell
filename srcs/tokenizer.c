@@ -6,19 +6,11 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:24:18 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 08:53:39 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:13:31 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse_struct.h"
-
-int	is_space(char c)
-
-{
-	if (c != '\n' && (c == ' ' || (c >= '\t' && c <= '\r')))
-		return (1);
-	return (0);
-}
 
 // 토큰의 타입 가져오기.
 t_type	get_type(char *string, int i)
@@ -59,9 +51,8 @@ int	get_word(char *line, char **string, t_type *type)
 	char	quote;
 
 	i = 0;
-	while (line[i] && !is_space(line[i]) \
-		&& !is_meta1(line[i]) \
-		&& line[i] != '(' && line[i] != ')'/* && line[i] != '='*/)
+	while (line[i] && !is_space(line[i]) && !is_meta1(line[i]) \
+		&& line[i] != '(' && line[i] != ')')
 	{
 		if (line[i] == '\"' || line[i] == '\'')
 		{
@@ -83,44 +74,39 @@ int	get_word(char *line, char **string, t_type *type)
 	return (i);
 }
 
-void	syntax_error_tokenizer(char *string, t_token **list)
+void	update_list(t_token **list, char *string, t_type type)
 {
-	// print error
-	printf("syntax error near unexpected token: `%s`\n", string);
-	free(string);
-	free_tokens(list);
+	t_token	*node;
+
+	node = new_token(string, type);
+	add_token(list, node);
 }
 
 t_token	*tokenizer(char *line)
 {
 	t_token		*list;
-	t_token		*node;
 	char		*string;
 	int			i;
 	t_type		type;
 
 	list = NULL;
-	if (line)
+	i = 0;
+	while (line[i])
 	{
-		i = 0;
-		while (line[i])
+		if (is_meta1(line[i]))
+			i += get_meta1(&(line[i]), &string, &type);
+		else if (is_meta2(line[i]))
+			i += get_meta2(&(line[i]), &string, &type);
+		else
+			i += get_word(&(line[i]), &string, &type);
+		if (type == T_ERROR)
 		{
-			if (is_meta1(line[i]))
-				i += get_meta1(&(line[i]), &string, &type);
-			else if (is_meta2(line[i]))
-				i += get_meta2(&(line[i]), &string, &type);
-			else
-				i += get_word(&(line[i]), &string, &type);
-			if (type == T_ERROR)
-			{
-				syntax_error_tokenizer(string, &list);
-				break ;
-			}
-			node = new_token(string, type);
-			add_token(&list, node);
-			free(string);
-			i += remove_space(&(line[i]));
+			syntax_error_tokenizer(string, &list);
+			break ;
 		}
+		update_list(&list, string, type);
+		free(string);
+		i += remove_space(&(line[i]));
 	}
 	return (list);
 }

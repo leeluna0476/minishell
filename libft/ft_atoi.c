@@ -6,13 +6,13 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 21:21:52 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/01 20:22:04 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/16 11:12:16 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	is_space(char c)
+int	is_space(char c)
 {
 	if ((c >= '\t' && c <= '\r') || c == ' ')
 		return (1);
