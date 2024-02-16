@@ -94,6 +94,14 @@ minishell> (ls && cat file)
 [ls] [&&] [cat] [file]
 [ls]
 [cat] [file]
+minishell> (ls > file
+parse error near unexpected token: `(`
+minishell> echo "$USER
+syntax error near unexpected token: `"`
+minishell> echo "hello"''"'abc'""'"
+[echo] ["hello"''"'abc'""'"]
+minishell> echo hello"''"'abc'""'"
+syntax error near unexpected token: `'`
 minishell> (ls && cat) > file
 parse error near unexpected token: `>`
 minishell> (ls | cat)
