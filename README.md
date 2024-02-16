@@ -47,6 +47,7 @@ struct s_token
 - 분할하면서 type 부여.
 
 ## Parser
+[BNF for parser](./bnf/parser.bnf)
 ```c
 struct s_ast
 {
