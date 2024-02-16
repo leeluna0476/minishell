@@ -76,5 +76,29 @@ struct s_ast
   - center로 분할이 되는 시점에서는 center의 타입이 노드의 타입이 된다.
   - 더 이상 분할이 되지 않는다면 start 토큰의 타입이 노드의 타입이 된다.
 
+### 예시
+```
+minishell> ls | grep *.out && ls | wc
+[ls] [|] [grep] [*.out] [&&] [ls] [|] [wc]
+[ls] [|] [grep] [*.out]
+[ls]
+[grep] [*.out]
+[ls] [|] [wc]
+[ls]
+[wc]
+minishell> ls -l | awk "{ print $2 }"
+[ls] [-l] [|] [awk] ["{ print $2 }"]
+[ls] [-l]
+[awk] ["{ print $2 }"]
+minishell> (ls && cat file)
+[ls] [&&] [cat] [file]
+[ls]
+[cat] [file]
+minishell> (ls && cat) > file
+parse error near unexpected token: `>`
+minishell> (ls | cat)
+parse error near unexpected token: `|`
+```
+
 ### 참고 자료
 - [Bash Reference Manual](https://www.gnu.org/software/bash/manual/bash.html)

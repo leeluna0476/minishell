@@ -7,12 +7,13 @@
 
 <simple command>     ::= <command> 
                       | '(' <command> ')' 
-                      | <redirection> <simple command> 
-                      | <simple command> <redirection> 
-                      | '(' <redirection> <simple command> ')' 
-                      | '(' <simple command> <redirection> ')'
+                      | <redirection>
+                      | <redirection> <command> 
+                      | <command> <redirection> 
+                      | '(' <redirection> <command> ')' 
+                      | '(' <command> <redirection> ')'
 
-<redirection>        ::= '<' <word> | '>' <word> | '<<' <word> | '>>' <word>
+<redirection>        ::= '<' <word> | '>' <word> | '<<' <word> | '>>' <word> | &<redirection>
 
 <command>            ::= <word> | <word> <command>
 
@@ -21,6 +22,12 @@
 <logical symbol>     ::= "&&" | "||"
 
 ---
+
+(ls) > outfile
+<script>
+<logical expression>
+<simple command>
+... fail: 명령어를 감싸는 괄호 바깥에 <logical symbol>도 아니고 pipe도 아닌 무언가 있다.
 
 (ls)=a
 <script>
