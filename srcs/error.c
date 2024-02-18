@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:03:51 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 13:18:10 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/19 08:57:32 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	set_parse_error(t_ast *ast, char *string)
 // 토큰화 단계에서 오류가 발생하면 오류 메세지와 함께 문제 토큰을 출력.
 void	syntax_error_tokenizer(char *string, t_token **list)
 {
-	printf("syntax error near unexpected token: `%s`\n", string);
+	printf("syntax error near unexpected quote: `%s`\n", string);
 	free(string);
 	free_tokens(list);
 }
