@@ -116,10 +116,14 @@ parse error near unexpected token: `|`
 마지막 두 경우는 subshell을 구현해야 해서 구현하지 않았다.
 첫번째 경우 subshell과 상관없이 구현하려면 command과 redirection을 구분해야 하는데 실행부의 요구사항과 충돌하기 때문에 억지로 구현하지는 않았다.
 
-### 다이어그램
+## 다이어그램
+### cmd1 | cmd2 | cmd3
 ![](./pics/example-18.jpg)
+### ls | grep *.out && ls | wc
 ![](./pics/example1-15.jpg)
+### (ls && cat file) | wc
 ![](./pics/example2-16.jpg)
+### cat < infile > outfile -e | wc -c
 ![](./pics/example3-17.jpg)
 
 ### 참고 자료
