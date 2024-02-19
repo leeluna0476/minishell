@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:50:21 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/19 16:57:08 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 02:23:12 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ int							g_exit_status;
 enum	e_type
 {
 	T_ERROR = -1,		// 기본값 (syntax check때의 초깃값)
-	T_WORD,				// 문자
 	T_SPACE,			// 공백문자(보통 space)
 	T_AND,				// 논리 연산 AND "&&"
 	T_OR,				// 논리 연산 OR "||"
 	T_PIPE,				// Pipe문자 '|'
+	T_WORD,				// 문자
 	T_LESSER,			// 리다이렉션 '<'
 	T_GREATER,			// 리다이렉션 '>'
 	T_D_LESSER,			// 리다이렉션 Here_doc "<<"
