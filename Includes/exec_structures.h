@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:50:21 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 02:23:12 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 04:57:37 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,12 +144,13 @@ struct s_ast
 
 struct s_info
 {
-	int		depths;				// 현재 몇 번째 가지(재귀)에 있는지 확인용
-	pid_t	last_pid;			// 가장 마지막에 fork()된 프로세스 id, exit code 확인용
-	int		fork_num;			// 몇번 fork()되었는지 기록, wait해야할 프로세스의 개수를 알아야 함
-	int		pipe_fds[2];			// pipe()의 결과물을 기록한다. 3개짜리 int배열이고 첫 두개는 pipe()의 결과물, 3번째칸에는 다중 파이프때의 이전에 사용한 파이프의 fd
-	int		prev_fd;
-	int		redir_fds[2];		// 리다이렉션 파이프, 기본값은 표준입출력 fd이고 만약 in_redir, out_redir이 있을때 해당 파일을 open할 때 리턴받은 fd값으로 바꿔준다
+	int			depths;				// 현재 몇 번째 가지(재귀)에 있는지 확인용
+	pid_t		last_pid;			// 가장 마지막에 fork()된 프로세스 id, exit code 확인용
+	int			fork_num;			// 몇번 fork()되었는지 기록, wait해야할 프로세스의 개수를 알아야 함
+	int			pipe_fds[2];			// pipe()의 결과물을 기록한다. 3개짜리 int배열이고 첫 두개는 pipe()의 결과물, 3번째칸에는 다중 파이프때의 이전에 사용한 파이프의 fd
+	int			prev_fd;
+	int			redir_fds[2];		// 리다이렉션 파이프, 기본값은 표준입출력 fd이고 만약 in_redir, out_redir이 있을때 해당 파일을 open할 때 리턴받은 fd값으로 바꿔준다
+	int			exit_status;
 };
 
 #endif
