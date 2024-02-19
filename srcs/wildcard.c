@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 16:24:50 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/19 20:35:41 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ char	**expand_wildcard(char *arg)
 	return (args);
 }
 
-// expanded_arg가 NULL이라면 기존 문자열 그대로 가져가야 됨.
+//// expanded_arg가 NULL이라면 기존 문자열 그대로 가져가야 됨.
 //int	main(int ac, char *av[], char *envp[])
 //{
 //	char	**expanded_arg;
@@ -160,7 +160,7 @@ char	**expand_wildcard(char *arg)
 //	(void)ac;
 //	(void)av;
 //	(void)envp;
-//	expanded_arg = expand_wildcard(".a");
+//	expanded_arg = expand_wildcard("*");
 //
 //	if (expanded_arg)
 //	{
@@ -191,6 +191,6 @@ char	**expand_wildcard(char *arg)
 //		free(final_arg);
 //	}
 //	else
-//		printf("no matches found: %s\n", ".a");
+//		printf("no matches found: %s\n", "*.a");
 //	system("leaks -q a.out");
 //}
