@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structures.h                                       :+:      :+:    :+:   */
+/*   exec_structures.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:50:21 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/14 15:27:56 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/19 10:30:32 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTURES_H
-# define STRUCTURES_H
+#ifndef EXEC_STRUCTURES_H
+# define EXEC_STRUCTURES_H
 # include "../srcs/libft/libft.h"
 // 이 파일에는 미니셸 구조체들을 선언한다
 
@@ -26,6 +26,7 @@ typedef struct s_expand		t_r_expand;		// 리다이렉션 파일 확장
 typedef struct s_exp_pair	t_exp_pair;
 typedef struct s_ast		t_ast;
 typedef enum e_type			t_type;
+typedef struct s_info		t_info;
 
 int							g_exit_status;
 // exit code(전역변수)
@@ -139,6 +140,15 @@ struct s_ast
 	char			*error;
 	struct s_ast	*left;
 	struct s_ast	*right;
+};
+
+struct s_info
+{
+	int		depths;				// 현재 몇 번째 가지(재귀)에 있는지 확인용
+	pid_t	last_pid;			// 가장 마지막에 fork()된 프로세스 id, exit code 확인용
+	int		fork_num;			// 몇번 fork()되었는지 기록, wait해야할 프로세스의 개수를 알아야 함
+	int		*pipe_fds;			// pipe()의 결과물을 기록한다. 3개짜리 int배열이고 첫 두개는 pipe()의 결과물, 3번째칸에는 다중 파이프때의 이전에 사용한 파이프의 fd
+	int		redir_fds[2];		// 리다이렉션 파이프, 기본값은 표준입출력 fd이고 만약 in_redir, out_redir이 있을때 해당 파일을 open할 때 리턴받은 fd값으로 바꿔준다
 };
 
 #endif

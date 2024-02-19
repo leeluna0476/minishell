@@ -6,13 +6,13 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:55 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/14 15:26:35 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/16 12:38:28 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef REDIRECTION_H
 # define REDIRECTION_H
-# include "structures.h"
+# include "exec_structures.h"
 # include "utils.h"
 # define TEMP_FILENAME "/Users/yusekim/goinfre/heredoc_tmp"
 

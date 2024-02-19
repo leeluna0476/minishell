@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youwin0802 <youwin0802@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/15 14:58:30 by youwin0802       ###   ########.fr       */
+/*   Updated: 2024/02/19 11:34:54 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,75 +15,95 @@
 #include "redirection.h"
 #include "builtin.h"
 
-void	execute(t_ast *tree, t_env_pack *pack, int level, int *fds)
+void	execute(t_ast *tree, t_env_pack *pack, t_info *info)
 {
 	if (!tree)
 		return ;
 	else if (tree->type == T_PIPE)
-		return (execute_pipe(tree, pack, level, fds));		// TODO
+		return (execute_pipe(tree, pack, info, info->depths));		// TODO
 	else if (tree->type == T_OR || tree->type == T_AND)
-		return /*(logical_expression(tree, pack, level))*/;	// TODO
+		return /*(logical_exp(tree, pack, info), info->depths)*/;	// TODO
 	else
-		do_execution(tree, pack, level, fds);
-	execute(tree->left, pack, level + 1, fds);
-	execute(tree->right, pack, level + 1, fds);
+		do_execution(tree, pack, info);
+	info->depths++;
+	execute(tree->left, pack, info);
+	execute(tree->right, pack, info);
 }
 // 트리 출력. 깊이우선탐색. 왼쪽부터 순회.
 
-int	*build_new_fds(void)
+void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)
 {
-	int	*new_fds;
-
-	new_fds = malloc(sizeof(int) * 3);
-	if (!new_fds)
-		exit(1);
-	new_fds[2] = 0;
-	if (pipe(new_fds) == -1)
-		exit (1);
-	return (new_fds);
-}
-
-void	execute_pipe(t_ast *tree, t_env_pack *pack, int level, int *fds)
-{
-	if (!fds)
-		fds = build_new_fds();
+	info->depths++;
 	if (tree->left->type != (T_AND || T_OR || T_PIPE))
-		do_execution(tree->left, pack, level + 1, fds);
+	{
+		do_execution(tree->left, pack, info);
+		ft_wait(info);
+	}
 	else
-		execute(tree->left, pack, level + 1, fds);
+		execute(tree->left, pack, info);
+	if (tree->type == T_AND && g_exit_status != 0)
+		return ;
 	if (tree->right->type != (T_AND || T_OR || T_PIPE))
-		do_execution(tree->right, pack, level + 1, fds);
+	{
+		do_execution(tree->right, pack, info);
+		ft_wait(info);
+	}
 	else
-		execute(tree->right, pack, level + 1, fds);
+		execute(tree->right, pack, info);
 }
 
-pid_t	execute_cmd(t_cmd *cmd, t_env_pack *envs, int *pipe_fds)
+void	execute_pipe(t_ast *tree, t_env_pack *pack, t_info *info, int level)	//depths기록하고 wait하기
 {
-	int		redir_fds[2];
-	pid_t	pid;
+	if (!info->pipe_fds)
+		info->pipe_fds = build_new_fds();
+	info->depths++;
+	if (tree->left->type != (T_AND || T_OR || T_PIPE))
+		do_execution(tree->left, pack, info);
+	else
+		execute(tree->left, pack, info);
+	if (tree->right->type != (T_AND || T_OR || T_PIPE))
+		do_execution(tree->right, pack, info);
+	else
+		execute(tree->right, pack, info);
+	if (info->depths == level + 1)
+		ft_wait(info);
+}
 
-	redir_fds[0] = 0;		// 초깃값 세팅
-	redir_fds[1] = 1;		// 초깃값 세팅2
-	set_fd(cmd, pipe_fds, redir_fds);
+void	execute_cmd(t_cmd *cmd, t_env_pack *envs, t_info *info)
+{
+	set_fd(cmd, info);
 	// signal(SIGINT, SIG_IGN);
 	// signal(SIGINT, exec_handler);
-	pid = fork();
-	if (pid == -1)
+	info->last_pid = fork();
+	if (info->last_pid == -1)
 	{
 		ft_printf("fork error!\n");
 		g_exit_status = 1;
 	}
-	if (pid == 0)
+	info->fork_num++;
+	if (info->last_pid == 0)
 	{
 		if (cmd->c_args)
 		{
-			ft_dup2(pipe_fds, redir_fds);
-			ft_execve(cmd, envs);				//TODO
+			ft_dup2(info);
+			ft_execve(cmd, envs);
 		}
 	}
 	else
-		exec_parent(pipe_fds, redir_fds);		//TODO
-	return (pid);
+		exec_parent(info);
+}
+
+void	exec_parent(t_info *info)
+{
+	if (info->redir_fds[0] > 2)
+		close(info->redir_fds[0]);
+	if (info->redir_fds[1] > 2)
+		close(info->redir_fds[1]);
+	if (info->fork_num != 0 && info->pipe_fds[2])
+		close(info->pipe_fds[2]);
+	if (info->pipe_fds[1] != 1)
+		close(info->pipe_fds[1]);
+	info->pipe_fds[2] = info->pipe_fds[0];
 }
 
 void	ft_execve(t_cmd *cmd, t_env_pack *envs)
@@ -103,39 +123,67 @@ void	ft_execve(t_cmd *cmd, t_env_pack *envs)
 				exit(1);//ft_perror(cmd->c_args[0], 1);
 		}
 	}
-	do_execve(cmd->c_args, envs, envp);
+	relative_execve(cmd->c_args, envs, envp);
 }
 
-void	ft_dup2(int *pipe_fds, int *redir_fds)
+void	relative_execve(char **args, t_env_pack *envs, char **envp)
 {
-	if (redir_fds[0] != 0)
+	char	**path_split;
+	int		i;
+	char	*relative_path;
+	t_env	*path;
+
+	path = find_env("PATH", envs);
+	if (!path)
+		exit(1); // ft_perror(no such file or directory)
+	path_split = ft_split(path->value, ':');
+	i = 0;
+	while (path_split && path_split[i])
 	{
-		dup2(redir_fds[0], STDIN_FILENO);
-		close(redir_fds[0]);
+		relative_path = path_join(path_split[i], args[0]);
+		if (access(relative_path, X_OK) == 0)
+		{
+			if (execve(relative_path, args, envp) < 0)
+				exit (1); // ftperror
+		}
+		free(relative_path);
+		free(path_split[i]);
+		i++;
 	}
-	if (redir_fds[1] != 1)
-	{
-		dup2(redir_fds[1], STDOUT_FILENO);
-		close(redir_fds[1]);
-	}
-	if (pipe_fds && pipe_fds[0])
-		close(pipe_fds);
-	if (pipe_fds && pipe_fds[1] != 1)
-		close(pipe_fds[1]);
-	free(pipe_fds);
+	free(path_split);
+	exit(1);	// ftperror()
 }
 
-void	do_execution(t_ast *tree, t_env_pack *pack, int level, int *fds)
+
+void	ft_dup2(t_info *info)
 {
-	t_cmd	*cmd;
-	pid_t	pid;
+	if (info->redir_fds[0] != 0)
+	{
+		dup2(info->redir_fds[0], STDIN_FILENO);
+		close(info->redir_fds[0]);
+	}
+	if (info->redir_fds[1] != 1)
+	{
+		dup2(info->redir_fds[1], STDOUT_FILENO);
+		close(info->redir_fds[1]);
+	}
+	if (info->pipe_fds && info->pipe_fds[0])
+		close(info->pipe_fds);
+	if (info->pipe_fds && info->pipe_fds[1] != 1)
+		close(info->pipe_fds[1]);
+	free(info->pipe_fds);
+}
+
+void	do_execution(t_ast *tree, t_env_pack *pack, t_info *info)
+{
+	t_cmd			*cmd;
 
 	cmd = build_cmd_pack(tree, pack);
 	if (scan_n_set_redirs(cmd, pack))
 		return /*(free_cmd(tree))*/;		// TODO
-	if (level == 0 && solo_builtin(cmd, pack))
+	if (info->depths == 0 && solo_builtin(cmd, pack))
 		return /*(free_cmd(tree))*/;
-	pid = execute_cmd(cmd, pack, fds);
+	execute_cmd(cmd, pack, info);
 }
 	// ft_printf("print output cmd structure!\n");
 	// if (cmd->in_redirs && cmd->out_redirs)

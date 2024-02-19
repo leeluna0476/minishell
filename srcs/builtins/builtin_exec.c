@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youwin0802 <youwin0802@student.42.fr>      +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:28 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/15 14:39:33 by youwin0802       ###   ########.fr       */
+/*   Updated: 2024/02/16 12:38:28 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structures.h"
+#include "exec_structures.h"
 #include "builtin.h"
 
 enum e_b_type	check_is_builtin(char *arg)

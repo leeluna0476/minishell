@@ -6,13 +6,13 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:47:35 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/10 16:53:50 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/16 12:38:28 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
-# include "structures.h"
+# include "exec_structures.h"
 
 // build_env_pack.c
 void	build_envp(t_env_pack *pack, char **envp);

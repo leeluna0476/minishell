@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_utils.c                                    :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/14 15:28:35 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/16 12:38:28 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structures.h"
+#include "exec_structures.h"
 #include "utils.h"
 
 void	split_free(char **split)

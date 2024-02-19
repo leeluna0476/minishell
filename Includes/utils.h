@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:14:38 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/14 09:59:37 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/16 12:38:28 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <sys/termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "structures.h"
+# include "exec_structures.h"
 
 // execute_utils.c
 char	**add_str(char **str, char *add);

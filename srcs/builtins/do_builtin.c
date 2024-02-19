@@ -6,11 +6,11 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:22 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/11 12:43:38 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/16 12:38:28 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structures.h"
+#include "exec_structures.h"
 #include "builtin.h"
 
 int	do_cd(char **args, t_env_pack *pack)
