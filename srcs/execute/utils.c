@@ -6,12 +6,12 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/19 13:25:29 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 01:00:30 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec_structures.h"
 #include "utils.h"
+#include "execute.h"
 
 void	split_free(char **split)
 {
@@ -89,4 +89,11 @@ char	**merge_strs(char **orig, char **new_strs)
 	free(orig);
 	free(new_strs);
 	return (out);
+}
+
+void	ft_assert(int expression, const char *arg, int exit_num)
+{
+	if (expression)
+		return ;
+	ft_perror(arg, exit_num);
 }

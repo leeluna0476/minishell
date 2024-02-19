@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/19 13:38:43 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 02:08:16 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 void	execute(t_ast *tree, t_env_pack *pack, t_info *info)
 {
+	info->depths++;
 	if (!tree)
 		return ;
 	else if (tree->type == T_PIPE)
@@ -25,7 +26,6 @@ void	execute(t_ast *tree, t_env_pack *pack, t_info *info)
 		return (logical_exp(tree, pack, info));
 	else
 		do_execution(tree, pack, info);
-	info->depths++;
 	execute(tree->left, pack, info);
 	execute(tree->right, pack, info);
 }
@@ -34,16 +34,17 @@ void	execute(t_ast *tree, t_env_pack *pack, t_info *info)
 void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)
 {
 	info->depths++;
-	if (tree->left->type != (T_AND || T_OR || T_PIPE))
+	if (tree->left->type >= T_LESSER && tree->left->type <= T_D_GREATER)
 	{
 		do_execution(tree->left, pack, info);
 		ft_wait(info);
 	}
 	else
 		execute(tree->left, pack, info);
-	if (tree->type == T_AND && g_exit_status != 0)
+	if ((tree->type == T_AND && g_exit_status != 0) || \
+		(tree->type == T_OR && g_exit_status == 0))
 		return ;
-	if (tree->right->type != (T_AND || T_OR || T_PIPE))
+	if (tree->right->type >= T_LESSER && tree->right->type <= T_D_GREATER)
 	{
 		do_execution(tree->right, pack, info);
 		ft_wait(info);
@@ -54,18 +55,16 @@ void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)
 
 void	execute_pipe(t_ast *tree, t_env_pack *pack, t_info *info, int level)	//depths기록하고 wait하기
 {
-	if (!info->pipe_fds)
-		info->pipe_fds = build_new_fds();
-	info->depths++;
-	if (tree->left->type != (T_AND || T_OR || T_PIPE))
+	if (tree->left->type == T_PIPE)
+		execute_pipe(tree->left, pack, info, level);
+	else
+	{
+		ft_assert(pipe(info->pipe_fds) != -1, "pipe", 1);
 		do_execution(tree->left, pack, info);
-	else
-		execute(tree->left, pack, info);
-	if (tree->right->type != (T_AND || T_OR || T_PIPE))
-		do_execution(tree->right, pack, info);
-	else
-		execute(tree->right, pack, info);
-	if (info->depths == level + 1)
+	}
+	ft_assert(pipe(info->pipe_fds) != -1, "pipe", 1);
+	do_execution(tree->right, pack, info);
+	if (info->depths == level)
 		ft_wait(info);
 }
 
@@ -77,9 +76,10 @@ void	do_execution(t_ast *tree, t_env_pack *pack, t_info *info)
 	cmd = build_cmd_pack(tree, pack);
 	if (scan_n_set_redirs(cmd, pack))
 		return /*(free_cmd(cmd))*/;		// TODO
-	if (info->depths == 0 && solo_builtin(cmd, pack))
+	if (info->depths == 1 && solo_builtin(cmd, pack))
 		return /*(free_cmd(cmd))*/;
-	execute_cmd(cmd, pack, info);
+	if (cmd->c_args)
+		execute_cmd(cmd, pack, info);
 	temp = cmd->all_redirs;
 	while (temp)
 	{
@@ -104,11 +104,7 @@ void	execute_cmd(t_cmd *cmd, t_env_pack *envs, t_info *info)
 	// signal(SIGINT, SIG_IGN);
 	// signal(SIGINT, exec_handler);
 	info->last_pid = fork();
-	if (info->last_pid == -1)
-	{
-		ft_printf("fork error!\n");
-		g_exit_status = 1;
-	}
+	ft_assert(info->last_pid != -1, "fork error\n", 1);
 	info->fork_num++;
 	if (info->last_pid == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 13:03:15 by youwin0802        #+#    #+#             */
-/*   Updated: 2024/02/19 13:11:30 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 01:54:51 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void	exec_parent(t_info *info)
 		close(info->redir_fds[0]);
 	if (info->redir_fds[1] > 2)
 		close(info->redir_fds[1]);
-	if (info->fork_num != 0 && info->pipe_fds[2])
-		close(info->pipe_fds[2]);
+	if (info->fork_num != 0 && info->prev_fd)
+		close(info->prev_fd);
 	if (info->pipe_fds[1] != 1)
 		close(info->pipe_fds[1]);
-	info->pipe_fds[2] = info->pipe_fds[0];
+	info->prev_fd = info->pipe_fds[0];
 }

@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:14:15 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/19 13:44:39 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 01:01:13 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,14 @@ t_cmd	*build_cmd_pack(t_ast *tree, t_env_pack *pack)
 		{
 			limiter = add_str(0, cur->string);
 			limiter = add_str(limiter, trim_quotes(cur->string));
-			// ft_printf("token data: %s\n", cur->string);		test code
 			append_redir(&cmd, cur->prev->type, limiter);
 		}
 		else if (cur->prev && cur->prev->type > T_PIPE)
-			append_redir(&cmd, cur->prev->type, expand(ft_strdup(cur->string), pack, 1));
+			append_redir(&cmd, cur->prev->type, \
+			expand(ft_strdup(cur->string), pack, 1));
 		else if (cur->type == T_WORD)
-		{
-			cmd->c_args = merge_strs(cmd->c_args, expand(ft_strdup(cur->string), pack, 0));
-		}
+			cmd->c_args = merge_strs(cmd->c_args, \
+			expand(ft_strdup(cur->string), pack, 0));
 		cur = cur->next;
 	}
 	return (cmd);
@@ -83,28 +82,29 @@ void	relative_execve(char **args, t_env_pack *envs, char **envp)
 		if (access(relative_path, X_OK) == 0)
 		{
 			if (execve(relative_path, args, envp) < 0)
-				exit (1); // ftperror
+				ft_perror(args[0], 1);
 		}
 		free(relative_path);
 		free(path_split[i]);
 		i++;
 	}
 	free(path_split);
-	exit(1);	// ftperror()
 }
 
 void	ft_perror(char *str, int exit_num)
 {
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
 	if (exit_num == 126)
-		ft_printf("minishell: %s: is a directory\n", str);
+		ft_putstr_fd(": is a directory\n", STDERR_FILENO);
 	else if (exit_num == 127)
-		ft_printf("minishell: %s: command not found\n", str);
+		ft_putstr_fd(": command not found\n", STDERR_FILENO);
 	else if (exit_num == 128)
 	{
-		ft_printf("minishell: %s: No such file or directory\n", str);
+		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 		exit_num--;
 	}
 	else
-		perror(str);
+		perror("");
 	exit(exit_num);
 }

@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:50:21 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/19 10:30:32 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/19 16:57:08 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ enum	e_type
 	T_ERROR = -1,		// 기본값 (syntax check때의 초깃값)
 	T_WORD,				// 문자
 	T_SPACE,			// 공백문자(보통 space)
+	T_AND,				// 논리 연산 AND "&&"
+	T_OR,				// 논리 연산 OR "||"
 	T_PIPE,				// Pipe문자 '|'
 	T_LESSER,			// 리다이렉션 '<'
 	T_GREATER,			// 리다이렉션 '>'
 	T_D_LESSER,			// 리다이렉션 Here_doc "<<"
 	T_D_GREATER,		// 리다이렉션 append ">>"
-	T_AND,				// 논리 연산 AND "&&"
-	T_OR,				// 논리 연산 OR "||"
 	T_OPEN_BRACKET,		// 논리 연산 괄호 열림 '('
 	T_CLOSE_BRACKET,	// 논리 연산 괄호 닫힘 ')'
 	T_NEWLINE,
@@ -147,7 +147,8 @@ struct s_info
 	int		depths;				// 현재 몇 번째 가지(재귀)에 있는지 확인용
 	pid_t	last_pid;			// 가장 마지막에 fork()된 프로세스 id, exit code 확인용
 	int		fork_num;			// 몇번 fork()되었는지 기록, wait해야할 프로세스의 개수를 알아야 함
-	int		*pipe_fds;			// pipe()의 결과물을 기록한다. 3개짜리 int배열이고 첫 두개는 pipe()의 결과물, 3번째칸에는 다중 파이프때의 이전에 사용한 파이프의 fd
+	int		pipe_fds[2];			// pipe()의 결과물을 기록한다. 3개짜리 int배열이고 첫 두개는 pipe()의 결과물, 3번째칸에는 다중 파이프때의 이전에 사용한 파이프의 fd
+	int		prev_fd;
 	int		redir_fds[2];		// 리다이렉션 파이프, 기본값은 표준입출력 fd이고 만약 in_redir, out_redir이 있을때 해당 파일을 open할 때 리턴받은 fd값으로 바꿔준다
 };
 

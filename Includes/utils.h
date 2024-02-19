@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:14:38 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/16 12:38:28 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 00:59:28 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 char	**add_str(char **str, char *add);
 void	split_free(char **split);
 int		split_len(char **split);
-char	*itoa(int n);
 char	**merge_strs(char **orig, char **new_strs);
+void	ft_assert(int expression, const char *arg, int exit_num);
 
 #endif

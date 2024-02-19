@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:36 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/19 13:39:32 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 01:52:45 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_perror(char *str, int exit_num);
 
 // pipe_utils.c
 void	set_fds(t_cmd *cur, t_info *info);
-int		*build_new_fds(void);
 void	ft_dup2(t_info *info);
 void	ft_wait(t_info *info);
 
