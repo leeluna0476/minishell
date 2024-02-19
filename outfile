@@ -1,0 +1,8 @@
+total 48
+-rw-r--r--   1 seojilee  2023_seoul   2154 Feb  5 11:12 BNF.md
+-rw-r--r--   1 seojilee  2023_seoul   1393 Feb  5 11:12 README.md
+drwxr-xr-x   7 seojilee  2023_seoul    238 Feb  5 14:24 bnf
+drwxr-xr-x  57 seojilee  2023_seoul   1938 Feb  5 11:12 libft
+-rw-r--r--   1 seojilee  2023_seoul      0 Feb  6 10:50 outfile
+drwxr-xr-x  12 seojilee  2023_seoul    408 Feb  6 10:49 srcs
+-rw-r--r--   1 seojilee  2023_seoul  14644 Feb  5 11:12 tags
