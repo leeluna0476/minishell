@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:07:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 02:18:46 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 05:00:11 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,17 @@ void	ft_dup2(t_info *info)
 void	ft_wait(t_info *info)
 {
 	int		status;
-	int		exit_num;
 
-	exit_num = g_exit_status;
 	while (info->fork_num--)
 	{
 		if (waitpid(-1, &status, 0) == info->last_pid)
 		{
 			if (WIFSIGNALED(status))
-				exit_num = WTERMSIG(status) + 128;
+				info->exit_status = WTERMSIG(status) + 128;
 			else if (WIFEXITED(status))
-				exit_num = WEXITSTATUS(status);
+				info->exit_status = WEXITSTATUS(status);
 		}
 	}
-	g_exit_status = exit_num;
 	info->fork_num = 0;
 	info->last_pid = 0;
 	return ;
