@@ -6,13 +6,14 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 19:35:11 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/19 11:47:07 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "readline/readline.h"
 #include "readline/history.h"
+#include <fcntl.h>
 
 int	main(int ac, char *av[], char *envp[])
 {
@@ -42,6 +43,6 @@ int	main(int ac, char *av[], char *envp[])
 			}
 			free(str);
 		}
-//		system("leaks -q minishell");
+		system("leaks -q minishell");
 	}
 }
