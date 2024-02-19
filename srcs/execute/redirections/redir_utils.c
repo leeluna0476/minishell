@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:59:01 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/14 10:03:07 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/19 13:25:37 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,31 @@ int	detact_exitcode(int temp)
 		g_exit_status = temp;
 		return (0);
 	}
+}
+
+char	*itoa(int n)
+{
+	int		size;
+	int		temp;
+	char	*out;
+
+	if (n == 0)
+		return (ft_strdup("0"));
+	size = 0;
+	temp = n;
+	while (temp)
+	{
+		temp /= 10;
+		size++;
+	}
+	out = malloc(sizeof(char) * (size + 1));
+	if (!out)
+		exit(1);
+	out[size] = '\0';
+	while (n)
+	{
+		out[--size] = (n % 10) + '0';
+		n /= 10;
+	}
+	return (out);
 }

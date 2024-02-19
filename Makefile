@@ -19,13 +19,14 @@ CFLAGS = -I./includes
 # -Wall -Wextra -Werror
 SRCS = ./srcs/envs/build_env_pack.c \
 		./srcs/envs/env_utils.c \
-		./srcs/execute/do_heredoc.c \
 		./srcs/execute/execute.c \
 		./srcs/execute/execute_utils.c \
+		./srcs/execute/execute_utils2.c \
 		./srcs/execute/pipe_utils.c \
 		./srcs/execute/utils.c \
-		./srcs/execute/redirections.c \
-		./srcs/execute/redir_utils.c \
+		./srcs/execute/redirections/redirections.c \
+		./srcs/execute/redirections/redir_utils.c \
+		./srcs/execute/redirections/do_heredoc.c \
 		./srcs/expand/expand.c \
 		./srcs/expand/do_expand.c \
 		./srcs/expand/expand_utils.c \

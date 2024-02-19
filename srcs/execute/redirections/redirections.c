@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 09:33:59 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/14 15:29:35 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/19 12:58:53 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,6 @@ void	append_redir(t_cmd **cmd, t_type type, char **fileinfo)
 {
 	t_redir	*new;
 	t_redir	*temp;
-
-	// int	i = -1;
-	// if (type == T_LESSER)
-	// 	ft_printf("\ntype is <\n");
-	// else if (type == T_GREATER)
-	// 	ft_printf("\ntype is >\n");
-	// else if (type == T_D_GREATER)
-	// 	ft_printf("\ntype is >>\n");
-	// ft_printf("print fileinfo\n");
-	// while (fileinfo && fileinfo[++i])
-	// 	ft_printf("[%s] ", fileinfo[i]);
-	// ft_printf("\n");
 
 	new = ft_calloc(1, sizeof(t_redir));
 	if (!new)
@@ -44,6 +32,17 @@ void	append_redir(t_cmd **cmd, t_type type, char **fileinfo)
 		temp->next = new;
 	}
 }
+// int	i = -1;
+// if (type == T_LESSER)
+// 	ft_printf("\ntype is <\n");
+// else if (type == T_GREATER)
+// 	ft_printf("\ntype is >\n");
+// else if (type == T_D_GREATER)
+// 	ft_printf("\ntype is >>\n");
+// ft_printf("print fileinfo\n");
+// while (fileinfo && fileinfo[++i])
+// 	ft_printf("[%s] ", fileinfo[i]);
+// ft_printf("\n");
 
 int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)
 {

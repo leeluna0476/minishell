@@ -6,36 +6,11 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 13:03:15 by youwin0802        #+#    #+#             */
-/*   Updated: 2024/02/19 11:02:18 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/19 13:11:30 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
-
-void	set_fd(t_cmd *cmd, t_info *info)
-{
-	if (cmd->in_redirs)
-	{
-		info->redir_fds[0] = open(cmd->in_redirs->filename[1], O_RDONLY);
-		if (info->redir_fds[0] == -1)
-			ft_printf("open error[%s]\n", cmd->in_redirs->filename[1]); // exit status = 1
-	}
-	else if (info->pipe_fds)
-		info->redir_fds[0] = info->pipe_fds[2];
-	if (cmd->out_redirs)
-	{
-		if (cmd->out_redirs->type == T_D_GREATER)
-			info->redir_fds[1] = open(cmd->out_redirs->filename[1], \
-			O_WRONLY | O_APPEND | O_CREAT, 0644);
-		else
-			info->redir_fds[1] = open(cmd->out_redirs->filename[1], \
-			O_WRONLY | O_TRUNC | O_CREAT, 0644);
-		if (info->redir_fds[1] == -1)
-			ft_printf("open error [%s]\n", cmd->out_redirs->filename[1]);
-	}
-	else if (info->pipe_fds)
-		info->redir_fds[1] = info->pipe_fds[1];
-}
 
 char	**make_envp(t_env_pack *envs)
 {
@@ -83,15 +58,26 @@ int	is_dir(char *str)
 		return (0);
 }
 
-int	*build_new_fds(void)
+char	*path_join(char *path, char *arg)
 {
-	int	*new_fds;
+	char	*temp;
+	char	*out;
 
-	new_fds = malloc(sizeof(int) * 3);
-	if (!new_fds)
-		exit(1);
-	new_fds[2] = 0;
-	if (pipe(new_fds) == -1)
-		exit (1);
-	return (new_fds);
+	temp = ft_strjoin(path, "/");
+	out = ft_strjoin(temp, arg);
+	free(temp);
+	return (out);
+}
+
+void	exec_parent(t_info *info)
+{
+	if (info->redir_fds[0] > 2)
+		close(info->redir_fds[0]);
+	if (info->redir_fds[1] > 2)
+		close(info->redir_fds[1]);
+	if (info->fork_num != 0 && info->pipe_fds[2])
+		close(info->pipe_fds[2]);
+	if (info->pipe_fds[1] != 1)
+		close(info->pipe_fds[1]);
+	info->pipe_fds[2] = info->pipe_fds[0];
 }

@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/16 12:38:28 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/19 13:25:29 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	split_free(char **split)
 		free(split[i]);
 	free(split);
 }
-
 
 int	split_len(char **split)
 {
@@ -89,32 +88,5 @@ char	**merge_strs(char **orig, char **new_strs)
 		out[idx + orig_len] = new_strs[idx];
 	free(orig);
 	free(new_strs);
-	return (out);
-}
-
-char	*itoa(int n)
-{
-	int		size;
-	int		temp;
-	char	*out;
-
-	if (n == 0)
-		return (ft_strdup("0"));
-	size = 0;
-	temp = n;
-	while (temp)
-	{
-		temp /= 10;
-		size++;
-	}
-	out = malloc(sizeof(char) * (size + 1));
-	if (!out)
-		exit(1);
-	out[size] = '\0';
-	while (n)
-	{
-		out[--size] = (n % 10) + '0';
-		n /= 10;
-	}
 	return (out);
 }

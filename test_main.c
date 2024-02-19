@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:13:02 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/19 10:31:01 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/19 13:42:19 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@
 void	leaks()
 {
 	system("leaks minishell");
+}
+
+void	set_info(t_info *info)
+{
+	info->depths = 0;
+	info->fork_num = 0;
+	info->last_pid = 0;
+	info->pipe_fds = 0;
+	info->redir_fds[0] = 0;
+	info->redir_fds[1] = 1;
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -42,13 +52,3 @@ int	main(int argc, char **argv, char **envp)
 	set_info(&info);
 	// atexit(leaks);
 }			// 확장 테스트용 코드
-
-void	set_info(t_info *info)
-{
-	info->depths = 0;
-	info->fork_num = 0;
-	info->last_pid = 0;
-	info->pipe_fds = 0;
-	info->redir_fds[0] = 0;
-	info->redir_fds[1] = 1;
-}
