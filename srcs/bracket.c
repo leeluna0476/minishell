@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:57:56 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 20:13:50 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:50:46 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,10 @@ t_token	*check_bracket(t_token *start, t_token *end)
 	else if (flag < 0)
 		return (last);
 	if (first && first->prev && first->prev >= start \
-		&& first->prev->type != T_AND && first->prev->type != T_OR \
-		&& first->prev->type != T_PIPE)
+		&& first->prev->type != T_AND && first->prev->type != T_OR)
 		return (first->prev);
 	else if (last && last->next && last->next <= end \
-		&& last->next->type != T_AND && last->next->type != T_OR \
-		&& last->next->type != T_PIPE)
+		&& last->next->type != T_AND && last->next->type != T_OR)
 		return (last->next);
 	return (NULL);
 }
