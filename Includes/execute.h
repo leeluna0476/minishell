@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:36 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 01:52:45 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 03:34:32 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	exec_parent(t_info *info);
 t_cmd	*build_cmd_pack(t_ast *tree, t_env_pack *pack);
 void	ft_execve(t_cmd *cmd, t_env_pack *envs);
 void	relative_execve(char **args, t_env_pack *envs, char **envp);
-void	ft_perror(char *str, int exit_num);
+void	ft_perror(const char *str, int exit_num);
+void	free_cmd(t_cmd *cmd);
 
 // pipe_utils.c
 void	set_fds(t_cmd *cur, t_info *info);

@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:14:15 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 01:01:13 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 03:32:59 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ void	relative_execve(char **args, t_env_pack *envs, char **envp)
 	free(path_split);
 }
 
-void	ft_perror(char *str, int exit_num)
+void	ft_perror(const char *str, int exit_num)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd((char *)str, STDERR_FILENO);
 	if (exit_num == 126)
 		ft_putstr_fd(": is a directory\n", STDERR_FILENO);
 	else if (exit_num == 127)
@@ -107,4 +107,23 @@ void	ft_perror(char *str, int exit_num)
 	else
 		perror("");
 	exit(exit_num);
+}
+
+void	free_cmd(t_cmd *cmd)
+{
+	t_redir	*temp;
+	t_redir	*next;
+
+	if (cmd->c_args)
+		split_free(cmd->c_args);
+	temp = cmd->all_redirs;
+	while (temp)
+	{
+		next = temp->next;
+		if (temp->type == T_D_LESSER)
+			unlink(temp->filename[1]);
+		split_free(temp->filename);
+		free(temp);
+		temp = next;
+	}
 }

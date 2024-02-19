@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 02:08:16 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 03:34:08 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	execute(t_ast *tree, t_env_pack *pack, t_info *info)
 void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)
 {
 	info->depths++;
-	if (tree->left->type >= T_LESSER && tree->left->type <= T_D_GREATER)
+	if (tree->left->type >= T_WORD && tree->left->type <= T_D_GREATER)
 	{
 		do_execution(tree->left, pack, info);
 		ft_wait(info);
@@ -44,7 +44,7 @@ void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)
 	if ((tree->type == T_AND && g_exit_status != 0) || \
 		(tree->type == T_OR && g_exit_status == 0))
 		return ;
-	if (tree->right->type >= T_LESSER && tree->right->type <= T_D_GREATER)
+	if (tree->right->type >= T_WORD && tree->right->type <= T_D_GREATER)
 	{
 		do_execution(tree->right, pack, info);
 		ft_wait(info);
@@ -53,7 +53,7 @@ void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)
 		execute(tree->right, pack, info);
 }
 
-void	execute_pipe(t_ast *tree, t_env_pack *pack, t_info *info, int level)	//depths기록하고 wait하기
+void	execute_pipe(t_ast *tree, t_env_pack *pack, t_info *info, int level)
 {
 	if (tree->left->type == T_PIPE)
 		execute_pipe(tree->left, pack, info, level);
@@ -75,18 +75,13 @@ void	do_execution(t_ast *tree, t_env_pack *pack, t_info *info)
 
 	cmd = build_cmd_pack(tree, pack);
 	if (scan_n_set_redirs(cmd, pack))
-		return /*(free_cmd(cmd))*/;		// TODO
+		return (free_cmd(cmd));
 	if (info->depths == 1 && solo_builtin(cmd, pack))
-		return /*(free_cmd(cmd))*/;
+		return (free_cmd(cmd));
 	if (cmd->c_args)
 		execute_cmd(cmd, pack, info);
 	temp = cmd->all_redirs;
-	while (temp)
-	{
-		if (temp->type == T_D_LESSER)
-			unlink(temp->filename[1]);
-		temp = temp->next;
-	}
+	return (free_cmd(cmd));
 }
 	// ft_printf("print output cmd structure!\n");
 	// if (cmd->in_redirs && cmd->out_redirs)
