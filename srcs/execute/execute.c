@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 03:34:08 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 07:12:08 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)
 	if (tree->left->type >= T_WORD && tree->left->type <= T_D_GREATER)
 	{
 		do_execution(tree->left, pack, info);
-		ft_wait(info);
+		ft_wait(info, pack);
 	}
 	else
 		execute(tree->left, pack, info);
@@ -47,7 +47,7 @@ void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)
 	if (tree->right->type >= T_WORD && tree->right->type <= T_D_GREATER)
 	{
 		do_execution(tree->right, pack, info);
-		ft_wait(info);
+		ft_wait(info, pack);
 	}
 	else
 		execute(tree->right, pack, info);
@@ -65,7 +65,7 @@ void	execute_pipe(t_ast *tree, t_env_pack *pack, t_info *info, int level)
 	ft_assert(pipe(info->pipe_fds) != -1, "pipe", 1);
 	do_execution(tree->right, pack, info);
 	if (info->depths == level)
-		ft_wait(info);
+		ft_wait(info, pack);
 }
 
 void	do_execution(t_ast *tree, t_env_pack *pack, t_info *info)
@@ -76,7 +76,7 @@ void	do_execution(t_ast *tree, t_env_pack *pack, t_info *info)
 	cmd = build_cmd_pack(tree, pack);
 	if (scan_n_set_redirs(cmd, pack))
 		return (free_cmd(cmd));
-	if (info->depths == 1 && solo_builtin(cmd, pack))
+	if (info->depths == 1 && solo_builtin(cmd, pack) != -1)
 		return (free_cmd(cmd));
 	if (cmd->c_args)
 		execute_cmd(cmd, pack, info);

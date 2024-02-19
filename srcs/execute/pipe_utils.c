@@ -6,19 +6,17 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:07:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 05:00:11 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 07:27:02 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
+#include "env.h"
 
 void	set_fds(t_cmd *cmd, t_info *info)
 {
 	if (cmd->in_redirs)
-	{
 		info->redir_fds[0] = open(cmd->in_redirs->filename[1], O_RDONLY);
-		ft_assert(info->redir_fds[0] != -1, cmd->in_redirs->filename[1], 1);
-	}
 	else
 		info->redir_fds[0] = info->prev_fd;
 	if (cmd->out_redirs)
@@ -29,8 +27,6 @@ void	set_fds(t_cmd *cmd, t_info *info)
 		else
 			info->redir_fds[1] = open(cmd->out_redirs->filename[1], \
 			O_WRONLY | O_TRUNC | O_CREAT, 0644);
-		if (info->redir_fds[1] == -1)
-			ft_printf("open error [%s]\n", cmd->out_redirs->filename[1]);
 	}
 	else
 		info->redir_fds[1] = info->pipe_fds[1];
@@ -54,9 +50,10 @@ void	ft_dup2(t_info *info)
 		close(info->pipe_fds[1]);
 }
 
-void	ft_wait(t_info *info)
+void	ft_wait(t_info *info, t_env_pack *pack)
 {
 	int		status;
+	char	*exit_code;
 
 	while (info->fork_num--)
 	{
@@ -70,5 +67,8 @@ void	ft_wait(t_info *info)
 	}
 	info->fork_num = 0;
 	info->last_pid = 0;
+	exit_code = ft_itoa(info->exit_status);
+	add_env_node(pack, "?", exit_code);
+	free(exit_code);
 	return ;
 }
