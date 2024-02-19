@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:28 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 02:31:43 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 06:01:30 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ enum e_b_type	check_is_builtin(char *arg)
 int	exec_builtin(char **args, t_env_pack *pack)
 {
 	int					i;
+	char				*result;
 	const t_builtin_ptr	f_ptr_list[] = \
 	{do_echo, do_cd, do_pwd, do_export, do_unset, do_env, do_exit};
 
@@ -48,9 +49,11 @@ int	exec_builtin(char **args, t_env_pack *pack)
 	// 	ft_printf("[%s]\n", args[i++]);
 	i = check_is_builtin(*args);
 	if (i == -1)
-		return (0);
-	else
-		return (f_ptr_list[i](args, pack));
+		return (i);
+	result = ft_itoa(f_ptr_list[i](args, pack));
+	add_env_node(pack, "?", result);
+	free(result);
+	return (0);
 }
 // 함수 포인터 배열을 사용하여 check_is_builtin의 리턴값에 맞는 함수를 실행시켜준다
 
@@ -68,8 +71,7 @@ int	solo_builtin(t_cmd *cur, t_env_pack *pack)
 		close(in_fd);
 	if (out_fd != 1)
 		close(out_fd);
-	if (exec_builtin(cur->c_args, pack))
-		res = 1;
+	res = exec_builtin(cur->c_args, pack);
 	if (cur->in_redirs)
 	{
 		dup2(std_fd[0], 0);

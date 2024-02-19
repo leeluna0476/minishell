@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:24 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/16 12:38:28 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 06:55:43 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	print_export(t_env_pack *pack)
 			ft_printf("\n");
 		temp = temp->sorted_next;
 	}
-	return (1);
+	return (0);
 }
 // 인자가 없는 export를 입력하였을때 bash의 출력에 맞춰 출력해준다.
 
@@ -40,7 +40,6 @@ int	check_env_name(char **args, int i)
 
 	if (ft_isdigit(*args[i]))
 	{
-		g_exit_status = 1;
 		ft_printf("%s: '%s': not a vaild identifier\n", args[0], args[i]);
 		return (1);
 	}
@@ -49,7 +48,6 @@ int	check_env_name(char **args, int i)
 	{
 		if (!(ft_isalnum(args[i][idx]) || args[i][idx] == '_'))
 		{
-			g_exit_status = 1;
 			ft_printf("%s: '%s': not a vaild identifier\n", args[0], args[i]);
 			return (1);
 		}

@@ -6,12 +6,13 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:22 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/16 12:38:28 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 05:58:14 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec_structures.h"
 #include "builtin.h"
+#include "env.h"
 
 int	do_cd(char **args, t_env_pack *pack)
 {
@@ -29,7 +30,6 @@ int	do_cd(char **args, t_env_pack *pack)
 		if (!target)
 		{
 			ft_printf("%s: OLDPWD not set\n", args[0]);
-			g_exit_status = 1;
 			return (1);
 		}
 		result = chdir(target->value);
@@ -38,7 +38,7 @@ int	do_cd(char **args, t_env_pack *pack)
 	else
 		result = chdir(args[1]);
 	check_res(result, pack, temp, args);
-	return (1);
+	return (0);
 }
 // 빌트인 cd 실행시켜주는 함수. '~'와 '-' 도 구현되어있다
 
@@ -61,8 +61,7 @@ int	do_echo(char **args, t_env_pack *pack)
 	}
 	if (!n_flag)
 		ft_printf("\n");
-	g_exit_status = 0;
-	return (1);
+	return (0);
 }
 // 옵션 -n이 가능한 echo, "echo -n -n -n -n hello" 등을 처리하기 위해 while문을 활용하였다.
 
@@ -75,7 +74,6 @@ int	do_pwd(char **args, t_env_pack *pack)
 	cur_path = getcwd(NULL, 0);
 	ft_printf("%s\n", cur_path);
 	free(cur_path);
-	g_exit_status = 0;
-	return (1);
+	return (0);
 }
 // pwd, getcwd함수를 쓰면 바로 가져올 수 있다
