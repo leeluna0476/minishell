@@ -119,7 +119,7 @@ parse error near unexpected token: `|`
 ## 다이어그램
 **cmd1 | cmd2 | cmd3**
 ![](./pics/example-18.jpg)
-**ls | grep *.out && ls | wc**
+**ls | grep \*.out && ls | wc**
 ![](./pics/example1-15.jpg)
 **(ls && cat file) | wc**
 ![](./pics/example2-16.jpg)
