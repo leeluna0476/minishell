@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:13:02 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 01:46:21 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 04:59:21 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,8 @@ void	leaks()
 
 void	set_info(t_info *info)
 {
-	info->depths = 0;
-	info->fork_num = 0;
-	info->last_pid = 0;
-	info->prev_fd = 0;
-	info->pipe_fds[0] = 0;
+	ft_memset(info, 0, sizeof(t_info));
 	info->pipe_fds[1] = 1;
-	info->redir_fds[0] = 0;
 	info->redir_fds[1] = 1;
 }
 

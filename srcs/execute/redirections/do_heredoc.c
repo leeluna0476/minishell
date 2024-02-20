@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:19 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/14 10:05:47 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 10:24:51 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	heredoc(t_redir *target, t_env_pack *pack)
 	while (!access(filename, F_OK))
 	{
 		free(filename);
-		itoa_out = itoa(++num);
+		itoa_out = ft_itoa(++num);
 		filename = ft_strjoin(TEMP_FILENAME, itoa_out);
 		free(itoa_out);
 	}
@@ -93,7 +93,7 @@ void	heredoc_expander(int fd, char *input, t_env_pack *pack, int flag)
 	while (input[i])
 	{
 		exp_len = 0;
-		if (input[i] == '$')
+		if (input[i] == '$' && flag == 0)
 		{
 			env_name = find_env_name(input + i);
 			exp_len = ft_strlen(env_name);

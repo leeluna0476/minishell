@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:36 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 03:34:32 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 07:12:23 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ void	free_cmd(t_cmd *cmd);
 // pipe_utils.c
 void	set_fds(t_cmd *cur, t_info *info);
 void	ft_dup2(t_info *info);
-void	ft_wait(t_info *info);
+void	ft_wait(t_info *info, t_env_pack *pack);
 
 #endif

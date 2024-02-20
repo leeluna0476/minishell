@@ -6,11 +6,12 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 09:33:59 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/19 12:58:53 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 07:25:24 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirection.h"
+#include "env.h"
 
 void	append_redir(t_cmd **cmd, t_type type, char **fileinfo)
 {
@@ -47,49 +48,54 @@ void	append_redir(t_cmd **cmd, t_type type, char **fileinfo)
 int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)
 {
 	t_redir	*temp;
+	int		exit_code;
+	char	*exit_code_str;
 
 	temp = cmd->all_redirs;
-	while (temp)
+	exit_code = 0;
+	while (temp && exit_code == 0)
 	{
 		if (temp->type == T_D_LESSER || temp->type == T_LESSER)
 			cmd->in_redirs = temp;
 		else if (temp->type == T_D_GREATER || temp->type == T_GREATER)
 			cmd->out_redirs = temp;
 		if (temp->type == T_D_LESSER)
-		{
-			if (heredoc(temp, pack))
-				return (1);
-		}
+			exit_code = heredoc(temp, pack);
 		temp = temp->next;
 	}
 	temp = cmd->all_redirs;
-	return (open_check(temp));
+	if (exit_code || open_check(temp))
+	{
+		exit_code_str = ft_itoa(exit_code);
+		add_env_node(pack, "?", exit_code_str);
+		free(exit_code_str);
+	}
+	return (0);
 }
 
 int	open_check(t_redir *temp)
 {
-	g_exit_status = 1;
-
 	while (temp)
 	{
 		if (temp->type != T_D_LESSER && split_len(temp->filename) > 2)
 		{
-			ft_printf("%s: ambiguous redirect\n", temp->filename[0]);
+			ft_putstr_fd(temp->filename[0], STDERR_FILENO);
+			ft_putstr_fd(": ambiguous redirect\n", STDERR_FILENO);
 			return (1);
 		}
 		redir_open(temp);
 		if (temp->type != T_D_LESSER && temp->fd < 0)
 		{
+			ft_putstr_fd(temp->filename[1], STDERR_FILENO);
 			if (access(temp->filename[1], F_OK) == 0)
-				printf("%s: Permission denied\n", temp->filename[1]);
+				ft_putstr_fd(": Permission denied\n", STDERR_FILENO);
 			else
-				printf("%s: No such file or directory\n", temp->filename[1]);
+				ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 			return (1);
 		}
 		if (temp->fd > 2)
 			close(temp->fd);
 		temp = temp->next;
 	}
-	g_exit_status = 0;
 	return (0);
 }
