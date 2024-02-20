@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:03:00 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 12:15:50 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 05:26:27 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define TOKENIZER_H
 
 # include <stdio.h>
+#include "readline/readline.h"
+#include "readline/history.h"
 # include "../libft/libft.h"
 # include "parse_define.h"
 # include "parse_struct.h"

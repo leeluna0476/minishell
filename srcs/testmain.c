@@ -6,25 +6,16 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/20 00:49:48 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:05:11 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "readline/readline.h"
 #include "readline/history.h"
+#include "signal_handler.h"
 #include <fcntl.h>
 #include <unistd.h>
-
-typedef struct s_pipe t_pipe;
-
-struct s_pipe
-{
-	t_token	*start;
-	t_token	*end;
-	t_pipe	*prev;
-	t_pipe	*next;
-};
 
 int	main(int ac, char *av[], char *envp[])
 {
@@ -37,9 +28,11 @@ int	main(int ac, char *av[], char *envp[])
 	(void)envp;
 	while (42)
 	{
-		str = readline("minishell> ");
+		str = get_line("minishell> ");
 		if (str)
 		{
+			if (str[0])
+				add_history(str);
 			tokens = tokenizer(str);
 			if (tokens)
 			{
