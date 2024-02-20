@@ -145,3 +145,6 @@ signal handler에서 사용해도 될 만한, *재진입*이 가능한 함수들
 
 </div>
 </details>
+
+### 참고 자료
+- LINUX SYSTEM PROGRAMMING (Robert Love)
