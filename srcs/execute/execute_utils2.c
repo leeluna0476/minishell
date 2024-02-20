@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:14:15 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 19:12:11 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:59:22 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	relative_execve(char **args, t_env_pack *envs, char **envp)
 	while (path_split && path_split[i])
 	{
 		relative_path = path_join(path_split[i], args[0]);
+			printf("%s\n", relative_path);
 		if (access(relative_path, X_OK) == 0)
 		{
 			if (execve(relative_path, args, envp) < 0)
@@ -89,6 +90,7 @@ void	relative_execve(char **args, t_env_pack *envs, char **envp)
 		i++;
 	}
 	free(path_split);
+//	exit(1);
 }
 
 void	ft_perror(const char *str, int exit_num)
