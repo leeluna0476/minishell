@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:14:15 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 14:02:28 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:12:11 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_cmd	*build_cmd_pack(t_ast *tree, t_env_pack *pack)
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	if (!cmd)
 		exit (1);
-	while (cur && cur <= tree->end)
+	while (cur && cur->prev != tree->end)
 	{
 		if (cur->prev && cur->prev->type == T_D_LESSER)
 		{
@@ -33,12 +33,12 @@ t_cmd	*build_cmd_pack(t_ast *tree, t_env_pack *pack)
 			limiter = add_str(limiter, trim_quotes(cur->string));
 			append_redir(&cmd, cur->prev->type, limiter);
 		}
-		else if (cur->prev && cur->prev->type > T_PIPE)
+		else if (cur->prev && cur->prev->type == T_PIPE)
 			append_redir(&cmd, cur->prev->type, \
-			expand(ft_strdup(cur->string), pack, 1));
+				expand(ft_strdup(cur->string), pack, 1));
 		else if (cur->type == T_WORD)
 			cmd->c_args = merge_strs(cmd->c_args, \
-			expand(ft_strdup(cur->string), pack, 0));
+				expand(ft_strdup(cur->string), pack, 0));
 		cur = cur->next;
 	}
 	return (cmd);

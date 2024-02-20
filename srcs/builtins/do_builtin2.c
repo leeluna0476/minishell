@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:05 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 07:03:24 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 19:20:21 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int	do_env(char **args, t_env_pack *pack)
 }
 // env구현함수, bash에 출력에 맞게 출력해주면 된다.
 
+// ft_putstr() 이전 libft 버전으로 바꾸고 printf는 yusekim 것으로 바꿔야 함.
+// exit이 안 됨.
 int	do_exit(char **args, t_env_pack *pack)
 {
 	int		args_len;

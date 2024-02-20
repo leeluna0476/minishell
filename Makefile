@@ -4,8 +4,6 @@ RM=rm -fr
 HEADERS_DIR=./includes/
 CFLAGS=-I./includes
 
-SRCS = ./srcs/*/*.c ./srcs/execute/redirections/*.c ./srcs/testmain.c
-
 SRCS = ./srcs/envs/build_env_pack.c \
 		./srcs/envs/env_utils.c \
 		./srcs/execute/execute.c \
@@ -57,7 +55,7 @@ $(NAME): $(OBJS)
 	make -C ./srcs/libft
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -lft -L./srcs/libft/ -lreadline
 
-$(OBJS): $(SRCS) $(HEADERS)
+#$(OBJS): $(SRCS)
 
 clean:
 	make clean -C ./srcs/libft

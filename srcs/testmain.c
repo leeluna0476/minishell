@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/20 14:32:32 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:19:45 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ int	main(int ac, char *av[], char *envp[])
 				ast = init_ast(tokens);
 				generate_ast(&ast, ast->start, ast->end);
 				if (!(ast->error))
+				{
 					execute(ast, &pack, &info);
+					while (waitpid(-1, NULL, WNOHANG) != -1);
+				}
 				else
 					syntax_error_parser(ast->error, &tokens);
 				free_tokens(&tokens);

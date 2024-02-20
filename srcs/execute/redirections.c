@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 09:33:59 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/14 15:29:35 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 19:43:43 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int	open_check(t_redir *temp)
 			return (1);
 		}
 		redir_open(temp);
+		printf("dkfljkajl\n");
+		// 이 부분 이해 안 감.
 		if (temp->type != T_D_LESSER && temp->fd < 0)
 		{
 			if (access(temp->filename[1], F_OK) == 0)
