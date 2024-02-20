@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:22 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 05:58:14 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:06:01 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ int	do_cd(char **args, t_env_pack *pack)
 	}
 	else
 		result = chdir(args[1]);
-	check_res(result, pack, temp, args);
-	return (0);
+	return (check_res(result, pack, temp, args));
 }
 // 빌트인 cd 실행시켜주는 함수. '~'와 '-' 도 구현되어있다
 

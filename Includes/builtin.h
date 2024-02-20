@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:38:38 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/16 12:38:28 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:06:52 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void			b_check_redir(t_cmd *cur, int *std_fd, int *in_fd, int *out_fd);
 // builtin_utils.c
 int				print_export(t_env_pack *pack);
 int				check_env_name(char **args, int i);
-void			check_res(int res, t_env_pack *pack, char *path, char **args);
+int				check_res(int res, t_env_pack *pack, char *path, char **args);
 int				check_sign(char *str);
 void			builtin_fd_set(int *in_fd, int *out_fd, int *std_fd);
 
