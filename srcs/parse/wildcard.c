@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/19 20:35:41 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:23:38 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,6 @@ char	**expand_wildcard(char *arg)
 //		free(final_arg);
 //	}
 //	else
-//		printf("no matches found: %s\n", "*.a");
+//		ft_printf("no matches found: %s\n", "*.a");
 //	system("leaks -q a.out");
 //}

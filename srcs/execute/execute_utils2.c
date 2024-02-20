@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:14:15 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 03:32:59 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/20 14:02:28 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_execve(t_cmd *cmd, t_env_pack *envs)
 {
 	char	**envp;
 
-	if (exec_builtin(cmd->c_args, envs))
+	if (exec_builtin(cmd->c_args, envs) != -1)
 		exit (0);
 	envp = make_envp(envs);
 	if (is_route(cmd->c_args[0]))

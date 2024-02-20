@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:01 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 12:05:33 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:23:47 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	print_ast(t_ast *ast)
 	curr = ast->start;
 	while (curr && curr->prev != ast->end)
 	{
-		printf("[%s] ", curr->string);
+		ft_printf("[%s] ", curr->string);
 		curr = curr->next;
 	}
-	printf("\n");
+	ft_printf("\n");
 	if (ast->left)
 		print_ast(ast->left);
 	if (ast->right)

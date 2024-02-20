@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/20 13:37:58 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:32:32 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int ac, char *av[], char *envp[])
 			}
 			free(str);
 		}
-		system("leaks -q minishell");
+//		system("leaks -q minishell");
 	}
 }
 //					print_ast(ast);
