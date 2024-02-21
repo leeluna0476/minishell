@@ -3,39 +3,89 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojilee <seojilee@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/29 19:40:06 by seojilee          #+#    #+#             */
-/*   Updated: 2023/11/07 16:31:10 by seojilee         ###   ########.fr       */
+/*   Created: 2023/03/28 10:41:07 by yusekim           #+#    #+#             */
+/*   Updated: 2024/02/21 13:27:22 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+int	ft_putchar(int c)
+{
+	int		out;
+
+	out = write(1, &c, 1);
+	return (out);
+}
+
+int	ft_putstr(char *s)
+{
+	int		out;
+	int		len;
+
+	out = 0;
+	len = 0;
+	if (s == NULL)
+		s = "(null)";
+	while (s[len])
+	{
+		out = ft_putchar(s[len]);
+		if (out == -1)
+			return (out);
+		len++;
+	}
+	return (len);
+}
+
+int	detact_f(char *format, va_list ap)
+{
+	int	temp;
+
+	temp = 0;
+	if (*format == 'c')
+		temp = ft_putchar(va_arg(ap, unsigned int));
+	if (*format == 's')
+		temp = ft_putstr(va_arg(ap, char *));
+	if (*format == 'i' || *format == 'd')
+		temp = ft_putnbr(va_arg(ap, int), *format, 10);
+	if (*format == 'u')
+		temp = ft_putnbr(va_arg(ap, unsigned int), *format, 10);
+	if (*format == 'x' || *format == 'X')
+		temp = ft_putnbr(va_arg(ap, unsigned int), *format, 16);
+	if (*format == 'p')
+		temp = ft_putmem((unsigned long long)va_arg(ap, void *));
+	if (*format == '%')
+		temp = ft_putchar('%');
+	return (temp);
+}
+
 int	ft_printf(const char *format, ...)
 {
-	va_list		ap;
-	t_variable	var;
+	va_list	ap;
+	int		res;
+	int		tmp;
 
+	res = 0;
 	va_start(ap, format);
-	var.i = 0;
-	var.ret = 0;
-	var.p_ret = 0;
-	while (format[var.i])
+	while (*format)
 	{
-		if (var.ret == -1)
-			return (var.ret);
-		if (format[var.i] == '%')
+		if (*format == '%')
 		{
-			var.i++;
-			ft_puts(format[var.i], ap, &var);
-			var.i++;
+			tmp = detact_f((char *)(++format), ap);
+			if (tmp == -1)
+				return (-1);
+			res += tmp;
+			format++;
+			continue ;
 		}
-		else
-			ft_putchar_fd(format[var.i++], 1, &var.ret, &var.p_ret);
+		tmp = write(1, format, 1);
+		if (tmp == -1)
+			return (tmp);
+		res++;
+		format++;
 	}
-	if (var.i == 0)
-		ft_putchar_fd(format[var.i], 1, &var.ret, &var.p_ret);
 	va_end(ap);
-	return (var.p_ret);
+	return (res);
 }
