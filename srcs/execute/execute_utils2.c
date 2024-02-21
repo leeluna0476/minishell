@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:14:15 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 19:59:22 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:56:00 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_cmd	*build_cmd_pack(t_ast *tree, t_env_pack *pack)
 			limiter = add_str(limiter, trim_quotes(cur->string));
 			append_redir(&cmd, cur->prev->type, limiter);
 		}
-		else if (cur->prev && cur->prev->type == T_PIPE)
+		else if (cur->prev && cur->prev->type == T_PIPE) // ??
 			append_redir(&cmd, cur->prev->type, \
 				expand(ft_strdup(cur->string), pack, 1));
 		else if (cur->type == T_WORD)
@@ -71,6 +71,7 @@ void	relative_execve(char **args, t_env_pack *envs, char **envp)
 	char	*relative_path;
 	t_env	*path;
 
+//	signal(SIGINT, SIG_DFL);
 	path = find_env("PATH", envs);
 	if (!path)
 		ft_perror(args[0], 1);
@@ -79,7 +80,6 @@ void	relative_execve(char **args, t_env_pack *envs, char **envp)
 	while (path_split && path_split[i])
 	{
 		relative_path = path_join(path_split[i], args[0]);
-			printf("%s\n", relative_path);
 		if (access(relative_path, X_OK) == 0)
 		{
 			if (execve(relative_path, args, envp) < 0)
@@ -90,7 +90,7 @@ void	relative_execve(char **args, t_env_pack *envs, char **envp)
 		i++;
 	}
 	free(path_split);
-//	exit(1);
+	exit(1);
 }
 
 void	ft_perror(const char *str, int exit_num)

@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:22 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 11:06:01 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/21 10:23:06 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ int	do_echo(char **args, t_env_pack *pack)
 		n_flag = 1;
 	while (args[i])
 	{
-		ft_printf("%s ", args[i]);
+		ft_printf("%s", args[i]);
 		i++;
+		if (args[i])
+			write(1, " ", 1);
 	}
 	if (!n_flag)
 		ft_printf("\n");
