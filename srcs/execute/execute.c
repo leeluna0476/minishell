@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/21 19:36:55 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:48:05 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	execute(t_ast *tree, t_env_pack *pack, t_info *info)
 
 int	get_exitstat(t_env_pack *pack)
 {
-	int		res;
 	t_env	*target_node;
 
 	target_node = find_env("?", pack);

@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:31:56 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/21 15:26:57 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/21 19:49:27 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	do_expand(t_c_expand *expand, t_env_pack *pack, int flag)
 	int		i;
 	char	*temp;
 
+	(void)flag;
 	i = -1;
 	if (expand->exp_num == 0)
 	{
@@ -43,8 +44,6 @@ void	do_expand(t_c_expand *expand, t_env_pack *pack, int flag)
 char	*search_value(t_exp_pair *pair, t_env_pack *pack)
 {
 	t_env	*target;
-	char	*value;
-	char	*out;
 
 	if (pair->q_flag == '\'')
 		return (NULL);
@@ -80,7 +79,6 @@ void	expand_join(t_c_expand *expand, char *temp)
 void	join_remain(t_c_expand *expand, int len)
 {
 	int		i;
-	int		count;
 	char	*new;
 	char	*new_orig;
 

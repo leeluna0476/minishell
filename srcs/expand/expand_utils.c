@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 14:57:36 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/11 19:37:27 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/21 19:50:39 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	build_exp_pair(t_c_expand *expand, char *ptr, int q_flag)
 {
 	t_exp_pair	*new;
-	int			i;
 
 	new = malloc(sizeof(t_exp_pair));
 	if (!new)

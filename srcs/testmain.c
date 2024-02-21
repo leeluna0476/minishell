@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/21 18:13:52 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/21 22:00:55 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 #include "redirection.h"
 #include "parse_struct.h"
 #include "parse_define.h"
-//#include "structures.h"
 #include "readline/readline.h"
 #include "readline/history.h"
 #include "signal_handler.h"
@@ -46,7 +45,7 @@ int	main(int ac, char *av[], char *envp[])
 	build_envp(&pack, envp);
 	while (42)
 	{
-		str = get_line("minishell> ");
+		str = get_line(PROMPT);
 		if (str)
 		{
 			if (str[0])
@@ -65,12 +64,13 @@ int	main(int ac, char *av[], char *envp[])
 				else
 					syntax_error_parser(ast->error, &tokens);
 				free_tokens(&tokens);
+
 				free_ast(&ast);
 			}
 			free(str);
 		}
 		else
-			ft_exit(0);
+			EOF_EXIT();
 	}
 }
 //	print_ast(ast);

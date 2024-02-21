@@ -2,7 +2,7 @@ NAME=minishell
 CC=cc
 RM=rm -fr
 HEADERS_DIR=./includes/
-CFLAGS=-I./includes
+CFLAGS=-Wextra -Wall -Werror -I./includes
 
 SRCS = ./srcs/envs/build_env_pack.c \
 		./srcs/envs/env_utils.c \
