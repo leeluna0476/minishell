@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_builtin2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:05 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 19:20:21 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:48:41 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,20 @@ int	do_env(char **args, t_env_pack *pack)
 }
 // env구현함수, bash에 출력에 맞게 출력해주면 된다.
 
-// ft_putstr() 이전 libft 버전으로 바꾸고 printf는 yusekim 것으로 바꿔야 함.
-// exit이 안 됨.
+void	ft_exit(uint8_t code)
+{
+	ft_putstr_fd("exit\n", STDOUT_FILENO);
+	exit(code);
+}
+// exit을 출력하고 exit()한다.
+
 int	do_exit(char **args, t_env_pack *pack)
 {
-	int		args_len;
+	int	args_len;
 
 	args_len = split_len(args);
-	if (args_len == 2)
+	// 그냥 exit도 exit이 되도록. 검수 필요.
+	if (args_len <= 2)
 	{
 		if (check_sign(args[1]))
 		{
@@ -96,10 +102,10 @@ int	do_exit(char **args, t_env_pack *pack)
 			ft_putstr_fd(": ", STDERR_FILENO);
 			ft_putstr_fd(args[1], STDERR_FILENO);
 			ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
-			exit(255);
+			ft_exit(255);
 		}
 		else
-			exit (ft_atoi(args[1]) % 256);
+			ft_exit(ft_atoi(args[1]) % 256);
 	}
 	ft_putstr_fd(args[0], STDERR_FILENO);
 	ft_putstr_fd(": too many arguments\n", STDERR_FILENO);

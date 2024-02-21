@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/21 15:37:48 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/21 19:36:55 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	execute(t_ast *tree, t_env_pack *pack, t_info *info)
 		return (do_execution(tree, pack, info));
 }
 // 재귀. 깊이우선탐색. 왼쪽부터 순회.
-
 
 int	get_exitstat(t_env_pack *pack)
 {
@@ -84,7 +83,8 @@ void	do_execution(t_ast *tree, t_env_pack *pack, t_info *info)
 	cmd = build_cmd_pack(tree, pack);
 	if (scan_n_set_redirs(cmd, pack))
 		return (free_cmd(cmd));
-	if (info->depths == 1 && solo_builtin(cmd, pack) != -1)
+	// info->depths == 1이 왜 있어야 하는지 모르겠음.
+	if (/*info->depths == 1 && */solo_builtin(cmd, pack) != -1)
 		return (free_cmd(cmd));
 	if (cmd->c_args)
 		execute_cmd(cmd, pack, info);

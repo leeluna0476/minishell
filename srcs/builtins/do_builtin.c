@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:22 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/21 10:23:06 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:58:37 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ int	do_cd(char **args, t_env_pack *pack)
 		do_pwd(args, pack);
 	}
 	else
+	{
 		result = chdir(args[1]);
+		// debug
+	}
 	return (check_res(result, pack, temp, args));
 }
 // 빌트인 cd 실행시켜주는 함수. '~'와 '-' 도 구현되어있다

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojilee <seojilee@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 02:19:01 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/20 20:03:09 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:39:57 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	sig_handler(int signo)
 	g_status = signo;
 }
 
-int	sigint_event(void)
+int	signal_event(void)
 {
 	if (g_status == SIGINT)
 	{
 		// write a newline
-		write(1, "\n", 1);
+		ft_putchar_fd('\n', 1);
 		// move the cursor to the newline
 		rl_on_new_line();
 		// clear the buffer
@@ -38,6 +38,11 @@ int	sigint_event(void)
 		// redisplay the contents of rl_line_buffer
 		rl_redisplay();
 		// initialize the signal
+		g_status = 0;
+	}
+	else if (g_status == SIGQUIT)
+	{
+		signal(SIGQUIT, SIG_IGN);
 		g_status = 0;
 	}
 	return (0);
@@ -57,11 +62,12 @@ char	*get_line(char *prompt)
 //	struct termios term;
 
 	rl_catch_signals = 0;
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, sig_handler);
 	signal(SIGINT, sig_handler);
 //	tcgetattr(STDIN_FILENO, &term);
 //	term.c_oflag = OPOST | ONLCR;
-	rl_signal_event_hook = sigint_event;
+//	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &term);
+	rl_signal_event_hook = signal_event;
 	str = readline(prompt);
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, SIG_DFL);

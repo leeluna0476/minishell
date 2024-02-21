@@ -45,7 +45,7 @@ JNDEX	srcs/libft/libft.h	/^# define JNDEX	/;"	d
 KNDEX	srcs/libft/libft.h	/^# define KNDEX	/;"	d
 LIBFT_H	srcs/libft/libft.h	/^# define LIBFT_H$/;"	d
 MAN_OBJS	srcs/libft/Makefile	/^MAN_OBJS=$(MAN_SRCS:.c=.o)$/;"	m
-MAN_SRCS	srcs/libft/Makefile	/^MAN_SRCS=ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c get_next_line.c get_next_line_utils.c$/;"	m
+MAN_SRCS	srcs/libft/Makefile	/^MAN_SRCS=ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putnbr_fd.c ft_putendl_fd.c get_next_line.c get_next_line_utils.c$/;"	m
 NAME	Makefile	/^NAME=minishell$/;"	m
 NAME	srcs/libft/Makefile	/^NAME=libft.a$/;"	m
 OBJS	Makefile	/^OBJS=$(SRCS:.c=.o)$/;"	m
@@ -54,12 +54,11 @@ PARSER_H	includes/parser.h	/^# define PARSER_H$/;"	d
 PARSE_DEFINE_H	includes/parse_define.h	/^# define PARSE_DEFINE_H$/;"	d
 PARSE_STRUCT_H	includes/parse_struct.h	/^# define PARSE_STRUCT_H$/;"	d
 PRINTF_OBJS	srcs/libft/Makefile	/^PRINTF_OBJS=$(PRINTF_SRCS:.c=.o)$/;"	m
-PRINTF_SRCS	srcs/libft/Makefile	/^PRINTF_SRCS=ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_puthex_l_fd.c ft_putint_fd.c ft_puts.c ft_putunbr_fd.c ft_printf.c ft_putchar_fd.c ft_puthex_s_fd.c ft_putmem_fd.c ft_putstr_fd.c$/;"	m
+PRINTF_SRCS	srcs/libft/Makefile	/^PRINTF_SRCS=ft_printf.c ft_printf2.c$/;"	m
 REDIRECTION_H	includes/redirection.h	/^# define REDIRECTION_H$/;"	d
 RM	Makefile	/^RM=rm -fr$/;"	m
 RM	srcs/libft/Makefile	/^RM=rm -fr$/;"	m
 SIGNAL_HANDLER_H	includes/signal_handler.h	/^# define SIGNAL_HANDLER_H$/;"	d
-SRCS	Makefile	/^SRCS = .\/srcs\/*\/*.c .\/srcs\/execute\/redirections\/*.c .\/srcs\/testmain.c$/;"	m
 SRCS	Makefile	/^SRCS = .\/srcs\/envs\/build_env_pack.c \\$/;"	m
 STRUCTURES_H	includes/structures.h	/^# define STRUCTURES_H$/;"	d
 TEMP_FILENAME	includes/redirection.h	/^# define TEMP_FILENAME /;"	d
@@ -135,6 +134,7 @@ delete_quotes	srcs/expand/expand.c	/^void	delete_quotes(t_c_expand *exp)$/;"	f
 depths	includes/exec_structures.h	/^	int			depths;				\/\/ 현재 몇 번째 가지(재귀)에 있는지 확인용$/;"	m	struct:s_info
 detact_exitcode	srcs/execute/redir_utils.c	/^int	detact_exitcode(int temp)$/;"	f
 detact_exitcode	srcs/execute/redirections/redir_utils.c	/^int	detact_exitcode(int temp)$/;"	f
+detact_f	srcs/libft/ft_printf.c	/^int	detact_f(char *format, va_list ap)$/;"	f
 do_cd	srcs/builtins/do_builtin.c	/^int	do_cd(char **args, t_env_pack *pack)$/;"	f
 do_echo	srcs/builtins/do_builtin.c	/^int	do_echo(char **args, t_env_pack *pack)$/;"	f
 do_env	srcs/builtins/do_builtin2.c	/^int	do_env(char **args, t_env_pack *pack)$/;"	f
@@ -180,8 +180,11 @@ fd	includes/exec_structures.h	/^	int			fd;				\/\/ filename[1] 을 open했을때
 fd	includes/structures.h	/^	int			fd;				\/\/ filename[1] 을 open했을때 반환받는 fd값, type == T_D_LESSER ("<<") 일 경우에는 filename[0]을 DELIMITER로 설정하고 heredoc을 실행한다.$/;"	m	struct:s_redir
 filename	includes/exec_structures.h	/^	char		**filename;		\/\/ 이중 포인터인 이유는 ambigious redirection 에러처리를 위함(확장 예외처리)$/;"	m	struct:s_redir
 filename	includes/structures.h	/^	char		**filename;		\/\/ 이중 포인터인 이유는 ambigious redirection 에러처리를 위함(확장 예외처리)$/;"	m	struct:s_redir
+fill_nbr	srcs/libft/ft_printf2.c	/^void	fill_nbr(char *str, long n, char format, size_t len)$/;"	f
 find_env	srcs/envs/env_utils.c	/^t_env	*find_env(char *name, t_env_pack *package)$/;"	f
 find_env_name	srcs/expand/expand_utils.c	/^char	*find_env_name(char *ptr)$/;"	f
+find_len	srcs/libft/ft_printf2.c	/^size_t	find_len(long n, int base)$/;"	f
+find_mem_len	srcs/libft/ft_printf2.c	/^size_t	find_mem_len(unsigned long long nb)$/;"	f
 find_position	srcs/expand/expand.c	/^void	find_position(t_c_expand *expand)$/;"	f
 fork_num	includes/exec_structures.h	/^	int			fork_num;			\/\/ 몇번 fork()되었는지 기록, wait해야할 프로세스의 개수를 알아야 함$/;"	m	struct:s_info
 free_all	srcs/libft/get_next_line.c	/^void	*free_all(char **remain, char *newline)$/;"	f
@@ -198,6 +201,7 @@ ft_bzero	srcs/libft/ft_bzero.c	/^void	ft_bzero(void *s, size_t n)$/;"	f
 ft_calloc	srcs/libft/ft_calloc.c	/^void	*ft_calloc(size_t count, size_t size)$/;"	f
 ft_dup2	srcs/execute/pipe_utils.c	/^void	ft_dup2(t_info *info)$/;"	f
 ft_execve	srcs/execute/execute_utils2.c	/^void	ft_execve(t_cmd *cmd, t_env_pack *envs)$/;"	f
+ft_exit	srcs/builtins/do_builtin2.c	/^void	ft_exit(uint8_t code)$/;"	f
 ft_free_all	srcs/libft/ft_split.c	/^static char	**ft_free_all(char **strings)$/;"	f	file:
 ft_isalnum	srcs/libft/ft_isalnum.c	/^int	ft_isalnum(int c)$/;"	f
 ft_isalpha	srcs/libft/ft_isalpha.c	/^int	ft_isalpha(int c)$/;"	f
@@ -223,16 +227,14 @@ ft_memmove	srcs/libft/ft_memmove.c	/^void	*ft_memmove(void *dst, const void *src
 ft_memset	srcs/libft/ft_memset.c	/^void	*ft_memset(void *b, int c, size_t len)$/;"	f
 ft_perror	srcs/execute/execute_utils2.c	/^void	ft_perror(const char *str, int exit_num)$/;"	f
 ft_printf	srcs/libft/ft_printf.c	/^int	ft_printf(const char *format, ...)$/;"	f
-ft_putchar_fd	srcs/libft/ft_putchar_fd.c	/^void	ft_putchar_fd(char c, int fd, ssize_t *ret, int *p_ret)$/;"	f
+ft_putchar	srcs/libft/ft_printf.c	/^int	ft_putchar(int c)$/;"	f
+ft_putchar_fd	srcs/libft/ft_putchar_fd.c	/^void	ft_putchar_fd(char c, int fd)$/;"	f
 ft_putendl_fd	srcs/libft/ft_putendl_fd.c	/^void	ft_putendl_fd(char *s, int fd)$/;"	f
-ft_puthex_l_fd	srcs/libft/ft_puthex_l_fd.c	/^void	ft_puthex_l_fd(unsigned int num, int fd, ssize_t *ret, int *p_ret)$/;"	f
-ft_puthex_s_fd	srcs/libft/ft_puthex_s_fd.c	/^void	ft_puthex_s_fd(unsigned int num, int fd, ssize_t *ret, int *p_ret)$/;"	f
-ft_putint_fd	srcs/libft/ft_putint_fd.c	/^void	ft_putint_fd(int n, int fd, ssize_t *ret, int *p_ret)$/;"	f
-ft_putmem_fd	srcs/libft/ft_putmem_fd.c	/^void	ft_putmem_fd(unsigned long long num, int fd, ssize_t *ret, int *p_ret)$/;"	f
+ft_putmem	srcs/libft/ft_printf2.c	/^int	ft_putmem(unsigned long long nb)$/;"	f
+ft_putnbr	srcs/libft/ft_printf2.c	/^int	ft_putnbr(long n, char format, int base)$/;"	f
 ft_putnbr_fd	srcs/libft/ft_putnbr_fd.c	/^void	ft_putnbr_fd(int n, int fd)$/;"	f
-ft_puts	srcs/libft/ft_puts.c	/^void	ft_puts(char form, va_list ap, t_variable *var)$/;"	f
-ft_putstr_fd	srcs/libft/ft_putstr_fd.c	/^void	ft_putstr_fd(char *s, int fd, ssize_t *ret, int *p_ret)$/;"	f
-ft_putunbr_fd	srcs/libft/ft_putunbr_fd.c	/^void	ft_putunbr_fd(unsigned int n, int fd, ssize_t *ret, int *p_ret)$/;"	f
+ft_putstr	srcs/libft/ft_printf.c	/^int	ft_putstr(char *s)$/;"	f
+ft_putstr_fd	srcs/libft/ft_putstr_fd.c	/^void	ft_putstr_fd(char *s, int fd)$/;"	f
 ft_split	srcs/libft/ft_split.c	/^char	**ft_split(char const *s, char c)$/;"	f
 ft_strchr	srcs/libft/ft_strchr.c	/^char	*ft_strchr(const char *s, int c)$/;"	f
 ft_strcmp	srcs/libft/ft_strncmp.c	/^int	ft_strcmp(const char *s1, const char *s2)$/;"	f
@@ -258,6 +260,7 @@ g_status	srcs/parse/signal.c	/^volatile sig_atomic_t	g_status = 0;$/;"	v
 generate_ast	srcs/parse/ast.c	/^void	generate_ast(t_ast **ast, t_token *start, t_token *end)$/;"	f
 get_bracket_flag	srcs/parse/bracket.c	/^int	get_bracket_flag(t_token **start, t_token **end, \\$/;"	f
 get_center	srcs/parse/center.c	/^t_token	*get_center(t_ast *ast, t_token *start, t_token *end)$/;"	f
+get_exitstat	srcs/execute/execute.c	/^int	get_exitstat(t_env_pack *pack)$/;"	f
 get_len	srcs/libft/ft_itoa.c	/^static void	get_len(int nb, int *len, int *sign)$/;"	f	file:
 get_line	srcs/parse/signal.c	/^char	*get_line(char *prompt)$/;"	f
 get_logical_exp	srcs/parse/center.c	/^t_token	*get_logical_exp(t_ast *ast, t_token *start, t_token *end)$/;"	f
@@ -278,7 +281,6 @@ heredoc_expander	srcs/execute/do_heredoc.c	/^void	heredoc_expander(int fd, char 
 heredoc_expander	srcs/execute/redirections/do_heredoc.c	/^void	heredoc_expander(int fd, char *input, t_env_pack *pack, int flag)$/;"	f
 heredoc_q_flag	srcs/execute/redir_utils.c	/^int	heredoc_q_flag(char *str)$/;"	f
 heredoc_q_flag	srcs/execute/redirections/redir_utils.c	/^int	heredoc_q_flag(char *str)$/;"	f
-i	srcs/libft/ft_printf.h	/^	int		i;$/;"	m	struct:s_variable
 in_redirs	includes/exec_structures.h	/^	t_redir		*in_redirs;		\/\/ 최종적으로 사용될 input redirection('<', "<<")$/;"	m	struct:s_cmd_pack
 in_redirs	includes/structures.h	/^	t_redir		*in_redirs;		\/\/ 최종적으로 사용될 input redirection('<', "<<")$/;"	m	struct:s_cmd_pack
 init_ast	srcs/parse/ast_utils.c	/^t_ast	*init_ast(t_token *tokens)$/;"	f
@@ -296,7 +298,6 @@ last_pid	includes/exec_structures.h	/^	pid_t		last_pid;			\/\/ 가장 마지막�
 last_token	srcs/parse/token_utils.c	/^t_token	*last_token(t_token *list)$/;"	f
 left	includes/exec_structures.h	/^	struct s_ast	*left;$/;"	m	struct:s_ast	typeref:struct:s_ast::s_ast
 left	includes/structures.h	/^	struct s_ast	*left;$/;"	m	struct:s_ast	typeref:struct:s_ast::s_ast
-left_ptr	includes/exec_structures.h	/^	void		*left_ptr;		\/\/ 왼쪽 branch$/;"	m	struct:s_tree
 left_ptr	includes/structures.h	/^	void		*left_ptr;		\/\/ 왼쪽 branch$/;"	m	struct:s_tree
 logical_exp	srcs/execute/execute.c	/^void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)$/;"	f
 main	srcs/testmain.c	/^int	main(int ac, char *av[], char *envp[])$/;"	f
@@ -326,7 +327,6 @@ original	includes/exec_structures.h	/^	char		*original;$/;"	m	struct:s_expand
 original	includes/structures.h	/^	char		*original;$/;"	m	struct:s_expand
 out_redirs	includes/exec_structures.h	/^	t_redir		*out_redirs;	\/\/ 최종적으로 사용될 output redirection('>', ">>")$/;"	m	struct:s_cmd_pack
 out_redirs	includes/structures.h	/^	t_redir		*out_redirs;	\/\/ 최종적으로 사용될 output redirection('>', ">>")$/;"	m	struct:s_cmd_pack
-p_ret	srcs/libft/ft_printf.h	/^	int		p_ret;$/;"	m	struct:s_variable
 path_join	srcs/execute/execute_utils.c	/^char	*path_join(char *path, char *arg)$/;"	f
 pipe_fds	includes/exec_structures.h	/^	int			pipe_fds[2];			\/\/ pipe()의 결과물을 기록한다. 3개짜리 int배열이고 첫 두개는 pipe()의 결과물, 3번째칸에는 다중 파이프때의 이전에 사용한 파이프의 fd$/;"	m	struct:s_info
 prev	includes/exec_structures.h	/^	struct s_token	*prev;		\/\/ 이전 node (syntax error 체크때 유용했었음)$/;"	m	struct:s_token	typeref:struct:s_token::s_token
@@ -345,10 +345,8 @@ remove_bracket	srcs/parse/bracket.c	/^void	remove_bracket(t_token **start, t_tok
 remove_space	srcs/parse/tokenizer.c	/^int	remove_space(char *line)$/;"	f
 result	includes/exec_structures.h	/^	char		**result;		\/\/ 확장을 완료한 최종 결과물$/;"	m	struct:s_expand
 result	includes/structures.h	/^	char		**result;		\/\/ 확장을 완료한 최종 결과물$/;"	m	struct:s_expand
-ret	srcs/libft/ft_printf.h	/^	ssize_t	ret;$/;"	m	struct:s_variable
 right	includes/exec_structures.h	/^	struct s_ast	*right;$/;"	m	struct:s_ast	typeref:struct:s_ast::s_ast
 right	includes/structures.h	/^	struct s_ast	*right;$/;"	m	struct:s_ast	typeref:struct:s_ast::s_ast
-right_ptr	includes/exec_structures.h	/^	void		*right_ptr;		\/\/ 오른쪽 branch$/;"	m	struct:s_tree
 right_ptr	includes/structures.h	/^	void		*right_ptr;		\/\/ 오른쪽 branch$/;"	m	struct:s_tree
 s_ast	includes/exec_structures.h	/^struct s_ast$/;"	s
 s_ast	includes/structures.h	/^struct s_ast$/;"	s
@@ -370,9 +368,7 @@ s_redir	includes/exec_structures.h	/^struct s_redir$/;"	s
 s_redir	includes/structures.h	/^struct s_redir$/;"	s
 s_token	includes/exec_structures.h	/^struct s_token$/;"	s
 s_token	includes/structures.h	/^struct s_token$/;"	s
-s_tree	includes/exec_structures.h	/^struct s_tree$/;"	s
 s_tree	includes/structures.h	/^struct s_tree$/;"	s
-s_variable	srcs/libft/ft_printf.h	/^typedef struct s_variable {$/;"	s
 scan_n_set_redirs	srcs/execute/redirections.c	/^int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)$/;"	f
 scan_n_set_redirs	srcs/execute/redirections/redirections.c	/^int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)$/;"	f
 scan_n_setup	srcs/expand/expand.c	/^void	scan_n_setup(t_c_expand *expand, char *data)$/;"	f
@@ -384,7 +380,7 @@ set_parse_error	srcs/parse/error.c	/^void	set_parse_error(t_ast *ast, char *stri
 set_start_end	srcs/parse/set_nodes.c	/^void	set_start_end(t_ast **ast, t_token *start, t_token *end)$/;"	f
 set_type_meta1	srcs/parse/meta.c	/^void	set_type_meta1(char c, int i, t_type *type)$/;"	f
 sig_handler	srcs/parse/signal.c	/^void	sig_handler(int signo)$/;"	f
-sigint_event	srcs/parse/signal.c	/^int	sigint_event(void)$/;"	f
+signal_event	srcs/parse/signal.c	/^int	signal_event(void)$/;"	f
 smaller	srcs/libft/ft_memmove.c	/^static void	smaller(unsigned char *dst, unsigned char *src, size_t len)$/;"	f	file:
 solo_builtin	srcs/builtins/builtin_exec.c	/^int	solo_builtin(t_cmd *cur, t_env_pack *pack)$/;"	f
 sorted_head	includes/exec_structures.h	/^	t_env	*sorted_head;	\/\/ 정렬된 순서의 envp head 노드$/;"	m	struct:s_env_pack
@@ -420,21 +416,16 @@ t_exp_pair	includes/structures.h	/^typedef struct s_exp_pair	t_exp_pair;$/;"	t	t
 t_info	includes/exec_structures.h	/^typedef struct s_info		t_info;$/;"	t	typeref:struct:s_info
 t_list	srcs/libft/libft.h	/^}					t_list;$/;"	t	typeref:struct:s_list
 t_mark	includes/parse_define.h	/^typedef struct s_mark	t_mark;$/;"	t	typeref:struct:s_mark
-t_r_expand	includes/exec_structures.h	/^typedef struct s_expand		t_r_expand;		\/\/ 리다이렉션 파일 확장$/;"	t	typeref:struct:s_expand
 t_r_expand	includes/structures.h	/^typedef struct s_expand		t_r_expand;		\/\/ 리다이렉션 파일 확장$/;"	t	typeref:struct:s_expand
 t_redir	includes/exec_structures.h	/^typedef struct s_redir		t_redir;$/;"	t	typeref:struct:s_redir
 t_redir	includes/structures.h	/^typedef struct s_redir		t_redir;$/;"	t	typeref:struct:s_redir
 t_token	includes/exec_structures.h	/^typedef struct s_token		t_token;$/;"	t	typeref:struct:s_token
 t_token	includes/structures.h	/^typedef struct s_token		t_token;$/;"	t	typeref:struct:s_token
-t_tree	includes/exec_structures.h	/^typedef struct s_tree		t_tree;$/;"	t	typeref:struct:s_tree
 t_tree	includes/structures.h	/^typedef struct s_tree		t_tree;$/;"	t	typeref:struct:s_tree
 t_type	includes/exec_structures.h	/^typedef enum e_type			t_type;$/;"	t	typeref:enum:e_type
 t_type	includes/structures.h	/^typedef enum e_type			t_type;$/;"	t	typeref:enum:e_type
-t_variable	srcs/libft/ft_printf.h	/^}	t_variable;$/;"	t	typeref:struct:s_variable
 take_bracket	srcs/parse/center.c	/^t_token	*take_bracket(t_token *curr, t_token *start)$/;"	f
-this_ptr	includes/exec_structures.h	/^	void		*this_ptr;		\/\/ 현재 노드가 가지고 있는 데이터, cmd타입일때만 내용이 있고 나머지는 NULL$/;"	m	struct:s_tree
 this_ptr	includes/structures.h	/^	void		*this_ptr;		\/\/ 현재 노드가 가지고 있는 데이터, cmd타입일때만 내용이 있고 나머지는 NULL$/;"	m	struct:s_tree
-this_type	includes/exec_structures.h	/^	enum e_type	this_type;		\/\/ 현재 노드의 타입 (아마 e_type 열거형으로 퉁칠 수 있을듯?)$/;"	m	struct:s_tree	typeref:enum:s_tree::e_type
 this_type	includes/structures.h	/^	enum e_type	this_type;		\/\/ 현재 노드의 타입 (아마 e_type 열거형으로 퉁칠 수 있을듯?)$/;"	m	struct:s_tree	typeref:enum:s_tree::e_type
 tokenizer	srcs/parse/tokenizer.c	/^t_token	*tokenizer(char *line)$/;"	f
 trim_quotes	srcs/execute/redir_utils.c	/^char	*trim_quotes(char *data)$/;"	f

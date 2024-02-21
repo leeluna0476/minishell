@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/21 13:02:14 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:13:52 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	main(int ac, char *av[], char *envp[])
 	(void)ac;
 	(void)av;
 	build_envp(&pack, envp);
-	set_info(&info);
 	while (42)
 	{
 		str = get_line("minishell> ");
@@ -59,6 +58,7 @@ int	main(int ac, char *av[], char *envp[])
 				generate_ast(&ast, ast->start, ast->end);
 				if (!(ast->error))
 				{
+					set_info(&info);
 					execute(ast, &pack, &info);
 					while (waitpid(-1, NULL, WNOHANG) != -1);
 				}
@@ -70,7 +70,7 @@ int	main(int ac, char *av[], char *envp[])
 			free(str);
 		}
 		else
-			exit(0);
+			ft_exit(0);
 	}
 }
 //	print_ast(ast);

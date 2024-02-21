@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:38:38 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 11:06:52 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/21 17:42:27 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int				do_cd(char **args, t_env_pack *pack);
 int				do_pwd(char **args, t_env_pack *pack);
 
 // do_builtin2.c
+void			ft_exit(uint8_t code);
 int				do_export(char **args, t_env_pack *pack);
 int				do_unset(char **args, t_env_pack *pack);
 int				do_env(char **args, t_env_pack *pack);
