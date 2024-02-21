@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 07:12:08 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/21 15:37:48 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,19 @@ void	execute(t_ast *tree, t_env_pack *pack, t_info *info)
 	else if (tree->type == T_OR || tree->type == T_AND)
 		return (logical_exp(tree, pack, info));
 	else
-		do_execution(tree, pack, info);
-	execute(tree->left, pack, info);
-	execute(tree->right, pack, info);
+		return (do_execution(tree, pack, info));
 }
 // 재귀. 깊이우선탐색. 왼쪽부터 순회.
+
+
+int	get_exitstat(t_env_pack *pack)
+{
+	int		res;
+	t_env	*target_node;
+
+	target_node = find_env("?", pack);
+	return (ft_atoi(target_node->value));
+}
 
 void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)
 {
@@ -41,8 +49,8 @@ void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)
 	}
 	else
 		execute(tree->left, pack, info);
-	if ((tree->type == T_AND && g_exit_status != 0) || \
-		(tree->type == T_OR && g_exit_status == 0))
+	if ((tree->type == T_AND && get_exitstat(pack)) || \
+		(tree->type == T_OR && get_exitstat(pack)))
 		return ;
 	if (tree->right->type >= T_WORD && tree->right->type <= T_D_GREATER)
 	{

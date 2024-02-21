@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 01:00:30 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/21 15:38:25 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@
 void	split_free(char **split)
 {
 	int	i;
+	int	s_len;
 
 	i = -1;
-	while (split[++i])
+	s_len = split_len(split);
+	while (++i < s_len)
 		free(split[i]);
 	free(split);
 }
@@ -71,12 +73,14 @@ char	**merge_strs(char **orig, char **new_strs)
 	int		idx;
 	char	**out;
 
+
 	if (!orig)
 		return (new_strs);
 	if (!new_strs)
 		return (orig);
 	orig_len = split_len(orig);
 	new_len = split_len(new_strs);
+
 	out = malloc(sizeof(char *) * (orig_len + new_len + 1));
 	if (!out)
 		exit(1);
@@ -84,7 +88,7 @@ char	**merge_strs(char **orig, char **new_strs)
 	while (++idx < orig_len)
 		out[idx] = orig[idx];
 	idx = -1;
-	while (++idx < new_len)
+	while (++idx <= new_len)
 		out[idx + orig_len] = new_strs[idx];
 	free(orig);
 	free(new_strs);

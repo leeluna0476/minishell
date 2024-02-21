@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:50:21 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 04:57:37 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/21 14:38:01 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,13 @@
 // 이 파일에는 미니셸 구조체들을 선언한다
 
 typedef struct s_token		t_token;
-typedef struct s_tree		t_tree;
+typedef struct s_ast		t_ast;
 typedef struct s_env		t_env;
 typedef struct s_env_pack	t_env_pack;
 typedef struct s_cmd_pack	t_cmd;
 typedef struct s_redir		t_redir;
 typedef struct s_expand		t_c_expand;		// 명령어 확장
-typedef struct s_expand		t_r_expand;		// 리다이렉션 파일 확장
 typedef struct s_exp_pair	t_exp_pair;
-typedef struct s_ast		t_ast;
 typedef enum e_type			t_type;
 typedef struct s_info		t_info;
 
@@ -70,15 +68,6 @@ struct s_token
 	struct s_token	*next;		// 다음 node
 	struct s_token	*prev;		// 이전 node (syntax error 체크때 유용했었음)
 };
-
-struct s_tree
-{
-	enum e_type	this_type;		// 현재 노드의 타입 (아마 e_type 열거형으로 퉁칠 수 있을듯?)
-	void		*this_ptr;		// 현재 노드가 가지고 있는 데이터, cmd타입일때만 내용이 있고 나머지는 NULL
-	void		*left_ptr;		// 왼쪽 branch
-	void		*right_ptr;		// 오른쪽 branch
-};
-// 임시 AST 구조체..
 
 struct s_env				// 환경변수 연결리스트
 {
