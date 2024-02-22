@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:14:15 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/22 16:17:57 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/22 17:28:54 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,26 +71,22 @@ void	relative_execve(char **args, t_env_pack *envs, char **envp)
 	char	*relative_path;
 	t_env	*path;
 
-//	signal(SIGINT, SIG_DFL);
 	path = find_env("PATH", envs);
 	if (!path)
-		ft_perror(args[0], 1);
+		ft_perror(args[0], 128);
 	path_split = ft_split(path->value, ':');
 	i = 0;
 	while (path_split && path_split[i])
 	{
 		relative_path = path_join(path_split[i], args[0]);
 		if (access(relative_path, X_OK) == 0)
-		{
-			if (execve(relative_path, args, envp) < 0)
-				ft_perror(args[0], 1);
-		}
+			ft_assert(execve(relative_path, args, envp) != -1, args[0], 1);
 		free(relative_path);
 		free(path_split[i]);
 		i++;
 	}
 	free(path_split);
-	exit(1);
+	ft_perror(args[0], 127);
 }
 
 void	ft_perror(const char *str, int exit_num)
@@ -107,7 +103,7 @@ void	ft_perror(const char *str, int exit_num)
 		exit_num--;
 	}
 	else
-		perror("");
+		perror(" ");
 	exit(exit_num);
 }
 

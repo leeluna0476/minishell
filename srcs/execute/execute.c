@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/22 13:43:47 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/22 17:15:31 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ void	execute(t_ast *tree, t_env_pack *pack, t_info *info)
 	else if (tree->type == T_OR || tree->type == T_AND)
 		return (logical_exp(tree, pack, info));
 	else
-		return (do_execution(tree, pack, info));
+	{
+		do_execution(tree, pack, info);
+		ft_wait(info, pack);
+	}
+
 }
 // 재귀. 깊이우선탐색. 왼쪽부터 순회.
 
@@ -48,6 +52,7 @@ void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)
 	}
 	else
 		execute(tree->left, pack, info);
+	ft_printf("exitstat: %d\n", get_exitstat(pack));
 	if ((tree->type == T_AND && get_exitstat(pack)) || \
 		(tree->type == T_OR && !get_exitstat(pack)))
 		return ;
