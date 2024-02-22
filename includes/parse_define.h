@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:08:25 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/20 13:41:53 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:26:36 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 //typedef enum e_type		t_type;
 //typedef struct s_token	t_token;
-typedef struct s_mark	t_mark;
+//typedef struct s_mark	t_mark;
 //typedef struct s_ast	t_ast;
 //
 //// 기본값 (syntax check때의 초깃값)

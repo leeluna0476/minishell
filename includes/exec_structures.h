@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:50:21 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/21 14:38:01 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/22 11:26:54 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_expand		t_c_expand;		// 명령어 확장
 typedef struct s_exp_pair	t_exp_pair;
 typedef enum e_type			t_type;
 typedef struct s_info		t_info;
+typedef struct s_mark	t_mark;
 
 int							g_exit_status;
 // exit code(전역변수)

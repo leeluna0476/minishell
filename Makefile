@@ -33,6 +33,7 @@ SRCS = ./srcs/envs/build_env_pack.c \
 		./srcs/parse/token_utils.c \
 		./srcs/parse/tokenizer.c \
 		./srcs/parse/signal.c \
+		./srcs/parse/wildcard.c \
 		./srcs/testmain.c
 
 

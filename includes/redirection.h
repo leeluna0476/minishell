@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:55 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 05:33:43 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/22 11:00:06 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define REDIRECTION_H
 # include "exec_structures.h"
 # include "utils.h"
-# define TEMP_FILENAME "/Users/yusekim/goinfre/heredoc_tmp"
+# define TEMP_FILENAME "/Users/seojilee/goinfre/heredoc_tmp"
 
 // redirections.c
 void	append_redir(t_cmd **cmd, t_type type, char **fileinfo);

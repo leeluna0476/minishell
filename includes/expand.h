@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:32:39 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/16 12:38:28 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/22 11:25:25 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 # include "exec_structures.h"
 # include "utils.h"
 # include "env.h"
+
+// wildcard.c
+char	**add_str(char **str, char *add);
+int	check_front_center(char *filename, char *pattern, t_mark *mark, int i);
+int	check_end(char *filename, char *pattern, t_mark mark, int i);
+int	check_wildfixes(char *filename, __uint8_t type, char *pattern);
+char	**expand_wildcard(char *arg);
+char	**wildcard(char **args);
+
 
 // expand.c
 char	**expand(char *data, t_env_pack *package, int flag);

@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/20 14:23:38 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:43:02 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,9 @@
 #include <stdlib.h>
 #include "tokenizer.h"
 #include <unistd.h>
+#include "expand.h"
 
 // 자세한 로직은 WILDCARD.md 참고.
-
-// char *를 char **에 추가.
-char	**add_str(char **str, char *add)
-{
-	char	**new;
-	int		i;
-
-	if (!add)
-		return (str);
-	i = 0;
-	while (str && str[i])
-		i++;
-	new = malloc(sizeof(char *) * (i + 2));
-	if (!new)
-		exit(1);
-	i = 0;
-	while (str && str[i])
-	{
-		new[i] = str[i];
-		i++;
-	}
-	new[i] = add;
-	i++;
-	new[i] = 0;
-	if (str)
-		free(str);
-	return (new);
-}
 
 // a*, *a* 등을 검사.
 int	check_front_center(char *filename, char *pattern, t_mark *mark, int i)
@@ -146,6 +119,39 @@ char	**expand_wildcard(char *arg)
 			entry = readdir(dp);
 		}
 		closedir(dp);
+	}
+	return (args);
+}
+
+char	**wildcard(char **args)
+{
+	char	**final;
+	char	**w_expand;
+	int		i;
+	int		j;
+
+	final = NULL;
+	w_expand = NULL;
+	i = 0;
+	while (args && args[i])
+	{
+		w_expand = expand_wildcard(args[i]);
+		if (!w_expand)
+			break ;
+		j = 0;
+		while (w_expand[j])
+		{
+			final = add_str(final, w_expand[j]);
+			j++;
+		}
+		i++;
+	}
+	if (!w_expand)
+		split_free(final);
+	else
+	{
+		split_free(args);
+		args = final;
 	}
 	return (args);
 }
