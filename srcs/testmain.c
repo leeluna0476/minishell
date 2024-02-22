@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/22 18:07:03 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:13:52 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ void	set_info(t_info *info)
 	info->redir_fds[1] = 1;
 }
 
+void	update_cursor(void)
+{
+	ft_putstr_fd("\e[s", STDOUT_FILENO);
+}
+
 int	main(int ac, char *av[], char *envp[])
 {
 	char	*str;
@@ -43,6 +48,7 @@ int	main(int ac, char *av[], char *envp[])
 	(void)ac;
 	(void)av;
 	build_envp(&pack, envp);
+	rl_event_hook = (rl_hook_func_t *)update_cursor;
 	while (42)
 	{
 		str = get_line(PROMPT);

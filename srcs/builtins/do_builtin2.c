@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:05 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/22 18:06:03 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/22 19:50:54 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	do_env(char **args, t_env_pack *pack)
 
 void	b_exit(int code)
 {
-	ft_printf("exit\n");
+	ft_putstr_fd("\e[u\e[B\e[Aexit\n", 1);
 	exit(code);
 }
 
