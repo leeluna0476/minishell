@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:19 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/21 08:09:28 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:46:57 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ void	write_heredoc(t_redir *redir, t_env_pack *pack, int inf_fd)
 	{
 		if (input)
 			heredoc_expander(inf_fd, input, pack, q_flag);
-		write(1, "here_doc>", 10);
+		ft_printf("here_doc> ");
+//		write(1, "here_doc> ", 10);
 		input = get_next_line(0);
 		if (!input || !ft_strncmp(input, redir->filename[1], l_len + 1))
 			break ;
