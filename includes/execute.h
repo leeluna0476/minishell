@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:36 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/22 09:29:10 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:12:06 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 # include "exec_structures.h"
 # include "utils.h"
 
-# define PROMPT "\0337minishell> "
-# define EOF_EXIT() { ft_printf("\0338\033[%dCexit\n", 11); exit(0); }
+# define PROMPT "minishell> \0337"
+# define EOF_EXIT() { ft_printf("\0338\033Mexit\n"); exit(0); }
 
 // execute.c
 void	execute(t_ast *tree, t_env_pack *pack, t_info *info);

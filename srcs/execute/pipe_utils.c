@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:07:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 07:27:02 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/22 11:31:48 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 void	set_fds(t_cmd *cmd, t_info *info)
 {
+	info->redir_fds[0] = 0;
+	info->redir_fds[1] = 1;
 	if (cmd->in_redirs)
 		info->redir_fds[0] = open(cmd->in_redirs->filename[1], O_RDONLY);
 	else
@@ -67,6 +69,8 @@ void	ft_wait(t_info *info, t_env_pack *pack)
 	}
 	info->fork_num = 0;
 	info->last_pid = 0;
+	if (info->prev_fd)
+		close(info->prev_fd);
 	exit_code = ft_itoa(info->exit_status);
 	add_env_node(pack, "?", exit_code);
 	free(exit_code);
