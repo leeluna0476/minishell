@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:05 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/22 17:53:06 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/22 18:06:03 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,12 @@ int	do_env(char **args, t_env_pack *pack)
 }
 // env구현함수, bash에 출력에 맞게 출력해주면 된다.
 
+void	b_exit(int code)
+{
+	ft_printf("exit\n");
+	exit(code);
+}
+
 int	do_exit(char **args, t_env_pack *pack)
 {
 	int	args_len;
@@ -103,10 +109,10 @@ int	do_exit(char **args, t_env_pack *pack)
 			ft_putstr_fd(": ", STDERR_FILENO);
 			ft_putstr_fd(args[1], STDERR_FILENO);
 			ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
-			B_EXIT(255);
+			b_exit(255);
 		}
 		else
-			B_EXIT(ft_atoi(args[1]) % 256);
+			b_exit(ft_atoi(args[1]) % 256);
 	}
 	ft_putstr_fd(args[0], STDERR_FILENO);
 	ft_putstr_fd(": too many arguments\n", STDERR_FILENO);

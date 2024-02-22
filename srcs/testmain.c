@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/22 16:53:36 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/22 18:07:03 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	main(int ac, char *av[], char *envp[])
 		}
 		free(str);
 	}
-	EOF_EXIT();
+	b_exit(0);
 }
 //	print_ast(ast);
 //	system("leaks -q minishell");
