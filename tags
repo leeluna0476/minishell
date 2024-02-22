@@ -16,6 +16,7 @@ B_ECHO	includes/exec_structures.h	/^	B_ECHO,$/;"	e	enum:e_b_type
 B_ECHO	includes/structures.h	/^	B_ECHO,$/;"	e	enum:e_b_type
 B_ENV	includes/exec_structures.h	/^	B_ENV,$/;"	e	enum:e_b_type
 B_ENV	includes/structures.h	/^	B_ENV,$/;"	e	enum:e_b_type
+B_EXIT	includes/builtin.h	/^# define B_EXIT(/;"	d
 B_EXIT	includes/exec_structures.h	/^	B_EXIT$/;"	e	enum:e_b_type
 B_EXIT	includes/structures.h	/^	B_EXIT$/;"	e	enum:e_b_type
 B_EXPORT	includes/exec_structures.h	/^	B_EXPORT,$/;"	e	enum:e_b_type
@@ -28,17 +29,19 @@ B_UNSET	includes/exec_structures.h	/^	B_UNSET,$/;"	e	enum:e_b_type
 B_UNSET	includes/structures.h	/^	B_UNSET,$/;"	e	enum:e_b_type
 CC	Makefile	/^CC=cc$/;"	m
 CC	srcs/libft/Makefile	/^CC=cc$/;"	m
-CFLAGS	Makefile	/^CFLAGS=-I.\/includes$/;"	m
+CFLAGS	Makefile	/^CFLAGS=-Wextra -Wall -Werror -I.\/includes$/;"	m
 CFLAGS	srcs/libft/Makefile	/^CFLAGS=-Wall -Wextra -Werror$/;"	m
 DIR_HEADER	srcs/libft/Makefile	/^DIR_HEADER=.\/$/;"	m
 DIR_SRCS	srcs/libft/Makefile	/^DIR_SRCS=.\/$/;"	m
 ENV_H	includes/env.h	/^# define ENV_H$/;"	d
+EOF_EXIT	includes/execute.h	/^# define EOF_EXIT(/;"	d
 EXECUTE_H	includes/execute.h	/^# define EXECUTE_H$/;"	d
 EXEC_STRUCTURES_H	includes/exec_structures.h	/^# define EXEC_STRUCTURES_H$/;"	d
 EXPAND_H	includes/expand.h	/^# define EXPAND_H$/;"	d
 FT_PRINTF_H	srcs/libft/ft_printf.h	/^# define FT_PRINTF_H$/;"	d
 GET_NEXT_LINE_H	srcs/libft/get_next_line.h	/^# define GET_NEXT_LINE_H$/;"	d
 HEADER	srcs/libft/Makefile	/^HEADER=libft.h$/;"	m
+HEADERS	Makefile	/^HEADERS= .\/includes\/env.h \\$/;"	m
 HEADERS_DIR	Makefile	/^HEADERS_DIR=.\/includes\/$/;"	m
 INDEX	srcs/libft/libft.h	/^# define INDEX	/;"	d
 JNDEX	srcs/libft/libft.h	/^# define JNDEX	/;"	d
@@ -55,6 +58,7 @@ PARSE_DEFINE_H	includes/parse_define.h	/^# define PARSE_DEFINE_H$/;"	d
 PARSE_STRUCT_H	includes/parse_struct.h	/^# define PARSE_STRUCT_H$/;"	d
 PRINTF_OBJS	srcs/libft/Makefile	/^PRINTF_OBJS=$(PRINTF_SRCS:.c=.o)$/;"	m
 PRINTF_SRCS	srcs/libft/Makefile	/^PRINTF_SRCS=ft_printf.c ft_printf2.c$/;"	m
+PROMPT	includes/execute.h	/^# define PROMPT /;"	d
 REDIRECTION_H	includes/redirection.h	/^# define REDIRECTION_H$/;"	d
 RM	Makefile	/^RM=rm -fr$/;"	m
 RM	srcs/libft/Makefile	/^RM=rm -fr$/;"	m
@@ -201,7 +205,6 @@ ft_bzero	srcs/libft/ft_bzero.c	/^void	ft_bzero(void *s, size_t n)$/;"	f
 ft_calloc	srcs/libft/ft_calloc.c	/^void	*ft_calloc(size_t count, size_t size)$/;"	f
 ft_dup2	srcs/execute/pipe_utils.c	/^void	ft_dup2(t_info *info)$/;"	f
 ft_execve	srcs/execute/execute_utils2.c	/^void	ft_execve(t_cmd *cmd, t_env_pack *envs)$/;"	f
-ft_exit	srcs/builtins/do_builtin2.c	/^void	ft_exit(uint8_t code)$/;"	f
 ft_free_all	srcs/libft/ft_split.c	/^static char	**ft_free_all(char **strings)$/;"	f	file:
 ft_isalnum	srcs/libft/ft_isalnum.c	/^int	ft_isalnum(int c)$/;"	f
 ft_isalpha	srcs/libft/ft_isalpha.c	/^int	ft_isalpha(int c)$/;"	f

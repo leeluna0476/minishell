@@ -36,16 +36,16 @@ SRCS = ./srcs/envs/build_env_pack.c \
 		./srcs/testmain.c
 
 
-#HEADERS= ./includes/env.h \
-#		 ./includes/utils.h \
-#		 ./includes/expand.h \
-#		 ./includes/parser.h \
-#		 ./includes/builtin.h \
-#		 ./includes/execute.h \
-#		 ./includes/tokenizer.h \
-#		 ./includes/structures.h \
-#		 ./includes/redirection.h \
-#		 ./includes/exec_structures.h
+HEADERS= ./includes/env.h \
+		 ./includes/utils.h \
+		 ./includes/expand.h \
+		 ./includes/parser.h \
+		 ./includes/builtin.h \
+		 ./includes/execute.h \
+		 ./includes/tokenizer.h \
+		 ./includes/structures.h \
+		 ./includes/redirection.h \
+		 ./includes/exec_structures.h
 
 OBJS=$(SRCS:.c=.o)
 
@@ -55,7 +55,7 @@ $(NAME): $(OBJS)
 	make -C ./srcs/libft
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -lft -L./srcs/libft/ -lreadline
 
-#$(OBJS): $(SRCS)
+$(OBJS): $(SRCS) $(HEADERS)
 
 clean:
 	make clean -C ./srcs/libft

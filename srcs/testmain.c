@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/21 22:00:55 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/22 09:16:34 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,32 +46,30 @@ int	main(int ac, char *av[], char *envp[])
 	while (42)
 	{
 		str = get_line(PROMPT);
-		if (str)
+		if (!str)
+			break ;
+		if (str[0])
+			add_history(str);
+		tokens = tokenizer(str);
+		if (tokens)
 		{
-			if (str[0])
-				add_history(str);
-			tokens = tokenizer(str);
-			if (tokens)
+			ast = init_ast(tokens);
+			generate_ast(&ast, ast->start, ast->end);
+			if (!(ast->error))
 			{
-				ast = init_ast(tokens);
-				generate_ast(&ast, ast->start, ast->end);
-				if (!(ast->error))
-				{
-					set_info(&info);
-					execute(ast, &pack, &info);
-					while (waitpid(-1, NULL, WNOHANG) != -1);
-				}
-				else
-					syntax_error_parser(ast->error, &tokens);
-				free_tokens(&tokens);
-
-				free_ast(&ast);
+				set_info(&info);
+				execute(ast, &pack, &info);
+				while (waitpid(-1, NULL, WNOHANG) != -1);
 			}
-			free(str);
+			else
+				syntax_error_parser(ast->error, &tokens);
+			free_tokens(&tokens);
+
+			free_ast(&ast);
 		}
-		else
-			EOF_EXIT();
+		free(str);
 	}
+	EOF_EXIT();
 }
 //	print_ast(ast);
 //	system("leaks -q minishell");

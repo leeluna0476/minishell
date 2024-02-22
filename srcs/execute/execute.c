@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/21 19:48:05 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/22 08:00:14 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)
 	else
 		execute(tree->left, pack, info);
 	if ((tree->type == T_AND && get_exitstat(pack)) || \
-		(tree->type == T_OR && get_exitstat(pack)))
+		(tree->type == T_OR && !get_exitstat(pack)))
 		return ;
 	if (tree->right->type >= T_WORD && tree->right->type <= T_D_GREATER)
 	{
