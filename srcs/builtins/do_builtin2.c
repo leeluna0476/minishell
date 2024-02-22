@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_builtin2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:05 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/21 22:06:31 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:38:50 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	do_env(char **args, t_env_pack *pack)
 		ft_printf("%s: %s: No such file or directory\n");
 		return (127);
 	}
-	temp = pack->origin_head;
+	temp = pack->origin_head->origin_next;
 	while (temp)
 	{
 		ft_printf("%s=", temp->name);
