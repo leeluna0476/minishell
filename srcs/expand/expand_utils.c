@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 14:57:36 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/21 19:50:39 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:03:16 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*find_env_name(char *ptr)
 	int		i;
 
 	i = 1;
-	if (ft_isdigit(ptr[i]))
+	if (ft_isdigit(ptr[i]) || ptr[i] == '?')
 		return (ft_substr(ptr, 0, i + 1));
 	while (ptr[i])
 	{
