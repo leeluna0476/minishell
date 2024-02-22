@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/20 14:23:38 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:24:11 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,48 +149,3 @@ char	**expand_wildcard(char *arg)
 	}
 	return (args);
 }
-
-//// expanded_arg가 NULL이라면 기존 문자열 그대로 가져가야 됨.
-//int	main(int ac, char *av[], char *envp[])
-//{
-//	char	**expanded_arg;
-//	char	**final_arg;
-//	pid_t	pid;
-//
-//	(void)ac;
-//	(void)av;
-//	(void)envp;
-//	expanded_arg = expand_wildcard("*");
-//
-//	if (expanded_arg)
-//	{
-//		final_arg = NULL;
-//		final_arg = add_str(final_arg, ft_strdup("ls"));
-//		final_arg = add_str(final_arg, ft_strdup("-Ga"));
-//
-//		int	i = 0;
-//		while (expanded_arg[i])
-//		{
-//			final_arg = add_str(final_arg, ft_strdup(expanded_arg[i]));
-//			free(expanded_arg[i]);
-//			i++;
-//		}
-//		free(expanded_arg);
-//
-//		pid = fork();
-//		if (pid == 0)
-//			execve("/bin/ls", final_arg, envp);
-//		else
-//			wait(NULL);
-//		i = 0;
-//		while (final_arg[i])
-//		{
-//			free(final_arg[i]);
-//			i++;
-//		}
-//		free(final_arg);
-//	}
-//	else
-//		ft_printf("no matches found: %s\n", "*.a");
-//	system("leaks -q a.out");
-//}
