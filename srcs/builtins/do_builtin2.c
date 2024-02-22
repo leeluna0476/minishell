@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:05 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/22 16:38:50 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/22 17:53:06 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,14 @@ int	do_export(char **args, t_env_pack *pack)
 			*addr = '=';
 		}
 		else
+		{
+			if (check_env_name(args, idx_n_res[0]))
+			{
+				idx_n_res[1] = 1;
+				continue ;
+			}
 			add_env_node(pack, args[idx_n_res[0]], 0);
+		}
 	}
 	return (idx_n_res[1]);
 }

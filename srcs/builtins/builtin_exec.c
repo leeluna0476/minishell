@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:28 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/21 18:28:06 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:16:56 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	exec_builtin(char **args, t_env_pack *pack)
 	if (i == -1)
 		return (i);
 	result = ft_itoa(f_ptr_list[i](args, pack));
+	ft_printf("builtin result: [%s]\n", result);
 	add_env_node(pack, "?", result);
 	free(result);
 	return (0);

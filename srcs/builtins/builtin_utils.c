@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:24 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/22 16:38:23 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/22 17:18:53 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	print_export(t_env_pack *pack)
 {
 	t_env	*temp;
 
-	temp = pack->sorted_head->origin_next;
+	temp = pack->sorted_head->sorted_next;
 	while (temp)
 	{
 		ft_printf("declare -x %s", temp->name);
@@ -38,6 +38,8 @@ int	check_env_name(char **args, int i)
 {
 	int	idx;
 
+	if (!*args[i])
+		*args[i] = '=';
 	if (ft_isdigit(*args[i]))
 	{
 		ft_putstr_fd("minishell: export: '", STDERR_FILENO);
