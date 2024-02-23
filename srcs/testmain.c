@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/23 13:59:00 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/23 16:12:56 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,38 @@ void	set_parse_exit(t_env_pack *pack, int code)
 	free(exit_code_str);
 }
 
+void	run_minishell(char *str, t_env_pack *pack)
+{
+	t_token	*tokens;
+	t_ast	*ast;
+	t_info	info;
+
+	tokens = tokenizer(str);
+	if (tokens)
+	{
+		ast = init_ast(tokens);
+		generate_ast(&ast, ast->start, ast->end);
+		if (!(ast->error))
+		{
+			set_info(&info);
+			execute(ast, pack, &info);
+		}
+		else
+		{
+			syntax_error_parser(ast->error, &tokens);
+			set_parse_exit(pack, 258);
+		}
+		free_tokens(&tokens);
+		free_ast(&ast);
+	}
+	else
+		set_parse_exit(pack, 258);
+}
+
 int	main(int ac, char *av[], char *envp[])
 {
 	char	*str;
-	t_token	*tokens;
-	t_ast	*ast;
 	t_env_pack	pack;
-	t_info		info;
 
 	(void)ac;
 	(void)av;
@@ -66,31 +91,10 @@ int	main(int ac, char *av[], char *envp[])
 			break ;
 		if (str[0])
 			add_history(str);
-		tokens = tokenizer(str);
-		if (tokens)
-		{
-			ast = init_ast(tokens);
-			generate_ast(&ast, ast->start, ast->end);
-			if (!(ast->error))
-			{
-				set_info(&info);
-				execute(ast, &pack, &info);
-			}
-			else
-			{
-				syntax_error_parser(ast->error, &tokens);
-				set_parse_exit(&pack, 258);
-			}
-			free_tokens(&tokens);
-			free_ast(&ast);
-		}
-		else
-			set_parse_exit(&pack, 258);
+		run_minishell(str, &pack);
 		free(str);
-		// system("leaks minishell");
 	}
 	ft_putstr_fd("\e8\e[B\e[Aexit\n", STDOUT_FILENO);
 	return (get_exitstat(&pack));
 }
 //	print_ast(ast);
-//	system("leaks -q minishell");
