@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:36 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/22 20:13:41 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:01:25 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info);
 void	execute_pipe(t_ast *tree, t_env_pack *pack, t_info *info, int level);
 void	do_execution(t_ast *tree, t_env_pack *pack, t_info *info);
 void	execute_cmd(t_cmd *cmd, t_env_pack *envs, t_info *info);
+int		get_exitstat(t_env_pack *pack);
+
 
 // execute_utils.c
 char	**make_envp(t_env_pack *envs);
