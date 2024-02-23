@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:55 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 13:09:53 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/23 14:27:02 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "exec_structures.h"
 # include "utils.h"
-# define TEMP_FILENAME "/Users/yusekim/goinfre/heredoc_tmp"
+# define TEMP_FILENAME ".heredoc_tmp"
 # define HEREDOC "여기문서> "
 
 // redirections.c
