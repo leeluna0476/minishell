@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/23 12:29:43 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:59:00 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,10 @@ int	main(int ac, char *av[], char *envp[])
 		{
 			ast = init_ast(tokens);
 			generate_ast(&ast, ast->start, ast->end);
-			set_parse_exit(&pack, 0);
 			if (!(ast->error))
 			{
 				set_info(&info);
 				execute(ast, &pack, &info);
-				while (waitpid(-1, NULL, WNOHANG) != -1);
 			}
 			else
 			{
@@ -84,7 +82,6 @@ int	main(int ac, char *av[], char *envp[])
 				set_parse_exit(&pack, 258);
 			}
 			free_tokens(&tokens);
-
 			free_ast(&ast);
 		}
 		else

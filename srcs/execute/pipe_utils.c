@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:07:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/22 17:14:00 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/23 12:42:02 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,19 @@ void	ft_dup2(t_info *info)
 		close(info->pipe_fds[0]);
 	if (info->pipe_fds[1] != 1)
 		close(info->pipe_fds[1]);
+}
+
+void	exec_parent(t_info *info)
+{
+	if (info->redir_fds[0] > 2)
+		close(info->redir_fds[0]);
+	if (info->redir_fds[1] > 2)
+		close(info->redir_fds[1]);
+	if (info->fork_num != 0 && info->prev_fd)
+		close(info->prev_fd);
+	if (info->pipe_fds[1] != 1)
+		close(info->pipe_fds[1]);
+	info->prev_fd = info->pipe_fds[0];
 }
 
 void	ft_wait(t_info *info, t_env_pack *pack)
