@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 13:03:15 by youwin0802        #+#    #+#             */
-/*   Updated: 2024/02/22 10:55:54 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/23 11:06:17 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,12 @@ void	exec_parent(t_info *info)
 	if (info->pipe_fds[1] != 1)
 		close(info->pipe_fds[1]);
 	info->prev_fd = info->pipe_fds[0];
+}
+
+int	get_exitstat(t_env_pack *pack)
+{
+	t_env	*target_node;
+
+	target_node = find_env("?", pack);
+	return (ft_atoi(target_node->value));
 }

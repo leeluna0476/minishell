@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:22 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/22 16:34:22 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/23 10:23:36 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,3 +80,35 @@ int	do_pwd(char **args, t_env_pack *pack)
 	return (0);
 }
 // pwd, getcwd함수를 쓰면 바로 가져올 수 있다
+
+int	do_exit(char **args, t_env_pack *pack)
+{
+	int	args_len;
+
+	(void)pack;
+	args_len = split_len(args);
+	// 그냥 exit도 exit이 되도록. 검수 필요.
+	if (args_len <= 2)
+	{
+		if (check_sign(args[1]))
+		{
+			ft_putstr_fd(args[0], STDERR_FILENO);
+			ft_putstr_fd(": ", STDERR_FILENO);
+			ft_putstr_fd(args[1], STDERR_FILENO);
+			ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+			b_exit(255);
+		}
+		else
+			b_exit(ft_atoi(args[1]) % 256);
+	}
+	ft_putstr_fd(args[0], STDERR_FILENO);
+	ft_putstr_fd(": too many arguments\n", STDERR_FILENO);
+	return (1);
+}
+// exit해주는 함수 bash의 동작과 맞춰주었다..
+
+void	b_exit(int code)
+{
+	ft_putstr_fd("exit\n", STDOUT_FILENO);
+	exit(code);
+}

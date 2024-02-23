@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:24 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/22 17:18:53 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/23 10:43:20 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,46 +14,24 @@
 #include "builtin.h"
 #include "execute.h"
 
-//int	is_space(char c);
-
-int	print_export(t_env_pack *pack)
-{
-	t_env	*temp;
-
-	temp = pack->sorted_head->sorted_next;
-	while (temp)
-	{
-		ft_printf("declare -x %s", temp->name);
-		if (temp->value)
-			ft_printf("=\"%s\"\n", temp->value);
-		else
-			ft_printf("\n");
-		temp = temp->sorted_next;
-	}
-	return (0);
-}
-// 인자가 없는 export를 입력하였을때 bash의 출력에 맞춰 출력해준다.
-
-int	check_env_name(char **args, int i)
+int	check_env_name(char *name)
 {
 	int	idx;
 
-	if (!*args[i])
-		*args[i] = '=';
-	if (ft_isdigit(*args[i]))
+	if (ft_isdigit(*name))
 	{
 		ft_putstr_fd("minishell: export: '", STDERR_FILENO);
-		ft_putstr_fd(args[i], STDERR_FILENO);
+		ft_putstr_fd(name, STDERR_FILENO);
 		ft_putstr_fd("': not a vaild identifier\n", STDERR_FILENO);
 		return (1);
 	}
 	idx = 0;
-	while (args[i][idx])
+	while (name && name[idx])
 	{
-		if (!(ft_isalnum(args[i][idx]) || args[i][idx] == '_'))
+		if (!(ft_isalnum(name[idx]) || name[idx] == '_'))
 		{
 			ft_putstr_fd("minishell: export: '", STDERR_FILENO);
-			ft_putstr_fd(args[i], STDERR_FILENO);
+			ft_putstr_fd(name[idx], STDERR_FILENO);
 			ft_putstr_fd("': not a vaild identifier\n", STDERR_FILENO);
 			return (1);
 		}
@@ -61,8 +39,6 @@ int	check_env_name(char **args, int i)
 	}
 	return (0);
 }
-// 환경변수 이름 생성시의 규칙을 체크하는 함수
-// 환경변수명이 숫자로 시작하지 않아야하고, 알파벳, 숫자, 그리고 '_'문자만이 이름에 포함될 수 있다.
 
 int	check_res(int res, t_env_pack *pack, char *path, char **args)
 {
@@ -120,10 +96,3 @@ void	builtin_fd_set(int *in_fd, int *out_fd, int *std_fd)
 	std_fd[1] = 1;
 }
 // 나는 놈이 싫다2..
-
-//int	is_space(char c)
-//{
-//	if (c != '\n' && (c == ' ' || (c >= '\t' && c <= '\r')))
-//		return (1);
-//	return (0);
-//}	// 서진님 코드 훔치기..히히

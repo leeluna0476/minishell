@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 10:02:36 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/23 11:05:24 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,6 @@ void	execute(t_ast *tree, t_env_pack *pack, t_info *info)
 
 }
 // 재귀. 깊이우선탐색. 왼쪽부터 순회.
-
-int	get_exitstat(t_env_pack *pack)
-{
-	t_env	*target_node;
-
-	target_node = find_env("?", pack);
-	return (ft_atoi(target_node->value));
-}
 
 void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)
 {
