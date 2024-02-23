@@ -6,15 +6,17 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:55 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/22 10:23:27 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:00:57 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef REDIRECTION_H
 # define REDIRECTION_H
+
 # include "exec_structures.h"
 # include "utils.h"
 # define TEMP_FILENAME "/Users/seojilee/goinfre/heredoc_tmp"
+# define HEREDOC "여기문서> "
 
 // redirections.c
 void	append_redir(t_cmd **cmd, t_type type, char **fileinfo);

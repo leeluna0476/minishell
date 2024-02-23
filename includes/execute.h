@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:36 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 11:01:25 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:00:44 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "exec_structures.h"
 # include "utils.h"
 
-# define PROMPT "minishell> "
+# define PROMPT "미니쉘$ "
 
 // execute.c
 void	execute(t_ast *tree, t_env_pack *pack, t_info *info);
