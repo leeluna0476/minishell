@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:24:18 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/23 19:19:15 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/23 19:46:19 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_token	*tokenizer(char *line)
 	t_type		type;
 
 	list = NULL;
-	i = remove_space(line);
+	i = 0;
 	while (line[i])
 	{
 		if (is_meta1(line[i]))

@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/23 17:29:09 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/23 19:54:02 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,7 @@
 #include "redirection.h"
 #include "parse_struct.h"
 #include "parse_define.h"
-#include <readline/readline.h>
-#include <readline/history.h>
 #include "signal_handler.h"
-#include <fcntl.h>
-#include <unistd.h>
 
 void	set_info(t_info *info)
 {
@@ -47,12 +43,19 @@ void	set_exit(t_env_pack *pack, int code)
 	free(exit_code_str);
 }
 
+void	free_inputs(t_token **tokens, t_ast **ast)
+{
+	free_tokens(tokens);
+	free_ast(ast);
+}
+
 void	run_minishell(char *str, t_env_pack *pack)
 {
 	t_token	*tokens;
 	t_ast	*ast;
 	t_info	info;
 
+	str += remove_space(str);
 	tokens = tokenizer(str);
 	if (tokens)
 	{
@@ -68,13 +71,13 @@ void	run_minishell(char *str, t_env_pack *pack)
 			syntax_error_parser(ast->error, &tokens);
 			set_exit(pack, 258);
 		}
-		free_tokens(&tokens);
-		free_ast(&ast);
+		free_inputs(&tokens, &ast);
 	}
-	else
+	else if (!tokens && *str)
 		set_exit(pack, 258);
 }
 
+//	print_ast(ast);
 int	main(int ac, char *av[], char *envp[])
 {
 	char	*str;
@@ -99,4 +102,3 @@ int	main(int ac, char *av[], char *envp[])
 	ft_putstr_fd("\e8\e[B\e[Aexit\n", STDOUT_FILENO);
 	return (get_exitstat(&pack));
 }
-//	print_ast(ast);
