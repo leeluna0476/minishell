@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:05 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 16:51:30 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/23 16:55:54 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,7 @@ int	do_env(char **args, t_env_pack *pack)
 {
 	t_env	*temp;
 
-	if (split_len(args) > 1)
-	{
-		ft_putstr_fd("미니쉘: env: ", STDERR_FILENO);
-		ft_putstr_fd(args[1], STDERR_FILENO);
-		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
-		return (127);
-	}
+	(void)args;
 	temp = pack->origin_head->origin_next;
 	while (temp)
 	{
