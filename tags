@@ -41,6 +41,7 @@ GET_NEXT_LINE_H	srcs/libft/get_next_line.h	/^# define GET_NEXT_LINE_H$/;"	d
 HEADER	srcs/libft/Makefile	/^HEADER=libft.h$/;"	m
 HEADERS	Makefile	/^HEADERS= .\/includes\/env.h \\$/;"	m
 HEADERS_DIR	Makefile	/^HEADERS_DIR=.\/includes\/$/;"	m
+HEREDOC	includes/redirection.h	/^# define HEREDOC /;"	d
 INDEX	srcs/libft/libft.h	/^# define INDEX	/;"	d
 JNDEX	srcs/libft/libft.h	/^# define JNDEX	/;"	d
 KNDEX	srcs/libft/libft.h	/^# define KNDEX	/;"	d
@@ -92,7 +93,6 @@ T_SPACE	includes/structures.h	/^	T_SPACE,			\/\/ 공백문자(보통 space)$/;"	
 T_WORD	includes/exec_structures.h	/^	T_WORD,				\/\/ 문자$/;"	e	enum:e_type
 T_WORD	includes/structures.h	/^	T_WORD,				\/\/ 문자$/;"	e	enum:e_type
 UTILS_H	includes/utils.h	/^# define UTILS_H$/;"	d
-add_cmd	srcs/parse/pipeline.c	/^void	add_cmd(t_cmd **list, t_cmd *cmd)$/;"	f
 add_env_node	srcs/envs/build_env_pack.c	/^void	add_env_node(t_env_pack *pack, char *name, char *value)$/;"	f
 add_sorted_node	srcs/envs/build_env_pack.c	/^void	add_sorted_node(t_env **sorted_head, t_env *new)$/;"	f
 add_split	srcs/expand/expand_utils.c	/^void	add_split(t_c_expand *expand, char **split, int split_len, int idx)$/;"	f
@@ -103,10 +103,9 @@ all_redirs	includes/exec_structures.h	/^	t_redir		*all_redirs;	\/\/ 해당 커�
 all_redirs	includes/structures.h	/^	t_redir		*all_redirs;	\/\/ 해당 커맨드 블럭(pipe로 구분됨)의 모든 리다이렉션을 기록한 연결리스트, 실행부로 들어올 때, 모든 cmd_pack 구조체의 리다이렉션을 훑고 파일들을 열어야한다$/;"	m	struct:s_cmd_pack
 appand_string	srcs/expand/expand_utils.c	/^char	*appand_string(char *result, char *original, int *start, int end)$/;"	f
 append_exp_ptr	srcs/expand/expand_utils.c	/^void	append_exp_ptr(t_c_expand *expand, t_exp_pair *newpair)$/;"	f
-append_redir	srcs/execute/redirections.c	/^void	append_redir(t_cmd **cmd, t_type type, char **fileinfo)$/;"	f
 append_redir	srcs/execute/redirections/redirections.c	/^void	append_redir(t_cmd **cmd, t_type type, char **fileinfo)$/;"	f
 b_check_redir	srcs/builtins/builtin_exec.c	/^void	b_check_redir(t_cmd *cur, int *std_fd, int *in_fd, int *out_fd)$/;"	f
-b_exit	srcs/builtins/do_builtin2.c	/^void	b_exit(int code)$/;"	f
+b_exit	srcs/builtins/do_builtin.c	/^void	b_exit(int code)$/;"	f
 buf_check_n_join	srcs/libft/get_next_line.c	/^char	*buf_check_n_join(char *newline, char *buf, int *ret)$/;"	f
 build_cmd_pack	srcs/execute/execute_utils2.c	/^t_cmd	*build_cmd_pack(t_ast *tree, t_env_pack *pack)$/;"	f
 build_envp	srcs/envs/build_env_pack.c	/^void	build_envp(t_env_pack *pack, char **envp)$/;"	f
@@ -118,11 +117,12 @@ c_args	includes/structures.h	/^	char		**c_args;		\/\/ builtin\/systemcall, argum
 check_bracket	srcs/parse/bracket.c	/^t_token	*check_bracket(t_token *start, t_token *end)$/;"	f
 check_center_error	srcs/parse/check_ast_error.c	/^void	check_center_error(t_ast *ast, t_token *center)$/;"	f
 check_end	srcs/parse/wildcard.c	/^int	check_end(char *filename, char *pattern, t_mark mark, int i)$/;"	f
-check_env_name	srcs/builtins/builtin_utils.c	/^int	check_env_name(char **args, int i)$/;"	f
+check_env_name	srcs/builtins/builtin_utils.c	/^int	check_env_name(char *name)$/;"	f
 check_error	srcs/parse/check_ast_error.c	/^int	check_error(t_ast *ast)$/;"	f
 check_front_center	srcs/parse/wildcard.c	/^int	check_front_center(char *filename, char *pattern, t_mark *mark, int i)$/;"	f
 check_if_single_pair	srcs/parse/bracket.c	/^int	check_if_single_pair(t_token *start, t_token *end)$/;"	f
 check_is_builtin	srcs/builtins/builtin_exec.c	/^enum e_b_type	check_is_builtin(char *arg)$/;"	f
+check_n_add	srcs/builtins/do_builtin2.c	/^void	check_n_add(t_env_pack *pack, char *arg, char *ptr, int *res)$/;"	f
 check_pipe_in_bracket	srcs/parse/bracket.c	/^t_token	*check_pipe_in_bracket(t_token *start, t_token *end)$/;"	f
 check_redirection_error	srcs/parse/check_ast_error.c	/^void	check_redirection_error(t_ast *ast)$/;"	f
 check_remain	srcs/libft/get_next_line.c	/^int	check_remain(char *remain, char **newline)$/;"	f
@@ -134,17 +134,15 @@ count_words	srcs/libft/ft_split.c	/^static size_t	count_words(char const *str, c
 delete_env	srcs/envs/env_utils.c	/^void	delete_env(char *name, t_env_pack *package)$/;"	f
 delete_quotes	srcs/expand/expand.c	/^void	delete_quotes(t_c_expand *exp)$/;"	f
 depths	includes/exec_structures.h	/^	int			depths;				\/\/ 현재 몇 번째 가지(재귀)에 있는지 확인용$/;"	m	struct:s_info
-detact_exitcode	srcs/execute/redir_utils.c	/^int	detact_exitcode(int temp)$/;"	f
 detact_exitcode	srcs/execute/redirections/redir_utils.c	/^int	detact_exitcode(int temp)$/;"	f
 detact_f	srcs/libft/ft_printf.c	/^int	detact_f(char *format, va_list ap)$/;"	f
 do_cd	srcs/builtins/do_builtin.c	/^int	do_cd(char **args, t_env_pack *pack)$/;"	f
 do_echo	srcs/builtins/do_builtin.c	/^int	do_echo(char **args, t_env_pack *pack)$/;"	f
 do_env	srcs/builtins/do_builtin2.c	/^int	do_env(char **args, t_env_pack *pack)$/;"	f
 do_execution	srcs/execute/execute.c	/^void	do_execution(t_ast *tree, t_env_pack *pack, t_info *info)$/;"	f
-do_exit	srcs/builtins/do_builtin2.c	/^int	do_exit(char **args, t_env_pack *pack)$/;"	f
+do_exit	srcs/builtins/do_builtin.c	/^int	do_exit(char **args, t_env_pack *pack)$/;"	f
 do_expand	srcs/expand/do_expand.c	/^void	do_expand(t_c_expand *expand, t_env_pack *pack, int flag)$/;"	f
 do_export	srcs/builtins/do_builtin2.c	/^int	do_export(char **args, t_env_pack *pack)$/;"	f
-do_heredoc	srcs/execute/do_heredoc.c	/^int	do_heredoc(t_redir *temp, char *f_name, t_env_pack *pack)$/;"	f
 do_heredoc	srcs/execute/redirections/do_heredoc.c	/^int	do_heredoc(t_redir *temp, char *f_name, t_env_pack *pack)$/;"	f
 do_pwd	srcs/builtins/do_builtin.c	/^int	do_pwd(char **args, t_env_pack *pack)$/;"	f
 do_unset	srcs/builtins/do_builtin2.c	/^int	do_unset(char **args, t_env_pack *pack)$/;"	f
@@ -155,13 +153,12 @@ e_type	includes/structures.h	/^enum	e_type$/;"	g
 end	includes/exec_structures.h	/^	struct s_token	*end;$/;"	m	struct:s_ast	typeref:struct:s_ast::s_token
 end	includes/parse_struct.h	/^	int	end;$/;"	m	struct:s_mark
 end	includes/structures.h	/^	struct s_token	*end;$/;"	m	struct:s_ast	typeref:struct:s_ast::s_token
-end	srcs/parse/pipeline.c	/^	t_token	*end;$/;"	m	struct:s_cmd	file:
 envp	includes/exec_structures.h	/^	char	**envp;			\/\/ 이중 캐릭터 포인터, 실행부에서 execve할때 넘겨줘야함, 만약 추가되거나 제거된 환경변수가 있으면 그걸 적용하기 위해 export\/unset할때 알맞게 업데이트해야함$/;"	m	struct:s_env_pack
 envp	includes/structures.h	/^	char	**envp;			\/\/ 이중 캐릭터 포인터, 실행부에서 execve할때 넘겨줘야함, 만약 추가되거나 제거된 환경변수가 있으면 그걸 적용하기 위해 export\/unset할때 알맞게 업데이트해야함$/;"	m	struct:s_env_pack
 error	includes/exec_structures.h	/^	char			*error;$/;"	m	struct:s_ast
 error	includes/structures.h	/^	char			*error;$/;"	m	struct:s_ast
 exec_builtin	srcs/builtins/builtin_exec.c	/^int	exec_builtin(char **args, t_env_pack *pack)$/;"	f
-exec_parent	srcs/execute/execute_utils.c	/^void	exec_parent(t_info *info)$/;"	f
+exec_parent	srcs/execute/pipe_utils.c	/^void	exec_parent(t_info *info)$/;"	f
 execute	srcs/execute/execute.c	/^void	execute(t_ast *tree, t_env_pack *pack, t_info *info)$/;"	f
 execute_cmd	srcs/execute/execute.c	/^void	execute_cmd(t_cmd *cmd, t_env_pack *envs, t_info *info)$/;"	f
 execute_pipe	srcs/execute/execute.c	/^void	execute_pipe(t_ast *tree, t_env_pack *pack, t_info *info, int level)$/;"	f
@@ -261,7 +258,7 @@ g_status	srcs/parse/signal.c	/^volatile sig_atomic_t	g_status = 0;$/;"	v
 generate_ast	srcs/parse/ast.c	/^void	generate_ast(t_ast **ast, t_token *start, t_token *end)$/;"	f
 get_bracket_flag	srcs/parse/bracket.c	/^int	get_bracket_flag(t_token **start, t_token **end, \\$/;"	f
 get_center	srcs/parse/center.c	/^t_token	*get_center(t_ast *ast, t_token *start, t_token *end)$/;"	f
-get_exitstat	srcs/execute/execute.c	/^int	get_exitstat(t_env_pack *pack)$/;"	f
+get_exitstat	srcs/execute/execute_utils.c	/^int	get_exitstat(t_env_pack *pack)$/;"	f
 get_len	srcs/libft/ft_itoa.c	/^static void	get_len(int nb, int *len, int *sign)$/;"	f	file:
 get_line	srcs/parse/signal.c	/^char	*get_line(char *prompt)$/;"	f
 get_logical_exp	srcs/parse/center.c	/^t_token	*get_logical_exp(t_ast *ast, t_token *start, t_token *end)$/;"	f
@@ -276,15 +273,13 @@ gnl_memcpy	srcs/libft/get_next_line_utils.c	/^void	*gnl_memcpy(void *dst, void *
 gnl_strnlen	srcs/libft/get_next_line_utils.c	/^int	gnl_strnlen(char *str, int type)$/;"	f
 greater	srcs/libft/ft_memmove.c	/^static void	greater(unsigned char *dst, unsigned char *src, size_t len)$/;"	f	file:
 greater_address	srcs/libft/ft_memmove.c	/^static int	greater_address(void *dst, const void *src)$/;"	f	file:
-heredoc	srcs/execute/do_heredoc.c	/^int	heredoc(t_redir *target, t_env_pack *pack)$/;"	f
 heredoc	srcs/execute/redirections/do_heredoc.c	/^int	heredoc(t_redir *target, t_env_pack *pack)$/;"	f
-heredoc_expander	srcs/execute/do_heredoc.c	/^void	heredoc_expander(int fd, char *input, t_env_pack *pack, int flag)$/;"	f
 heredoc_expander	srcs/execute/redirections/do_heredoc.c	/^void	heredoc_expander(int fd, char *input, t_env_pack *pack, int flag)$/;"	f
-heredoc_q_flag	srcs/execute/redir_utils.c	/^int	heredoc_q_flag(char *str)$/;"	f
 heredoc_q_flag	srcs/execute/redirections/redir_utils.c	/^int	heredoc_q_flag(char *str)$/;"	f
 in_redirs	includes/exec_structures.h	/^	t_redir		*in_redirs;		\/\/ 최종적으로 사용될 input redirection('<', "<<")$/;"	m	struct:s_cmd_pack
 in_redirs	includes/structures.h	/^	t_redir		*in_redirs;		\/\/ 최종적으로 사용될 input redirection('<', "<<")$/;"	m	struct:s_cmd_pack
 init_ast	srcs/parse/ast_utils.c	/^t_ast	*init_ast(t_token *tokens)$/;"	f
+input_handler	srcs/testmain.c	/^void	input_handler(void)$/;"	f
 insert_num	srcs/libft/ft_itoa.c	/^static void	insert_num(int nb, char *num_string, int *i)$/;"	f	file:
 is_dir	srcs/execute/execute_utils.c	/^int	is_dir(char *str)$/;"	f
 is_meta1	srcs/parse/meta.c	/^int	is_meta1(char c)$/;"	f
@@ -294,7 +289,6 @@ is_route	srcs/execute/execute_utils.c	/^int	is_route(char *str)$/;"	f
 is_set	srcs/libft/ft_strtrim.c	/^static int	is_set(char const *set, char c)$/;"	f	file:
 is_space	srcs/libft/ft_atoi.c	/^int	is_space(char c)$/;"	f
 join_remain	srcs/expand/do_expand.c	/^void	join_remain(t_c_expand *expand, int len)$/;"	f
-last_cmd	srcs/parse/pipeline.c	/^t_cmd	*last_cmd(t_cmd *list)$/;"	f
 last_pid	includes/exec_structures.h	/^	pid_t		last_pid;			\/\/ 가장 마지막에 fork()된 프로세스 id, exit code 확인용$/;"	m	struct:s_info
 last_token	srcs/parse/token_utils.c	/^t_token	*last_token(t_token *list)$/;"	f
 left	includes/exec_structures.h	/^	struct s_ast	*left;$/;"	m	struct:s_ast	typeref:struct:s_ast::s_ast
@@ -306,15 +300,12 @@ make_envp	srcs/execute/execute_utils.c	/^char	**make_envp(t_env_pack *envs)$/;"	
 merge_strs	srcs/execute/utils.c	/^char	**merge_strs(char **orig, char **new_strs)$/;"	f
 name	includes/exec_structures.h	/^	char			*name;			\/\/ 환경변수 Key값 ($USER=yusekim 에서 'USER' 부분)$/;"	m	struct:s_env
 name	includes/structures.h	/^	char			*name;			\/\/ 환경변수 Key값 ($USER=yusekim 에서 'USER' 부분)$/;"	m	struct:s_env
-new_cmd	srcs/parse/pipeline.c	/^t_cmd	*new_cmd(t_token *start, t_token *end)$/;"	f
 new_token	srcs/parse/token_utils.c	/^t_token	*new_token(char *string, t_type type)$/;"	f
 next	includes/exec_structures.h	/^	struct s_token	*next;		\/\/ 다음 node$/;"	m	struct:s_token	typeref:struct:s_token::s_token
 next	includes/exec_structures.h	/^	t_redir		*next;			\/\/ next node$/;"	m	struct:s_redir
 next	includes/structures.h	/^	struct s_token	*next;		\/\/ 다음 node$/;"	m	struct:s_token	typeref:struct:s_token::s_token
 next	includes/structures.h	/^	t_redir		*next;			\/\/ next node$/;"	m	struct:s_redir
 next	srcs/libft/libft.h	/^	struct s_list	*next;$/;"	m	struct:s_list	typeref:struct:s_list::s_list
-next	srcs/parse/pipeline.c	/^	t_cmd	*next;$/;"	m	struct:s_cmd	file:
-open_check	srcs/execute/redirections.c	/^int	open_check(t_redir *temp)$/;"	f
 open_check	srcs/execute/redirections/redirections.c	/^int	open_check(t_redir *temp)$/;"	f
 origin_head	includes/exec_structures.h	/^	t_env	*origin_head;	\/\/ envp 순서대로 받았을때의 head node$/;"	m	struct:s_env_pack
 origin_head	includes/structures.h	/^	t_env	*origin_head;	\/\/ envp 순서대로 받았을때의 head node$/;"	m	struct:s_env_pack
@@ -332,14 +323,12 @@ path_join	srcs/execute/execute_utils.c	/^char	*path_join(char *path, char *arg)$
 pipe_fds	includes/exec_structures.h	/^	int			pipe_fds[2];			\/\/ pipe()의 결과물을 기록한다. 3개짜리 int배열이고 첫 두개는 pipe()의 결과물, 3번째칸에는 다중 파이프때의 이전에 사용한 파이프의 fd$/;"	m	struct:s_info
 prev	includes/exec_structures.h	/^	struct s_token	*prev;		\/\/ 이전 node (syntax error 체크때 유용했었음)$/;"	m	struct:s_token	typeref:struct:s_token::s_token
 prev	includes/structures.h	/^	struct s_token	*prev;		\/\/ 이전 node (syntax error 체크때 유용했었음)$/;"	m	struct:s_token	typeref:struct:s_token::s_token
-prev	srcs/parse/pipeline.c	/^	t_cmd	*prev;$/;"	m	struct:s_cmd	file:
 prev_fd	includes/exec_structures.h	/^	int			prev_fd;$/;"	m	struct:s_info
 print_ast	srcs/parse/ast_utils.c	/^void	print_ast(t_ast *ast)$/;"	f
-print_export	srcs/builtins/builtin_utils.c	/^int	print_export(t_env_pack *pack)$/;"	f
+print_export	srcs/builtins/do_builtin2.c	/^int	print_export(t_env_pack *pack)$/;"	f
 q_flag	includes/exec_structures.h	/^	char	q_flag;			\/\/ 따옴표 플래그$/;"	m	struct:s_exp_pair
 q_flag	includes/structures.h	/^	char	q_flag;			\/\/ 따옴표 플래그$/;"	m	struct:s_exp_pair
 redir_fds	includes/exec_structures.h	/^	int			redir_fds[2];		\/\/ 리다이렉션 파이프, 기본값은 표준입출력 fd이고 만약 in_redir, out_redir이 있을때 해당 파일을 open할 때 리턴받은 fd값으로 바꿔준다$/;"	m	struct:s_info
-redir_open	srcs/execute/redir_utils.c	/^void	redir_open(t_redir *temp)$/;"	f
 redir_open	srcs/execute/redirections/redir_utils.c	/^void	redir_open(t_redir *temp)$/;"	f
 relative_execve	srcs/execute/execute_utils2.c	/^void	relative_execve(char **args, t_env_pack *envs, char **envp)$/;"	f
 remove_bracket	srcs/parse/bracket.c	/^void	remove_bracket(t_token **start, t_token **end)$/;"	f
@@ -349,9 +338,9 @@ result	includes/structures.h	/^	char		**result;		\/\/ 확장을 완료한 최종
 right	includes/exec_structures.h	/^	struct s_ast	*right;$/;"	m	struct:s_ast	typeref:struct:s_ast::s_ast
 right	includes/structures.h	/^	struct s_ast	*right;$/;"	m	struct:s_ast	typeref:struct:s_ast::s_ast
 right_ptr	includes/structures.h	/^	void		*right_ptr;		\/\/ 오른쪽 branch$/;"	m	struct:s_tree
+run_minishell	srcs/testmain.c	/^void	run_minishell(char *str, t_env_pack *pack)$/;"	f
 s_ast	includes/exec_structures.h	/^struct s_ast$/;"	s
 s_ast	includes/structures.h	/^struct s_ast$/;"	s
-s_cmd	srcs/parse/pipeline.c	/^struct s_cmd$/;"	s	file:
 s_cmd_pack	includes/exec_structures.h	/^struct s_cmd_pack$/;"	s
 s_cmd_pack	includes/structures.h	/^struct s_cmd_pack$/;"	s
 s_env	includes/exec_structures.h	/^struct s_env				\/\/ 환경변수 연결리스트$/;"	s
@@ -370,7 +359,6 @@ s_redir	includes/structures.h	/^struct s_redir$/;"	s
 s_token	includes/exec_structures.h	/^struct s_token$/;"	s
 s_token	includes/structures.h	/^struct s_token$/;"	s
 s_tree	includes/structures.h	/^struct s_tree$/;"	s
-scan_n_set_redirs	srcs/execute/redirections.c	/^int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)$/;"	f
 scan_n_set_redirs	srcs/execute/redirections/redirections.c	/^int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)$/;"	f
 scan_n_setup	srcs/expand/expand.c	/^void	scan_n_setup(t_c_expand *expand, char *data)$/;"	f
 search_value	srcs/expand/do_expand.c	/^char	*search_value(t_exp_pair *pair, t_env_pack *pack)$/;"	f
@@ -378,6 +366,7 @@ set_fds	srcs/execute/pipe_utils.c	/^void	set_fds(t_cmd *cmd, t_info *info)$/;"	f
 set_info	srcs/testmain.c	/^void	set_info(t_info *info)$/;"	f
 set_new_env	srcs/envs/build_env_pack.c	/^void	set_new_env(t_env_pack *pack, t_env *new)$/;"	f
 set_parse_error	srcs/parse/error.c	/^void	set_parse_error(t_ast *ast, char *string)$/;"	f
+set_parse_exit	srcs/testmain.c	/^void	set_parse_exit(t_env_pack *pack, int code)$/;"	f
 set_start_end	srcs/parse/set_nodes.c	/^void	set_start_end(t_ast **ast, t_token *start, t_token *end)$/;"	f
 set_type_meta1	srcs/parse/meta.c	/^void	set_type_meta1(char c, int i, t_type *type)$/;"	f
 sig_handler	srcs/parse/signal.c	/^void	sig_handler(int signo)$/;"	f
@@ -395,7 +384,6 @@ split_len	srcs/execute/utils.c	/^int	split_len(char **split)$/;"	f
 start	includes/exec_structures.h	/^	struct s_token	*start;$/;"	m	struct:s_ast	typeref:struct:s_ast::s_token
 start	includes/parse_struct.h	/^	int	start;$/;"	m	struct:s_mark
 start	includes/structures.h	/^	struct s_token	*start;$/;"	m	struct:s_ast	typeref:struct:s_ast::s_token
-start	srcs/parse/pipeline.c	/^	t_token	*start;$/;"	m	struct:s_cmd	file:
 string	includes/exec_structures.h	/^	char			*string;		\/\/ 해당 node의 data$/;"	m	struct:s_token
 string	includes/structures.h	/^	char			*string;		\/\/ 해당 node의 data$/;"	m	struct:s_token
 syntax_error_parser	srcs/parse/error.c	/^void	syntax_error_parser(char *string, t_token **list)$/;"	f
@@ -407,7 +395,6 @@ t_c_expand	includes/exec_structures.h	/^typedef struct s_expand		t_c_expand;		\/
 t_c_expand	includes/structures.h	/^typedef struct s_expand		t_c_expand;		\/\/ 명령어 확장$/;"	t	typeref:struct:s_expand
 t_cmd	includes/exec_structures.h	/^typedef struct s_cmd_pack	t_cmd;$/;"	t	typeref:struct:s_cmd_pack
 t_cmd	includes/structures.h	/^typedef struct s_cmd_pack	t_cmd;$/;"	t	typeref:struct:s_cmd_pack
-t_cmd	srcs/parse/pipeline.c	/^typedef struct s_cmd t_cmd;$/;"	t	typeref:struct:s_cmd	file:
 t_env	includes/exec_structures.h	/^typedef struct s_env		t_env;$/;"	t	typeref:struct:s_env
 t_env	includes/structures.h	/^typedef struct s_env		t_env;$/;"	t	typeref:struct:s_env
 t_env_pack	includes/exec_structures.h	/^typedef struct s_env_pack	t_env_pack;$/;"	t	typeref:struct:s_env_pack
@@ -429,7 +416,6 @@ take_bracket	srcs/parse/center.c	/^t_token	*take_bracket(t_token *curr, t_token 
 this_ptr	includes/structures.h	/^	void		*this_ptr;		\/\/ 현재 노드가 가지고 있는 데이터, cmd타입일때만 내용이 있고 나머지는 NULL$/;"	m	struct:s_tree
 this_type	includes/structures.h	/^	enum e_type	this_type;		\/\/ 현재 노드의 타입 (아마 e_type 열거형으로 퉁칠 수 있을듯?)$/;"	m	struct:s_tree	typeref:enum:s_tree::e_type
 tokenizer	srcs/parse/tokenizer.c	/^t_token	*tokenizer(char *line)$/;"	f
-trim_quotes	srcs/execute/redir_utils.c	/^char	*trim_quotes(char *data)$/;"	f
 trim_quotes	srcs/execute/redirections/redir_utils.c	/^char	*trim_quotes(char *data)$/;"	f
 type	includes/exec_structures.h	/^	enum e_type		type;		\/\/ 열거형 type$/;"	m	struct:s_token	typeref:enum:s_token::e_type
 type	includes/exec_structures.h	/^	enum e_type		type;$/;"	m	struct:s_ast	typeref:enum:s_ast::e_type
@@ -437,9 +423,7 @@ type	includes/exec_structures.h	/^	enum e_type	type;			\/\/ 어떤 리다이렉�
 type	includes/structures.h	/^	enum e_type		type;		\/\/ 열거형 type$/;"	m	struct:s_token	typeref:enum:s_token::e_type
 type	includes/structures.h	/^	enum e_type		type;$/;"	m	struct:s_ast	typeref:enum:s_ast::e_type
 type	includes/structures.h	/^	enum e_type	type;			\/\/ 어떤 리다이렉션 타입인지 가르쳐준다$/;"	m	struct:s_redir	typeref:enum:s_redir::e_type
-update_cursor	srcs/testmain.c	/^void	update_cursor(void)$/;"	f
 update_list	srcs/parse/tokenizer.c	/^void	update_list(t_token **list, char *string, t_type type)$/;"	f
 value	includes/exec_structures.h	/^	char			*value;			\/\/ 환경변수 Value값 ($USER=yusekim 에서 'yusekim' 부분)$/;"	m	struct:s_env
 value	includes/structures.h	/^	char			*value;			\/\/ 환경변수 Value값 ($USER=yusekim 에서 'yusekim' 부분)$/;"	m	struct:s_env
-write_heredoc	srcs/execute/do_heredoc.c	/^void	write_heredoc(t_redir *redir, t_env_pack *pack, int inf_fd)$/;"	f
 write_heredoc	srcs/execute/redirections/do_heredoc.c	/^void	write_heredoc(t_redir *redir, t_env_pack *pack, int inf_fd)$/;"	f

@@ -6,13 +6,14 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:22 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 10:23:36 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/23 16:19:38 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec_structures.h"
 #include "builtin.h"
 #include "env.h"
+#include "execute.h"
 
 int	do_cd(char **args, t_env_pack *pack)
 {
@@ -88,7 +89,9 @@ int	do_exit(char **args, t_env_pack *pack)
 	(void)pack;
 	args_len = split_len(args);
 	// 그냥 exit도 exit이 되도록. 검수 필요.
-	if (args_len <= 2)
+	if (args_len == 1)
+		b_exit(get_exitstat(pack));
+	if (args_len == 2)
 	{
 		if (check_sign(args[1]))
 		{
