@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/23 16:12:56 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/23 17:29:09 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	input_handler(void)
 	signal_event();
 }
 
-void	set_parse_exit(t_env_pack *pack, int code)
+void	set_exit(t_env_pack *pack, int code)
 {
 	char *exit_code_str;
 
@@ -66,13 +66,13 @@ void	run_minishell(char *str, t_env_pack *pack)
 		else
 		{
 			syntax_error_parser(ast->error, &tokens);
-			set_parse_exit(pack, 258);
+			set_exit(pack, 258);
 		}
 		free_tokens(&tokens);
 		free_ast(&ast);
 	}
 	else
-		set_parse_exit(pack, 258);
+		set_exit(pack, 258);
 }
 
 int	main(int ac, char *av[], char *envp[])
@@ -86,12 +86,14 @@ int	main(int ac, char *av[], char *envp[])
 	rl_event_hook = (rl_hook_func_t *)input_handler;
 	while (42)
 	{
-		str = get_line(PROMPT);
+		str = get_line(PROMPT, &pack);
 		if (!str)
 			break ;
 		if (str[0])
+		{
 			add_history(str);
-		run_minishell(str, &pack);
+			run_minishell(str, &pack);
+		}
 		free(str);
 	}
 	ft_putstr_fd("\e8\e[B\e[Aexit\n", STDOUT_FILENO);

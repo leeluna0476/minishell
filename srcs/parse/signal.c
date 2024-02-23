@@ -6,13 +6,13 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 02:19:01 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/23 09:31:47 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/23 17:32:54 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenizer.h"
 #include "signal_handler.h"
-#include <termios.h>
+#include "utils.h"
 
 volatile sig_atomic_t	g_status = 0;
 
@@ -38,7 +38,7 @@ int	signal_event(void)
 		// redisplay the contents of rl_line_buffer
 		rl_redisplay();
 		// initialize the signal
-		g_status = 0;
+		g_status = -1;
 	}
 	else if (g_status == SIGQUIT)
 	{
@@ -56,15 +56,20 @@ int	signal_event(void)
 // int tcgetattr: shall get the parameters associated with the terminal referred to by fildes and store them in the termios structure referenced by termios_p. The fildes argument is an open file descriptor associated with a terminal.
 
 // int tcsetattr: shall set the parameters associated with the terminal referred to by the open file descriptor fildes (an open file descriptor associated with a terminal) from the termios structure referenced by termios_p.
-char	*get_line(char *prompt)
+char	*get_line(char *prompt, t_env_pack *pack)
 {
 	char	*str;
 
 	rl_catch_signals = 0;
 	signal(SIGQUIT, sig_handler);
 	signal(SIGINT, sig_handler);
-//	rl_signal_event_hook = signal_event;
 	str = readline(prompt);
+	// sigint는 ?에 1을 저장.
+	if (g_status == -1)
+	{
+		set_exit(pack, 1);
+		g_status = 0;
+	}
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
 	return (str);
