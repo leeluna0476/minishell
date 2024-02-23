@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:24 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 10:43:20 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/23 13:02:06 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	check_env_name(char *name)
 
 	if (ft_isdigit(*name))
 	{
-		ft_putstr_fd("minishell: export: '", STDERR_FILENO);
+		ft_putstr_fd("미니쉘: export: '", STDERR_FILENO);
 		ft_putstr_fd(name, STDERR_FILENO);
-		ft_putstr_fd("': not a vaild identifier\n", STDERR_FILENO);
+		ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
 		return (1);
 	}
 	idx = 0;
@@ -30,9 +30,9 @@ int	check_env_name(char *name)
 	{
 		if (!(ft_isalnum(name[idx]) || name[idx] == '_'))
 		{
-			ft_putstr_fd("minishell: export: '", STDERR_FILENO);
-			ft_putstr_fd(name[idx], STDERR_FILENO);
-			ft_putstr_fd("': not a vaild identifier\n", STDERR_FILENO);
+			ft_putstr_fd("미니쉘: export: '", STDERR_FILENO);
+			ft_putstr_fd(name, STDERR_FILENO);
+			ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
 			return (1);
 		}
 		idx++;

@@ -6,11 +6,12 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 13:03:15 by youwin0802        #+#    #+#             */
-/*   Updated: 2024/02/23 11:06:17 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/23 12:41:54 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
+#include "env.h"
 
 char	**make_envp(t_env_pack *envs)
 {
@@ -67,19 +68,6 @@ char	*path_join(char *path, char *arg)
 	out = ft_strjoin(temp, arg);
 	free(temp);
 	return (out);
-}
-
-void	exec_parent(t_info *info)
-{
-	if (info->redir_fds[0] > 2)
-		close(info->redir_fds[0]);
-	if (info->redir_fds[1] > 2)
-		close(info->redir_fds[1]);
-	if (info->fork_num != 0 && info->prev_fd)
-		close(info->prev_fd);
-	if (info->pipe_fds[1] != 1)
-		close(info->pipe_fds[1]);
-	info->prev_fd = info->pipe_fds[0];
 }
 
 int	get_exitstat(t_env_pack *pack)

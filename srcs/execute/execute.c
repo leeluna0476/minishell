@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 11:05:24 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/23 13:41:08 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	execute(t_ast *tree, t_env_pack *pack, t_info *info)
 	else
 	{
 		do_execution(tree, pack, info);
-		ft_wait(info, pack);
+		if (info->fork_num)
+			ft_wait(info, pack);
 	}
 
 }
