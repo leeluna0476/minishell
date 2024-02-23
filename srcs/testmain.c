@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/22 20:13:52 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/23 09:29:31 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 #include "redirection.h"
 #include "parse_struct.h"
 #include "parse_define.h"
-#include "readline/readline.h"
-#include "readline/history.h"
+#include <readline/readline.h>
+#include <readline/history.h>
 #include "signal_handler.h"
 #include <fcntl.h>
 #include <unistd.h>
@@ -34,7 +34,8 @@ void	set_info(t_info *info)
 
 void	update_cursor(void)
 {
-	ft_putstr_fd("\e[s", STDOUT_FILENO);
+	ft_putstr_fd("\e7", STDOUT_FILENO);
+	signal_event();
 }
 
 int	main(int ac, char *av[], char *envp[])
@@ -72,11 +73,11 @@ int	main(int ac, char *av[], char *envp[])
 			free_tokens(&tokens);
 
 			free_ast(&ast);
-			// system("leaks minishell");
 		}
 		free(str);
+		// system("leaks minishell");
 	}
-	b_exit(0);
+	ft_putstr_fd("\e8\e[B\e[Aexit\n", STDOUT_FILENO);
 }
 //	print_ast(ast);
 //	system("leaks -q minishell");
