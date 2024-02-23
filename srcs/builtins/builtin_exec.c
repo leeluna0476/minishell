@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:28 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/22 17:16:56 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/23 09:40:39 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	exec_builtin(char **args, t_env_pack *pack)
 	result = ft_itoa(f_ptr_list[i](args, pack));
 	ft_printf("builtin result: [%s]\n", result);
 	add_env_node(pack, "?", result);
+	t_env *temp = find_env("?", pack);
+	ft_printf("node->value: [%s]\n", temp->value);
 	free(result);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/22 17:15:31 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/23 09:56:33 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)
 	if (tree->left->type >= T_WORD && tree->left->type <= T_D_GREATER)
 	{
 		do_execution(tree->left, pack, info);
-		ft_wait(info, pack);
+		if (info->fork_num)
+			ft_wait(info, pack);
 	}
 	else
 		execute(tree->left, pack, info);
-	ft_printf("exitstat: %d\n", get_exitstat(pack));
 	if ((tree->type == T_AND && get_exitstat(pack)) || \
 		(tree->type == T_OR && !get_exitstat(pack)))
 		return ;
