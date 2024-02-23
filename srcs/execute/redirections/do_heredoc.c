@@ -6,55 +6,72 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:19 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 12:00:13 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:37:46 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirection.h"
+#include "execute.h"
 #include "expand.h"
 #include "env.h"
 
 int	heredoc(t_redir *target, t_env_pack *pack)
 {
+	pid_t	pid;
+	int		status;
 	char	*filename;
-	char	*itoa_out;
-	int		num;
 
-	signal(SIGINT, SIG_IGN);
-	// signal(SIGINT, handler_heredoc);
-	num = -1;
-	filename = ft_strdup(TEMP_FILENAME);
-	while (!access(filename, F_OK))
-	{
-		free(filename);
-		itoa_out = ft_itoa(++num);
-		filename = ft_strjoin(TEMP_FILENAME, itoa_out);
-		free(itoa_out);
-	}
-	return (do_heredoc(target, filename, pack));
+	pid = fork();
+	filename = get_filename();
+	if (pid == -1)
+		ft_perror("fork", 1);
+	else if (pid == 0)
+		do_heredoc(target, filename, pack);
+	// 여기 SIG_IGN해야함
+	free(target->filename[1]);
+	target->filename[1] = filename;
+	waitpid(pid, &status, 0);
+	if (WIFSIGNALED(status))
+		return (1);
+	return (0);
 }
 
-int	do_heredoc(t_redir *temp, char *f_name, t_env_pack *pack)
+char	*get_filename(void)
+{
+	char	*path;
+	char	*itoa_out;
+	char	*temp_filepath;
+	int		num;
+
+	path = getcwd(0, 0);
+	temp_filepath = ft_strjoin(path, TEMP_FILENAME);
+	free(path);
+	path = ft_strdup(temp_filepath);
+	num = -1;
+	while (!access(path, F_OK))
+	{
+		free(path);
+		itoa_out = ft_itoa(++num);
+		path = ft_strjoin(temp_filepath, itoa_out);
+		free(itoa_out);
+	}
+	free(temp_filepath);
+	return (path);
+}
+
+void	do_heredoc(t_redir *temp, char *f_path, t_env_pack *pack)
 {
 	int		infile_fd;
-	int		temp_exit_status;
-	int		fd;
 
-	infile_fd = open(f_name, O_WRONLY | O_CREAT, 0644);
+	infile_fd = open(f_path, O_WRONLY | O_CREAT, 0644);
 	if (infile_fd == -1)
 		exit (1);
-	fd = dup(0);
-	temp_exit_status = g_exit_status;
-	g_exit_status = 0;
 	write_heredoc(temp, pack, infile_fd);
-	if (g_exit_status)
-		dup2(fd, 0);
-	// signal(SIGINT, handler);
 	free(temp->filename[1]);
-	temp->filename[1] = f_name;
-	if (close(infile_fd) == -1 || close(fd) == -1)
+	temp->filename[1] = f_path;
+	if (close(infile_fd) == -1)
 		exit(1);
-	return (detact_exitcode(temp_exit_status));
+	exit(0);
 }
 
 void	write_heredoc(t_redir *redir, t_env_pack *pack, int inf_fd)
@@ -76,7 +93,9 @@ void	write_heredoc(t_redir *redir, t_env_pack *pack, int inf_fd)
 		if (!input || !ft_strncmp(input, redir->filename[1], l_len + 1))
 			break ;
 	}
-	if (input)
+	if (!input)
+		ft_printf("\n");
+	else
 		free(input);
 	redir->filename[1][l_len] = 0;
 }

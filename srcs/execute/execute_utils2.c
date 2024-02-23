@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:14:15 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/22 17:28:54 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/23 16:26:51 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_cmd	*build_cmd_pack(t_ast *tree, t_env_pack *pack)
 	{
 		if (cur->prev && cur->prev->type == T_D_LESSER)
 		{
-			limiter = add_str(0, cur->string);
+			limiter = add_str(0, ft_strdup(cur->string));
 			limiter = add_str(limiter, trim_quotes(cur->string));
 			append_redir(&cmd, cur->prev->type, limiter);
 		}
@@ -38,7 +38,8 @@ t_cmd	*build_cmd_pack(t_ast *tree, t_env_pack *pack)
 			append_redir(&cmd, cur->prev->type, \
 				expand(ft_strdup(cur->string), pack, 1));
 		else if (cur->type == T_WORD)
-			cmd->c_args = merge_strs(cmd->c_args, expand(ft_strdup(cur->string), pack, 0));
+			cmd->c_args = merge_strs(cmd->c_args, \
+			expand(ft_strdup(cur->string), pack, 0));
 		cur = cur->next;
 	}
 	return (cmd);
@@ -124,5 +125,4 @@ void	free_cmd(t_cmd *cmd)
 		free(temp);
 		temp = next;
 	}
-	free(cmd);
 }

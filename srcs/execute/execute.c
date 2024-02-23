@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 13:41:08 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/23 16:25:17 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	do_execution(t_ast *tree, t_env_pack *pack, t_info *info)
 	cmd = build_cmd_pack(tree, pack);
 	if (scan_n_set_redirs(cmd, pack))
 		return (free_cmd(cmd));
-	// info->depths == 1이 왜 있어야 하는지 모르겠음.
 	if (info->depths == 0 && solo_builtin(cmd, pack) != -1)
 		return (free_cmd(cmd));
 	if (cmd->c_args)
@@ -96,21 +95,10 @@ void	do_execution(t_ast *tree, t_env_pack *pack, t_info *info)
 	temp = cmd->all_redirs;
 	return (free_cmd(cmd));
 }
-	// ft_printf("print output cmd structure!\n");
-	// if (cmd->in_redirs && cmd->out_redirs)
-	// 	ft_printf("redirections:\nin: %s\nout:%s\n", cmd->in_redirs->filename[1], cmd->out_redirs->filename[1]);
-	// if (!cmd->c_args)
-	// 	return ;
-	// ft_printf("command_args:\n");
-	// int	i = -1;
-	// while (cmd->c_args && cmd->c_args[++i])
-	// 	ft_printf("args %d: [%s]\n", i, cmd->c_args[i]);
 
 void	execute_cmd(t_cmd *cmd, t_env_pack *envs, t_info *info)
 {
 	set_fds(cmd, info);
-	// signal(SIGINT, SIG_IGN);
-	// signal(SIGINT, exec_handler);
 	info->last_pid = fork();
 	ft_assert(info->last_pid != -1, "fork error\n", 1);
 	info->fork_num++;

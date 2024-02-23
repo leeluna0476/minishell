@@ -5,6 +5,8 @@
 		"execute.h": "c",
 		"builtin.h": "c",
 		"exec_structures.h": "c",
-		"__locale": "c"
+		"__locale": "c",
+		"redirection.h": "c",
+		"utils.h": "c"
 	}
 }

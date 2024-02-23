@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 09:33:59 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 07:25:24 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/23 16:21:43 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,6 @@ void	append_redir(t_cmd **cmd, t_type type, char **fileinfo)
 		temp->next = new;
 	}
 }
-// int	i = -1;
-// if (type == T_LESSER)
-// 	ft_printf("\ntype is <\n");
-// else if (type == T_GREATER)
-// 	ft_printf("\ntype is >\n");
-// else if (type == T_D_GREATER)
-// 	ft_printf("\ntype is >>\n");
-// ft_printf("print fileinfo\n");
-// while (fileinfo && fileinfo[++i])
-// 	ft_printf("[%s] ", fileinfo[i]);
-// ft_printf("\n");
 
 int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)
 {
@@ -64,7 +53,8 @@ int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)
 		temp = temp->next;
 	}
 	temp = cmd->all_redirs;
-	if (exit_code || open_check(temp))
+	open_check(temp, &exit_code);
+	if (exit_code)
 	{
 		exit_code_str = ft_itoa(exit_code);
 		add_env_node(pack, "?", exit_code_str);
@@ -73,7 +63,7 @@ int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)
 	return (0);
 }
 
-int	open_check(t_redir *temp)
+int	open_check(t_redir *temp, int *exit_code)
 {
 	while (temp)
 	{
@@ -81,6 +71,7 @@ int	open_check(t_redir *temp)
 		{
 			ft_putstr_fd(temp->filename[0], STDERR_FILENO);
 			ft_putstr_fd(": ambiguous redirect\n", STDERR_FILENO);
+			*exit_code = 1;
 			return (1);
 		}
 		redir_open(temp);
@@ -91,6 +82,7 @@ int	open_check(t_redir *temp)
 				ft_putstr_fd(": Permission denied\n", STDERR_FILENO);
 			else
 				ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+			*exit_code = 1;
 			return (1);
 		}
 		if (temp->fd > 2)

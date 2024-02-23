@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:55 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 14:27:02 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:34:30 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@
 // redirections.c
 void	append_redir(t_cmd **cmd, t_type type, char **fileinfo);
 int		scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack);
-int		open_check(t_redir *temp);
+int		open_check(t_redir *temp, int *exit_code);
 
 // do_heredoc.c
 int		heredoc(t_redir *target, t_env_pack *pack);
-int		do_heredoc(t_redir *temp, char *f_name, t_env_pack *pack);
+char	*get_filename(void);
+void	do_heredoc(t_redir *temp, char *f_name, t_env_pack *pack);
 void	write_heredoc(t_redir *redir, t_env_pack *pack, int inf_fd);
 void	heredoc_expander(int fd, char *input, t_env_pack *pack, int flag);
 
