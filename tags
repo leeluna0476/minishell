@@ -143,7 +143,7 @@ do_execution	srcs/execute/execute.c	/^void	do_execution(t_ast *tree, t_env_pack 
 do_exit	srcs/builtins/do_builtin.c	/^int	do_exit(char **args, t_env_pack *pack)$/;"	f
 do_expand	srcs/expand/do_expand.c	/^void	do_expand(t_c_expand *expand, t_env_pack *pack, int flag)$/;"	f
 do_export	srcs/builtins/do_builtin2.c	/^int	do_export(char **args, t_env_pack *pack)$/;"	f
-do_heredoc	srcs/execute/redirections/do_heredoc.c	/^int	do_heredoc(t_redir *temp, char *f_name, t_env_pack *pack)$/;"	f
+do_heredoc	srcs/execute/redirections/do_heredoc.c	/^void	do_heredoc(t_redir *temp, char *f_path, t_env_pack *pack)$/;"	f
 do_pwd	srcs/builtins/do_builtin.c	/^int	do_pwd(char **args, t_env_pack *pack)$/;"	f
 do_unset	srcs/builtins/do_builtin2.c	/^int	do_unset(char **args, t_env_pack *pack)$/;"	f
 e_b_type	includes/exec_structures.h	/^enum	e_b_type$/;"	g
@@ -191,6 +191,7 @@ free_ast	srcs/parse/ast_utils.c	/^void	free_ast(t_ast **ast)$/;"	f
 free_cmd	srcs/execute/execute_utils2.c	/^void	free_cmd(t_cmd *cmd)$/;"	f
 free_envs	srcs/envs/env_utils.c	/^void	free_envs(t_env *head)$/;"	f
 free_expand	srcs/expand/expand.c	/^void	free_expand(t_c_expand *expand)$/;"	f
+free_inputs	srcs/testmain.c	/^void	free_inputs(t_token **tokens, t_ast **ast)$/;"	f
 free_node	srcs/parse/ast_utils.c	/^void	free_node(t_ast **node)$/;"	f
 free_token	srcs/parse/token_utils.c	/^void	free_token(t_token **token)$/;"	f
 free_tokens	srcs/parse/token_utils.c	/^void	free_tokens(t_token **tokens)$/;"	f
@@ -254,13 +255,14 @@ ft_toupper	srcs/libft/ft_toupper.c	/^int	ft_toupper(int c)$/;"	f
 ft_wait	srcs/execute/pipe_utils.c	/^void	ft_wait(t_info *info, t_env_pack *pack)$/;"	f
 g_exit_status	includes/exec_structures.h	/^int							g_exit_status;$/;"	v
 g_exit_status	includes/structures.h	/^int							g_exit_status;$/;"	v
-g_status	srcs/parse/signal.c	/^volatile sig_atomic_t	g_status = 0;$/;"	v
+g_status	srcs/signal/signal.c	/^volatile sig_atomic_t	g_status = 0;$/;"	v
 generate_ast	srcs/parse/ast.c	/^void	generate_ast(t_ast **ast, t_token *start, t_token *end)$/;"	f
 get_bracket_flag	srcs/parse/bracket.c	/^int	get_bracket_flag(t_token **start, t_token **end, \\$/;"	f
 get_center	srcs/parse/center.c	/^t_token	*get_center(t_ast *ast, t_token *start, t_token *end)$/;"	f
 get_exitstat	srcs/execute/execute_utils.c	/^int	get_exitstat(t_env_pack *pack)$/;"	f
+get_filename	srcs/execute/redirections/do_heredoc.c	/^char	*get_filename(void)$/;"	f
 get_len	srcs/libft/ft_itoa.c	/^static void	get_len(int nb, int *len, int *sign)$/;"	f	file:
-get_line	srcs/parse/signal.c	/^char	*get_line(char *prompt)$/;"	f
+get_line	srcs/signal/signal.c	/^char	*get_line(char *prompt, t_env_pack *pack)$/;"	f
 get_logical_exp	srcs/parse/center.c	/^t_token	*get_logical_exp(t_ast *ast, t_token *start, t_token *end)$/;"	f
 get_meta1	srcs/parse/get_token.c	/^int	get_meta1(char *line, char **string, t_type *type)$/;"	f
 get_meta2	srcs/parse/get_token.c	/^int	get_meta2(char *line, char **string, t_type *type)$/;"	f
@@ -306,7 +308,7 @@ next	includes/exec_structures.h	/^	t_redir		*next;			\/\/ next node$/;"	m	struct
 next	includes/structures.h	/^	struct s_token	*next;		\/\/ 다음 node$/;"	m	struct:s_token	typeref:struct:s_token::s_token
 next	includes/structures.h	/^	t_redir		*next;			\/\/ next node$/;"	m	struct:s_redir
 next	srcs/libft/libft.h	/^	struct s_list	*next;$/;"	m	struct:s_list	typeref:struct:s_list::s_list
-open_check	srcs/execute/redirections/redirections.c	/^int	open_check(t_redir *temp)$/;"	f
+open_check	srcs/execute/redirections/redirections.c	/^int	open_check(t_redir *temp, int *exit_code)$/;"	f
 origin_head	includes/exec_structures.h	/^	t_env	*origin_head;	\/\/ envp 순서대로 받았을때의 head node$/;"	m	struct:s_env_pack
 origin_head	includes/structures.h	/^	t_env	*origin_head;	\/\/ envp 순서대로 받았을때의 head node$/;"	m	struct:s_env_pack
 origin_last	includes/exec_structures.h	/^	t_env	*origin_last;	\/\/ envp 순서대로 받았을때의 last node, export 빌트인 시 여기 뒤에 추가한다.$/;"	m	struct:s_env_pack
@@ -362,15 +364,15 @@ s_tree	includes/structures.h	/^struct s_tree$/;"	s
 scan_n_set_redirs	srcs/execute/redirections/redirections.c	/^int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)$/;"	f
 scan_n_setup	srcs/expand/expand.c	/^void	scan_n_setup(t_c_expand *expand, char *data)$/;"	f
 search_value	srcs/expand/do_expand.c	/^char	*search_value(t_exp_pair *pair, t_env_pack *pack)$/;"	f
+set_exit	srcs/testmain.c	/^void	set_exit(t_env_pack *pack, int code)$/;"	f
 set_fds	srcs/execute/pipe_utils.c	/^void	set_fds(t_cmd *cmd, t_info *info)$/;"	f
 set_info	srcs/testmain.c	/^void	set_info(t_info *info)$/;"	f
 set_new_env	srcs/envs/build_env_pack.c	/^void	set_new_env(t_env_pack *pack, t_env *new)$/;"	f
 set_parse_error	srcs/parse/error.c	/^void	set_parse_error(t_ast *ast, char *string)$/;"	f
-set_parse_exit	srcs/testmain.c	/^void	set_parse_exit(t_env_pack *pack, int code)$/;"	f
 set_start_end	srcs/parse/set_nodes.c	/^void	set_start_end(t_ast **ast, t_token *start, t_token *end)$/;"	f
 set_type_meta1	srcs/parse/meta.c	/^void	set_type_meta1(char c, int i, t_type *type)$/;"	f
-sig_handler	srcs/parse/signal.c	/^void	sig_handler(int signo)$/;"	f
-signal_event	srcs/parse/signal.c	/^int	signal_event(void)$/;"	f
+sig_handler	srcs/signal/signal.c	/^void	sig_handler(int signo)$/;"	f
+signal_event	srcs/signal/signal.c	/^int	signal_event(void)$/;"	f
 smaller	srcs/libft/ft_memmove.c	/^static void	smaller(unsigned char *dst, unsigned char *src, size_t len)$/;"	f	file:
 solo_builtin	srcs/builtins/builtin_exec.c	/^int	solo_builtin(t_cmd *cur, t_env_pack *pack)$/;"	f
 sorted_head	includes/exec_structures.h	/^	t_env	*sorted_head;	\/\/ 정렬된 순서의 envp head 노드$/;"	m	struct:s_env_pack

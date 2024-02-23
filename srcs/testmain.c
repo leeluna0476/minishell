@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/23 19:54:02 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/23 20:02:19 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	set_info(t_info *info)
 void	input_handler(void)
 {
 	ft_putstr_fd("\e7", STDOUT_FILENO);
-	signal_event();
+	signal_readline();
 }
 
 void	set_exit(t_env_pack *pack, int code)

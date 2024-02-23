@@ -6,10 +6,11 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:19 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 16:37:46 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/23 20:58:34 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "signal_handler.h"
 #include "redirection.h"
 #include "execute.h"
 #include "expand.h"
@@ -21,18 +22,25 @@ int	heredoc(t_redir *target, t_env_pack *pack)
 	int		status;
 	char	*filename;
 
+	signal_ign();
 	pid = fork();
 	filename = get_filename();
 	if (pid == -1)
 		ft_perror("fork", 1);
 	else if (pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);
 		do_heredoc(target, filename, pack);
-	// 여기 SIG_IGN해야함
+	}
 	free(target->filename[1]);
 	target->filename[1] = filename;
 	waitpid(pid, &status, 0);
+	signal_dfl();
 	if (WIFSIGNALED(status))
+	{
+		ft_putchar_fd('\n', STDOUT_FILENO);
 		return (1);
+	}
 	return (0);
 }
 

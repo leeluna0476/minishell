@@ -6,12 +6,13 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:07:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 12:42:02 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/23 20:39:46 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
 #include "env.h"
+#include "signal_handler.h"
 
 void	set_fds(t_cmd *cmd, t_info *info)
 {
@@ -75,11 +76,17 @@ void	ft_wait(t_info *info, t_env_pack *pack)
 		if (waitpid(-1, &status, 0) == info->last_pid)
 		{
 			if (WIFSIGNALED(status))
+			{
+				if (WTERMSIG(status) == SIGQUIT)
+					ft_putstr_fd("Quit: 3", STDOUT_FILENO);
+				ft_putchar_fd('\n', STDOUT_FILENO);
 				info->exit_status = WTERMSIG(status) + 128;
+			}
 			else if (WIFEXITED(status))
 				info->exit_status = WEXITSTATUS(status);
 		}
 	}
+	signal_dfl();
 	info->fork_num = 0;
 	info->last_pid = 0;
 	if (info->prev_fd)

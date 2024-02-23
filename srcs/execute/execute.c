@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 16:25:17 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/23 20:48:09 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "expand.h"
 #include "redirection.h"
 #include "builtin.h"
+#include "signal_handler.h"
 
 void	execute(t_ast *tree, t_env_pack *pack, t_info *info)
 {
@@ -99,11 +100,13 @@ void	do_execution(t_ast *tree, t_env_pack *pack, t_info *info)
 void	execute_cmd(t_cmd *cmd, t_env_pack *envs, t_info *info)
 {
 	set_fds(cmd, info);
+	signal_ign();
 	info->last_pid = fork();
 	ft_assert(info->last_pid != -1, "fork error\n", 1);
 	info->fork_num++;
 	if (info->last_pid == 0)
 	{
+		signal_dfl();
 		if (cmd->c_args)
 		{
 			ft_dup2(info);
