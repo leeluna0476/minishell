@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:57:56 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/23 12:58:22 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:00:45 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	get_bracket_flag(t_token **start, t_token **end, \
 		else if (curr->type == T_CLOSE_BRACKET)
 		{
 			flag--;
-			if (!flag && !(*last))
+			if ((!flag || flag < 0) && !(*last))
 				*last = curr;
 		}
 		curr = curr->next;
@@ -62,9 +62,7 @@ t_token	*check_bracket(t_token *start, t_token *end)
 	flag = get_bracket_flag(&start, &end, &first, &last);
 	if (flag > 0)
 		return (first);
-	else if (flag < 0 && !last)
-		return (end);
-	else if (flag < 0 && last)
+	else if (flag < 0)
 		return (last);
 	if (first && first->prev && first->prev >= start \
 		&& first->prev->type != T_AND && first->prev->type != T_OR)
