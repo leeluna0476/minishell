@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   testmain.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/22 09:16:34 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/23 10:11:13 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 #include "redirection.h"
 #include "parse_struct.h"
 #include "parse_define.h"
-#include "readline/readline.h"
-#include "readline/history.h"
+#include <readline/readline.h>
+#include <readline/history.h>
 #include "signal_handler.h"
 #include <fcntl.h>
 #include <unistd.h>
@@ -30,6 +30,12 @@ void	set_info(t_info *info)
 	ft_memset(info, 0, sizeof(t_info));
 	info->pipe_fds[1] = 1;
 	info->redir_fds[1] = 1;
+}
+
+void	input_handler(void)
+{
+	ft_putstr_fd("\e7", STDOUT_FILENO);
+	signal_event();
 }
 
 int	main(int ac, char *av[], char *envp[])
@@ -43,6 +49,7 @@ int	main(int ac, char *av[], char *envp[])
 	(void)ac;
 	(void)av;
 	build_envp(&pack, envp);
+	rl_event_hook = (rl_hook_func_t *)input_handler;
 	while (42)
 	{
 		str = get_line(PROMPT);
@@ -68,8 +75,9 @@ int	main(int ac, char *av[], char *envp[])
 			free_ast(&ast);
 		}
 		free(str);
+		// system("leaks minishell");
 	}
-	EOF_EXIT();
+	ft_putstr_fd("\e8\e[B\e[Aexit\n", STDOUT_FILENO);
 }
 //	print_ast(ast);
 //	system("leaks -q minishell");

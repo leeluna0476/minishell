@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:46:43 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 05:27:50 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/22 17:02:50 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	build_envp(t_env_pack *pack, char **envp)
 
 	ft_memset(pack, 0, sizeof(t_env_pack));
 	idx = 0;
+	add_env_node(pack, "?", "0");
 	while (envp[idx])
 	{
 		temp = ft_strchr(envp[idx], '=');

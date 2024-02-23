@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_builtin2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:05 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/21 22:06:31 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/23 10:08:33 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,39 @@
 
 int	do_export(char **args, t_env_pack *pack)
 {
-	int		idx_n_res[2];
+	int		idx;
+	int		result;
 	char	*addr;
 
 	if (split_len(args) == 1)
 		return (print_export(pack));
-	idx_n_res[0] = 0;
-	idx_n_res[1] = 0;
-	while (args[++idx_n_res[0]])
+	idx = 0;
+	result = 0;
+	while (args[++idx])
 	{
-		addr = ft_strchr(args[idx_n_res[0]], '=');
+		addr = ft_strchr(args[idx], '=');
 		if (addr)
 		{
 			*addr = 0;
-			if (check_env_name(args, idx_n_res[0]))
+			if (check_env_name(args, idx))
 			{
-				idx_n_res[1] = 1;
+				result = 1;
 				continue ;
 			}
-			add_env_node(pack, args[idx_n_res[0]], addr + 1);
+			add_env_node(pack, args[idx], addr + 1);
 			*addr = '=';
 		}
 		else
-			add_env_node(pack, args[idx_n_res[0]], 0);
+		{
+			if (check_env_name(args, idx))
+			{
+				result = 1;
+				continue ;
+			}
+			add_env_node(pack, args[idx], 0);
+		}
 	}
-	return (idx_n_res[1]);
+	return (result);
 }
 // 인자가 있는 export 빌트인을 처리하는 함수.
 // 모든 인자에 대해 이름 유효성 검사를 진행 후 유효한 이름에 대해 환경변수 구조체 노드를 만들어 준다.
@@ -70,7 +78,7 @@ int	do_env(char **args, t_env_pack *pack)
 		ft_printf("%s: %s: No such file or directory\n");
 		return (127);
 	}
-	temp = pack->origin_head;
+	temp = pack->origin_head->origin_next;
 	while (temp)
 	{
 		ft_printf("%s=", temp->name);
@@ -80,6 +88,12 @@ int	do_env(char **args, t_env_pack *pack)
 	return (0);
 }
 // env구현함수, bash에 출력에 맞게 출력해주면 된다.
+
+void	b_exit(int code)
+{
+	ft_putstr_fd("exit\n", STDOUT_FILENO);
+	exit(code);
+}
 
 int	do_exit(char **args, t_env_pack *pack)
 {
@@ -96,10 +110,10 @@ int	do_exit(char **args, t_env_pack *pack)
 			ft_putstr_fd(": ", STDERR_FILENO);
 			ft_putstr_fd(args[1], STDERR_FILENO);
 			ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
-			B_EXIT(255);
+			b_exit(255);
 		}
 		else
-			B_EXIT(ft_atoi(args[1]) % 256);
+			b_exit(ft_atoi(args[1]) % 256);
 	}
 	ft_putstr_fd(args[0], STDERR_FILENO);
 	ft_putstr_fd(": too many arguments\n", STDERR_FILENO);

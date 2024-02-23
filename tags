@@ -16,7 +16,6 @@ B_ECHO	includes/exec_structures.h	/^	B_ECHO,$/;"	e	enum:e_b_type
 B_ECHO	includes/structures.h	/^	B_ECHO,$/;"	e	enum:e_b_type
 B_ENV	includes/exec_structures.h	/^	B_ENV,$/;"	e	enum:e_b_type
 B_ENV	includes/structures.h	/^	B_ENV,$/;"	e	enum:e_b_type
-B_EXIT	includes/builtin.h	/^# define B_EXIT(/;"	d
 B_EXIT	includes/exec_structures.h	/^	B_EXIT$/;"	e	enum:e_b_type
 B_EXIT	includes/structures.h	/^	B_EXIT$/;"	e	enum:e_b_type
 B_EXPORT	includes/exec_structures.h	/^	B_EXPORT,$/;"	e	enum:e_b_type
@@ -34,7 +33,6 @@ CFLAGS	srcs/libft/Makefile	/^CFLAGS=-Wall -Wextra -Werror$/;"	m
 DIR_HEADER	srcs/libft/Makefile	/^DIR_HEADER=.\/$/;"	m
 DIR_SRCS	srcs/libft/Makefile	/^DIR_SRCS=.\/$/;"	m
 ENV_H	includes/env.h	/^# define ENV_H$/;"	d
-EOF_EXIT	includes/execute.h	/^# define EOF_EXIT(/;"	d
 EXECUTE_H	includes/execute.h	/^# define EXECUTE_H$/;"	d
 EXEC_STRUCTURES_H	includes/exec_structures.h	/^# define EXEC_STRUCTURES_H$/;"	d
 EXPAND_H	includes/expand.h	/^# define EXPAND_H$/;"	d
@@ -71,7 +69,6 @@ T_AND	includes/exec_structures.h	/^	T_AND,				\/\/ 논리 연산 AND "&&"$/;"	e	
 T_AND	includes/structures.h	/^	T_AND,				\/\/ 논리 연산 AND "&&"$/;"	e	enum:e_type
 T_CLOSE_BRACKET	includes/exec_structures.h	/^	T_CLOSE_BRACKET,	\/\/ 논리 연산 괄호 닫힘 ')'$/;"	e	enum:e_type
 T_CLOSE_BRACKET	includes/structures.h	/^	T_CLOSE_BRACKET,	\/\/ 논리 연산 괄호 닫힘 ')'$/;"	e	enum:e_type
-T_CMD	includes/exec_structures.h	/^	T_CMD$/;"	e	enum:e_type
 T_D_GREATER	includes/exec_structures.h	/^	T_D_GREATER,		\/\/ 리다이렉션 append ">>"$/;"	e	enum:e_type
 T_D_GREATER	includes/structures.h	/^	T_D_GREATER,		\/\/ 리다이렉션 append ">>"$/;"	e	enum:e_type
 T_D_LESSER	includes/exec_structures.h	/^	T_D_LESSER,			\/\/ 리다이렉션 Here_doc "<<"$/;"	e	enum:e_type
@@ -82,7 +79,7 @@ T_GREATER	includes/exec_structures.h	/^	T_GREATER,			\/\/ 리다이렉션 '>'$/;
 T_GREATER	includes/structures.h	/^	T_GREATER,			\/\/ 리다이렉션 '>'$/;"	e	enum:e_type
 T_LESSER	includes/exec_structures.h	/^	T_LESSER,			\/\/ 리다이렉션 '<'$/;"	e	enum:e_type
 T_LESSER	includes/structures.h	/^	T_LESSER,			\/\/ 리다이렉션 '<'$/;"	e	enum:e_type
-T_NEWLINE	includes/exec_structures.h	/^	T_NEWLINE,$/;"	e	enum:e_type
+T_NEWLINE	includes/exec_structures.h	/^	T_NEWLINE$/;"	e	enum:e_type
 T_NEWLINE	includes/structures.h	/^	T_NEWLINE$/;"	e	enum:e_type
 T_OPEN_BRACKET	includes/exec_structures.h	/^	T_OPEN_BRACKET,		\/\/ 논리 연산 괄호 열림 '('$/;"	e	enum:e_type
 T_OPEN_BRACKET	includes/structures.h	/^	T_OPEN_BRACKET,		\/\/ 논리 연산 괄호 열림 '('$/;"	e	enum:e_type
@@ -100,6 +97,7 @@ add_env_node	srcs/envs/build_env_pack.c	/^void	add_env_node(t_env_pack *pack, ch
 add_sorted_node	srcs/envs/build_env_pack.c	/^void	add_sorted_node(t_env **sorted_head, t_env *new)$/;"	f
 add_split	srcs/expand/expand_utils.c	/^void	add_split(t_c_expand *expand, char **split, int split_len, int idx)$/;"	f
 add_str	srcs/execute/utils.c	/^char	**add_str(char **str, char *add)$/;"	f
+add_str	srcs/parse/wildcard.c	/^char	**add_str(char **str, char *add)$/;"	f
 add_token	srcs/parse/token_utils.c	/^void	add_token(t_token **list, t_token *token)$/;"	f
 all_redirs	includes/exec_structures.h	/^	t_redir		*all_redirs;	\/\/ 해당 커맨드 블럭(pipe로 구분됨)의 모든 리다이렉션을 기록한 연결리스트, 실행부로 들어올 때, 모든 cmd_pack 구조체의 리다이렉션을 훑고 파일들을 열어야한다$/;"	m	struct:s_cmd_pack
 all_redirs	includes/structures.h	/^	t_redir		*all_redirs;	\/\/ 해당 커맨드 블럭(pipe로 구분됨)의 모든 리다이렉션을 기록한 연결리스트, 실행부로 들어올 때, 모든 cmd_pack 구조체의 리다이렉션을 훑고 파일들을 열어야한다$/;"	m	struct:s_cmd_pack
@@ -108,6 +106,7 @@ append_exp_ptr	srcs/expand/expand_utils.c	/^void	append_exp_ptr(t_c_expand *expa
 append_redir	srcs/execute/redirections.c	/^void	append_redir(t_cmd **cmd, t_type type, char **fileinfo)$/;"	f
 append_redir	srcs/execute/redirections/redirections.c	/^void	append_redir(t_cmd **cmd, t_type type, char **fileinfo)$/;"	f
 b_check_redir	srcs/builtins/builtin_exec.c	/^void	b_check_redir(t_cmd *cur, int *std_fd, int *in_fd, int *out_fd)$/;"	f
+b_exit	srcs/builtins/do_builtin2.c	/^void	b_exit(int code)$/;"	f
 buf_check_n_join	srcs/libft/get_next_line.c	/^char	*buf_check_n_join(char *newline, char *buf, int *ret)$/;"	f
 build_cmd_pack	srcs/execute/execute_utils2.c	/^t_cmd	*build_cmd_pack(t_ast *tree, t_env_pack *pack)$/;"	f
 build_envp	srcs/envs/build_env_pack.c	/^void	build_envp(t_env_pack *pack, char **envp)$/;"	f
@@ -417,7 +416,7 @@ t_exp_pair	includes/exec_structures.h	/^typedef struct s_exp_pair	t_exp_pair;$/;
 t_exp_pair	includes/structures.h	/^typedef struct s_exp_pair	t_exp_pair;$/;"	t	typeref:struct:s_exp_pair
 t_info	includes/exec_structures.h	/^typedef struct s_info		t_info;$/;"	t	typeref:struct:s_info
 t_list	srcs/libft/libft.h	/^}					t_list;$/;"	t	typeref:struct:s_list
-t_mark	includes/exec_structures.h	/^typedef struct s_mark	t_mark;$/;"	t	typeref:struct:s_mark
+t_mark	includes/parse_define.h	/^typedef struct s_mark	t_mark;$/;"	t	typeref:struct:s_mark
 t_r_expand	includes/structures.h	/^typedef struct s_expand		t_r_expand;		\/\/ 리다이렉션 파일 확장$/;"	t	typeref:struct:s_expand
 t_redir	includes/exec_structures.h	/^typedef struct s_redir		t_redir;$/;"	t	typeref:struct:s_redir
 t_redir	includes/structures.h	/^typedef struct s_redir		t_redir;$/;"	t	typeref:struct:s_redir
@@ -438,9 +437,9 @@ type	includes/exec_structures.h	/^	enum e_type	type;			\/\/ 어떤 리다이렉�
 type	includes/structures.h	/^	enum e_type		type;		\/\/ 열거형 type$/;"	m	struct:s_token	typeref:enum:s_token::e_type
 type	includes/structures.h	/^	enum e_type		type;$/;"	m	struct:s_ast	typeref:enum:s_ast::e_type
 type	includes/structures.h	/^	enum e_type	type;			\/\/ 어떤 리다이렉션 타입인지 가르쳐준다$/;"	m	struct:s_redir	typeref:enum:s_redir::e_type
+update_cursor	srcs/testmain.c	/^void	update_cursor(void)$/;"	f
 update_list	srcs/parse/tokenizer.c	/^void	update_list(t_token **list, char *string, t_type type)$/;"	f
 value	includes/exec_structures.h	/^	char			*value;			\/\/ 환경변수 Value값 ($USER=yusekim 에서 'yusekim' 부분)$/;"	m	struct:s_env
 value	includes/structures.h	/^	char			*value;			\/\/ 환경변수 Value값 ($USER=yusekim 에서 'yusekim' 부분)$/;"	m	struct:s_env
-wildcard	srcs/parse/wildcard.c	/^char	**wildcard(char **args)$/;"	f
 write_heredoc	srcs/execute/do_heredoc.c	/^void	write_heredoc(t_redir *redir, t_env_pack *pack, int inf_fd)$/;"	f
 write_heredoc	srcs/execute/redirections/do_heredoc.c	/^void	write_heredoc(t_redir *redir, t_env_pack *pack, int inf_fd)$/;"	f

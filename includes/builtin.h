@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:38:38 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/21 22:07:38 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:05:49 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 # include "exec_structures.h"
 # include "utils.h"
 # include "env.h"
-
-# define B_EXIT(code) { ft_putstr_fd("exit\n", STDOUT_FILENO); exit(code); }
 
 typedef int	(*t_builtin_ptr)(char **, t_env_pack *);
 
@@ -44,5 +42,6 @@ int				do_export(char **args, t_env_pack *pack);
 int				do_unset(char **args, t_env_pack *pack);
 int				do_env(char **args, t_env_pack *pack);
 int				do_exit(char **args, t_env_pack *pack);
+void			b_exit(int code);
 
 #endif

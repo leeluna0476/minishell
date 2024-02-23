@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/22 11:49:45 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:37:38 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ char	**expand(char *data, t_env_pack *package, int flag)
 		expand.result = add_str(expand.result, ft_strdup(""));
 	do_expand(&expand, package, flag);
 	free_expand(&expand);
-	// expand 구조체에서 flag 설정 후 조건으로 걸기.
-	expand.result = wildcard(expand.result);
 	return (expand.result);
 }
 

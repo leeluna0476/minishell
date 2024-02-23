@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:24 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/21 17:10:25 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:18:53 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	print_export(t_env_pack *pack)
 {
 	t_env	*temp;
 
-	temp = pack->sorted_head;
+	temp = pack->sorted_head->sorted_next;
 	while (temp)
 	{
 		ft_printf("declare -x %s", temp->name);
@@ -38,6 +38,8 @@ int	check_env_name(char **args, int i)
 {
 	int	idx;
 
+	if (!*args[i])
+		*args[i] = '=';
 	if (ft_isdigit(*args[i]))
 	{
 		ft_putstr_fd("minishell: export: '", STDERR_FILENO);
@@ -64,11 +66,14 @@ int	check_env_name(char **args, int i)
 
 int	check_res(int res, t_env_pack *pack, char *path, char **args)
 {
+	char	*str;
+
+	str = getcwd(0, 0);
 	if (!res)
 	{
 		add_env_node(pack, "OLDPWD", path);
-		free(path);
-		add_env_node(pack, "PWD", getcwd(0, 0));
+		add_env_node(pack, "PWD", str);
+		free(str);
 		return (0);
 	}
 	else
@@ -76,6 +81,7 @@ int	check_res(int res, t_env_pack *pack, char *path, char **args)
 		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
 		ft_putstr_fd(args[1], STDERR_FILENO);
 		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+		free(str);
 		return (1);
 	}
 }

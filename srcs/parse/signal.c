@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 02:19:01 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/21 21:08:29 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/23 09:31:47 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,11 @@ int	signal_event(void)
 char	*get_line(char *prompt)
 {
 	char	*str;
-//	struct termios term;
 
 	rl_catch_signals = 0;
 	signal(SIGQUIT, sig_handler);
 	signal(SIGINT, sig_handler);
-//	tcgetattr(STDIN_FILENO, &term);
-//	term.c_oflag = OPOST | ONLCR;
-//	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &term);
-	rl_signal_event_hook = signal_event;
+//	rl_signal_event_hook = signal_event;
 	str = readline(prompt);
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, SIG_DFL);

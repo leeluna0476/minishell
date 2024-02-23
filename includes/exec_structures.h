@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:50:21 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/22 11:26:54 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:45:28 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct s_expand		t_c_expand;		// 명령어 확장
 typedef struct s_exp_pair	t_exp_pair;
 typedef enum e_type			t_type;
 typedef struct s_info		t_info;
-typedef struct s_mark	t_mark;
 
 int							g_exit_status;
 // exit code(전역변수)
@@ -44,8 +43,7 @@ enum	e_type
 	T_D_GREATER,		// 리다이렉션 append ">>"
 	T_OPEN_BRACKET,		// 논리 연산 괄호 열림 '('
 	T_CLOSE_BRACKET,	// 논리 연산 괄호 닫힘 ')'
-	T_NEWLINE,
-	T_CMD
+	T_NEWLINE
 };
 // 따옴표 같은 경우 같은 짝(ascii코드로 판별)이 나올때까지 값을 모두 WORD로 해야한다..
 // 괄호는 일단 넣었는데, 짝이 안맞을 경우 따옴표와 똑같이 토큰 클리어를 해야하기 때문에 이 부분은 고민 필요
