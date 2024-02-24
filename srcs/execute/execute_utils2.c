@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:14:15 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 16:26:51 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/24 09:41:14 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,4 +125,5 @@ void	free_cmd(t_cmd *cmd)
 		free(temp);
 		temp = next;
 	}
+	free(cmd);
 }
