@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 13:31:07 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/24 16:15:24 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,14 @@ char	**expand(char *data, t_env_pack *package, int flag)
 	find_position(&expand);
 	if (expand.exp_num && flag && split_len(expand.result) == 1)
 		expand.result = add_str(expand.result, ft_strdup(""));
-	do_expand(&expand, package, flag);
+	do_expand(&expand, package);
 	free_expand(&expand);
+	int i = 0;
+	while (expand.result && expand.result[i])
+	{
+		ft_printf("[%s]\n", expand.result[i]);
+		i++;
+	}
 	return (expand.result);
 }
 
@@ -43,7 +49,7 @@ void	scan_n_setup(t_c_expand *expand, char *data)
 			q_flag = data[i];
 		else if (q_flag == data[i])
 			q_flag = 0;
-		if (data[i] == '$')
+		if (data[i] == '$' || data[i] == '*')
 			build_exp_pair(expand, data + i, q_flag);		// t_exp_pair 구조체 생성 후 따옴표 정보 기입
 		i++;
 	}
@@ -86,15 +92,16 @@ void	find_position(t_c_expand *expand)
 	int		j;
 	char	*new_o;
 
-	i = 0;
+	i = -1;
 	j = -1;
 	if (expand->exp_num == 0)
 		return ;
-	while (expand->original[i])
+	while (expand->original[++i])
 	{
-		if (expand->original[i] == '$')
+		if (expand->original[i] == '*')
+			j++;
+		else if (expand->original[i] == '$')
 			expand->exp_ptrs[++j]->exp_pos = expand->original + i;
-		i++;
 	}
 	i = 0;
 	while (expand->original[i] && expand->original[i] != '$')	// 첫 확장문자 이전까지의 문자열을 result에 저장

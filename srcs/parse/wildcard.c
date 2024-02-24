@@ -3,48 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/22 20:24:11 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/24 16:13:48 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <dirent.h>
-#include <stdlib.h>
 #include "tokenizer.h"
-#include <unistd.h>
+#include "utils.h"
 
 // 자세한 로직은 WILDCARD.md 참고.
-
-// char *를 char **에 추가.
-char	**add_str(char **str, char *add)
-{
-	char	**new;
-	int		i;
-
-	if (!add)
-		return (str);
-	i = 0;
-	while (str && str[i])
-		i++;
-	new = malloc(sizeof(char *) * (i + 2));
-	if (!new)
-		exit(1);
-	i = 0;
-	while (str && str[i])
-	{
-		new[i] = str[i];
-		i++;
-	}
-	new[i] = add;
-	i++;
-	new[i] = 0;
-	if (str)
-		free(str);
-	return (new);
-}
-
 // a*, *a* 등을 검사.
 int	check_front_center(char *filename, char *pattern, t_mark *mark, int i)
 {

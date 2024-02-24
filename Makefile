@@ -17,6 +17,7 @@ SRCS = ./srcs/envs/build_env_pack.c \
 		./srcs/expand/expand.c \
 		./srcs/expand/do_expand.c \
 		./srcs/expand/expand_utils.c \
+		./srcs/expand/wildcard_utils.c \
 		./srcs/builtins/builtin_exec.c \
 		./srcs/builtins/builtin_utils.c \
 		./srcs/builtins/do_builtin.c \
@@ -33,19 +34,19 @@ SRCS = ./srcs/envs/build_env_pack.c \
 		./srcs/parse/token_utils.c \
 		./srcs/parse/tokenizer.c \
 		./srcs/parse/signal.c \
+		./srcs/parse/wildcard.c \
 		./srcs/testmain.c
 
 
-HEADERS= ./includes/env.h \
-		 ./includes/utils.h \
-		 ./includes/expand.h \
-		 ./includes/parser.h \
-		 ./includes/builtin.h \
-		 ./includes/execute.h \
-		 ./includes/tokenizer.h \
-		 ./includes/structures.h \
-		 ./includes/redirection.h \
-		 ./includes/exec_structures.h
+# HEADERS= ./includes/env.h \
+# 		 ./includes/utils.h \
+# 		 ./includes/expand.h \
+# 		 ./includes/parser.h \
+# 		 ./includes/builtin.h \
+# 		 ./includes/execute.h \
+# 		 ./includes/tokenizer.h \
+# 		 ./includes/redirection.h \
+# 		 ./includes/exec_structures.h
 
 OBJS=$(SRCS:.c=.o)
 

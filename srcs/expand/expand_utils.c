@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 14:57:36 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/22 17:03:16 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/24 14:35:45 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ void	build_exp_pair(t_c_expand *expand, char *ptr, int q_flag)
 {
 	t_exp_pair	*new;
 
-	new = malloc(sizeof(t_exp_pair));
+	new = ft_calloc(1, sizeof(t_exp_pair));
 	if (!new)
 		exit (1);
 	new->q_flag = q_flag;
-	new->exp_name = find_env_name(ptr);
+	if (*ptr == '*')
+		new->exp_name = ft_strdup("*");
+	else
+		new->exp_name = find_env_name(ptr);
 	if (!expand->exp_num)
 	{
 		expand->exp_ptrs = malloc(sizeof(t_c_expand *) * 2);
