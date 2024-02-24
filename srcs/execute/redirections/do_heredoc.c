@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:19 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/24 10:15:40 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/24 12:26:14 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,34 @@
 #include "execute.h"
 #include "expand.h"
 #include "env.h"
+#include <termios.h>
+
+void	set_term(struct termios *term)
+{
+	tcgetattr(STDIN_FILENO, term);
+	term->c_lflag &= ~(ICANON | ECHOCTL);
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, term);
+}
+
+void	save_term(struct termios *term)
+{
+	tcgetattr(STDIN_FILENO, term);
+}
+
+void	reset_term(struct termios *term)
+{
+	term->c_lflag = (ISIG | ICANON | NOFLSH | ECHO | ECHOE | ECHOPRT | ECHONL | ECHOCTL);
+	tcsetattr(STDIN_FILENO, TCSANOW, term);
+}
 
 int	heredoc(t_redir *target, t_env_pack *pack)
 {
-	pid_t	pid;
-	int		status;
-	char	*filename;
+	pid_t			pid;
+	int				status;
+	char			*filename;
+	struct termios	term;
 
+	set_term(&term);
 	signal_ign();
 	pid = fork();
 	filename = get_filename();
@@ -35,6 +56,7 @@ int	heredoc(t_redir *target, t_env_pack *pack)
 	free(target->filename[1]);
 	target->filename[1] = filename;
 	waitpid(pid, &status, 0);
+	reset_term(&term);
 	signal_dfl();
 	if (WIFSIGNALED(status))
 	{
