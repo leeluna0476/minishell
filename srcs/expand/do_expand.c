@@ -6,18 +6,17 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:31:56 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 13:36:46 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/24 15:56:31 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 
-void	do_expand(t_c_expand *expand, t_env_pack *pack, int flag)
+void	do_expand(t_c_expand *expand, t_env_pack *pack)
 {
 	int		i;
 	char	*temp;
 
-	(void)flag;
 	i = -1;
 	if (expand->exp_num == 0)
 	{
@@ -47,6 +46,8 @@ char	*search_value(t_exp_pair *pair, t_env_pack *pack)
 
 	if (pair->q_flag == '\'')
 		return (NULL);
+	if (*pair->exp_name == '*')
+		return (ft_strdup("*"));
 	target = find_env(pair->exp_name, pack);
 	if (!target)
 		return (ft_strdup(""));
@@ -126,5 +127,6 @@ void	expand_add(t_c_expand *expand, char *temp)
 	}
 	else
 		add_split(expand, split, split_l, i - 1);
+	do_wildcard(expand, i - 1);
 	return (free(temp));
 }
