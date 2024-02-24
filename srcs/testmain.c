@@ -1,12 +1,11 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   testmain.c                                         :+:      :+:    :+:   */
+/*                                                        :::      ::::::::   */ /*   testmain.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/24 09:38:10 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/24 10:06:39 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +64,8 @@ void	run_minishell(char *str, t_env_pack *pack)
 		{
 			set_info(&info);
 			execute(ast, pack, &info);
+			// 임시 wait.
+			while (waitpid(-1, NULL, WNOHANG) != -1);
 		}
 		else
 		{
@@ -77,12 +78,18 @@ void	run_minishell(char *str, t_env_pack *pack)
 		set_exit(pack, 258);
 }
 
+void	leaks(void)
+{
+	system("leaks -q minishell");
+}
+
 //	print_ast(ast);
 int	main(int ac, char *av[], char *envp[])
 {
 	char	*str;
 	t_env_pack	pack;
 
+//	atexit(leaks);
 	(void)ac;
 	(void)av;
 	build_envp(&pack, envp);
@@ -98,7 +105,7 @@ int	main(int ac, char *av[], char *envp[])
 			run_minishell(str, &pack);
 		}
 		free(str);
-		system("leaks --list minishell");
+//		leaks();
 	}
 	ft_putstr_fd("\e8\e[B\e[Aexit\n", STDOUT_FILENO);
 	return (get_exitstat(&pack));

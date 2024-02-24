@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:07:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 20:39:46 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/24 10:16:54 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void	ft_wait(t_info *info, t_env_pack *pack)
 			}
 			else if (WIFEXITED(status))
 				info->exit_status = WEXITSTATUS(status);
+			else
+				info->exit_status = 0;
 		}
 	}
 	signal_dfl();
