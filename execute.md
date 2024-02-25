@@ -99,7 +99,7 @@ int	exec_builtin(char **args, t_env_pack *pack)
 ```
 
 **- echo**
-먼저 `-n` 옵션을 처리하고, 들어온 `arg` 순서대로 프린트해주면 된다..
+먼저 `-n` 옵션을 처리하고, 들어온 `arg` 순서대로 프린트해주면 된다.
 **- cd**
 `getcwd()`, `chdir()`을 활용하여 경로를 옮기고, 환경변수의 `PWD`와 `OLDPWD` 를 갱신한다.
 **- pwd**
@@ -114,3 +114,5 @@ int	exec_builtin(char **args, t_env_pack *pack)
 `exit`의 경우 추가 인자는 최대 하나만 받아야하고 숫자값(`atoi`로 변환가능한) 값이 들어와야 한다. 아닐 경우에는 적절한 오류메세지를 출력해준다. 전역변수로 설정해둔 `g_exit_status`을 적절한 값으로 갱신 후 `exit`을 해주면 된다.
 
 ### AST 순회 및 파이프/리다이렉션 executing, pipe, and redirection
+과거에 진행했던 미니셸과 다르게, 트리 구조로 파싱이 되어 실행부로 넘겨지기 때문에, 재귀를 활용하여 들어온 인자들을 실행시켜주어야 한다. 
+
