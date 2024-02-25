@@ -113,6 +113,4 @@ int	exec_builtin(char **args, t_env_pack *pack)
 **- exit**
 `exit`의 경우 추가 인자는 최대 하나만 받아야하고 숫자값(`atoi`로 변환가능한) 값이 들어와야 한다. 아닐 경우에는 적절한 오류메세지를 출력해준다. 전역변수로 설정해둔 `g_exit_status`을 적절한 값으로 갱신 후 `exit`을 해주면 된다.
 
-### 시그널 처리 / 종료 코드 Signal handling / exit code
-
 ### AST 순회 및 파이프/리다이렉션 executing, pipe, and redirection
