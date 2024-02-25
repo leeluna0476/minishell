@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 09:33:59 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 16:21:43 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/25 20:47:41 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)
 		add_env_node(pack, "?", exit_code_str);
 		free(exit_code_str);
 	}
-	return (0);
+//	여기 return값이 왜 항상 0인지 의문.
+//	return (0);
+	return (exit_code);
 }
 
 int	open_check(t_redir *temp, int *exit_code)

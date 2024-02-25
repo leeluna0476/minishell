@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:19 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/25 15:06:12 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/25 21:00:35 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,13 @@
 void	set_term(struct termios *term)
 {
 	tcgetattr(STDIN_FILENO, term);
-	term->c_lflag &= ~(ICANON | ECHOCTL);
-	tcsetattr(STDIN_FILENO, TCSAFLUSH, term);
-}
-
-void	save_term(struct termios *term)
-{
-	tcgetattr(STDIN_FILENO, term);
+	term->c_lflag &= ~(ECHOCTL);
+	tcsetattr(STDIN_FILENO, TCSANOW, term);
 }
 
 void	reset_term(struct termios *term)
 {
-	term->c_lflag = (ISIG | ICANON | NOFLSH | ECHO | ECHOE | ECHOPRT | ECHONL | ECHOCTL);
+	term->c_lflag |= ECHOCTL;
 	tcsetattr(STDIN_FILENO, TCSANOW, term);
 }
 
@@ -111,20 +106,24 @@ void	write_heredoc(t_redir *redir, t_env_pack *pack, int inf_fd)
 
 	q_flag = heredoc_q_flag(redir->filename[0]);
 	l_len = ft_strlen(redir->filename[1]);
-	redir->filename[1][l_len] = '\n';
+	// << eof
+	// 그냥 마지막 바이트 할당 X.
+	redir->filename[1][l_len] = '\0';
 	input = 0;
 	while (1)
 	{
 		if (input)
 			heredoc_expander(inf_fd, input, pack, q_flag);
-		ft_printf(HEREDOC);
-		input = get_next_line(0);
-		if (!input || !ft_strncmp(input, redir->filename[1], l_len + 1))
+//		ft_printf(HEREDOC);
+	// readline으로 변경. 제어문자를 입력받지 않기 위해.
+		input = readline(HEREDOC);
+	// 문자열을 일부가 아닌 전체를 비교해야 해서 strncmp보다는 strcmp가 적절해보였음.
+		if (!input || !ft_strcmp(input, redir->filename[1]))
 			break ;
 	}
-	if (!input)
-		ft_printf("\n");
-	else
+//	if (!input)
+//		ft_printf("\n");
+//	else
 		free(input);
 	redir->filename[1][l_len] = 0;
 }
@@ -155,5 +154,7 @@ void	heredoc_expander(int fd, char *input, t_env_pack *pack, int flag)
 			write(fd, input + i, 1);
 		i += exp_len + 1;
 	}
+	// 모든 입력을 개행으로 구분한다.
+	write(fd, "\n", 1);
 	free (input);
 }
