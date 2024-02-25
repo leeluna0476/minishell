@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/24 16:15:24 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/25 14:43:13 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ char	**expand(char *data, t_env_pack *package, int flag)
 		expand.result = add_str(expand.result, ft_strdup(""));
 	do_expand(&expand, package);
 	free_expand(&expand);
-	int i = 0;
-	while (expand.result && expand.result[i])
-	{
-		ft_printf("[%s]\n", expand.result[i]);
-		i++;
-	}
+	// int i = 0;
+	// while (expand.result && expand.result[i])
+	// {
+	// 	ft_printf("[%s]\n", expand.result[i]);
+	// 	i++;
+	// }
 	return (expand.result);
 }
 
@@ -49,7 +49,7 @@ void	scan_n_setup(t_c_expand *expand, char *data)
 			q_flag = data[i];
 		else if (q_flag == data[i])
 			q_flag = 0;
-		if (data[i] == '$' || data[i] == '*')
+		if (data[i] == '$')
 			build_exp_pair(expand, data + i, q_flag);		// t_exp_pair 구조체 생성 후 따옴표 정보 기입
 		i++;
 	}

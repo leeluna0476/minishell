@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:31:56 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/24 15:56:31 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/25 14:42:02 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,5 @@ void	expand_add(t_c_expand *expand, char *temp)
 	}
 	else
 		add_split(expand, split, split_l, i - 1);
-	do_wildcard(expand, i - 1);
 	return (free(temp));
 }

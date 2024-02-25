@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:22 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 16:19:38 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/25 16:39:50 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	do_cd(char **args, t_env_pack *pack)
 		target = find_env("OLDPWD", pack);
 		if (!target)
 		{
-			ft_printf("%s: OLDPWD not set\n", args[0]);
+			ft_putstr_fd("cd: OLDPWD not set\n", STDERR_FILENO);
 			return (1);
 		}
 		result = chdir(target->value);

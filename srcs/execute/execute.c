@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/24 10:15:55 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/25 16:38:54 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)
 			ft_wait(info, pack);
 	}
 	else
+	{
+		set_info(info);
 		execute(tree->left, pack, info);
+	}
 	if ((tree->type == T_AND && get_exitstat(pack)) || \
 		(tree->type == T_OR && !get_exitstat(pack)))
 		return ;
@@ -56,7 +59,10 @@ void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)
 		ft_wait(info, pack);
 	}
 	else
+	{
+		set_info(info);
 		execute(tree->right, pack, info);
+	}
 }
 
 void	execute_pipe(t_ast *tree, t_env_pack *pack, t_info *info, int level)
@@ -77,7 +83,7 @@ void	execute_pipe(t_ast *tree, t_env_pack *pack, t_info *info, int level)
 	if (temp_depths != level)
 		ft_assert(pipe(info->pipe_fds) != -1, "pipe", 1);
 	do_execution(tree->right, pack, info);
-	if (info->depths == level)
+	if (temp_depths == level)
 		ft_wait(info, pack);
 }
 

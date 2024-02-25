@@ -55,6 +55,7 @@ LIBFT = ./srcs/libft/libft.a
 all : $(NAME)
 
 $(NAME) : $(LIBFT) $(OBJS)
+	@echo $(GREEN)"---compiling---"
 	@$(CC) $(CFLAGS) $(LINKING_FLAG) -o $(NAME) $^
 	@echo $(GREEN)"\n==========================================================\n"$(EOC)
 	@echo $(YELLOW)"                    MINISHELL IS READY"$(EOC)
@@ -62,6 +63,7 @@ $(NAME) : $(LIBFT) $(OBJS)
 
 $(LIBFT) :
 	@cd ./srcs/libft ; $(MAKE)
+	@echo $(GREEN)"---creating libft.a---"
 
 %.o : %.c
 	@$(CC) $(CFLAGS) -c $< -o $@

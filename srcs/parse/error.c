@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:03:51 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/20 14:23:47 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/25 16:42:07 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	set_parse_error(t_ast *ast, char *string)
 // 토큰화 단계에서 오류가 발생하면 오류 메세지와 함께 문제 토큰을 출력.
 void	syntax_error_tokenizer(char *string, t_token **list)
 {
-	ft_printf("syntax error near unexpected character: `%s`\n", string);
+	ft_putstr_fd("syntax error near unexpected character: `", STDERR_FILENO);
+	ft_putstr_fd(string, STDERR_FILENO);
+	ft_putstr_fd("'\n", STDERR_FILENO);
 	free(string);
 	free_tokens(list);
 }
@@ -31,6 +33,8 @@ void	syntax_error_tokenizer(char *string, t_token **list)
 // 파싱 단계에서 오류가 발생하면 오류 메세지와 함께 문제 토큰을 출력.
 void	syntax_error_parser(char *string, t_token **list)
 {
-	ft_printf("parse error near unexpected token: `%s`\n", string);
+	ft_putstr_fd("parse error near unexpected token: ", STDERR_FILENO);
+	ft_putstr_fd(string, STDERR_FILENO);
+	ft_putstr_fd("'\n", STDERR_FILENO);
 	free_tokens(list);
 }

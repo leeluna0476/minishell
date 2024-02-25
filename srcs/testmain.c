@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   testmain.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojilee <seojilee@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 11:09:40 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/24 12:27:26 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/25 15:33:35 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ void	run_minishell(char *str, t_env_pack *pack)
 		{
 			set_info(&info);
 			execute(ast, pack, &info);
-			// 임시 wait.
-			while (waitpid(-1, NULL, WNOHANG) != -1);
 		}
 		else
 		{

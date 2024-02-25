@@ -14,6 +14,8 @@
 		"unistd.h": "c",
 		"parse_struct.h": "c",
 		"env.h": "c",
-		"parser.h": "c"
+		"parser.h": "c",
+		"signal_handler.h": "c",
+		"stdlib.h": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:19 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/24 12:26:14 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/25 15:06:12 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "execute.h"
 #include "expand.h"
 #include "env.h"
-#include <termios.h>
 
 void	set_term(struct termios *term)
 {
