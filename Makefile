@@ -1,9 +1,22 @@
-NAME=minishell
-CC=cc
-RM=rm -fr
-HEADERS_DIR=./includes/
-CFLAGS=-Wextra -Wall -Werror -g -I./includes
+#-------------------------------------------
 
+BLACK       =   "\033[0;30m"
+GRAY        =   "\033[1;30m"
+RED         =   "\033[1;31m"
+GREEN       =   "\033[0;32m"
+YELLOW      =   "\033[1;33m"
+PURPLE      =   "\033[0;35m"
+CYAN        =   "\033[1;36m"
+WHITE       =   "\033[1;37m"
+EOC         =   "\033[0;0m"
+LINE_CLEAR  =   "\x1b[1A\x1b[M"
+
+#-------------------------------------------
+
+NAME = minishell
+CC = cc
+CFLAGS = -I./includes -Wall -Wextra -Werror
+LINKING_FLAG = -lft -L./srcs/libft/ -lreadline
 SRCS = ./srcs/envs/build_env_pack.c \
 		./srcs/envs/env_utils.c \
 		./srcs/execute/execute.c \
@@ -36,36 +49,33 @@ SRCS = ./srcs/envs/build_env_pack.c \
 		./srcs/signal/signal.c \
 		./srcs/parse/wildcard.c \
 		./srcs/testmain.c
+OBJS = $(SRCS:.c=.o)
+LIBFT = ./srcs/libft/libft.a
 
+all : $(NAME)
 
-# HEADERS= ./includes/env.h \
-# 		 ./includes/utils.h \
-# 		 ./includes/expand.h \
-# 		 ./includes/parser.h \
-# 		 ./includes/builtin.h \
-# 		 ./includes/execute.h \
-# 		 ./includes/tokenizer.h \
-# 		 ./includes/redirection.h \
-# 		 ./includes/exec_structures.h
+$(NAME) : $(LIBFT) $(OBJS)
+	@$(CC) $(CFLAGS) $(LINKING_FLAG) -o $(NAME) $^
+	@echo $(GREEN)"\n==========================================================\n"$(EOC)
+	@echo $(YELLOW)"                    MINISHELL IS READY"$(EOC)
+	@echo $(GREEN)"\n==========================================================\n"$(EOC)
 
-OBJS=$(SRCS:.c=.o)
+$(LIBFT) :
+	@cd ./srcs/libft ; $(MAKE)
 
-all: $(NAME)
+%.o : %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJS)
-	make -C ./srcs/libft
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -lft -L./srcs/libft/ -lreadline
+clean :
+	rm -f $(OBJS)
+	cd ./srcs/libft ; $(MAKE) clean
 
-$(OBJS): $(SRCS) $(HEADERS)
+fclean : clean
+	rm -f $(NAME)
+	cd ./srcs/libft ; $(MAKE) fclean
 
-clean:
-	make clean -C ./srcs/libft
-	$(RM) $(OBJS)
+re :
+	$(MAKE) fclean
+	$(MAKE) all
 
-fclean: clean
-	make fclean -C ./srcs/libft
-	$(RM) $(NAME)
-
-re: clean all
-
-.PHONY: all clean fclean re
+.PHONY : all bonus clean fclean re
