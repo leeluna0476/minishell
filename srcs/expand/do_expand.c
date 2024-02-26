@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:31:56 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/25 14:42:02 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/26 10:54:47 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	do_expand(t_c_expand *expand, t_env_pack *pack)
 	if (expand->exp_num == 0)
 	{
 		expand->result = add_str(expand->result, ft_strdup(expand->original));
+		if (expand->wild_num)
+			expand->result = expand_wildcard(expand->original);
 		return ;
 	}
 	while (expand->exp_ptrs[++i])
@@ -50,7 +52,12 @@ char	*search_value(t_exp_pair *pair, t_env_pack *pack)
 		return (ft_strdup("*"));
 	target = find_env(pair->exp_name, pack);
 	if (!target)
-		return (ft_strdup(""));
+	{
+		if (ft_strlen(pair->exp_name) == 1)
+			return (ft_strdup("$"));
+		else
+			return (ft_strdup(""));
+	}
 	else
 		return (ft_strdup(target->value));
 }

@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/25 14:43:13 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/26 10:50:29 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 char	**expand(char *data, t_env_pack *package, int flag)
 {
-	t_c_expand	expand;
+	t_c_expand	env_info;
 
-	ft_memset(&expand, 0, sizeof(t_c_expand));
-	scan_n_setup(&expand, data);
+	ft_memset(&env_info, 0, sizeof(t_c_expand));
+	scan_n_setup(&env_info, data);
 	if (flag)
-		expand.result = add_str(expand.result, ft_strdup(data));
-	delete_quotes(&expand);
-	find_position(&expand);
-	if (expand.exp_num && flag && split_len(expand.result) == 1)
-		expand.result = add_str(expand.result, ft_strdup(""));
-	do_expand(&expand, package);
-	free_expand(&expand);
+		env_info.result = add_str(env_info.result, ft_strdup(data));
+	delete_quotes(&env_info);
+	find_position(&env_info);
+	if (env_info.exp_num && flag && split_len(env_info.result) == 1)
+		env_info.result = add_str(env_info.result, ft_strdup(""));
+	do_expand(&env_info, package);
+	free_expand(&env_info);
 	// int i = 0;
 	// while (expand.result && expand.result[i])
 	// {
 	// 	ft_printf("[%s]\n", expand.result[i]);
 	// 	i++;
 	// }
-	return (expand.result);
+	return (env_info.result);
 }
 
 void	scan_n_setup(t_c_expand *expand, char *data)
@@ -51,6 +51,8 @@ void	scan_n_setup(t_c_expand *expand, char *data)
 			q_flag = 0;
 		if (data[i] == '$')
 			build_exp_pair(expand, data + i, q_flag);		// t_exp_pair 구조체 생성 후 따옴표 정보 기입
+		else if (data[i] == '*')
+			expand->wild_num++;
 		i++;
 	}
 }
