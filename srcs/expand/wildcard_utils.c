@@ -6,17 +6,17 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:47:48 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 20:27:51 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/26 21:16:15 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 
-void	do_wildcard(t_c_expand *expand, int i)
+void	do_wildcard(t_c_expand *expand, int i, int bound)
 {
 	char		**temp_wildcard;
 
-	while (expand->result && expand->result[i])
+	while (expand->result && expand->result[i] && bound--)
 	{
 		if (scan_for_wildcard(expand->result[i]))
 		{

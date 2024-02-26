@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:14:15 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 15:08:06 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/26 21:33:27 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,9 @@ void	ft_execve(t_cmd *cmd, t_env_pack *envs)
 				errno = EISDIR;
 			if (errno == EISDIR || errno == ENOTDIR || errno == EACCES)
 				ft_perror(cmd->c_args[0], 126);
-			else
+			else if (access(cmd->c_args[0], F_OK))
 				ft_perror(cmd->c_args[0], 128);
+			exit(0);
 		}
 	}
 	relative_execve(cmd->c_args, envs, envp);

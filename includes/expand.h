@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:32:39 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/24 15:55:47 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/26 21:12:16 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*appand_string(char *result, char *original, int *start, int end);
 void	add_split(t_c_expand *expand, char **split, int split_len, int idx);
 
 // wildcard_utils.c
-void	do_wildcard(t_c_expand *expand, int i);
+void	do_wildcard(t_c_expand *expand, int i, int bound);
 int		scan_for_wildcard(char *str);
 char	**insert_strs(char **orig, char **new, int *i);
 
