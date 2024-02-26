@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:55 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 10:15:48 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:21:32 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "exec_structures.h"
 # include "utils.h"
 # define TEMP_FILENAME ".heredoc_tmp"
-# define HEREDOC "여기문서> \e[7"
+# define HEREDOC "여기문서> "
 
 // redirections.c
 void	append_redir(t_cmd **cmd, t_type type, char **fileinfo);
