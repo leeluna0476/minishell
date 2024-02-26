@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:03:51 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/25 16:42:07 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/26 18:31:20 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ void	syntax_error_tokenizer(char *string, t_token **list)
 void	syntax_error_parser(char *string, t_token **list)
 {
 	ft_putstr_fd("parse error near unexpected token: ", STDERR_FILENO);
+	ft_putchar_fd('`', STDERR_FILENO);
 	ft_putstr_fd(string, STDERR_FILENO);
-	ft_putstr_fd("'\n", STDERR_FILENO);
+	ft_putchar_fd('`', STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
 	free_tokens(list);
 }

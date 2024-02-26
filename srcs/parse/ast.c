@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:01 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 12:54:51 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/26 18:27:58 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ void	generate_ast(t_ast **ast, t_token *start, t_token *end)
 		set_start_end(&((*ast)->left), start, center->prev);
 		generate_ast(&((*ast)->left), (*ast)->left->start, (*ast)->left->end);
 		if (check_error(*ast))
+		{
 			return ;
+		}
 		set_start_end(&((*ast)->right), center->next, end);
 		generate_ast(&((*ast)->right), \
 			(*ast)->right->start, (*ast)->right->end);

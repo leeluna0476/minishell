@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 13:28:26 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/26 18:18:17 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	set_start_end(t_ast **ast, t_token *start, t_token *end)
 	if (*ast)
 	{
 		err_token = check_bracket(start, end);
-		if (!err_token)
-			err_token = check_pipe_in_bracket(start, end);
+//		if (!err_token)
+//			err_token = check_pipe_in_bracket(start, end);
 		remove_bracket(&start, &end);
 		if (err_token)
 			(*ast)->error = ft_strdup(err_token->string);
