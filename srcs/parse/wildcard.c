@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/24 16:13:48 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/26 20:54:22 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ char	**expand_wildcard(char *arg)
 	if (arg)
 	{
 		dp = opendir(".");
-		entry = readdir(dp);
-		entry = readdir(dp);
 		entry = readdir(dp);
 		while (entry)
 		{
