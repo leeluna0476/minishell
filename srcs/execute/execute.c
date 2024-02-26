@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 16:27:51 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/26 18:01:36 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	execute_pipe(t_ast *tree, t_env_pack *pack, t_info *info, int level)
 	if (temp_depths != level)
 		ft_assert(pipe(info->pipe_fds) != -1, "pipe", 1);
 	do_execution(tree->right, pack, info);
+	if (!(info->fork_num))
+		return ;
 	if (temp_depths == level)
 		ft_wait(info, pack);
 }
@@ -95,6 +97,7 @@ void	do_execution(t_ast *tree, t_env_pack *pack, t_info *info)
 	info->prev_signal += scan_n_set_redirs(cmd, pack);
 	if (info->prev_signal)
 	{
+		add_env_node(pack, "?", "1");
 		return (free_cmd(cmd));
 	}
 	if (info->depths == 0 && solo_builtin(cmd, pack) != -1)
