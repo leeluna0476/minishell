@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 11:57:39 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/26 15:04:30 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,6 @@ char	**expand(char *data, t_env_pack *package, int flag)
 		env_info.result = add_str(env_info.result, ft_strdup(""));
 	do_expand(&env_info, package);
 	free_expand(&env_info);
-	// int i = 0;
-	// while (expand.result && expand.result[i])
-	// {
-	// 	ft_printf("[%s]\n", expand.result[i]);
-	// 	i++;
-	// }
 	return (env_info.result);
 }
 

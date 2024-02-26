@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 11:09:40 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/26 09:10:18 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/26 15:11:12 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	input_handler(void)
 
 void	set_exit(t_env_pack *pack, int code)
 {
-	char *exit_code_str;
+	char	*exit_code_str;
 
 	exit_code_str = ft_itoa(code);
 	add_env_node(pack, "?", exit_code_str);
@@ -85,10 +85,11 @@ void	leaks(void)
 //	print_ast(ast);
 int	main(int ac, char *av[], char *envp[])
 {
-	char	*str;
+	char		*str;
 	t_env_pack	pack;
+	int			exitcode;
 
-//	atexit(leaks);
+	// atexit(leaks);
 	(void)ac;
 	(void)av;
 	build_envp(&pack, envp);
@@ -104,8 +105,10 @@ int	main(int ac, char *av[], char *envp[])
 			run_minishell(str, &pack);
 		}
 		free(str);
-//		leaks();
+		// leaks();
 	}
 	ft_putstr_fd("\e8\e[B\e[Aexit\n", STDOUT_FILENO);
-	return (get_exitstat(&pack));
+	exitcode = get_exitstat(&pack);
+	free_envs(pack.origin_head);
+	return (exitcode);
 }
