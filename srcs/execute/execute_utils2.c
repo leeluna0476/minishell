@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:14:15 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/24 09:41:14 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:03:56 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	relative_execve(char **args, t_env_pack *envs, char **envp)
 	while (path_split && path_split[i])
 	{
 		relative_path = path_join(path_split[i], args[0]);
-		if (access(relative_path, X_OK) == 0)
+		if (access(relative_path, X_OK) == 0 && !is_dir(relative_path))
 			ft_assert(execve(relative_path, args, envp) != -1, args[0], 1);
 		free(relative_path);
 		free(path_split[i]);
@@ -92,7 +92,7 @@ void	relative_execve(char **args, t_env_pack *envs, char **envp)
 
 void	ft_perror(const char *str, int exit_num)
 {
-	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	ft_putstr_fd("미니쉘: ", STDERR_FILENO);
 	ft_putstr_fd((char *)str, STDERR_FILENO);
 	if (exit_num == 126)
 		ft_putstr_fd(": is a directory\n", STDERR_FILENO);
