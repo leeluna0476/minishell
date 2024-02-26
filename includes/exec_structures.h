@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:50:21 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 10:33:39 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/26 11:19:52 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ struct s_expand
 	t_exp_pair	**exp_ptrs;		// original을 돌면서 찾은 '$' 위치들과
 	int			exp_num;		// '$' 갯수(확장여부 상관없이)
 	int			wild_num;		// 확장 전(original)의 wildcard 문자 갯수
+	int			wild_flag;		// 확장 전(original)의 와일드카드에 적용된 따옴표 플래그
 	char		**result;		// 확장을 완료한 최종 결과물
 };
 

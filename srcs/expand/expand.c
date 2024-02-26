@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 10:50:29 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/26 11:07:57 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ void	scan_n_setup(t_c_expand *expand, char *data)
 		if (data[i] == '$')
 			build_exp_pair(expand, data + i, q_flag);		// t_exp_pair 구조체 생성 후 따옴표 정보 기입
 		else if (data[i] == '*')
+		{
 			expand->wild_num++;
+			expand->wild_flag = q_flag;
+		}
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:14:15 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 11:03:56 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:28:17 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_execve(t_cmd *cmd, t_env_pack *envs)
 	{
 		if (execve(cmd->c_args[0], cmd->c_args, envp) < 0)
 		{
-			if (is_dir(cmd->c_args[0]))
+			if (!access(cmd->c_args[0], F_OK) && is_dir(cmd->c_args[0]))
 				ft_perror(cmd->c_args[0], 126);
 			else
 				ft_perror(cmd->c_args[0], 1);
