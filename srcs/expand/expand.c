@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 11:07:57 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/26 11:57:39 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,7 @@ void	find_position(t_c_expand *expand)
 		return ;
 	while (expand->original[++i])
 	{
-		if (expand->original[i] == '*')
-			j++;
-		else if (expand->original[i] == '$')
+		if (expand->original[i] == '$')
 			expand->exp_ptrs[++j]->exp_pos = expand->original + i;
 	}
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:31:56 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 11:22:40 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:45:44 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	do_expand(t_c_expand *expand, t_env_pack *pack)
 			expand_join(expand, temp);		// split 없이 바로 strjoin
 		join_remain(expand, ft_strlen(expand->exp_ptrs[i]->exp_name));						// 다음 $문자오기 전까지 일반문자열들을 join한다
 	}
+	do_wildcard(expand, split_len(expand->result) - 1);
 }
 
 char	*search_value(t_exp_pair *pair, t_env_pack *pack)
@@ -120,20 +121,21 @@ void	expand_add(t_c_expand *expand, char *temp)
 		return (free(temp));
 	split = ft_split(temp, ' ');
 	split_l = split_len(split);
-	i = 0;
+	i = 1;
 	while (expand->result && expand->result[i])
 		i++;
+	i -= 1;
 	if (!expand->result)
 		expand->result = split;
 	else if (split_l == 1)
 	{
-		out = ft_strjoin(expand->result[i - 1], temp);
-		free(expand->result[i - 1]);
-		expand->result[i - 1] = out;
+		out = ft_strjoin(expand->result[i], temp);
+		free(expand->result[i]);
+		expand->result[i] = out;
 		split_free(split);
 	}
 	else
-		add_split(expand, split, split_l, i - 1);
-	do_wildcard(expand, i - 1);
+		add_split(expand, split, split_l, i);
+	do_wildcard(expand, i);
 	return (free(temp));
 }
