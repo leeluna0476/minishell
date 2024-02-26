@@ -1,0 +1,21 @@
+{
+	"files.associations": {
+		"__functional_03": "c",
+		"functional": "c",
+		"execute.h": "c",
+		"builtin.h": "c",
+		"exec_structures.h": "c",
+		"__locale": "c",
+		"redirection.h": "c",
+		"utils.h": "c",
+		"expand.h": "c",
+		"structures.h": "c",
+		"tokenizer.h": "c",
+		"unistd.h": "c",
+		"parse_struct.h": "c",
+		"env.h": "c",
+		"parser.h": "c",
+		"signal_handler.h": "c",
+		"stdlib.h": "c"
+	}
+}
