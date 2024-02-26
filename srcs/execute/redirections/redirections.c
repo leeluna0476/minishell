@@ -6,7 +6,11 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 09:33:59 by yusekim           #+#    #+#             */
+<<<<<<< HEAD:srcs/execute/redirections/redirections.c
 /*   Updated: 2024/02/20 07:25:24 by yusekim          ###   ########.fr       */
+=======
+/*   Updated: 2024/02/26 21:41:29 by yusekim          ###   ########.fr       */
+>>>>>>> yusekim_test:srcs/execute/redirections.c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +68,25 @@ int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)
 		temp = temp->next;
 	}
 	temp = cmd->all_redirs;
+<<<<<<< HEAD:srcs/execute/redirections/redirections.c
 	if (exit_code || open_check(temp))
+=======
+	open_check(temp, &exit_code);
+	if (exit_code)
+>>>>>>> yusekim_test:srcs/execute/redirections.c
 	{
 		exit_code_str = ft_itoa(exit_code);
 		add_env_node(pack, "?", exit_code_str);
 		free(exit_code_str);
 	}
+<<<<<<< HEAD:srcs/execute/redirections/redirections.c
 	return (0);
+=======
+	return (exit_code);
+>>>>>>> yusekim_test:srcs/execute/redirections.c
 }
 
-int	open_check(t_redir *temp)
+int	open_check(t_redir *temp, int *exit_code)
 {
 	while (temp)
 	{
@@ -81,6 +94,10 @@ int	open_check(t_redir *temp)
 		{
 			ft_putstr_fd(temp->filename[0], STDERR_FILENO);
 			ft_putstr_fd(": ambiguous redirect\n", STDERR_FILENO);
+<<<<<<< HEAD:srcs/execute/redirections/redirections.c
+=======
+			*exit_code = 1;
+>>>>>>> yusekim_test:srcs/execute/redirections.c
 			return (1);
 		}
 		redir_open(temp);
@@ -91,6 +108,10 @@ int	open_check(t_redir *temp)
 				ft_putstr_fd(": Permission denied\n", STDERR_FILENO);
 			else
 				ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+<<<<<<< HEAD:srcs/execute/redirections/redirections.c
+=======
+			*exit_code = 1;
+>>>>>>> yusekim_test:srcs/execute/redirections.c
 			return (1);
 		}
 		if (temp->fd > 2)

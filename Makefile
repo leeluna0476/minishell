@@ -4,6 +4,26 @@ RM=rm -fr
 HEADERS_DIR=./includes/
 CFLAGS=-Wextra -Wall -Werror -I./includes
 
+<<<<<<< HEAD
+=======
+BLACK       =   "\033[0;30m"
+GRAY        =   "\033[1;30m"
+RED         =   "\033[1;31m"
+GREEN       =   "\033[0;32m"
+YELLOW      =   "\033[1;33m"
+PURPLE      =   "\033[0;35m"
+CYAN        =   "\033[1;36m"
+WHITE       =   "\033[1;37m"
+EOC         =   "\033[0;0m"
+LINE_CLEAR  =   "\x1b[1A\x1b[M"
+
+#-------------------------------------------
+
+NAME = minishell
+CC = cc
+CFLAGS = -I./includes -Wall -Wextra -Werror
+LINKING_FLAG = -lft -L./srcs/libft/ -lreadline
+>>>>>>> yusekim_test
 SRCS = ./srcs/envs/build_env_pack.c \
 		./srcs/envs/env_utils.c \
 		./srcs/execute/execute.c \
@@ -17,6 +37,7 @@ SRCS = ./srcs/envs/build_env_pack.c \
 		./srcs/expand/expand.c \
 		./srcs/expand/do_expand.c \
 		./srcs/expand/expand_utils.c \
+		./srcs/expand/wildcard_utils.c \
 		./srcs/builtins/builtin_exec.c \
 		./srcs/builtins/builtin_utils.c \
 		./srcs/builtins/do_builtin.c \
@@ -32,6 +53,7 @@ SRCS = ./srcs/envs/build_env_pack.c \
 		./srcs/parse/set_nodes.c \
 		./srcs/parse/token_utils.c \
 		./srcs/parse/tokenizer.c \
+<<<<<<< HEAD
 		./srcs/parse/signal.c \
 		./srcs/testmain.c
 
@@ -46,14 +68,34 @@ HEADERS= ./includes/env.h \
 		 ./includes/structures.h \
 		 ./includes/redirection.h \
 		 ./includes/exec_structures.h
+=======
+		./srcs/signal/signal.c \
+		./srcs/parse/wildcard.c \
+		./srcs/testmain.c
+OBJS = $(SRCS:.c=.o)
+LIBFT = ./srcs/libft/libft.a
+>>>>>>> yusekim_test
 
 OBJS=$(SRCS:.c=.o)
 
+<<<<<<< HEAD
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C ./srcs/libft
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -lft -L./srcs/libft/ -lreadline
+=======
+$(NAME) : $(LIBFT) $(OBJS)
+	@echo $(GREEN)"---compiling---"
+	@$(CC) $(CFLAGS) $(LINKING_FLAG) -o $(NAME) $^
+	@echo $(GREEN)"\n==========================================================\n"$(EOC)
+	@echo $(YELLOW)"                    MINISHELL IS READY"$(EOC)
+	@echo $(GREEN)"\n==========================================================\n"$(EOC)
+
+$(LIBFT) :
+	@cd ./srcs/libft ; $(MAKE)
+	@echo $(GREEN)"---creating libft.a---"
+>>>>>>> yusekim_test
 
 $(OBJS): $(SRCS) $(HEADERS)
 

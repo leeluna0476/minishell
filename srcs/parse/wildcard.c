@@ -3,6 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD:srcs/parse/wildcard.c
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
@@ -45,6 +46,19 @@ char	**add_str(char **str, char *add)
 	return (new);
 }
 
+=======
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
+/*   Updated: 2024/02/26 20:54:22 by seojilee         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "tokenizer.h"
+#include "utils.h"
+
+// 자세한 로직은 WILDCARD.md 참고.
+>>>>>>> yusekim_test:srcs/test.c
 // a*, *a* 등을 검사.
 int	check_front_center(char *filename, char *pattern, t_mark *mark, int i)
 {
@@ -132,8 +146,11 @@ char	**expand_wildcard(char *arg)
 	if (arg)
 	{
 		dp = opendir(".");
+<<<<<<< HEAD:srcs/parse/wildcard.c
 		entry = readdir(dp);
 		entry = readdir(dp);
+=======
+>>>>>>> yusekim_test:srcs/test.c
 		entry = readdir(dp);
 		while (entry)
 		{

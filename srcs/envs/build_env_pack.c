@@ -6,7 +6,11 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:46:43 by yusekim           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/02/22 17:02:50 by yusekim          ###   ########.fr       */
+=======
+/*   Updated: 2024/02/24 10:03:00 by seojilee         ###   ########.fr       */
+>>>>>>> yusekim_test
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +20,8 @@ void	build_envp(t_env_pack *pack, char **envp)
 {
 	int		idx;
 	char	*temp;
+	char	*shlvl;
+	t_env	*shlv_node;
 
 	ft_memset(pack, 0, sizeof(t_env_pack));
 	idx = 0;
@@ -28,6 +34,10 @@ void	build_envp(t_env_pack *pack, char **envp)
 		*temp = '=';
 		idx++;
 	}
+	shlv_node = find_env("SHLVL", pack);
+	shlvl = ft_itoa(ft_atoi(shlv_node->value) + 1);
+	free(shlv_node->value);
+	shlv_node->value = shlvl;
 	idx = 0;
 }
 // 환경변수 패키지 구조체(t_env_pack)를 만드는 함수

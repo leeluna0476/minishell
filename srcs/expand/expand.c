@@ -6,7 +6,11 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:31 by yusekim           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/02/21 15:37:38 by yusekim          ###   ########.fr       */
+=======
+/*   Updated: 2024/02/26 15:04:30 by yusekim          ###   ########.fr       */
+>>>>>>> yusekim_test
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +18,12 @@
 
 char	**expand(char *data, t_env_pack *package, int flag)
 {
-	t_c_expand	expand;
+	t_c_expand	env_info;
 
-	ft_memset(&expand, 0, sizeof(t_c_expand));
-	scan_n_setup(&expand, data);
+	ft_memset(&env_info, 0, sizeof(t_c_expand));
+	scan_n_setup(&env_info, data);
 	if (flag)
+<<<<<<< HEAD
 		expand.result = add_str(expand.result, ft_strdup(data));
 	delete_quotes(&expand);
 	find_position(&expand);
@@ -27,6 +32,16 @@ char	**expand(char *data, t_env_pack *package, int flag)
 	do_expand(&expand, package, flag);
 	free_expand(&expand);
 	return (expand.result);
+=======
+		env_info.result = add_str(env_info.result, ft_strdup(data));
+	delete_quotes(&env_info);
+	find_position(&env_info);
+	if (env_info.exp_num && flag && split_len(env_info.result) == 1)
+		env_info.result = add_str(env_info.result, ft_strdup(""));
+	do_expand(&env_info, package);
+	free_expand(&env_info);
+	return (env_info.result);
+>>>>>>> yusekim_test
 }
 
 void	scan_n_setup(t_c_expand *expand, char *data)
@@ -45,6 +60,11 @@ void	scan_n_setup(t_c_expand *expand, char *data)
 			q_flag = 0;
 		if (data[i] == '$')
 			build_exp_pair(expand, data + i, q_flag);		// t_exp_pair 구조체 생성 후 따옴표 정보 기입
+		else if (data[i] == '*')
+		{
+			expand->wild_num++;
+			expand->wild_flag = q_flag;
+		}
 		i++;
 	}
 }
@@ -86,15 +106,14 @@ void	find_position(t_c_expand *expand)
 	int		j;
 	char	*new_o;
 
-	i = 0;
+	i = -1;
 	j = -1;
 	if (expand->exp_num == 0)
 		return ;
-	while (expand->original[i])
+	while (expand->original[++i])
 	{
 		if (expand->original[i] == '$')
 			expand->exp_ptrs[++j]->exp_pos = expand->original + i;
-		i++;
 	}
 	i = 0;
 	while (expand->original[i] && expand->original[i] != '$')	// 첫 확장문자 이전까지의 문자열을 result에 저장

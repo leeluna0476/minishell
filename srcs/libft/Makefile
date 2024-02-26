@@ -18,10 +18,10 @@ OBJS=$(BONUS_OBJS) $(MAN_OBJS) $(PRINTF_OBJS)
 all: $(NAME)
 
 %.o: %.c $(DIR_HEADER)$(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS) $(PRINTF_OBJS)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 
 clean:
 	$(RM) $(OBJS) $(PRINTF_OBJS) $(BONUS_OBJS)

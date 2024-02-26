@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structures.h                                       :+:      :+:    :+:   */
+/*   exec_structures.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:50:21 by yusekim           #+#    #+#             */
+<<<<<<< HEAD:includes/structures.h
 /*   Updated: 2024/02/19 14:13:29 by seojilee         ###   ########.fr       */
+=======
+/*   Updated: 2024/02/26 16:21:56 by yusekim          ###   ########.fr       */
+>>>>>>> yusekim_test:includes/exec_structures.h
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTURES_H
-# define STRUCTURES_H
+#ifndef EXEC_STRUCTURES_H
+# define EXEC_STRUCTURES_H
 # include "../srcs/libft/libft.h"
 // 이 파일에는 미니셸 구조체들을 선언한다
 
 typedef struct s_token		t_token;
-typedef struct s_tree		t_tree;
+typedef struct s_ast		t_ast;
 typedef struct s_env		t_env;
 typedef struct s_env_pack	t_env_pack;
 typedef struct s_cmd_pack	t_cmd;
 typedef struct s_redir		t_redir;
 typedef struct s_expand		t_c_expand;		// 명령어 확장
-typedef struct s_expand		t_r_expand;		// 리다이렉션 파일 확장
 typedef struct s_exp_pair	t_exp_pair;
-typedef struct s_ast		t_ast;
 typedef enum e_type			t_type;
+typedef struct s_info		t_info;
 
 int							g_exit_status;
 // exit code(전역변수)
@@ -33,15 +36,15 @@ int							g_exit_status;
 enum	e_type
 {
 	T_ERROR = -1,		// 기본값 (syntax check때의 초깃값)
-	T_WORD,				// 문자
 	T_SPACE,			// 공백문자(보통 space)
+	T_AND,				// 논리 연산 AND "&&"
+	T_OR,				// 논리 연산 OR "||"
 	T_PIPE,				// Pipe문자 '|'
+	T_WORD,				// 문자
 	T_LESSER,			// 리다이렉션 '<'
 	T_GREATER,			// 리다이렉션 '>'
 	T_D_LESSER,			// 리다이렉션 Here_doc "<<"
 	T_D_GREATER,		// 리다이렉션 append ">>"
-	T_AND,				// 논리 연산 AND "&&"
-	T_OR,				// 논리 연산 OR "||"
 	T_OPEN_BRACKET,		// 논리 연산 괄호 열림 '('
 	T_CLOSE_BRACKET,	// 논리 연산 괄호 닫힘 ')'
 	T_NEWLINE
@@ -68,15 +71,6 @@ struct s_token
 	struct s_token	*next;		// 다음 node
 	struct s_token	*prev;		// 이전 node (syntax error 체크때 유용했었음)
 };
-
-struct s_tree
-{
-	enum e_type	this_type;		// 현재 노드의 타입 (아마 e_type 열거형으로 퉁칠 수 있을듯?)
-	void		*this_ptr;		// 현재 노드가 가지고 있는 데이터, cmd타입일때만 내용이 있고 나머지는 NULL
-	void		*left_ptr;		// 왼쪽 branch
-	void		*right_ptr;		// 오른쪽 branch
-};
-// 임시 AST 구조체..
 
 struct s_env				// 환경변수 연결리스트
 {
@@ -120,6 +114,8 @@ struct s_expand
 	char		*original;
 	t_exp_pair	**exp_ptrs;		// original을 돌면서 찾은 '$' 위치들과
 	int			exp_num;		// '$' 갯수(확장여부 상관없이)
+	int			wild_num;		// 확장 전(original)의 wildcard 문자 갯수
+	int			wild_flag;		// 확장 전(original)의 와일드카드에 적용된 따옴표 플래그
 	char		**result;		// 확장을 완료한 최종 결과물
 };
 
@@ -138,6 +134,18 @@ struct s_ast
 	char			*error;
 	struct s_ast	*left;
 	struct s_ast	*right;
+};
+
+struct s_info
+{
+	int			depths;				// 현재 몇 번째 가지(재귀)에 있는지 확인용
+	pid_t		last_pid;			// 가장 마지막에 fork()된 프로세스 id, exit code 확인용
+	int			fork_num;			// 몇번 fork()되었는지 기록, wait해야할 프로세스의 개수를 알아야 함
+	int			pipe_fds[2];			// pipe()의 결과물을 기록한다. 3개짜리 int배열이고 첫 두개는 pipe()의 결과물, 3번째칸에는 다중 파이프때의 이전에 사용한 파이프의 fd
+	int			prev_fd;
+	int			redir_fds[2];		// 리다이렉션 파이프, 기본값은 표준입출력 fd이고 만약 in_redir, out_redir이 있을때 해당 파일을 open할 때 리턴받은 fd값으로 바꿔준다
+	int			exit_status;
+	int			prev_signal;
 };
 
 #endif

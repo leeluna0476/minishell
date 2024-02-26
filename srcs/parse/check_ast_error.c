@@ -6,7 +6,11 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:01 by seojilee          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/02/16 13:16:47 by seojilee         ###   ########.fr       */
+=======
+/*   Updated: 2024/02/26 18:30:00 by seojilee         ###   ########.fr       */
+>>>>>>> yusekim_test
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +22,7 @@
 // ls && (ls) -> error
 void	check_center_error(t_ast *ast, t_token *center)
 {
+<<<<<<< HEAD
 	if ((!(center->next) || !(center->prev)) \
 		|| (center->next->type == T_AND || center->next->type == T_OR \
 		|| center->next->type == T_PIPE \
@@ -28,6 +33,32 @@ void	check_center_error(t_ast *ast, t_token *center)
 	{
 		set_parse_error(ast, center->string);
 	}
+=======
+	if (!(center->prev))
+		set_parse_error(ast, center->string);
+	else if (!(center->next))
+		set_parse_error(ast, "newline");
+	else if (center->prev->type == T_AND || center->prev->type == T_OR \
+		|| center->prev->type == T_PIPE \
+		|| center->prev->type == T_OPEN_BRACKET)
+		set_parse_error(ast, center->prev->string);
+	else if (center->next->type == T_AND || center->next->type == T_OR \
+		|| center->next->type == T_PIPE \
+		|| center->next->type == T_CLOSE_BRACKET)
+		set_parse_error(ast, center->next->string);
+//
+//
+//	if ((!(center->next) || !(center->prev)) \
+//		|| (center->next->type == T_AND || center->next->type == T_OR \
+//		|| center->next->type == T_PIPE \
+//		|| center->next->type == T_CLOSE_BRACKET \
+//		|| center->prev->type == T_AND || center->prev->type == T_OR \
+//		|| center->prev->type == T_PIPE \
+//		|| center->prev->type == T_OPEN_BRACKET))
+//	{
+//		set_parse_error(ast, center->string);
+//	}
+>>>>>>> yusekim_test
 }
 
 // 리다이렉션 뒤에 아무것도 없거나 T_WORD 외의 타입이 온다면 에러 설정.

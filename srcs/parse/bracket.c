@@ -6,7 +6,11 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:57:56 by seojilee          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/02/19 19:50:46 by seojilee         ###   ########.fr       */
+=======
+/*   Updated: 2024/02/26 18:19:34 by seojilee         ###   ########.fr       */
+>>>>>>> yusekim_test
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +39,15 @@ int	get_bracket_flag(t_token **start, t_token **end, \
 		else if (curr->type == T_CLOSE_BRACKET)
 		{
 			flag--;
+<<<<<<< HEAD
 			if (!flag && !(*last))
 				*last = curr;
 		}
+=======
+			if ((!flag || flag < 0) && !(*last))
+				*last = curr;
+}
+>>>>>>> yusekim_test
 		curr = curr->next;
 	}
 	if (*first && *last && (*first)->next == (*end))

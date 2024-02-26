@@ -6,7 +6,11 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:32:39 by yusekim           #+#    #+#             */
+<<<<<<< HEAD:includes/expand.h
 /*   Updated: 2024/02/16 12:38:28 by yusekim          ###   ########.fr       */
+=======
+/*   Updated: 2024/02/26 21:12:16 by yusekim          ###   ########.fr       */
+>>>>>>> yusekim_test:Includes/expand.h
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +19,7 @@
 # include "exec_structures.h"
 # include "utils.h"
 # include "env.h"
+# include "parser.h"
 
 // expand.c
 char	**expand(char *data, t_env_pack *package, int flag);
@@ -36,5 +41,10 @@ void	append_exp_ptr(t_c_expand *expand, t_exp_pair *newpair);
 char	*find_env_name(char *ptr);
 char	*appand_string(char *result, char *original, int *start, int end);
 void	add_split(t_c_expand *expand, char **split, int split_len, int idx);
+
+// wildcard_utils.c
+void	do_wildcard(t_c_expand *expand, int i, int bound);
+int		scan_for_wildcard(char *str);
+char	**insert_strs(char **orig, char **new, int *i);
 
 #endif

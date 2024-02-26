@@ -6,7 +6,11 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:14:15 by yusekim           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/02/22 17:28:54 by yusekim          ###   ########.fr       */
+=======
+/*   Updated: 2024/02/26 21:33:27 by yusekim          ###   ########.fr       */
+>>>>>>> yusekim_test
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +34,11 @@ t_cmd	*build_cmd_pack(t_ast *tree, t_env_pack *pack)
 	{
 		if (cur->prev && cur->prev->type == T_D_LESSER)
 		{
+<<<<<<< HEAD
 			limiter = add_str(0, cur->string);
+=======
+			limiter = add_str(0, ft_strdup(cur->string));
+>>>>>>> yusekim_test
 			limiter = add_str(limiter, trim_quotes(cur->string));
 			append_redir(&cmd, cur->prev->type, limiter);
 		}
@@ -38,7 +46,12 @@ t_cmd	*build_cmd_pack(t_ast *tree, t_env_pack *pack)
 			append_redir(&cmd, cur->prev->type, \
 				expand(ft_strdup(cur->string), pack, 1));
 		else if (cur->type == T_WORD)
+<<<<<<< HEAD
 			cmd->c_args = merge_strs(cmd->c_args, expand(ft_strdup(cur->string), pack, 0));
+=======
+			cmd->c_args = merge_strs(cmd->c_args, \
+			expand(ft_strdup(cur->string), pack, 0));
+>>>>>>> yusekim_test
 		cur = cur->next;
 	}
 	return (cmd);
@@ -56,9 +69,18 @@ void	ft_execve(t_cmd *cmd, t_env_pack *envs)
 		if (execve(cmd->c_args[0], cmd->c_args, envp) < 0)
 		{
 			if (is_dir(cmd->c_args[0]))
+<<<<<<< HEAD
 				ft_perror(cmd->c_args[0], 126);
 			else
 				ft_perror(cmd->c_args[0], 1);
+=======
+				errno = EISDIR;
+			if (errno == EISDIR || errno == ENOTDIR || errno == EACCES)
+				ft_perror(cmd->c_args[0], 126);
+			else if (access(cmd->c_args[0], F_OK))
+				ft_perror(cmd->c_args[0], 128);
+			exit(0);
+>>>>>>> yusekim_test
 		}
 	}
 	relative_execve(cmd->c_args, envs, envp);
@@ -79,7 +101,11 @@ void	relative_execve(char **args, t_env_pack *envs, char **envp)
 	while (path_split && path_split[i])
 	{
 		relative_path = path_join(path_split[i], args[0]);
+<<<<<<< HEAD
 		if (access(relative_path, X_OK) == 0)
+=======
+		if (access(relative_path, X_OK) == 0 && !is_dir(relative_path))
+>>>>>>> yusekim_test
 			ft_assert(execve(relative_path, args, envp) != -1, args[0], 1);
 		free(relative_path);
 		free(path_split[i]);
@@ -91,10 +117,24 @@ void	relative_execve(char **args, t_env_pack *envs, char **envp)
 
 void	ft_perror(const char *str, int exit_num)
 {
+<<<<<<< HEAD
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd((char *)str, STDERR_FILENO);
 	if (exit_num == 126)
 		ft_putstr_fd(": is a directory\n", STDERR_FILENO);
+=======
+	ft_putstr_fd("미니쉘: ", STDERR_FILENO);
+	ft_putstr_fd((char *)str, STDERR_FILENO);
+	if (exit_num == 126)
+	{
+		if (errno == ENOTDIR)
+			ft_putstr_fd(": not a directory\n", STDERR_FILENO);
+		else if (errno == EISDIR)
+			ft_putstr_fd(": is a directory\n", STDERR_FILENO);
+		else if (errno == EACCES)
+			ft_putstr_fd(": Permission denied\n", STDERR_FILENO);
+	}
+>>>>>>> yusekim_test
 	else if (exit_num == 127)
 		ft_putstr_fd(": command not found\n", STDERR_FILENO);
 	else if (exit_num == 128)

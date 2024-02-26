@@ -6,12 +6,20 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:07:31 by yusekim           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/02/22 17:14:00 by yusekim          ###   ########.fr       */
+=======
+/*   Updated: 2024/02/26 21:37:51 by yusekim          ###   ########.fr       */
+>>>>>>> yusekim_test
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
 #include "env.h"
+<<<<<<< HEAD
+=======
+#include "signal_handler.h"
+>>>>>>> yusekim_test
 
 void	set_fds(t_cmd *cmd, t_info *info)
 {
@@ -52,6 +60,22 @@ void	ft_dup2(t_info *info)
 		close(info->pipe_fds[1]);
 }
 
+<<<<<<< HEAD
+=======
+void	exec_parent(t_info *info)
+{
+	if (info->redir_fds[0] > 2)
+		close(info->redir_fds[0]);
+	if (info->redir_fds[1] > 2)
+		close(info->redir_fds[1]);
+	if (info->fork_num != 0 && info->prev_fd)
+		close(info->prev_fd);
+	if (info->pipe_fds[1] != 1)
+		close(info->pipe_fds[1]);
+	info->prev_fd = info->pipe_fds[0];
+}
+
+>>>>>>> yusekim_test
 void	ft_wait(t_info *info, t_env_pack *pack)
 {
 	int		status;
@@ -62,11 +86,27 @@ void	ft_wait(t_info *info, t_env_pack *pack)
 		if (waitpid(-1, &status, 0) == info->last_pid)
 		{
 			if (WIFSIGNALED(status))
+<<<<<<< HEAD
 				info->exit_status = WTERMSIG(status) + 128;
 			else if (WIFEXITED(status))
 				info->exit_status = WEXITSTATUS(status);
 		}
 	}
+=======
+			{
+				if (WTERMSIG(status) == SIGQUIT)
+					ft_putstr_fd("Quit: 3", STDOUT_FILENO);
+				ft_putchar_fd('\n', STDOUT_FILENO);
+				info->exit_status = WTERMSIG(status) + 128;
+			}
+			else if (WIFEXITED(status))
+				info->exit_status = WEXITSTATUS(status);
+			else
+				info->exit_status = 0;
+		}
+	}
+	signal_dfl();
+>>>>>>> yusekim_test
 	info->fork_num = 0;
 	info->last_pid = 0;
 	if (info->prev_fd)
@@ -76,3 +116,13 @@ void	ft_wait(t_info *info, t_env_pack *pack)
 	free(exit_code);
 	return ;
 }
+<<<<<<< HEAD
+=======
+
+void	set_info(t_info *info)
+{
+	ft_memset(info, 0, sizeof(t_info));
+	info->pipe_fds[1] = 1;
+	info->redir_fds[1] = 1;
+}
+>>>>>>> yusekim_test

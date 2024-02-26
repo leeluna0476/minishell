@@ -6,13 +6,21 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:22 by yusekim           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/02/22 16:34:22 by yusekim          ###   ########.fr       */
+=======
+/*   Updated: 2024/02/26 21:43:27 by yusekim          ###   ########.fr       */
+>>>>>>> yusekim_test
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec_structures.h"
 #include "builtin.h"
 #include "env.h"
+<<<<<<< HEAD
+=======
+#include "execute.h"
+>>>>>>> yusekim_test
 
 int	do_cd(char **args, t_env_pack *pack)
 {
@@ -29,7 +37,11 @@ int	do_cd(char **args, t_env_pack *pack)
 		target = find_env("OLDPWD", pack);
 		if (!target)
 		{
+<<<<<<< HEAD
 			ft_printf("%s: OLDPWD not set\n", args[0]);
+=======
+			ft_putstr_fd("cd: OLDPWD not set\n", STDERR_FILENO);
+>>>>>>> yusekim_test
 			return (1);
 		}
 		result = chdir(target->value);
@@ -80,3 +92,36 @@ int	do_pwd(char **args, t_env_pack *pack)
 	return (0);
 }
 // pwd, getcwd함수를 쓰면 바로 가져올 수 있다
+
+int	do_exit(char **args, t_env_pack *pack)
+{
+	int	args_len;
+
+	(void)pack;
+	args_len = split_len(args);
+	if (args_len == 1)
+		b_exit(get_exitstat(pack));
+	if (args_len == 2)
+	{
+		if (check_sign(args[1]))
+		{
+			ft_putstr_fd(args[0], STDERR_FILENO);
+			ft_putstr_fd(": ", STDERR_FILENO);
+			ft_putstr_fd(args[1], STDERR_FILENO);
+			ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+			b_exit(255);
+		}
+		else
+			b_exit(ft_atoi(args[1]) % 256);
+	}
+	ft_putstr_fd(args[0], STDERR_FILENO);
+	ft_putstr_fd(": too many arguments\n", STDERR_FILENO);
+	return (1);
+}
+// exit해주는 함수 bash의 동작과 맞춰주었다..
+
+void	b_exit(int code)
+{
+	ft_putstr_fd("exit\n", STDOUT_FILENO);
+	exit(code);
+}

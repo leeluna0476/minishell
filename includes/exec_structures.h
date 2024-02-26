@@ -3,10 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   exec_structures.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:50:21 by yusekim           #+#    #+#             */
 /*   Updated: 2024/02/22 13:45:28 by yusekim          ###   ########.fr       */
+=======
+/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/01 12:50:21 by yusekim           #+#    #+#             */
+<<<<<<< HEAD:includes/structures.h
+/*   Updated: 2024/02/19 14:13:29 by seojilee         ###   ########.fr       */
+=======
+/*   Updated: 2024/02/26 16:21:56 by yusekim          ###   ########.fr       */
+>>>>>>> yusekim_test:includes/exec_structures.h
+>>>>>>> yusekim_test
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +121,11 @@ struct s_expand
 	char		*original;
 	t_exp_pair	**exp_ptrs;		// original을 돌면서 찾은 '$' 위치들과
 	int			exp_num;		// '$' 갯수(확장여부 상관없이)
+<<<<<<< HEAD
+=======
+	int			wild_num;		// 확장 전(original)의 wildcard 문자 갯수
+	int			wild_flag;		// 확장 전(original)의 와일드카드에 적용된 따옴표 플래그
+>>>>>>> yusekim_test
 	char		**result;		// 확장을 완료한 최종 결과물
 };
 
@@ -139,6 +155,10 @@ struct s_info
 	int			prev_fd;
 	int			redir_fds[2];		// 리다이렉션 파이프, 기본값은 표준입출력 fd이고 만약 in_redir, out_redir이 있을때 해당 파일을 open할 때 리턴받은 fd값으로 바꿔준다
 	int			exit_status;
+<<<<<<< HEAD
+=======
+	int			prev_signal;
+>>>>>>> yusekim_test
 };
 
 #endif

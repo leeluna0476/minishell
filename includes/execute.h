@@ -6,7 +6,11 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:36 by yusekim           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/02/22 20:13:41 by seojilee         ###   ########.fr       */
+=======
+/*   Updated: 2024/02/26 21:37:43 by yusekim          ###   ########.fr       */
+>>>>>>> yusekim_test
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +19,11 @@
 # include "exec_structures.h"
 # include "utils.h"
 
+<<<<<<< HEAD
 # define PROMPT "minishell> "
+=======
+# define PROMPT "미니쉘$ "
+>>>>>>> yusekim_test
 
 // execute.c
 void	execute(t_ast *tree, t_env_pack *pack, t_info *info);
@@ -29,7 +37,11 @@ char	**make_envp(t_env_pack *envs);
 int		is_route(char *str);
 int		is_dir(char *str);
 char	*path_join(char *path, char *arg);
+<<<<<<< HEAD
 void	exec_parent(t_info *info);
+=======
+int		get_exitstat(t_env_pack *pack);
+>>>>>>> yusekim_test
 
 // execute_utils2.c
 t_cmd	*build_cmd_pack(t_ast *tree, t_env_pack *pack);
@@ -41,6 +53,12 @@ void	free_cmd(t_cmd *cmd);
 // pipe_utils.c
 void	set_fds(t_cmd *cur, t_info *info);
 void	ft_dup2(t_info *info);
+<<<<<<< HEAD
 void	ft_wait(t_info *info, t_env_pack *pack);
+=======
+void	exec_parent(t_info *info);
+void	ft_wait(t_info *info, t_env_pack *pack);
+void	set_info(t_info *info);
+>>>>>>> yusekim_test
 
 #endif

@@ -6,7 +6,11 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:14:38 by yusekim           #+#    #+#             */
+<<<<<<< HEAD:includes/utils.h
 /*   Updated: 2024/02/20 00:59:28 by yusekim          ###   ########.fr       */
+=======
+/*   Updated: 2024/02/26 16:15:18 by yusekim          ###   ########.fr       */
+>>>>>>> yusekim_test:Includes/utils.h
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +38,9 @@ void	split_free(char **split);
 int		split_len(char **split);
 char	**merge_strs(char **orig, char **new_strs);
 void	ft_assert(int expression, const char *arg, int exit_num);
+<<<<<<< HEAD:includes/utils.h
+=======
+void	set_exit(t_env_pack *pack, int code);
+>>>>>>> yusekim_test:Includes/utils.h
 
 #endif

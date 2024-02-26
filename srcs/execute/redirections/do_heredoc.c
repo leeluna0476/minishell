@@ -6,55 +6,106 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:19 by yusekim           #+#    #+#             */
+<<<<<<< HEAD:srcs/execute/redirections/do_heredoc.c
 /*   Updated: 2024/02/22 18:53:03 by seojilee         ###   ########.fr       */
+=======
+/*   Updated: 2024/02/26 14:22:33 by seojilee         ###   ########.fr       */
+>>>>>>> yusekim_test:srcs/execute/do_heredoc.c
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "signal_handler.h"
 #include "redirection.h"
+#include "execute.h"
 #include "expand.h"
 #include "env.h"
 
+void	set_term(struct termios *term)
+{
+	tcgetattr(STDIN_FILENO, term);
+	term->c_lflag &= ~(ECHOCTL);
+	tcsetattr(STDIN_FILENO, TCSANOW, term);
+}
+
+void	reset_term(struct termios *term)
+{
+	term->c_lflag |= ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, term);
+}
+
 int	heredoc(t_redir *target, t_env_pack *pack)
 {
-	char	*filename;
+	pid_t			pid;
+	int				status;
+	char			*filename;
+	struct termios	term;
+
+	set_term(&term);
+	signal_ign();
+	pid = fork();
+	filename = get_filename();
+	if (pid == -1)
+		ft_perror("fork", 1);
+	else if (pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);
+		do_heredoc(target, filename, pack);
+	}
+	free(target->filename[1]);
+	target->filename[1] = filename;
+	waitpid(pid, &status, 0);
+	reset_term(&term);
+	signal_dfl();
+	if (WIFSIGNALED(status))
+	{
+		ft_putchar_fd('\n', STDOUT_FILENO);
+		return (1);
+	}
+	return (0);
+}
+
+char	*get_filename(void)
+{
+	char	*path;
 	char	*itoa_out;
+	char	*temp_filepath;
 	int		num;
 
-	signal(SIGINT, SIG_IGN);
-	// signal(SIGINT, handler_heredoc);
+	path = getcwd(0, 0);
+	temp_filepath = ft_strjoin(path, TEMP_FILENAME);
+	free(path);
+	path = ft_strdup(temp_filepath);
 	num = -1;
-	filename = ft_strdup(TEMP_FILENAME);
-	while (!access(filename, F_OK))
+	while (!access(path, F_OK))
 	{
+<<<<<<< HEAD:srcs/execute/redirections/do_heredoc.c
 		free(filename);
 		itoa_out = ft_itoa(++num);
 		filename = ft_strjoin(TEMP_FILENAME, itoa_out);
+=======
+		free(path);
+		itoa_out = ft_itoa(++num);
+		path = ft_strjoin(temp_filepath, itoa_out);
+>>>>>>> yusekim_test:srcs/execute/do_heredoc.c
 		free(itoa_out);
 	}
-	return (do_heredoc(target, filename, pack));
+	free(temp_filepath);
+	return (path);
 }
 
-int	do_heredoc(t_redir *temp, char *f_name, t_env_pack *pack)
+void	do_heredoc(t_redir *temp, char *f_path, t_env_pack *pack)
 {
 	int		infile_fd;
-	int		temp_exit_status;
-	int		fd;
 
-	infile_fd = open(f_name, O_WRONLY | O_CREAT, 0644);
+	infile_fd = open(f_path, O_WRONLY | O_CREAT, 0644);
 	if (infile_fd == -1)
 		exit (1);
-	fd = dup(0);
-	temp_exit_status = g_exit_status;
-	g_exit_status = 0;
 	write_heredoc(temp, pack, infile_fd);
-	if (g_exit_status)
-		dup2(fd, 0);
-	// signal(SIGINT, handler);
 	free(temp->filename[1]);
-	temp->filename[1] = f_name;
-	if (close(infile_fd) == -1 || close(fd) == -1)
+	temp->filename[1] = f_path;
+	if (close(infile_fd) == -1)
 		exit(1);
-	return (detact_exitcode(temp_exit_status));
+	exit(0);
 }
 
 void	write_heredoc(t_redir *redir, t_env_pack *pack, int inf_fd)
@@ -65,20 +116,32 @@ void	write_heredoc(t_redir *redir, t_env_pack *pack, int inf_fd)
 
 	q_flag = heredoc_q_flag(redir->filename[0]);
 	l_len = ft_strlen(redir->filename[1]);
-	redir->filename[1][l_len] = '\n';
+	// << eof
+	// 그냥 마지막 바이트 할당 X.
+	redir->filename[1][l_len] = '\0';
 	input = 0;
 	while (1)
 	{
 		if (input)
 			heredoc_expander(inf_fd, input, pack, q_flag);
+<<<<<<< HEAD:srcs/execute/redirections/do_heredoc.c
 		ft_printf("heredoc> ");
 //		write(1, "heredoc> ", 10);
 		input = get_next_line(0);
 		if (!input || !ft_strncmp(input, redir->filename[1], l_len + 1))
+=======
+//		ft_printf(HEREDOC);
+	// readline으로 변경. 제어문자를 입력받지 않기 위해.
+		input = readline(HEREDOC);
+	// 문자열을 일부가 아닌 전체를 비교해야 해서 strncmp보다는 strcmp가 적절해보였음.
+		if (!input || !ft_strcmp(input, redir->filename[1]))
+>>>>>>> yusekim_test:srcs/execute/do_heredoc.c
 			break ;
 	}
-	if (input)
-		free(input);
+	if (!input)
+		ft_putstr_fd("\e8\e[B\e[A", STDOUT_FILENO);
+//	else
+	free(input);
 	redir->filename[1][l_len] = 0;
 }
 
@@ -108,5 +171,7 @@ void	heredoc_expander(int fd, char *input, t_env_pack *pack, int flag)
 			write(fd, input + i, 1);
 		i += exp_len + 1;
 	}
+	// 모든 입력을 개행으로 구분한다.
+	write(fd, "\n", 1);
 	free (input);
 }

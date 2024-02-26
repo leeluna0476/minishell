@@ -6,11 +6,19 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 13:03:15 by youwin0802        #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/02/22 10:55:54 by yusekim          ###   ########.fr       */
+=======
+/*   Updated: 2024/02/26 14:43:14 by seojilee         ###   ########.fr       */
+>>>>>>> yusekim_test
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
+<<<<<<< HEAD
+=======
+#include "env.h"
+>>>>>>> yusekim_test
 
 char	**make_envp(t_env_pack *envs)
 {
@@ -44,6 +52,7 @@ int	is_route(char *str)
 		i++;
 	}
 	return (0);
+<<<<<<< HEAD
 }
 
 int	is_dir(char *str)
@@ -67,6 +76,38 @@ char	*path_join(char *path, char *arg)
 	out = ft_strjoin(temp, arg);
 	free(temp);
 	return (out);
+=======
+}
+
+int	is_dir(char *str)
+{
+	struct stat	path_stat;
+
+	stat(str, &path_stat);
+	if (S_ISDIR(path_stat.st_mode))
+		return (1);
+	else
+		return (0);
+}
+
+char	*path_join(char *path, char *arg)
+{
+	char	*temp;
+	char	*out;
+
+	temp = ft_strjoin(path, "/");
+	out = ft_strjoin(temp, arg);
+	free(temp);
+	return (out);
+}
+
+int	get_exitstat(t_env_pack *pack)
+{
+	t_env	*target_node;
+
+	target_node = find_env("?", pack);
+	return (ft_atoi(target_node->value));
+>>>>>>> yusekim_test
 }
 
 void	exec_parent(t_info *info)
