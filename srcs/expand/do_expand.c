@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:31:56 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 15:08:52 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/26 20:04:27 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	do_expand(t_c_expand *expand, t_env_pack *pack)
 {
 	int		i;
 	char	*temp;
+	char	**temp_wildcard;
 
 	i = -1;
 	if (expand->exp_num == 0)
@@ -23,8 +24,12 @@ void	do_expand(t_c_expand *expand, t_env_pack *pack)
 		expand->result = add_str(expand->result, ft_strdup(expand->original));
 		if (expand->wild_num && expand->wild_flag == 0)
 		{
-			split_free(expand->result);
-			expand->result = expand_wildcard(expand->original);
+			temp_wildcard = expand_wildcard(expand->original);
+			if (temp_wildcard)
+			{
+				split_free(expand->result);
+				expand->result = temp_wildcard;
+			}
 		}
 		return ;
 	}

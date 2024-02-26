@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:47:48 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 14:49:19 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/26 20:27:51 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	do_wildcard(t_c_expand *expand, int i)
 {
 	char		**temp_wildcard;
 
-	while (expand->result[i])
+	while (expand->result && expand->result[i])
 	{
 		if (scan_for_wildcard(expand->result[i]))
 		{
@@ -26,6 +26,7 @@ void	do_wildcard(t_c_expand *expand, int i)
 				expand->result = insert_strs(expand->result, temp_wildcard, &i);
 				split_free(temp_wildcard);
 				temp_wildcard = NULL;
+				continue ;
 			}
 		}
 		i++;
@@ -57,16 +58,16 @@ char	**insert_strs(char **orig, char **new, int *i)
 	orig_len = split_len(orig);
 	new_len = split_len(new);
 	result = malloc(sizeof(char *) * (orig_len + new_len));
-	result[orig_len + new_len -1] = NULL;
+	result[orig_len + new_len - 1] = NULL;
 	idx = -1;
 	while (++idx < *i)
 		result[idx] = ft_strdup(orig[idx]);
 	while (*new != NULL)
 		result[idx++] = ft_strdup(*new++);
 	jdx = 0;
-	while (idx < orig_len)
+	while (idx - new_len < orig_len)
 		result[idx++] = ft_strdup(orig[*i + ++jdx]);
 	split_free(orig);
-	*i = *i + new_len - 1;
+	*i = *i + new_len;
 	return (result);
 }
