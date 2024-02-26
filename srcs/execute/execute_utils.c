@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 13:03:15 by youwin0802        #+#    #+#             */
-/*   Updated: 2024/02/23 12:41:54 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:43:14 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ int	is_dir(char *str)
 {
 	struct stat	path_stat;
 
-	if (stat(str, &path_stat) != 0)
-		ft_perror(str, 128);
+	stat(str, &path_stat);
 	if (S_ISDIR(path_stat.st_mode))
 		return (1);
 	else

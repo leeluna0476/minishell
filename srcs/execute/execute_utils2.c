@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:14:15 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 11:28:17 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/26 15:08:06 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,12 @@ void	ft_execve(t_cmd *cmd, t_env_pack *envs)
 	{
 		if (execve(cmd->c_args[0], cmd->c_args, envp) < 0)
 		{
-			if (!access(cmd->c_args[0], F_OK) && is_dir(cmd->c_args[0]))
+			if (is_dir(cmd->c_args[0]))
+				errno = EISDIR;
+			if (errno == EISDIR || errno == ENOTDIR || errno == EACCES)
 				ft_perror(cmd->c_args[0], 126);
 			else
-				ft_perror(cmd->c_args[0], 1);
+				ft_perror(cmd->c_args[0], 128);
 		}
 	}
 	relative_execve(cmd->c_args, envs, envp);
@@ -95,7 +97,14 @@ void	ft_perror(const char *str, int exit_num)
 	ft_putstr_fd("미니쉘: ", STDERR_FILENO);
 	ft_putstr_fd((char *)str, STDERR_FILENO);
 	if (exit_num == 126)
-		ft_putstr_fd(": is a directory\n", STDERR_FILENO);
+	{
+		if (errno == ENOTDIR)
+			ft_putstr_fd(": not a directory\n", STDERR_FILENO);
+		else if (errno == EISDIR)
+			ft_putstr_fd(": is a directory\n", STDERR_FILENO);
+		else if (errno == EACCES)
+			ft_putstr_fd(": Permission denied\n", STDERR_FILENO);
+	}
 	else if (exit_num == 127)
 		ft_putstr_fd(": command not found\n", STDERR_FILENO);
 	else if (exit_num == 128)
