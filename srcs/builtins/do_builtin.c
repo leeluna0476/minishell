@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:22 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/25 16:39:50 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/26 21:43:27 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int	do_exit(char **args, t_env_pack *pack)
 
 	(void)pack;
 	args_len = split_len(args);
-	// 그냥 exit도 exit이 되도록. 검수 필요.
 	if (args_len == 1)
 		b_exit(get_exitstat(pack));
 	if (args_len == 2)

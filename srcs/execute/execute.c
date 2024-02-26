@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 18:01:36 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/26 21:40:28 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	execute(t_ast *tree, t_env_pack *pack, t_info *info)
 		if (info->fork_num)
 			ft_wait(info, pack);
 	}
-
 }
 // 재귀. 깊이우선탐색. 왼쪽부터 순회.
 

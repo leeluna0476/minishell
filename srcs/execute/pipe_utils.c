@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:07:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/25 16:40:13 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/26 21:37:51 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,11 @@ void	ft_wait(t_info *info, t_env_pack *pack)
 	add_env_node(pack, "?", exit_code);
 	free(exit_code);
 	return ;
+}
+
+void	set_info(t_info *info)
+{
+	ft_memset(info, 0, sizeof(t_info));
+	info->pipe_fds[1] = 1;
+	info->redir_fds[1] = 1;
 }

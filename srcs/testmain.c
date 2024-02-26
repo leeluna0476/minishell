@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 11:09:40 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/26 15:11:12 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/26 21:37:24 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,6 @@
 #include "parse_struct.h"
 #include "parse_define.h"
 #include "signal_handler.h"
-
-void	set_info(t_info *info)
-{
-	ft_memset(info, 0, sizeof(t_info));
-	info->pipe_fds[1] = 1;
-	info->redir_fds[1] = 1;
-}
 
 void	input_handler(void)
 {
