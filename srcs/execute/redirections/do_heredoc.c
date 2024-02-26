@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:19 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 09:15:25 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/26 10:17:18 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,9 +122,9 @@ void	write_heredoc(t_redir *redir, t_env_pack *pack, int inf_fd)
 			break ;
 	}
 	if (!input)
-		ft_putstr_fd("\e[10C\e[A", STDOUT_FILENO);
+		ft_putstr_fd("\e8", STDOUT_FILENO);
 //	else
-		free(input);
+	free(input);
 	redir->filename[1][l_len] = 0;
 }
 
