@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:19 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 14:22:33 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/27 01:45:36 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,13 +140,13 @@ void	heredoc_expander(int fd, char *input, t_env_pack *pack, int flag)
 	while (input[i])
 	{
 		exp_len = 0;
+		j = 0;
 		if (input[i] == '$' && flag == 0)
 		{
-			env_name = find_env_name(input + i);
+			env_name = find_env_name(input + i--);
 			exp_len = ft_strlen(env_name);
 			target = find_env(env_name, pack);
 			free(env_name);
-			j = 0;
 			while (target && target->value && target->value[j])
 				write(fd, target->value + j++, 1);
 		}
@@ -154,7 +154,6 @@ void	heredoc_expander(int fd, char *input, t_env_pack *pack, int flag)
 			write(fd, input + i, 1);
 		i += exp_len + 1;
 	}
-	// 모든 입력을 개행으로 구분한다.
 	write(fd, "\n", 1);
 	free (input);
 }

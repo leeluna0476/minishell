@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:24 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 13:02:06 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/27 01:16:45 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ int	check_res(int res, t_env_pack *pack, char *path, char **args)
 	{
 		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
 		ft_putstr_fd(args[1], STDERR_FILENO);
-		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+		if (!access(args[1], F_OK) && !is_dir(args[1]))
+			ft_putstr_fd(": Not a directory\n", STDERR_FILENO);
+		else
+			ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 		free(str);
 		return (1);
 	}

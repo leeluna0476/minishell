@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:57:56 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/26 18:19:34 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/28 07:58:28 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,32 @@ int	get_bracket_flag(t_token **start, t_token **end, \
 	}
 	if (*first && *last && (*first)->next == (*end))
 		flag = -1;
-	*start = curr;
+	//*start = curr;
 	return (flag);
+}
+
+//  0: equal
+// -1: smaller
+//  1: greater
+static int	tokcmp(t_token *token1, t_token *token2)
+{
+	t_token *curr;
+
+	if (token1 == token2)
+		return (0);
+	curr = token1;
+	while (curr)
+	{
+		if (curr == token2)
+			return (-1);
+		curr = curr->next;
+	}
+	return (1);
 }
 
 // (주소 크기 비교. 재차 확인.)
 // flag를 받아서 괄호 짝이 맞는지 확인. 맞지 않는다면 문제 토큰을 반환.
 // first, last: 가장 바깥쪽 괄호.
-	// ((ls) || (ls)). (ls) || (ls) 와 같은 경우에는 NULL.
 // 바깥 괄호 앞뒤로 허용되지 않는 type이 오는지 확인. 그렇다면 문제 토큰을 반환.
 t_token	*check_bracket(t_token *start, t_token *end)
 {
@@ -64,12 +82,18 @@ t_token	*check_bracket(t_token *start, t_token *end)
 		return (first);
 	else if (flag < 0)
 		return (last);
-	if (first && first->prev && first->prev >= start \
-		&& first->prev->type != T_AND && first->prev->type != T_OR)
-		return (first->prev);
-	else if (last && last->next && last->next <= end \
-		&& last->next->type != T_AND && last->next->type != T_OR)
-		return (last->next);
+	if (first && first->prev)
+	{
+		if (tokcmp(first->prev, start) == 1 \
+			&& first->prev->type != T_AND && first->prev->type != T_OR)
+			return (first->prev);
+	}
+	else if (last && last->next)
+	{
+		if (tokcmp(last->next, end) == -1 \
+			&& last->next->type != T_AND && last->next->type != T_OR)
+			return (last->next);
+	}
 	return (NULL);
 }
 
