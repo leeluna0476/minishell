@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:57:56 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/27 11:39:47 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/02/28 07:58:28 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	get_bracket_flag(t_token **start, t_token **end, \
 //  0: equal
 // -1: smaller
 //  1: greater
-static int	token_cmp(t_token *token1, t_token *token2)
+static int	tokcmp(t_token *token1, t_token *token2)
 {
 	t_token *curr;
 
@@ -84,13 +84,13 @@ t_token	*check_bracket(t_token *start, t_token *end)
 		return (last);
 	if (first && first->prev)
 	{
-		if (token_cmp(first->prev, start) == 1 \
+		if (tokcmp(first->prev, start) == 1 \
 			&& first->prev->type != T_AND && first->prev->type != T_OR)
 			return (first->prev);
 	}
 	else if (last && last->next)
 	{
-		if (token_cmp(last->next, end) == -1 \
+		if (tokcmp(last->next, end) == -1 \
 			&& last->next->type != T_AND && last->next->type != T_OR)
 			return (last->next);
 	}
