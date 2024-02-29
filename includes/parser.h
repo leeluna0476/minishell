@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:06:48 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 13:21:54 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/01 08:16:48 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	free_ast(t_ast **ast);
 // bracket.c
 int		get_bracket_flag(t_token **start, t_token **end, \
 					t_token **first, t_token **last);
+int		tokcmp(t_token *token1, t_token *token2);
 t_token	*check_bracket(t_token *start, t_token *end);
 int		check_if_single_pair(t_token *start, t_token *end);
 void	remove_bracket(t_token **start, t_token **end);
-t_token	*check_pipe_in_bracket(t_token *start, t_token *end);
 
 // center.c
 t_token	*take_bracket(t_token *curr, t_token *start);

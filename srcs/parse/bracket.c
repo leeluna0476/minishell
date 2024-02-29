@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:57:56 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/28 07:58:28 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/01 08:12:42 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	get_bracket_flag(t_token **start, t_token **end, \
 //  0: equal
 // -1: smaller
 //  1: greater
-static int	tokcmp(t_token *token1, t_token *token2)
+int	tokcmp(t_token *token1, t_token *token2)
 {
 	t_token *curr;
 
@@ -134,29 +134,4 @@ void	remove_bracket(t_token **start, t_token **end)
 			*end = (*end)->prev;
 		}
 	}
-}
-
-// 괄호 안에 파이프가 있는지 확인.
-// 있다면 오류임.
-t_token	*check_pipe_in_bracket(t_token *start, t_token *end)
-{
-	t_token	*curr;
-	int		flag;
-
-	if (start->type == T_OPEN_BRACKET && end->type == T_CLOSE_BRACKET)
-	{
-		flag = 0;
-		curr = start;
-		while (curr && curr->prev != end)
-		{
-			if (curr->type == T_OPEN_BRACKET)
-				flag++;
-			else if (curr->type == T_CLOSE_BRACKET)
-				flag--;
-			else if (flag && curr->type == T_PIPE)
-				return (curr);
-			curr = curr->next;
-		}
-	}
-	return (NULL);
 }
