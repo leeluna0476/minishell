@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:14:15 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 21:33:27 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/28 17:18:56 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	ft_perror(const char *str, int exit_num)
 	if (exit_num == 126)
 	{
 		if (errno == ENOTDIR)
-			ft_putstr_fd(": not a directory\n", STDERR_FILENO);
+			ft_putstr_fd(": Not a directory\n", STDERR_FILENO);
 		else if (errno == EISDIR)
 			ft_putstr_fd(": is a directory\n", STDERR_FILENO);
 		else if (errno == EACCES)
