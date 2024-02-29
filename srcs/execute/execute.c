@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 21:40:28 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/28 16:11:32 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 void	execute(t_ast *tree, t_env_pack *pack, t_info *info)
 {
+	set_info(info);
 	if (!tree)
 		return ;
 	else if (tree->type == T_PIPE)
@@ -45,10 +46,7 @@ void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)
 			ft_wait(info, pack);
 	}
 	else
-	{
-		set_info(info);
 		execute(tree->left, pack, info);
-	}
 	if ((tree->type == T_AND && get_exitstat(pack)) || \
 		(tree->type == T_OR && !get_exitstat(pack)))
 		return ;
@@ -58,10 +56,7 @@ void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)
 		ft_wait(info, pack);
 	}
 	else
-	{
-		set_info(info);
 		execute(tree->right, pack, info);
-	}
 }
 
 void	execute_pipe(t_ast *tree, t_env_pack *pack, t_info *info, int level)
@@ -93,15 +88,15 @@ void	do_execution(t_ast *tree, t_env_pack *pack, t_info *info)
 	t_cmd	*cmd;
 
 	cmd = build_cmd_pack(tree, pack);
-	info->prev_signal += scan_n_set_redirs(cmd, pack);
-	if (info->prev_signal)
+	info->exit_status = scan_n_set_redirs(cmd, pack);
+	if (info->exit_status)
 	{
 		add_env_node(pack, "?", "1");
 		return (free_cmd(cmd));
 	}
 	if (info->depths == 0 && solo_builtin(cmd, pack) != -1)
 		return (free_cmd(cmd));
-	if (info->prev_signal == 0)
+	if (info->exit_status == 0)
 		execute_cmd(cmd, pack, info);
 	return (free_cmd(cmd));
 }

@@ -77,6 +77,7 @@ char	**expand(char *data, t_env_pack *package, int flag)
 	return (expand.result);
 }
 ```
+#### 와일드 카드 처리 Wildcards
 
 ### 빌트인 builtins
 미니셸 과제에서는 총 7개의 내장 기능(built-in)을 구현하여야 한다. 두 번째 미니셸인 만큼, 더욱 깔@쌈하게 코드를 짜고 싶은 욕심이 있어 피신때 한번 쓰고 쳐다도 안본 함수 포인터 배열을 써보기로 했다
@@ -193,9 +194,12 @@ void	do_execution(t_ast *tree, t_env_pack *pack, t_info *info)
 	t_cmd	*cmd;
 
 	cmd = build_cmd_pack(tree, pack);
-	info->exit_status += scan_n_set_redirs(cmd, pack);
+	info->exit_status = scan_n_set_redirs(cmd, pack);
 	if (info->exit_status)
+	{
+		add_env_node(pack, "?", "1");
 		return (free_cmd(cmd));
+	}
 	if (info->depths == 0 && solo_builtin(cmd, pack) != -1)
 		return (free_cmd(cmd));
 	if (info->exit_status == 0)
@@ -204,3 +208,41 @@ void	do_execution(t_ast *tree, t_env_pack *pack, t_info *info)
 }
 ```
 
+#### 다중 파이프에서의 fd 연결
+
+```c
+void	ft_dup2(t_info *info)
+{
+	if (info->redir_fds[0] != 0)		// 만약 infile리다이렉션 또는 pipe가 존재한다면
+	{
+		dup2(info->redir_fds[0], STDIN_FILENO);	// 해당 값으로 dup2를 해주고
+		close(info->redir_fds[0]);		// fd를 닫아준다.
+	}
+	if (info->redir_fds[1] != 1)		// 여기도 outfile또는 pipe가 존재한다면
+	{
+		dup2(info->redir_fds[1], STDOUT_FILENO);// dup2해주고
+		close(info->redir_fds[1]);		// 닫아준다.
+	}
+	if (info->pipe_fds[0])
+		close(info->pipe_fds[0]);
+	if (info->pipe_fds[1] != 1)
+		close(info->pipe_fds[1]);
+}
+// 헷갈릴 수 있는데, redir_fds[2]는 최종적으로 넘겨받거나 넘겨줘야하는 fd들의 값이다.
+// 즉 리다이렉션(<. >, <<, >>)과 pipe() 둘 다 될 수 있다.
+// 세번째 조건문과 네 번째 조건문은, 최종 리다이렉션이 파이프가 아닌 파일로 읽기쓰기가 되었을시, pipe()콜을 통해 열린 fd들을 닫아주는 과정이다.
+
+void	exec_parent(t_info *info)
+{
+	if (info->redir_fds[0] > 2)
+		close(info->redir_fds[0]);
+	if (info->redir_fds[1] > 2)
+		close(info->redir_fds[1]);
+	if (info->fork_num != 0 && info->prev_fd)
+		close(info->prev_fd);
+	if (info->pipe_fds[1] != 1)
+		close(info->pipe_fds[1]);
+	info->prev_fd = info->pipe_fds[0];
+}
+// fork()이후 부모 프로세스가 실행하게 되는 함수, 다음 파이프롤 넘겨줄 fd를 제외하고 열려있는 파이프들을 전부 닫아준다.
+```

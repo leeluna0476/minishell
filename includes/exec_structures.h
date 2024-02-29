@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:50:21 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 16:21:56 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/28 16:15:53 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,6 @@ struct s_info
 	int			prev_fd;
 	int			redir_fds[2];		// 리다이렉션 파이프, 기본값은 표준입출력 fd이고 만약 in_redir, out_redir이 있을때 해당 파일을 open할 때 리턴받은 fd값으로 바꿔준다
 	int			exit_status;
-	int			prev_signal;
 };
 
 #endif

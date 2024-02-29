@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:59:01 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/20 05:33:39 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/28 15:47:55 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,4 @@ int	heredoc_q_flag(char *str)
 		i++;
 	}
 	return (0);
-}
-
-int	detact_exitcode(int temp)
-{
-	if (g_exit_status)
-	{
-		g_exit_status = temp;
-		return (1);
-	}
-	else
-	{
-		g_exit_status = temp;
-		return (0);
-	}
 }

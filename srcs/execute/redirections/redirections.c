@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 09:33:59 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 21:41:29 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/02/28 16:11:41 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)
 {
 	t_redir	*temp;
 	int		exit_code;
-	char	*exit_code_str;
 
 	temp = cmd->all_redirs;
 	exit_code = 0;
@@ -52,14 +51,10 @@ int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)
 			exit_code = heredoc(temp, pack);
 		temp = temp->next;
 	}
+	if (exit_code)
+		return (exit_code);
 	temp = cmd->all_redirs;
 	open_check(temp, &exit_code);
-	if (exit_code)
-	{
-		exit_code_str = ft_itoa(exit_code);
-		add_env_node(pack, "?", exit_code_str);
-		free(exit_code_str);
-	}
 	return (exit_code);
 }
 
