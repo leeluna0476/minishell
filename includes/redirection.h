@@ -6,14 +6,14 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:55 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/28 15:48:08 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/01 08:01:42 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef REDIRECTION_H
 # define REDIRECTION_H
 
-# include "exec_structures.h"
+# include "structures.h"
 # include "utils.h"
 # define TEMP_FILENAME ".heredoc_tmp"
 # define HEREDOC "여기문서> "

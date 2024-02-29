@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 02:22:10 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/23 20:49:47 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/01 08:01:42 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SIGNAL_HANDLER_H
 
 # include <signal.h>
-# include "exec_structures.h"
+# include "structures.h"
 
 void	sig_handler(int signo);
 void	signal_readline(void);

@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_structures.h                                  :+:      :+:    :+:   */
+/*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: seojilee <seojilee@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 12:50:21 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/28 16:15:53 by yusekim          ###   ########.fr       */
+/*   Created: 2024/03/01 08:02:36 by seojilee          #+#    #+#             */
+/*   Updated: 2024/03/01 08:06:11 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_STRUCTURES_H
-# define EXEC_STRUCTURES_H
+#ifndef STRUCTURES_H
+# define STRUCTURES_H
 # include "../srcs/libft/libft.h"
 // 이 파일에는 미니셸 구조체들을 선언한다
 
 typedef struct s_token		t_token;
 typedef struct s_ast		t_ast;
+typedef struct s_mark		t_mark;
 typedef struct s_env		t_env;
 typedef struct s_env_pack	t_env_pack;
 typedef struct s_cmd_pack	t_cmd;
@@ -25,9 +26,6 @@ typedef struct s_expand		t_c_expand;		// 명령어 확장
 typedef struct s_exp_pair	t_exp_pair;
 typedef enum e_type			t_type;
 typedef struct s_info		t_info;
-
-int							g_exit_status;
-// exit code(전역변수)
 
 enum	e_type
 {
@@ -66,6 +64,22 @@ struct s_token
 	char			*string;		// 해당 node의 data
 	struct s_token	*next;		// 다음 node
 	struct s_token	*prev;		// 이전 node (syntax error 체크때 유용했었음)
+};
+
+struct s_ast
+{
+	enum e_type		type;
+	struct s_token	*start;
+	struct s_token	*end;
+	char			*error;
+	struct s_ast	*left;
+	struct s_ast	*right;
+};
+
+struct s_mark
+{
+	int	start;
+	int	end;
 };
 
 struct s_env				// 환경변수 연결리스트
@@ -120,16 +134,6 @@ struct s_exp_pair
 	char	q_flag;			// 따옴표 플래그
 	char	*exp_name;		// 환경변수 이름!(나 좀 짱인듯)
 	char	*exp_pos;		// 확장문자 위치
-};
-
-struct s_ast
-{
-	enum e_type		type;
-	struct s_token	*start;
-	struct s_token	*end;
-	char			*error;
-	struct s_ast	*left;
-	struct s_ast	*right;
 };
 
 struct s_info

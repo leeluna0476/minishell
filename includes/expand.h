@@ -6,13 +6,13 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:32:39 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 21:12:16 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/01 08:01:42 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXPAND_H
 # define EXPAND_H
-# include "exec_structures.h"
+# include "structures.h"
 # include "utils.h"
 # include "env.h"
 # include "parser.h"

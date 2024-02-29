@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:03:00 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/20 13:38:23 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/01 08:01:17 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 # include "readline/readline.h"
 # include "readline/history.h"
 # include "../srcs/libft/libft.h"
-# include "parse_define.h"
-# include "parse_struct.h"
+# include "structures.h"
 
 // error.c
 void	syntax_error_tokenizer(char *string, t_token **list);

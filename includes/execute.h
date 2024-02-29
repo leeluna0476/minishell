@@ -6,13 +6,13 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:36 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 21:37:43 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/01 08:01:42 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTE_H
 # define EXECUTE_H
-# include "exec_structures.h"
+# include "structures.h"
 # include "utils.h"
 
 # define PROMPT "미니쉘$ "

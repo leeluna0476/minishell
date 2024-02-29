@@ -6,11 +6,11 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:28 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 13:44:17 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/01 08:03:17 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec_structures.h"
+#include "structures.h"
 #include "builtin.h"
 
 enum e_b_type	check_is_builtin(char *arg)

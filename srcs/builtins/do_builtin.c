@@ -6,11 +6,11 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:22 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/27 01:12:36 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/01 08:03:17 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec_structures.h"
+#include "structures.h"
 #include "builtin.h"
 #include "env.h"
 #include "execute.h"

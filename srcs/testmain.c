@@ -6,19 +6,17 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 11:09:40 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/26 21:37:24 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/01 08:05:04 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "env.h"
-#include "exec_structures.h"
+#include "structures.h"
 #include "execute.h"
 #include "expand.h"
 #include "parser.h"
 #include "redirection.h"
-#include "parse_struct.h"
-#include "parse_define.h"
 #include "signal_handler.h"
 
 void	input_handler(void)
