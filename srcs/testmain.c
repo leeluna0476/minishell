@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 11:09:40 by seojilee          #+#    #+#             */
-/*   Updated: 2024/03/01 14:53:06 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/01 15:05:01 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,6 @@ void	run_minishell(char *str, t_env_pack *pack)
 	}
 	else if (!tokens && *str)
 		set_exit(pack, 258);
-}
-
-void	leaks(void)
-{
-	system("leaks -q minishell");
 }
 
 int	main(int ac, char *av[], char *envp[])
