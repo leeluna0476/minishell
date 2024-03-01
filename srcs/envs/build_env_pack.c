@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:46:43 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/01 14:53:27 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/01 17:09:46 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	build_envp(t_env_pack *pack, char **envp, int idx)
 	char	*shlvl;
 	t_env	*shlv_node;
 
-	if (!envp)
+	if (!envp[0])
 	{
 		ft_putstr_fd("미니쉘: envp not set\n", STDERR_FILENO);
 		exit(1);
