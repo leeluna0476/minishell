@@ -6,12 +6,11 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/26 20:54:22 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/01 09:38:25 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
-#include "utils.h"
+#include "expand.h"
 
 // 자세한 로직은 WILDCARD.md 참고.
 // a*, *a* 등을 검사.
@@ -88,6 +87,20 @@ int	check_wildfixes(char *filename, __uint8_t type, char *pattern)
 	return (check_end(filename, pattern, mark, i));
 }
 
+char	*check_file_access(int idx, char *filename, char *suffix)
+{
+	char	*expanded_filename;
+
+	if (idx)
+	{
+		expanded_filename = ft_strjoin(filename, suffix);
+		if (!access(expanded_filename, F_OK))
+			return (expanded_filename);
+		free(expanded_filename);
+	}
+	return (NULL);
+}
+
 // 현재 디렉토리를 열어서 filename 확인. (., ..  제외)
 // filename이 와일드카드 패턴에 맞는다면 확장된 매개변수 리스트에 추가.
 char	**expand_wildcard(char *arg)
@@ -97,22 +110,20 @@ char	**expand_wildcard(char *arg)
 	char			**args;
 	int				i;
 
+	if (!arg)
+		return (NULL);
 	args = NULL;
-	if (arg)
+	dp = opendir(".");
+	entry = readdir(dp);
+	while (entry)
 	{
-		dp = opendir(".");
-		entry = readdir(dp);
-		while (entry)
+		if (!(entry->d_name[0] == '.' && arg[0] != '.'))
 		{
-			if (!(entry->d_name[0] == '.' && arg[0] != '.'))
-			{
-				i = check_wildfixes(entry->d_name, entry->d_type, arg);
-				if (i)
-					args = add_str(args, ft_strjoin(entry->d_name, &(arg[i])));
-			}
-			entry = readdir(dp);
+			i = check_wildfixes(entry->d_name, entry->d_type, arg);
+			args = add_str(args, check_file_access(i, entry->d_name, &(arg[i])));
 		}
-		closedir(dp);
+		entry = readdir(dp);
 	}
+	closedir(dp);
 	return (args);
 }

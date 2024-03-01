@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:32:39 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/01 08:01:42 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/01 09:37:32 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ void	append_exp_ptr(t_c_expand *expand, t_exp_pair *newpair);
 char	*find_env_name(char *ptr);
 char	*appand_string(char *result, char *original, int *start, int end);
 void	add_split(t_c_expand *expand, char **split, int split_len, int idx);
+
+// wildcard.c
+int		check_front_center(char *filename, char *pattern, t_mark *mark, int i);
+int		check_end(char *filename, char *pattern, t_mark mark, int i);
+int		check_wildfixes(char *filename, __uint8_t type, char *pattern);
+char	*check_file_access(int idx, char *filename, char *suffix);
+char	**expand_wildcard(char *arg);
 
 // wildcard_utils.c
 void	do_wildcard(t_c_expand *expand, int i, int bound);

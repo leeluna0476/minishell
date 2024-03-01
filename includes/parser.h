@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:06:48 by seojilee          #+#    #+#             */
-/*   Updated: 2024/03/01 08:16:48 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/01 09:37:20 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,5 @@ void	syntax_error_parser(char *string, t_token **list);
 
 // set_node.c
 void	set_start_end(t_ast **ast, t_token *start, t_token *end);
-
-// wildcard.c
-char	**add_str(char **str, char *add);
-int		check_front_center(char *filename, char *pattern, t_mark *mark, int i);
-int		check_end(char *filename, char *pattern, t_mark mark, int i);
-int		check_wildfixes(char *filename, __uint8_t type, char *pattern);
-char	**expand_wildcard(char *arg);
 
 #endif
