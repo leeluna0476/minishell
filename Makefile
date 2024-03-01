@@ -69,15 +69,20 @@ $(LIBFT) :
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
-	rm -f $(OBJS)
-	cd ./srcs/libft ; $(MAKE) clean
+	@echo $(GREEN)"make libft clean"
+	@make clean -C srcs/libft
+	@echo $(GREEN)"make clean"
+	@rm -fr $(OBJS)
 
 fclean : clean
-	rm -f $(NAME)
-	cd ./srcs/libft ; $(MAKE) fclean
+	@echo $(GREEN)"make libft fclean"
+	@make fclean -C srcs/libft
+	@echo $(GREEN)"make fclean"
+	@rm -fr $(NAME)
 
 re :
-	$(MAKE) fclean
-	$(MAKE) all
+	@echo $(GREEN)"make re"
+	@$(MAKE) fclean
+	@$(MAKE) all
 
 .PHONY : all bonus clean fclean re
