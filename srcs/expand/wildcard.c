@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:02 by seojilee          #+#    #+#             */
-/*   Updated: 2024/03/01 09:38:25 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/01 09:41:14 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,8 @@ char	**expand_wildcard(char *arg)
 		if (!(entry->d_name[0] == '.' && arg[0] != '.'))
 		{
 			i = check_wildfixes(entry->d_name, entry->d_type, arg);
-			args = add_str(args, check_file_access(i, entry->d_name, &(arg[i])));
+			args = add_str(args, \
+					check_file_access(i, entry->d_name, &(arg[i])));
 		}
 		entry = readdir(dp);
 	}
