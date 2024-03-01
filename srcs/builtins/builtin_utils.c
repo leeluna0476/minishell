@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:24 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/01 08:03:17 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:49:43 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,19 @@ int	check_env_name(char *name)
 		idx++;
 	}
 	return (0);
+}
+
+int	cd_home(t_env_pack *pack)
+{
+	t_env	*target;
+
+	target = find_env("HOME", pack);
+	if (!target)
+	{
+		ft_putstr_fd("미니쉘: cd: HOME not set\n", STDERR_FILENO);
+		return (1);
+	}
+	return (chdir(target->value));
 }
 
 int	check_res(int res, t_env_pack *pack, char *path, char **args)

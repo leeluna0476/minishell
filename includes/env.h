@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:47:35 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/01 08:01:42 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:53:42 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "structures.h"
 
 // build_env_pack.c
-void	build_envp(t_env_pack *pack, char **envp);
+void	build_envp(t_env_pack *pack, char **envp, int idx);
 void	add_env_node(t_env_pack *pack, char *name, char *value);
 void	set_new_env(t_env_pack *pack, t_env *new);
 void	add_sorted_node(t_env **sorted_head, t_env *new);

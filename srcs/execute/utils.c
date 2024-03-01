@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/21 15:38:25 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/01 10:40:14 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,6 @@ char	**add_str(char **str, char *add)
 		free(str);
 	return (new);
 }
-// 이중 캐릭터 배열에 새 문자열을 넣어주는 함수
-// 예를 들어 str[0] = "ls", str[1] = "-l", str[2] = NULL 이고 add = "-a" 일 때
-// 재할당과 해제를 통해 new를 리턴한다
-// 이때 new[0] = "ls", new[1] = "-l", new[2] = "-a", new[3] = NULL
 
 char	**merge_strs(char **orig, char **new_strs)
 {
@@ -73,14 +69,12 @@ char	**merge_strs(char **orig, char **new_strs)
 	int		idx;
 	char	**out;
 
-
 	if (!orig)
 		return (new_strs);
 	if (!new_strs)
 		return (orig);
 	orig_len = split_len(orig);
 	new_len = split_len(new_strs);
-
 	out = malloc(sizeof(char *) * (orig_len + new_len + 1));
 	if (!out)
 		exit(1);

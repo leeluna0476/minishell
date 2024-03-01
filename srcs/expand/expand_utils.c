@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 14:57:36 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 10:30:07 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/01 09:41:08 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	build_exp_pair(t_c_expand *expand, char *ptr, int q_flag)
 	else
 		append_exp_ptr(expand, new);
 }
-// 확장문자의 위치와 해당 확장문자의 따옴표 정보를 기억하는 t_exp_pair 구조체를 빌드
 
 void	append_exp_ptr(t_c_expand *expand, t_exp_pair *newpair)
 {
@@ -56,7 +55,6 @@ void	append_exp_ptr(t_c_expand *expand, t_exp_pair *newpair)
 	free(expand->exp_ptrs);
 	expand->exp_ptrs = res;
 }
-// 만들어진 pair구조체를 t_c_expand의 포인터 배열에 추가해주는 함수..
 
 char	*find_env_name(char *ptr)
 {
@@ -75,7 +73,6 @@ char	*find_env_name(char *ptr)
 	}
 	return (ft_substr(ptr, 0, i));
 }
-// 문자열에서 확장시 환경변수의 이름까지 잘라 substr해서 리턴해주는 함수..
 
 char	*appand_string(char *result, char *original, int *start, int end)
 {
@@ -85,8 +82,8 @@ char	*appand_string(char *result, char *original, int *start, int end)
 	out = 0;
 	if (!*start)
 	{
-		out = ft_substr(original, *start, end);		// 첫 따옴표를 만났을시
-		*start = end + 1;							// start를 따옴표 다음까지로 밀어준다.
+		out = ft_substr(original, *start, end);
+		*start = end + 1;
 		return (out);
 	}
 	else

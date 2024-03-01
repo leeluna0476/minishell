@@ -3,19 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   check_ast_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:01 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/26 18:30:00 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/01 10:28:05 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-// center 앞뒤로 오면 안 되는 type이 존재한다면 에러 반환.
-// ls && || -> error
-// ls | && -> error
-// ls && (ls) -> error
 void	check_center_error(t_ast *ast, t_token *center)
 {
 	if (!(center->prev))
@@ -30,21 +26,8 @@ void	check_center_error(t_ast *ast, t_token *center)
 		|| center->next->type == T_PIPE \
 		|| center->next->type == T_CLOSE_BRACKET)
 		set_parse_error(ast, center->next->string);
-//
-//
-//	if ((!(center->next) || !(center->prev)) \
-//		|| (center->next->type == T_AND || center->next->type == T_OR \
-//		|| center->next->type == T_PIPE \
-//		|| center->next->type == T_CLOSE_BRACKET \
-//		|| center->prev->type == T_AND || center->prev->type == T_OR \
-//		|| center->prev->type == T_PIPE \
-//		|| center->prev->type == T_OPEN_BRACKET))
-//	{
-//		set_parse_error(ast, center->string);
-//	}
 }
 
-// 리다이렉션 뒤에 아무것도 없거나 T_WORD 외의 타입이 온다면 에러 설정.
 void	check_redirection_error(t_ast *ast)
 {
 	t_token	*curr;
@@ -63,7 +46,6 @@ void	check_redirection_error(t_ast *ast)
 	}
 }
 
-// 트리에 에러가 발생했는지 확인.
 int	check_error(t_ast *ast)
 {
 	if (ast->error)

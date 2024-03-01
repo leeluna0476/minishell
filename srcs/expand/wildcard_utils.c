@@ -6,11 +6,28 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:47:48 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 21:16:15 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/01 10:34:20 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
+
+void	only_wildcard(t_c_expand *expand)
+{
+	char	**temp_wildcard;
+
+	expand->result = add_str(expand->result, ft_strdup(expand->original));
+	if (expand->wild_num && expand->wild_flag == 0)
+	{
+		temp_wildcard = expand_wildcard(expand->original);
+		if (temp_wildcard)
+		{
+			split_free(expand->result);
+			expand->result = temp_wildcard;
+		}
+	}
+	return ;
+}
 
 void	do_wildcard(t_c_expand *expand, int i, int bound)
 {

@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:22 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/01 08:03:17 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:48:36 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,14 @@ int	do_cd(char **args, t_env_pack *pack)
 	t_env	*target;
 
 	temp = getcwd(0, 0);
-	target = find_env("HOME", pack);
-	if (!args[1] || ft_strcmp(args[1], "~") == 0)	// "cd" 또는 "cd ~"
-		result = chdir(target->value);
-	else if (!ft_strcmp(args[1], "-"))				// "cd -" 처리
+	if (!args[1] || ft_strcmp(args[1], "~") == 0)
+		return (cd_home(pack));
+	else if (!ft_strcmp(args[1], "-"))
 	{
 		target = find_env("OLDPWD", pack);
 		if (!target)
 		{
-			ft_putstr_fd("cd: OLDPWD not set\n", STDERR_FILENO);
+			ft_putstr_fd("미니쉘: cd: OLDPWD not set\n", STDERR_FILENO);
 			return (1);
 		}
 		result = chdir(target->value);
@@ -42,7 +41,6 @@ int	do_cd(char **args, t_env_pack *pack)
 	free(temp);
 	return (result);
 }
-// 빌트인 cd 실행시켜주는 함수. '~'와 '-' 도 구현되어있다
 
 int	do_echo(char **args, t_env_pack *pack)
 {
@@ -67,7 +65,6 @@ int	do_echo(char **args, t_env_pack *pack)
 		ft_printf("\n");
 	return (0);
 }
-// 옵션 -n이 가능한 echo, "echo -n -n -n -n hello" 등을 처리하기 위해 while문을 활용하였다.
 
 int	do_pwd(char **args, t_env_pack *pack)
 {
@@ -80,7 +77,6 @@ int	do_pwd(char **args, t_env_pack *pack)
 	free(cur_path);
 	return (0);
 }
-// pwd, getcwd함수를 쓰면 바로 가져올 수 있다
 
 int	do_exit(char **args, t_env_pack *pack)
 {
@@ -107,7 +103,6 @@ int	do_exit(char **args, t_env_pack *pack)
 	ft_putstr_fd(": too many arguments\n", STDERR_FILENO);
 	return (1);
 }
-// exit해주는 함수 bash의 동작과 맞춰주었다..
 
 void	b_exit(int code)
 {

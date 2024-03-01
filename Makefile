@@ -24,9 +24,11 @@ SRCS = ./srcs/envs/build_env_pack.c \
 		./srcs/execute/execute_utils2.c \
 		./srcs/execute/pipe_utils.c \
 		./srcs/execute/utils.c \
+		./srcs/execute/utils2.c \
 		./srcs/execute/redirections/redirections.c \
 		./srcs/execute/redirections/redir_utils.c \
 		./srcs/execute/redirections/do_heredoc.c \
+		./srcs/execute/redirections/heredoc_utils.c \
 		./srcs/expand/expand.c \
 		./srcs/expand/do_expand.c \
 		./srcs/expand/expand_utils.c \

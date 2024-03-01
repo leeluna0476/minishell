@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:14:15 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/28 17:18:56 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/01 10:47:19 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 #include "expand.h"
 #include "builtin.h"
 #include "parser.h"
+
+void	set_info(t_info *info)
+{
+	ft_memset(info, 0, sizeof(t_info));
+	info->pipe_fds[1] = 1;
+	info->redir_fds[1] = 1;
+}
 
 t_cmd	*build_cmd_pack(t_ast *tree, t_env_pack *pack)
 {
@@ -91,31 +98,6 @@ void	relative_execve(char **args, t_env_pack *envs, char **envp)
 	}
 	free(path_split);
 	ft_perror(args[0], 127);
-}
-
-void	ft_perror(const char *str, int exit_num)
-{
-	ft_putstr_fd("미니쉘: ", STDERR_FILENO);
-	ft_putstr_fd((char *)str, STDERR_FILENO);
-	if (exit_num == 126)
-	{
-		if (errno == ENOTDIR)
-			ft_putstr_fd(": Not a directory\n", STDERR_FILENO);
-		else if (errno == EISDIR)
-			ft_putstr_fd(": is a directory\n", STDERR_FILENO);
-		else if (errno == EACCES)
-			ft_putstr_fd(": Permission denied\n", STDERR_FILENO);
-	}
-	else if (exit_num == 127)
-		ft_putstr_fd(": command not found\n", STDERR_FILENO);
-	else if (exit_num == 128)
-	{
-		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
-		exit_num--;
-	}
-	else
-		perror(" ");
-	exit(exit_num);
 }
 
 void	free_cmd(t_cmd *cmd)

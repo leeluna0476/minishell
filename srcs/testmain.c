@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 11:09:40 by seojilee          #+#    #+#             */
-/*   Updated: 2024/03/01 08:05:04 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:53:06 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,6 @@ void	input_handler(void)
 {
 	ft_putstr_fd("\e7", STDOUT_FILENO);
 	signal_readline();
-}
-
-void	set_exit(t_env_pack *pack, int code)
-{
-	char	*exit_code_str;
-
-	exit_code_str = ft_itoa(code);
-	add_env_node(pack, "?", exit_code_str);
-	free(exit_code_str);
 }
 
 void	free_inputs(t_token **tokens, t_ast **ast)
@@ -73,17 +64,15 @@ void	leaks(void)
 	system("leaks -q minishell");
 }
 
-//	print_ast(ast);
 int	main(int ac, char *av[], char *envp[])
 {
 	char		*str;
 	t_env_pack	pack;
 	int			exitcode;
 
-	// atexit(leaks);
 	(void)ac;
 	(void)av;
-	build_envp(&pack, envp);
+	build_envp(&pack, envp, 0);
 	rl_event_hook = (rl_hook_func_t *)input_handler;
 	while (42)
 	{
@@ -96,7 +85,6 @@ int	main(int ac, char *av[], char *envp[])
 			run_minishell(str, &pack);
 		}
 		free(str);
-		// leaks();
 	}
 	ft_putstr_fd("\e8\e[B\e[Aexit\n", STDOUT_FILENO);
 	exitcode = get_exitstat(&pack);

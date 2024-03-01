@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 09:33:59 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/28 16:11:41 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/01 08:09:26 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)
 		else if (temp->type == T_D_GREATER || temp->type == T_GREATER)
 			cmd->out_redirs = temp;
 		if (temp->type == T_D_LESSER)
-			exit_code = heredoc(temp, pack);
+			exit_code = heredoc(temp, pack, get_filename());
 		temp = temp->next;
 	}
 	if (exit_code)

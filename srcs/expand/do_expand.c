@@ -6,49 +6,36 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:31:56 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/26 21:24:18 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/01 10:35:08 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 
-void	do_expand(t_c_expand *expand, t_env_pack *pack)
+void	do_expand(t_c_expand *exp, t_env_pack *pack)
 {
 	int		i;
 	char	*temp;
-	char	**temp_wildcard;
 
 	i = -1;
-	if (expand->exp_num == 0)
+	if (exp->exp_num == 0)
+		return (only_wildcard(exp));
+	while (exp->exp_ptrs[++i])
 	{
-		expand->result = add_str(expand->result, ft_strdup(expand->original));
-		if (expand->wild_num && expand->wild_flag == 0)
-		{
-			temp_wildcard = expand_wildcard(expand->original);
-			if (temp_wildcard)
-			{
-				split_free(expand->result);
-				expand->result = temp_wildcard;
-			}
-		}
-		return ;
-	}
-	while (expand->exp_ptrs[++i])
-	{
-		temp = search_value(expand->exp_ptrs[i], pack);
+		temp = search_value(exp->exp_ptrs[i], pack);
 		if (!temp)
 		{
-			expand_join(expand, ft_strdup(expand->exp_ptrs[i]->exp_name));
-			join_remain(expand, ft_strlen(expand->exp_ptrs[i]->exp_name));
+			expand_join(exp, ft_strdup(exp->exp_ptrs[i]->exp_name));
+			join_remain(exp, ft_strlen(exp->exp_ptrs[i]->exp_name));
 			continue ;
 		}
-		if (expand->exp_ptrs[i]->q_flag == 0)
-			expand_add(expand, temp);		// 환경변수 value를 split해보고 split되면 나누어서 붙이기
+		if (exp->exp_ptrs[i]->q_flag == 0)
+			expand_add(exp, temp);
 		else
-			expand_join(expand, temp);		// split 없이 바로 strjoin
-		join_remain(expand, ft_strlen(expand->exp_ptrs[i]->exp_name));						// 다음 $문자오기 전까지 일반문자열들을 join한다
+			expand_join(exp, temp);
+		join_remain(exp, ft_strlen(exp->exp_ptrs[i]->exp_name));
 	}
-	do_wildcard(expand, split_len(expand->result) - 1, split_len(expand->result));
+	do_wildcard(exp, split_len(exp->result) - 1, split_len(exp->result));
 }
 
 char	*search_value(t_exp_pair *pair, t_env_pack *pack)

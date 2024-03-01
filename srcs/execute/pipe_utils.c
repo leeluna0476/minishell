@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:07:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/28 16:12:09 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/01 10:49:32 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,23 @@ void	exec_parent(t_info *info)
 
 void	ft_wait(t_info *info, t_env_pack *pack)
 {
-	int		status;
 	char	*exit_code;
+
+	get_waitstatus(info);
+	signal_dfl();
+	info->fork_num = 0;
+	info->last_pid = 0;
+	if (info->prev_fd)
+		close(info->prev_fd);
+	exit_code = ft_itoa(info->exit_status);
+	add_env_node(pack, "?", exit_code);
+	free(exit_code);
+	return ;
+}
+
+void	get_waitstatus(t_info *info)
+{
+	int		status;
 
 	while (info->fork_num--)
 	{
@@ -88,20 +103,4 @@ void	ft_wait(t_info *info, t_env_pack *pack)
 				info->exit_status = 0;
 		}
 	}
-	signal_dfl();
-	info->fork_num = 0;
-	info->last_pid = 0;
-	if (info->prev_fd)
-		close(info->prev_fd);
-	exit_code = ft_itoa(info->exit_status);
-	add_env_node(pack, "?", exit_code);
-	free(exit_code);
-	return ;
-}
-
-void	set_info(t_info *info)
-{
-	ft_memset(info, 0, sizeof(t_info));
-	info->pipe_fds[1] = 1;
-	info->redir_fds[1] = 1;
 }
