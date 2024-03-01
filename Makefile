@@ -55,7 +55,7 @@ LIBFT = ./srcs/libft/libft.a
 all : $(NAME)
 
 $(NAME) : $(LIBFT) $(OBJS)
-	@echo $(GREEN)"---compiling---"
+	@echo $(GREEN)"---building minishell"
 	@$(CC) $(CFLAGS) $(LINKING_FLAG) -o $(NAME) $^
 	@echo $(GREEN)"\n==========================================================\n"$(EOC)
 	@echo $(YELLOW)"                    MINISHELL IS READY"$(EOC)
@@ -63,25 +63,25 @@ $(NAME) : $(LIBFT) $(OBJS)
 
 $(LIBFT) :
 	@cd ./srcs/libft ; $(MAKE)
-	@echo $(GREEN)"---creating libft.a---"
+	@echo $(GREEN)"---creating libft.a"
 
 %.o : %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
-	@echo $(GREEN)"make libft clean"
+	@echo $(GREEN)"---make libft clean"
 	@make clean -C srcs/libft
-	@echo $(GREEN)"make clean"
+	@echo $(GREEN)"---make clean"
 	@rm -fr $(OBJS)
 
 fclean : clean
-	@echo $(GREEN)"make libft fclean"
+	@echo $(GREEN)"---make libft fclean"
 	@make fclean -C srcs/libft
-	@echo $(GREEN)"make fclean"
+	@echo $(GREEN)"---make fclean"
 	@rm -fr $(NAME)
 
 re :
-	@echo $(GREEN)"make re"
+	@echo $(GREEN)"---make re"
 	@$(MAKE) fclean
 	@$(MAKE) all
 
