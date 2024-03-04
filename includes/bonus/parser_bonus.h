@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   parser_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:06:48 by seojilee          #+#    #+#             */
-/*   Updated: 2024/03/01 10:26:39 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 18:50:02 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
-# include "tokenizer.h"
+#ifndef PARSER_BONUS_H
+# define PARSER_BONUS_H
+
+# include "tokenizer_bonus.h"
 
 // ast.c
 void	generate_ast(t_ast **ast, t_token *start, t_token *end);

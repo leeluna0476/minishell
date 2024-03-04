@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.h                                           :+:      :+:    :+:   */
+/*   signal_handler_bonus.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojilee <seojilee@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 02:22:10 by seojilee          #+#    #+#             */
-/*   Updated: 2024/03/01 08:01:42 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:51:57 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGNAL_HANDLER_H
-# define SIGNAL_HANDLER_H
+#ifndef SIGNAL_HANDLER_BONUS_H
+# define SIGNAL_HANDLER_BONUS_H
 
 # include <signal.h>
-# include "structures.h"
+# include "structures_bonus.h"
 
 void	sig_handler(int signo);
 void	signal_readline(void);

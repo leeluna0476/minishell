@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structures.h                                       :+:      :+:    :+:   */
+/*   structures_bonus.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 08:02:36 by seojilee          #+#    #+#             */
-/*   Updated: 2024/03/01 10:27:06 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 18:51:07 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTURES_H
-# define STRUCTURES_H
-# include "../srcs/libft/libft.h"
+#ifndef STRUCTURES_BONUS_H
+# define STRUCTURES_BONUS_H
+
+# include "../../srcs/libft/libft.h"
 
 typedef struct s_token		t_token;
 typedef struct s_ast		t_ast;

@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand.h                                           :+:      :+:    :+:   */
+/*   expand_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:32:39 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/04 16:33:17 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 18:49:59 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPAND_H
-# define EXPAND_H
-# include "structures.h"
-# include "utils.h"
-# include "env.h"
-# include "parser.h"
+#ifndef EXPAND_BONUS_H
+# define EXPAND_BONUS_H
+
+# include "structures_bonus.h"
+# include "utils_bonus.h"
+# include "env_bonus.h"
+# include "parser_bonus.h"
 
 // expand.c
 char	**expand(char *data, t_env_pack *package, int flag);

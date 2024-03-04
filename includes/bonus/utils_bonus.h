@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   utils_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:14:38 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/01 10:41:09 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 18:51:17 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef UTILS_BONUS_H
+# define UTILS_BONUS_H
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -26,7 +27,7 @@
 # include <sys/termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "structures.h"
+# include "structures_bonus.h"
 
 // utils.c
 char	**add_str(char **str, char *add);

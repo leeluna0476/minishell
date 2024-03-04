@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection.h                                      :+:      :+:    :+:   */
+/*   redirection_bonus.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:55 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/01 10:26:48 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 18:50:04 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REDIRECTION_H
-# define REDIRECTION_H
+#ifndef REDIRECTION_BONUS_H
+# define REDIRECTION_BONUS_H
 
-# include "structures.h"
-# include "utils.h"
-# define TEMP_FILENAME "/.heredoc_tmp"
+# include "structures_bonus.h"
+# include "utils_bonus.h"
+# define TEMP_FILENAME "/_bonus.heredoc_tmp"
 # define HEREDOC "여기문서> "
 
 // redirections.c

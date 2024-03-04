@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   builtin_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 16:38:38 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/01 14:47:51 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 18:49:41 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
-# include "structures.h"
-# include "utils.h"
-# include "env.h"
+#ifndef BUILTIN_BONUS_H
+# define BUILTIN_BONUS_H
+
+# include "structures_bonus.h"
+# include "utils_bonus.h"
+# include "env_bonus.h"
 
 typedef int	(*t_builtin_ptr)(char **, t_env_pack *);
 
