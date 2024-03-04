@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/04 12:09:01 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 15:21:56 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	scan_n_setup(t_c_expand *expand, char *data)
 			q_flag = data[i];
 		else if (q_flag == data[i])
 			q_flag = 0;
-		if (data[i] == '$' || (data[i] == '~' && check_tilde(data + i, q_flag)))
+		if (data[i] == '$' || data[i] == '~')
 			build_exp_pair(expand, data + i, q_flag);
 		else if (data[i] == '*')
 		{
@@ -95,11 +95,12 @@ void	find_position(t_c_expand *expand)
 		return ;
 	while (expand->original[++i])
 	{
-		if (expand->original[i] == '$')
+		if (expand->original[i] == '$' || expand->original[i] == '~')
 			expand->exp_ptrs[++j]->exp_pos = expand->original + i;
 	}
 	i = 0;
-	while (expand->original[i] && expand->original[i] != '$')
+	while (expand->original[i] && \
+	!(expand->original[i] == '$' || expand->original[i] == '~'))
 		i++;
 	expand->result = add_str(expand->result, ft_substr(expand->original, 0, i));
 	if (i)

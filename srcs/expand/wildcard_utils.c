@@ -6,17 +6,24 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:47:48 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/04 12:46:11 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 15:28:25 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 
-int	check_tilde(char *ptr, int q_flag)
+int	check_tilde(t_c_expand *expand, char *ptr)
 {
-	if (strlen(ptr) == 1)
+	int	i;
+
+	i = 0;
+	while (expand->original && expand->original + i != ptr)
+		i++;
+	if (i > 0)
+		return (0);
+	if (ft_strlen(ptr) == 1 && *(ptr + 1) == '/')
 		return (1);
-	if (q_flag || *(ptr + 1) != '/')
+	else
 		return (0);
 }
 

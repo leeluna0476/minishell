@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 14:57:36 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/04 13:07:33 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 15:16:49 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ void	build_exp_pair(t_c_expand *expand, char *ptr, int q_flag)
 	new->exp_name = find_env_name(ptr);
 	if (*ptr == '~')
 	{
-		new->q_flag = 0;
-		new->exp_name = ft_strdup("~");
+		if (check_tilde(expand, ptr))
+			new->exp_name = ft_strdup("~");
+		else
+			new->exp_name = ft_strdup("");
 	}
 	if (!expand->exp_num)
 	{

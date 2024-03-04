@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:05 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/01 10:42:11 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 15:24:27 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	print_export(t_env_pack *pack)
 	temp = pack->sorted_head->sorted_next;
 	while (temp)
 	{
+		if (ft_strncmp(temp->name, "~", 2) == 0)
+			temp = temp->sorted_next;
 		ft_printf("%s", temp->name);
 		if (temp->value)
 			ft_printf("=\"%s\"\n", temp->value);
@@ -95,7 +97,7 @@ int	do_env(char **args, t_env_pack *pack)
 	t_env	*temp;
 
 	(void)args;
-	temp = pack->origin_head->origin_next;
+	temp = pack->origin_head->origin_next->origin_next;
 	while (temp)
 	{
 		if (temp->value)

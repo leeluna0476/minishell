@@ -6,14 +6,14 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:47:35 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/04 11:53:29 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 15:29:59 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
 # include "structures.h"
-# define TILDE_SYMBOL "/Users/seojlee"
+
 // build_env_pack.c
 void	build_envp(t_env_pack *pack, char **envp);
 void	add_env_node(t_env_pack *pack, char *name, char *value);

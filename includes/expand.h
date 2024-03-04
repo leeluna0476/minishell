@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:32:39 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/04 12:47:21 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 15:08:36 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*check_file_access(int idx, char *filename, char *suffix);
 char	**expand_wildcard(char *arg);
 
 // wildcard_utils.c
-int		check_tilde(char *ptr, int q_flag);
+int		check_tilde(t_c_expand *expand, char *ptr);
 void	only_wildcard(t_c_expand *expand);
 void	do_wildcard(t_c_expand *expand, int i, int bound);
 int		scan_for_wildcard(char *str);

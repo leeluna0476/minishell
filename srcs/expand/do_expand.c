@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:31:56 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/01 10:35:08 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 15:21:49 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*search_value(t_exp_pair *pair, t_env_pack *pack)
 {
 	t_env	*target;
 
-	if (pair->q_flag == '\'')
+	if (pair->q_flag == '\'' || !*pair->exp_name)
 		return (NULL);
 	if (*pair->exp_name == '*')
 		return (ft_strdup("*"));
@@ -89,7 +89,7 @@ void	join_remain(t_c_expand *expand, int len)
 	i = 1;
 	while (expand->original[i])
 	{
-		if (expand->original[i] == '$')
+		if (expand->original[i] == '$' || expand->original[i] == '~')
 			break ;
 		i++;
 	}
