@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   execute_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 17:39:17 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/28 16:11:32 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 18:36:10 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execute.h"
-#include "expand.h"
-#include "redirection.h"
-#include "builtin.h"
-#include "signal_handler.h"
+#include "execute_bonus.h"
+#include "expand_bonus.h"
+#include "redirection_bonus.h"
+#include "builtin_bonus.h"
+#include "signal_handler_bonus.h"
 
 void	execute(t_ast *tree, t_env_pack *pack, t_info *info)
 {

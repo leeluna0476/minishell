@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redir_utils.c                                      :+:      :+:    :+:   */
+/*   redir_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:59:01 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/28 15:47:55 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 18:36:00 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "redirection.h"
-#include "expand.h"
+#include "redirection_bonus.h"
+#include "expand_bonus.h"
 
 void	redir_open(t_redir *temp)
 {

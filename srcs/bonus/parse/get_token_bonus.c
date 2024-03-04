@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_token.c                                        :+:      :+:    :+:   */
+/*   get_token_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:36:46 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/16 13:26:32 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:37:09 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
+#include "tokenizer_bonus.h"
 
 // meta1에 속하는 토큰 가져오기.
 int	get_meta1(char *line, char **string, t_type *type)

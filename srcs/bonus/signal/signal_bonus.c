@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   signal_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 02:19:01 by seojilee          #+#    #+#             */
-/*   Updated: 2024/03/04 15:07:08 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:37:24 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tokenizer.h"
-#include "signal_handler.h"
-#include "utils.h"
+#include "tokenizer_bonus.h"
+#include "signal_handler_bonus.h"
+#include "utils_bonus.h"
 
 volatile sig_atomic_t	g_status = 0;
 

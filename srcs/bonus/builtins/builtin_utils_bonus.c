@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_utils.c                                    :+:      :+:    :+:   */
+/*   builtin_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:24 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/04 13:48:34 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:35:25 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structures.h"
-#include "builtin.h"
-#include "execute.h"
+#include "structures_bonus.h"
+#include "builtin_bonus.h"
+#include "execute_bonus.h"
 
 int	check_env_name(char *name)
 {

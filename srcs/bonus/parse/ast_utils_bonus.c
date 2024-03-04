@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast_utils.c                                        :+:      :+:    :+:   */
+/*   ast_utils_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:01 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/20 14:23:47 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:36:58 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "parser_bonus.h"
 
 // 현재 기호가 리다이렉션 문자인지 확인.
 int	is_redirection(t_type type)

@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   do_heredoc.c                                       :+:      :+:    :+:   */
+/*   do_heredoc_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:19 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/04 15:06:27 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:35:50 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "signal_handler.h"
-#include "execute.h"
-#include "redirection.h"
-#include "expand.h"
-#include "env.h"
+#include "signal_handler_bonus.h"
+#include "execute_bonus.h"
+#include "redirection_bonus.h"
+#include "expand_bonus.h"
+#include "env_bonus.h"
 
 int	heredoc(t_redir *target, t_env_pack *pack, char *filename)
 {

@@ -19,6 +19,7 @@
 		"stdlib.h": "c",
 		"libft.h": "c",
 		"util.h": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"ios": "c"
 	}
 }
