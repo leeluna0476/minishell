@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:47:48 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/04 15:28:25 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 15:51:46 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_tilde(t_c_expand *expand, char *ptr)
 		i++;
 	if (i > 0)
 		return (0);
-	if (ft_strlen(ptr) == 1 && *(ptr + 1) == '/')
+	if (ft_strlen(ptr) == 1 || *(ptr + 1) == '/')
 		return (1);
 	else
 		return (0);

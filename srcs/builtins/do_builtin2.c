@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:05 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/04 15:24:27 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 16:15:50 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	do_export(char **args, t_env_pack *pack)
 		{
 			ft_putstr_fd("미니쉘: export: '", STDERR_FILENO);
 			ft_putstr_fd(args[i], STDERR_FILENO);
-			ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+			ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
 			res = 1;
 			continue ;
 		}
@@ -46,13 +46,13 @@ int	print_export(t_env_pack *pack)
 	temp = pack->sorted_head->sorted_next;
 	while (temp)
 	{
-		if (ft_strncmp(temp->name, "~", 2) == 0)
-			temp = temp->sorted_next;
+		// if (ft_strncmp(temp->name, "~", 2) == 0)
+		// 	temp = temp->sorted_next;
 		ft_printf("%s", temp->name);
 		if (temp->value)
 			ft_printf("=\"%s\"\n", temp->value);
 		else
-			ft_printf("\n");
+			ft_putchar_fd('\n', STDOUT_FILENO);
 		temp = temp->sorted_next;
 	}
 	return (0);

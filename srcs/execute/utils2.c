@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 10:39:37 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/04 11:36:07 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 13:55:33 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,17 @@ void	ft_perror(const char *str, int exit_num)
 	if (exit_num == 126)
 	{
 		if (errno == ENOTDIR)
-			ft_putstr_fd(": Not a directory\n", STDERR_FILENO);
+			ft_putendl_fd(": Not a directory", STDERR_FILENO);
 		else if (errno == EISDIR)
-			ft_putstr_fd(": is a directory\n", STDERR_FILENO);
+			ft_putendl_fd(": is a directory", STDERR_FILENO);
 		else if (errno == EACCES)
-			ft_putstr_fd(": Permission denied\n", STDERR_FILENO);
+			ft_putendl_fd(": Permission denied", STDERR_FILENO);
 	}
 	else if (exit_num == 127)
-		ft_putstr_fd(": command not found\n", STDERR_FILENO);
+		ft_putendl_fd(": command not found", STDERR_FILENO);
 	else if (exit_num == 128)
 	{
-		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
 		exit_num--;
 	}
 	else

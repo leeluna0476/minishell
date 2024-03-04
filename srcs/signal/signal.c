@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 02:19:01 by seojilee          #+#    #+#             */
-/*   Updated: 2024/02/24 11:10:34 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:07:08 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	signal_dfl(void)
 	signal(SIGQUIT, SIG_DFL);
 }
 
-// g_status == -1 == SIGINT
 char	*get_line(char *prompt, t_env_pack *pack)
 {
 	char	*str;

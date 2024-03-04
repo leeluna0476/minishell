@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:22 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/01 14:48:36 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 15:39:05 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	do_cd(char **args, t_env_pack *pack)
 		target = find_env("OLDPWD", pack);
 		if (!target)
 		{
-			ft_putstr_fd("미니쉘: cd: OLDPWD not set\n", STDERR_FILENO);
+			ft_putendl_fd("미니쉘: cd: OLDPWD not set", STDERR_FILENO);
 			return (1);
 		}
 		result = chdir(target->value);
@@ -56,13 +56,13 @@ int	do_echo(char **args, t_env_pack *pack)
 		n_flag = 1;
 	while (args[i])
 	{
-		ft_printf("%s", args[i]);
+		ft_putstr_fd(args[i], STDOUT_FILENO);
 		i++;
 		if (args[i])
-			write(1, " ", 1);
+			ft_putchar_fd(' ', STDOUT_FILENO);
 	}
 	if (!n_flag)
-		ft_printf("\n");
+		ft_putchar_fd('\n', STDOUT_FILENO);
 	return (0);
 }
 
@@ -73,7 +73,7 @@ int	do_pwd(char **args, t_env_pack *pack)
 	(void)args;
 	(void)pack;
 	cur_path = getcwd(NULL, 0);
-	ft_printf("%s\n", cur_path);
+	ft_putendl_fd(cur_path, STDOUT_FILENO);
 	free(cur_path);
 	return (0);
 }
@@ -93,19 +93,19 @@ int	do_exit(char **args, t_env_pack *pack)
 			ft_putstr_fd(args[0], STDERR_FILENO);
 			ft_putstr_fd(": ", STDERR_FILENO);
 			ft_putstr_fd(args[1], STDERR_FILENO);
-			ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+			ft_putendl_fd(": numeric argument required", STDERR_FILENO);
 			b_exit(255);
 		}
 		else
 			b_exit(ft_atoi(args[1]) % 256);
 	}
 	ft_putstr_fd(args[0], STDERR_FILENO);
-	ft_putstr_fd(": too many arguments\n", STDERR_FILENO);
+	ft_putendl_fd(": too many arguments", STDERR_FILENO);
 	return (1);
 }
 
 void	b_exit(int code)
 {
-	ft_putstr_fd("exit\n", STDOUT_FILENO);
+	ft_putendl_fd("exit", STDOUT_FILENO);
 	exit(code);
 }

@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:24 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/01 14:49:43 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 13:48:34 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_env_name(char *name)
 	{
 		ft_putstr_fd("미니쉘: export: '", STDERR_FILENO);
 		ft_putstr_fd(name, STDERR_FILENO);
-		ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+		ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
 		return (1);
 	}
 	idx = 0;
@@ -32,7 +32,7 @@ int	check_env_name(char *name)
 		{
 			ft_putstr_fd("미니쉘: export: '", STDERR_FILENO);
 			ft_putstr_fd(name, STDERR_FILENO);
-			ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+			ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
 			return (1);
 		}
 		idx++;
@@ -47,7 +47,7 @@ int	cd_home(t_env_pack *pack)
 	target = find_env("HOME", pack);
 	if (!target)
 	{
-		ft_putstr_fd("미니쉘: cd: HOME not set\n", STDERR_FILENO);
+		ft_putendl_fd("미니쉘: cd: HOME not set", STDERR_FILENO);
 		return (1);
 	}
 	return (chdir(target->value));
@@ -70,9 +70,9 @@ int	check_res(int res, t_env_pack *pack, char *path, char **args)
 		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
 		ft_putstr_fd(args[1], STDERR_FILENO);
 		if (!access(args[1], F_OK) && !is_dir(args[1]))
-			ft_putstr_fd(": Not a directory\n", STDERR_FILENO);
+			ft_putendl_fd(": Not a directory", STDERR_FILENO);
 		else
-			ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+			ft_putendl_fd(": No such file or directory", STDERR_FILENO);
 		free(str);
 		return (1);
 	}

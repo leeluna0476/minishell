@@ -6,11 +6,33 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:00:13 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/04 13:30:40 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 16:13:14 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
+
+void	set_new_env(t_env_pack *pack, t_env *new)
+{
+	new->origin_next = 0;
+	new->sorted_next = 0;
+	new->origin_prev = 0;
+	new->sorted_prev = 0;
+	if (!(pack->origin_head))
+	{
+		pack->origin_head = new;
+		pack->origin_last = new;
+		pack->sorted_head = new;
+	}
+	else
+	{
+		new->origin_prev = pack->origin_last;
+		pack->origin_last->origin_next = new;
+		pack->origin_last = new;
+		add_sorted_node(&(pack->sorted_head), new);
+	}
+}
+// new를 초기화하고 t_env_pack을 검사하며 orgin_next/prev를 연결하는 함수
 
 t_env	*find_env(char *name, t_env_pack *package)
 {
@@ -28,20 +50,6 @@ t_env	*find_env(char *name, t_env_pack *package)
 	return (temp);
 }
 // package의 node를 순회하며 매개변수 name과 매칭되는 node를 찾아 리턴해준다
-
-void	set_shlvl(t_env_pack *pack)
-{
-	t_env	*shlvl_node;
-	char	*shlvl_str;
-
-	shlvl_node = find_env("SHLVL", pack);
-	if (!shlvl_node)
-		return (add_env_node(pack, "SHLVL", "1"));
-	shlvl_str = ft_itoa(ft_atoi(shlvl_node->value) + 1);
-	add_env_node(pack, "SHLVL", shlvl_str);
-	free(shlvl_str);
-	return ;
-}
 
 void	delete_env(char *name, t_env_pack *package)
 {
@@ -87,4 +95,28 @@ void	free_envs(t_env *head)
 		free(temp);
 		temp = next;
 	}
+}
+
+char	*get_home_dir(void)
+{
+	char	*curr_dir;
+	char	*home_dir;
+	int		flag;
+	int		i;
+
+	curr_dir = getcwd(NULL, 0);
+	home_dir = curr_dir;
+	if (!curr_dir)
+		return (NULL);
+	i = 0;
+	flag = 1;
+	while (curr_dir[i] && flag < 3)
+	{
+		i++;
+		if (curr_dir[i] == '/')
+			flag++;
+	}
+	home_dir = ft_substr(curr_dir, 0, i);
+	free(curr_dir);
+	return (home_dir);
 }

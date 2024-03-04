@@ -6,11 +6,39 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:46:43 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/04 15:30:03 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 15:59:26 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
+
+void	set_shlvl(t_env_pack *pack)
+{
+	t_env	*shlvl_node;
+	char	*shlvl_str;
+
+	shlvl_node = find_env("SHLVL", pack);
+	if (!shlvl_node)
+		return (add_env_node(pack, "SHLVL", "1"));
+	shlvl_str = ft_itoa(ft_atoi(shlvl_node->value) + 1);
+	add_env_node(pack, "SHLVL", shlvl_str);
+	free(shlvl_str);
+	return ;
+}
+
+void	set_tilde(t_env_pack *pack)
+{
+	t_env	*home;
+	char	*tilde_value;
+
+	home = find_env("HOME", pack);
+	if (home)
+		tilde_value = ft_strdup(home->value);
+	else
+		tilde_value = get_home_dir();
+	add_env_node(pack, "~", tilde_value);
+	free(tilde_value);
+}
 
 void	build_envp(t_env_pack *pack, char **envp)
 {
@@ -20,7 +48,7 @@ void	build_envp(t_env_pack *pack, char **envp)
 	idx = 0;
 	if (!*envp)
 	{
-		ft_putstr_fd("미니쉘: envp not set\n", STDERR_FILENO);
+		ft_putendl_fd("미니쉘: envp not set", STDERR_FILENO);
 		exit(1);
 	}
 	ft_memset(pack, 0, sizeof(t_env_pack));
@@ -35,6 +63,7 @@ void	build_envp(t_env_pack *pack, char **envp)
 		idx++;
 	}
 	set_shlvl(pack);
+	set_tilde(pack);
 	return ;
 }
 // 환경변수 패키지 구조체(t_env_pack)를 만드는 함수
@@ -68,28 +97,6 @@ void	add_env_node(t_env_pack *pack, char *name, char *value)
 // value 값이 없이 export 빌트인이 실행될 때에도 리스트에 추가해야 하기 때문에 먼저 key값이 있는지 확인한다
 // 키 값이 있으면(이미 노드가 존재) value를 처리하고, 없으면 새로 노드를 만들어준다.
 // strdup으로 각 key와 value를 가져오고 set_new_env로 초기화랑 대응되는 노드로 연결해준다..
-
-void	set_new_env(t_env_pack *pack, t_env *new)
-{
-	new->origin_next = 0;
-	new->sorted_next = 0;
-	new->origin_prev = 0;
-	new->sorted_prev = 0;
-	if (!(pack->origin_head))
-	{
-		pack->origin_head = new;
-		pack->origin_last = new;
-		pack->sorted_head = new;
-	}
-	else
-	{
-		new->origin_prev = pack->origin_last;
-		pack->origin_last->origin_next = new;
-		pack->origin_last = new;
-		add_sorted_node(&(pack->sorted_head), new);
-	}
-}
-// new를 초기화하고 t_env_pack을 검사하며 orgin_next/prev를 연결하는 함수
 
 void	add_sorted_node(t_env **sorted_head, t_env *new)
 {

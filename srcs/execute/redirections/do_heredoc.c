@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:42:19 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/01 10:25:54 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 15:06:27 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,13 +101,13 @@ void	heredoc_expander(int fd, char *input, t_env_pack *pack, int flag)
 			exp_value = get_heredoc_expval(input + i, pack, &i);
 			exp_len = ft_strlen(exp_value);
 			while (j < exp_len)
-				write(fd, exp_value + j++, 1);
+				ft_putchar_fd(*(exp_value + j++), fd);
 			free(exp_value);
 		}
 		else
 			write(fd, input + i, 1);
 		i++;
 	}
-	write(fd, "\n", 1);
+	ft_putchar_fd('\n', fd);
 	free (input);
 }

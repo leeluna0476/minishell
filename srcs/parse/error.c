@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:03:51 by seojilee          #+#    #+#             */
-/*   Updated: 2024/03/01 10:10:57 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:04:49 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ void	set_parse_error(t_ast *ast, char *string)
 // 토큰화 단계에서 오류가 발생하면 오류 메세지와 함께 문제 토큰을 출력.
 void	syntax_error_tokenizer(char *string, t_token **list)
 {
-	ft_putstr_fd("syntax error near unclosed quote: `", STDERR_FILENO);
-	ft_putstr_fd(string, STDERR_FILENO);
-	ft_putstr_fd("'\n", STDERR_FILENO);
+	ft_putstr_fd("syntax error near unclosed quote: ", STDERR_FILENO);
+	ft_putchar_fd('`', STDERR_FILENO);
+	ft_putendl_fd(string, STDERR_FILENO);
+	ft_putchar_fd('`', STDERR_FILENO);
 	free(string);
 	free_tokens(list);
 }
@@ -37,6 +38,6 @@ void	syntax_error_parser(char *string, t_token **list)
 	ft_putchar_fd('`', STDERR_FILENO);
 	ft_putstr_fd(string, STDERR_FILENO);
 	ft_putchar_fd('`', STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
+	ft_putchar_fd('\n', STDERR_FILENO);
 	free_tokens(list);
 }

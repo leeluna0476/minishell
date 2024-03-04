@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 09:33:59 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/01 08:09:26 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 13:54:38 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	open_check(t_redir *temp, int *exit_code)
 		if (temp->type != T_D_LESSER && split_len(temp->filename) > 2)
 		{
 			ft_putstr_fd(temp->filename[0], STDERR_FILENO);
-			ft_putstr_fd(": ambiguous redirect\n", STDERR_FILENO);
+			ft_putendl_fd(": ambiguous redirect", STDERR_FILENO);
 			*exit_code = 1;
 			return (1);
 		}
@@ -74,9 +74,9 @@ int	open_check(t_redir *temp, int *exit_code)
 		{
 			ft_putstr_fd(temp->filename[1], STDERR_FILENO);
 			if (access(temp->filename[1], F_OK) == 0)
-				ft_putstr_fd(": Permission denied\n", STDERR_FILENO);
+				ft_putendl_fd(": Permission denied", STDERR_FILENO);
 			else
-				ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+				ft_putendl_fd(": No such file or directory", STDERR_FILENO);
 			*exit_code = 1;
 			return (1);
 		}

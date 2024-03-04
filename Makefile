@@ -17,7 +17,7 @@ NAME = minishell
 CC = cc
 CFLAGS = -I./includes -Wall -Wextra -Werror
 LINKING_FLAG = -lft -L./srcs/libft/ -lreadline
-SRCS = ./srcs/envs/build_env_pack.c \
+MAN_SRCS = ./srcs/envs/build_env_pack.c \
 		./srcs/envs/env_utils.c \
 		./srcs/execute/execute.c \
 		./srcs/execute/execute_utils.c \
@@ -51,10 +51,54 @@ SRCS = ./srcs/envs/build_env_pack.c \
 		./srcs/parse/tokenizer.c \
 		./srcs/signal/signal.c \
 		./srcs/testmain.c
-OBJS = $(SRCS:.c=.o)
+MAN_OBJS = $(MAN_SRCS:.c=.o)
+
+BONUS_SRCS = ./srcs/envs/build_env_pack_bonus.c \
+		./srcs/envs/env_utils_bonus.c \
+		./srcs/execute/execute_bonus.c \
+		./srcs/execute/execute_utils_bonus.c \
+		./srcs/execute/execute_utils2_bonus.c \
+		./srcs/execute/pipe_utils_bonus.c \
+		./srcs/execute/utils_bonus.c \
+		./srcs/execute/utils2_bonus.c \
+		./srcs/execute/redirections/redirections_bonus.c \
+		./srcs/execute/redirections/redir_utils_bonus.c \
+		./srcs/execute/redirections/do_heredoc_bonus.c \
+		./srcs/execute/redirections/heredoc_utils_bonus.c \
+		./srcs/expand/expand_bonus.c \
+		./srcs/expand/do_expand_bonus.c \
+		./srcs/expand/expand_utils_bonus.c \
+		./srcs/expand/wildcard_bonus.c \
+		./srcs/expand/wildcard_utils_bonus.c \
+		./srcs/builtins/builtin_exec_bonus.c \
+		./srcs/builtins/builtin_utils_bonus.c \
+		./srcs/builtins/do_builtin_bonus.c \
+		./srcs/builtins/do_builtin2_bonus.c \
+		./srcs/parse/ast_bonus.c \
+		./srcs/parse/ast_utils_bonus.c \
+		./srcs/parse/bracket_bonus.c \
+		./srcs/parse/center_bonus.c \
+		./srcs/parse/check_ast_error_bonus.c \
+		./srcs/parse/error_bonus.c \
+		./srcs/parse/get_token_bonus.c \
+		./srcs/parse/meta_bonus.c \
+		./srcs/parse/set_nodes_bonus.c \
+		./srcs/parse/token_utils_bonus.c \
+		./srcs/parse/tokenizer_bonus.c \
+		./srcs/signal/signal_bonus.c \
+		./srcs/testmain_bonus.c
+BONUS_OBJS = $(BONUS_SRCS:.c=.o)
+
 LIBFT = ./srcs/libft/libft.a
 
+ifeq ($(MAKECMDGOALS),bonus)
+	OBJS=$(BONUS_OBJS)
+else
+	OBJS=$(MAN_OBJS)
+endif
+
 all : $(NAME)
+bonus : $(NAME)
 
 $(NAME) : $(LIBFT) $(OBJS)
 	@echo $(GREEN)"---building minishell"
@@ -64,9 +108,9 @@ $(NAME) : $(LIBFT) $(OBJS)
 	@echo $(GREEN)"\n==========================================================\n"$(EOC)
 
 $(LIBFT) :
-	@echo $(GREEN)"---creating libft.a\n"
+	@echo $(GREEN)"---creating libft.a"$(EOF)
 	@cd ./srcs/libft ; $(MAKE)
-	@echo $(LINE_CLEAR)
+#	@echo $(LINE_CLEAR)
 
 %.o : %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
