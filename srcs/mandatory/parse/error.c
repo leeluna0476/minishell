@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:03:51 by seojilee          #+#    #+#             */
-/*   Updated: 2024/03/04 15:04:49 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:53:36 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ void	syntax_error_tokenizer(char *string, t_token **list)
 {
 	ft_putstr_fd("syntax error near unclosed quote: ", STDERR_FILENO);
 	ft_putchar_fd('`', STDERR_FILENO);
-	ft_putendl_fd(string, STDERR_FILENO);
+	ft_putstr_fd(string, STDERR_FILENO);
 	ft_putchar_fd('`', STDERR_FILENO);
+	ft_putchar_fd('\n', STDERR_FILENO);
 	free(string);
 	free_tokens(list);
 }
