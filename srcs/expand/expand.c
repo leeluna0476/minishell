@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:32:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/01 10:29:08 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 12:09:01 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	scan_n_setup(t_c_expand *expand, char *data)
 			q_flag = data[i];
 		else if (q_flag == data[i])
 			q_flag = 0;
-		if (data[i] == '$')
+		if (data[i] == '$' || (data[i] == '~' && check_tilde(data + i, q_flag)))
 			build_exp_pair(expand, data + i, q_flag);
 		else if (data[i] == '*')
 		{

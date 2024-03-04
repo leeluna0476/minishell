@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:00:13 by yusekim           #+#    #+#             */
-/*   Updated: 2024/02/23 13:29:52 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 11:53:12 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ t_env	*find_env(char *name, t_env_pack *package)
 	return (temp);
 }
 // package의 node를 순회하며 매개변수 name과 매칭되는 node를 찾아 리턴해준다
+
+void	set_shlvl(t_env_pack *pack)
+{
+	t_env	*shlvl_node;
+	char	*shlvl_str;
+
+	shlvl_node = find_env("SHLVL", pack);
+	if (!shlvl_node)
+		return (add_env_node(pack, "SHLVL", "1"));
+	shlvl_str = ft_itoa(ft_atoi(shlvl_node->value) + 1);
+	add_env_node(pack, "SHLVL", shlvl_str);
+	free(shlvl_str);
+	return ;
+}
 
 void	delete_env(char *name, t_env_pack *package)
 {

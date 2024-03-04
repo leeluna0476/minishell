@@ -6,11 +6,19 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:47:48 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/01 10:34:20 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 12:46:11 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
+
+int	check_tilde(char *ptr, int q_flag)
+{
+	if (strlen(ptr) == 1)
+		return (1);
+	if (q_flag || *(ptr + 1) != '/')
+		return (0);
+}
 
 void	only_wildcard(t_c_expand *expand)
 {

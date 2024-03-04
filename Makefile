@@ -64,22 +64,23 @@ $(NAME) : $(LIBFT) $(OBJS)
 	@echo $(GREEN)"\n==========================================================\n"$(EOC)
 
 $(LIBFT) :
+	@echo $(GREEN)"---creating libft.a\n"
 	@cd ./srcs/libft ; $(MAKE)
-	@echo $(GREEN)"---creating libft.a"
+	@echo $(LINE_CLEAR)
 
 %.o : %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
-	@echo $(GREEN)"---make libft clean"
+	@echo $(GREEN)"---make libft clean"$(EOC)
 	@make clean -C srcs/libft
-	@echo $(GREEN)"---make clean"
+	@echo $(GREEN)"---make clean"$(EOC)
 	@rm -fr $(OBJS)
 
 fclean : clean
-	@echo $(GREEN)"---make libft fclean"
+	@echo $(GREEN)"---make libft fclean"$(EOC)
 	@make fclean -C srcs/libft
-	@echo $(GREEN)"---make fclean"
+	@echo $(GREEN)"---make fclean"$(EOC)
 	@rm -fr $(NAME)
 
 re :

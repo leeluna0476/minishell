@@ -6,25 +6,26 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:46:43 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/01 17:14:36 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 11:50:47 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 
-void	build_envp(t_env_pack *pack, char **envp, int idx)
+void	build_envp(t_env_pack *pack, char **envp)
 {
 	char	*temp;
-	char	*shlvl;
-	t_env	*shlv_node;
+	int		idx;
 
-	if (!envp)
+	idx = 0;
+	if (!*envp)
 	{
 		ft_putstr_fd("미니쉘: envp not set\n", STDERR_FILENO);
 		exit(1);
 	}
 	ft_memset(pack, 0, sizeof(t_env_pack));
 	add_env_node(pack, "?", "0");
+	add_env_node(pack, "~", TILDE_SYMBOL);
 	while (envp[idx])
 	{
 		temp = ft_strchr(envp[idx], '=');
@@ -33,11 +34,8 @@ void	build_envp(t_env_pack *pack, char **envp, int idx)
 		*temp = '=';
 		idx++;
 	}
-	shlv_node = find_env("SHLVL", pack);
-	shlvl = ft_itoa(ft_atoi(shlv_node->value) + 1);
-	free(shlv_node->value);
-	shlv_node->value = shlvl;
-	idx = 0;
+	set_shlvl(pack);
+	return ;
 }
 // 환경변수 패키지 구조체(t_env_pack)를 만드는 함수
 

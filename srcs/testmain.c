@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 11:09:40 by seojilee          #+#    #+#             */
-/*   Updated: 2024/03/01 15:05:01 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/04 11:50:57 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	main(int ac, char *av[], char *envp[])
 
 	(void)ac;
 	(void)av;
-	build_envp(&pack, envp, 0);
+	build_envp(&pack, envp);
 	rl_event_hook = (rl_hook_func_t *)input_handler;
 	while (42)
 	{
