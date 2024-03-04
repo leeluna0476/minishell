@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   utils2_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 10:39:37 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/04 13:55:33 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:36:37 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
-#include "env.h"
-#include "execute.h"
+#include "utils_bonus.h"
+#include "env_bonus.h"
+#include "execute_bonus.h"
 
 void	set_exit(t_env_pack *pack, int code)
 {

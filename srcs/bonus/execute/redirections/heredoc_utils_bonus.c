@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc_utils.c                                    :+:      :+:    :+:   */
+/*   heredoc_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 08:10:45 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/01 10:24:18 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 18:35:57 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "signal_handler.h"
-#include "redirection.h"
-#include "expand.h"
-#include "env.h"
+#include "signal_handler_bonus.h"
+#include "redirection_bonus.h"
+#include "expand_bonus.h"
+#include "env_bonus.h"
 
 void	set_term(struct termios *term)
 {

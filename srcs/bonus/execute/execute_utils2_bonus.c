@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_utils2.c                                   :+:      :+:    :+:   */
+/*   execute_utils2_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:14:15 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/01 10:47:19 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 18:36:25 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execute.h"
-#include "redirection.h"
-#include "expand.h"
-#include "builtin.h"
-#include "parser.h"
+#include "execute_bonus.h"
+#include "redirection_bonus.h"
+#include "expand_bonus.h"
+#include "builtin_bonus.h"
+#include "parser_bonus.h"
 
 void	set_info(t_info *info)
 {

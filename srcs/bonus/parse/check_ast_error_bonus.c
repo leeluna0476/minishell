@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_ast_error.c                                  :+:      :+:    :+:   */
+/*   check_ast_error_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 08:53:01 by seojilee          #+#    #+#             */
-/*   Updated: 2024/03/01 10:28:05 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 18:37:05 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "parser_bonus.h"
 
 void	check_center_error(t_ast *ast, t_token *center)
 {

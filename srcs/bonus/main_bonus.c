@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   testmain.c                                         :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 11:09:40 by seojilee          #+#    #+#             */
-/*   Updated: 2024/03/04 16:34:15 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 18:37:34 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
-#include "env.h"
-#include "structures.h"
-#include "execute.h"
-#include "expand.h"
-#include "parser.h"
-#include "redirection.h"
-#include "signal_handler.h"
+#include "builtin_bonus.h"
+#include "env_bonus.h"
+#include "structures_bonus.h"
+#include "execute_bonus.h"
+#include "expand_bonus.h"
+#include "parser_bonus.h"
+#include "redirection_bonus.h"
+#include "signal_handler_bonus.h"
 
 void	input_handler(void)
 {

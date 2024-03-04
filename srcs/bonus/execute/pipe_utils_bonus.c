@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_utils.c                                       :+:      :+:    :+:   */
+/*   pipe_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:07:31 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/01 10:49:32 by yusekim          ###   ########.fr       */
+/*   Updated: 2024/03/04 18:36:29 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execute.h"
-#include "env.h"
-#include "signal_handler.h"
+#include "execute_bonus.h"
+#include "env_bonus.h"
+#include "signal_handler_bonus.h"
 
 void	set_fds(t_cmd *cmd, t_info *info)
 {
