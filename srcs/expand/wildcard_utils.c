@@ -6,13 +6,13 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 10:47:48 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/04 15:51:46 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:33:03 by yusekim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expand.h"
 
-int	check_tilde(t_c_expand *expand, char *ptr)
+char	*get_tilde_name(t_c_expand *expand, char *ptr)
 {
 	int	i;
 
@@ -20,11 +20,11 @@ int	check_tilde(t_c_expand *expand, char *ptr)
 	while (expand->original && expand->original + i != ptr)
 		i++;
 	if (i > 0)
-		return (0);
+		return (ft_strdup(""));
 	if (ft_strlen(ptr) == 1 || *(ptr + 1) == '/')
-		return (1);
+		return (ft_strdup("~"));
 	else
-		return (0);
+		return (ft_strdup(""));
 }
 
 void	only_wildcard(t_c_expand *expand)
