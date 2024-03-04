@@ -15,7 +15,7 @@ LINE_CLEAR  =   "\x1b[1A\x1b[M"
 
 NAME = minishell
 CC = cc
-CFLAGS = -I./includes -Wall -Wextra -Werror
+CFLAGS = -I $(HEADERS_DIR) -Wall -Wextra -Werror
 LINKING_FLAG = -lft -L./srcs/libft/ -lreadline
 MAN_SRCS = ./srcs/mandatory/envs/build_env_pack.c \
 		./srcs/mandatory/envs/env_utils.c \
@@ -89,11 +89,16 @@ BONUS_SRCS = ./srcs/bonus/envs/build_env_pack_bonus.c \
 		./srcs/bonus/main_bonus.c
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 
+MAN_HEADERS_DIR=./includes/mandatory
+BONUS_HEADERS_DIR=./includes/bonus
+
 LIBFT = ./srcs/libft/libft.a
 
 ifeq ($(MAKECMDGOALS),bonus)
+	HEADERS_DIR=$(BONUS_HEADERS_DIR)
 	OBJS=$(BONUS_OBJS)
 else
+	HEADERS_DIR=$(MAN_HEADERS_DIR)
 	OBJS=$(MAN_OBJS)
 endif
 

@@ -7,7 +7,9 @@
 AR	srcs/libft/Makefile	/^AR=ar$/;"	m
 ARFLAGS	srcs/libft/Makefile	/^ARFLAGS=rc$/;"	m
 BLACK	Makefile	/^BLACK       =   "\\033[0;30m"$/;"	m
+BONUS_OBJS	Makefile	/^BONUS_OBJS = $(BONUS_SRCS:.c=.o)$/;"	m
 BONUS_OBJS	srcs/libft/Makefile	/^BONUS_OBJS=$(BONUS_SRCS:.c=.o)$/;"	m
+BONUS_SRCS	Makefile	/^BONUS_SRCS = .\/srcs\/bonus\/envs\/build_env_pack_bonus.c \\$/;"	m
 BONUS_SRCS	srcs/libft/Makefile	/^BONUS_SRCS=ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c$/;"	m
 BUFFER_SIZE	srcs/libft/get_next_line.h	/^#  define BUFFER_SIZE /;"	d
 BUILTIN_H	includes/builtin.h	/^# define BUILTIN_H$/;"	d
@@ -43,11 +45,14 @@ LIBFT	Makefile	/^LIBFT = .\/srcs\/libft\/libft.a$/;"	m
 LIBFT_H	srcs/libft/libft.h	/^# define LIBFT_H$/;"	d
 LINE_CLEAR	Makefile	/^LINE_CLEAR  =   "\\x1b[1A\\x1b[M"$/;"	m
 LINKING_FLAG	Makefile	/^LINKING_FLAG = -lft -L.\/srcs\/libft\/ -lreadline$/;"	m
+MAN_OBJS	Makefile	/^MAN_OBJS = $(MAN_SRCS:.c=.o)$/;"	m
 MAN_OBJS	srcs/libft/Makefile	/^MAN_OBJS=$(MAN_SRCS:.c=.o)$/;"	m
+MAN_SRCS	Makefile	/^MAN_SRCS = .\/srcs\/mandatory\/envs\/build_env_pack.c \\$/;"	m
 MAN_SRCS	srcs/libft/Makefile	/^MAN_SRCS=ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putnbr_fd.c ft_putendl_fd.c get_next_line.c get_next_line_utils.c$/;"	m
 NAME	Makefile	/^NAME = minishell$/;"	m
 NAME	srcs/libft/Makefile	/^NAME=libft.a$/;"	m
-OBJS	Makefile	/^OBJS = $(SRCS:.c=.o)$/;"	m
+OBJS	Makefile	/^	OBJS=$(BONUS_OBJS)$/;"	m
+OBJS	Makefile	/^	OBJS=$(MAN_OBJS)$/;"	m
 OBJS	srcs/libft/Makefile	/^OBJS=$(BONUS_OBJS) $(MAN_OBJS) $(PRINTF_OBJS)$/;"	m
 PARSER_H	includes/parser.h	/^# define PARSER_H$/;"	d
 PRINTF_OBJS	srcs/libft/Makefile	/^PRINTF_OBJS=$(PRINTF_SRCS:.c=.o)$/;"	m
@@ -58,10 +63,8 @@ RED	Makefile	/^RED         =   "\\033[1;31m"$/;"	m
 REDIRECTION_H	includes/redirection.h	/^# define REDIRECTION_H$/;"	d
 RM	srcs/libft/Makefile	/^RM=rm -fr$/;"	m
 SIGNAL_HANDLER_H	includes/signal_handler.h	/^# define SIGNAL_HANDLER_H$/;"	d
-SRCS	Makefile	/^SRCS = .\/srcs\/envs\/build_env_pack.c \\$/;"	m
 STRUCTURES_H	includes/structures.h	/^# define STRUCTURES_H$/;"	d
 TEMP_FILENAME	includes/redirection.h	/^# define TEMP_FILENAME /;"	d
-TILDE_SYMBOL	includes/env.h	/^# define TILDE_SYMBOL /;"	d
 TOKENIZER_H	includes/tokenizer.h	/^# define TOKENIZER_H$/;"	d
 T_AND	includes/structures.h	/^	T_AND,$/;"	e	enum:e_type
 T_CLOSE_BRACKET	includes/structures.h	/^	T_CLOSE_BRACKET,$/;"	e	enum:e_type
@@ -79,102 +82,166 @@ T_WORD	includes/structures.h	/^	T_WORD,$/;"	e	enum:e_type
 UTILS_H	includes/utils.h	/^# define UTILS_H$/;"	d
 WHITE	Makefile	/^WHITE       =   "\\033[1;37m"$/;"	m
 YELLOW	Makefile	/^YELLOW      =   "\\033[1;33m"$/;"	m
-add_env_node	srcs/envs/build_env_pack.c	/^void	add_env_node(t_env_pack *pack, char *name, char *value)$/;"	f
-add_sorted_node	srcs/envs/build_env_pack.c	/^void	add_sorted_node(t_env **sorted_head, t_env *new)$/;"	f
-add_split	srcs/expand/expand_utils.c	/^void	add_split(t_c_expand *expand, char **split, int split_len, int idx)$/;"	f
-add_str	srcs/execute/utils.c	/^char	**add_str(char **str, char *add)$/;"	f
-add_token	srcs/parse/token_utils.c	/^void	add_token(t_token **list, t_token *token)$/;"	f
+add_env_node	srcs/bonus/envs/build_env_pack_bonus.c	/^void	add_env_node(t_env_pack *pack, char *name, char *value)$/;"	f
+add_env_node	srcs/mandatory/envs/build_env_pack.c	/^void	add_env_node(t_env_pack *pack, char *name, char *value)$/;"	f
+add_sorted_node	srcs/bonus/envs/build_env_pack_bonus.c	/^void	add_sorted_node(t_env **sorted_head, t_env *new)$/;"	f
+add_sorted_node	srcs/mandatory/envs/build_env_pack.c	/^void	add_sorted_node(t_env **sorted_head, t_env *new)$/;"	f
+add_split	srcs/bonus/expand/expand_utils_bonus.c	/^void	add_split(t_c_expand *expand, char **split, int split_len, int idx)$/;"	f
+add_split	srcs/mandatory/expand/expand_utils.c	/^void	add_split(t_c_expand *expand, char **split, int split_len, int idx)$/;"	f
+add_str	srcs/bonus/execute/utils_bonus.c	/^char	**add_str(char **str, char *add)$/;"	f
+add_str	srcs/mandatory/execute/utils.c	/^char	**add_str(char **str, char *add)$/;"	f
+add_token	srcs/bonus/parse/token_utils_bonus.c	/^void	add_token(t_token **list, t_token *token)$/;"	f
+add_token	srcs/mandatory/parse/token_utils.c	/^void	add_token(t_token **list, t_token *token)$/;"	f
 all_redirs	includes/structures.h	/^	t_redir		*all_redirs;$/;"	m	struct:s_cmd_pack
-appand_string	srcs/expand/expand_utils.c	/^char	*appand_string(char *result, char *original, int *start, int end)$/;"	f
-append_exp_ptr	srcs/expand/expand_utils.c	/^void	append_exp_ptr(t_c_expand *expand, t_exp_pair *newpair)$/;"	f
-append_redir	srcs/execute/redirections/redirections.c	/^void	append_redir(t_cmd **cmd, t_type type, char **fileinfo)$/;"	f
-b_check_redir	srcs/builtins/builtin_exec.c	/^void	b_check_redir(t_cmd *cur, int *std_fd, int *in_fd, int *out_fd)$/;"	f
-b_exit	srcs/builtins/do_builtin.c	/^void	b_exit(int code)$/;"	f
+appand_string	srcs/bonus/expand/expand_utils_bonus.c	/^char	*appand_string(char *result, char *original, int *start, int end)$/;"	f
+appand_string	srcs/mandatory/expand/expand_utils.c	/^char	*appand_string(char *result, char *original, int *start, int end)$/;"	f
+append_exp_ptr	srcs/bonus/expand/expand_utils_bonus.c	/^void	append_exp_ptr(t_c_expand *expand, t_exp_pair *newpair)$/;"	f
+append_exp_ptr	srcs/mandatory/expand/expand_utils.c	/^void	append_exp_ptr(t_c_expand *expand, t_exp_pair *newpair)$/;"	f
+append_redir	srcs/bonus/execute/redirections/redirections_bonus.c	/^void	append_redir(t_cmd **cmd, t_type type, char **fileinfo)$/;"	f
+append_redir	srcs/mandatory/execute/redirections/redirections.c	/^void	append_redir(t_cmd **cmd, t_type type, char **fileinfo)$/;"	f
+b_check_redir	srcs/bonus/builtins/builtin_exec_bonus.c	/^void	b_check_redir(t_cmd *cur, int *std_fd, int *in_fd, int *out_fd)$/;"	f
+b_check_redir	srcs/mandatory/builtins/builtin_exec.c	/^void	b_check_redir(t_cmd *cur, int *std_fd, int *in_fd, int *out_fd)$/;"	f
+b_exit	srcs/bonus/builtins/do_builtin_bonus.c	/^void	b_exit(int code)$/;"	f
+b_exit	srcs/mandatory/builtins/do_builtin.c	/^void	b_exit(int code)$/;"	f
 buf_check_n_join	srcs/libft/get_next_line.c	/^char	*buf_check_n_join(char *newline, char *buf, int *ret)$/;"	f
-build_cmd_pack	srcs/execute/execute_utils2.c	/^t_cmd	*build_cmd_pack(t_ast *tree, t_env_pack *pack)$/;"	f
-build_envp	srcs/envs/build_env_pack.c	/^void	build_envp(t_env_pack *pack, char **envp)$/;"	f
-build_exp_pair	srcs/expand/expand_utils.c	/^void	build_exp_pair(t_c_expand *expand, char *ptr, int q_flag)$/;"	f
+build_cmd_pack	srcs/bonus/execute/execute_utils2_bonus.c	/^t_cmd	*build_cmd_pack(t_ast *tree, t_env_pack *pack)$/;"	f
+build_cmd_pack	srcs/mandatory/execute/execute_utils2.c	/^t_cmd	*build_cmd_pack(t_ast *tree, t_env_pack *pack)$/;"	f
+build_envp	srcs/bonus/envs/build_env_pack_bonus.c	/^void	build_envp(t_env_pack *pack, char **envp)$/;"	f
+build_envp	srcs/mandatory/envs/build_env_pack.c	/^void	build_envp(t_env_pack *pack, char **envp)$/;"	f
+build_exp_pair	srcs/bonus/expand/expand_utils_bonus.c	/^void	build_exp_pair(t_c_expand *expand, char *ptr, int q_flag)$/;"	f
+build_exp_pair	srcs/mandatory/expand/expand_utils.c	/^void	build_exp_pair(t_c_expand *expand, char *ptr, int q_flag)$/;"	f
 build_remain	srcs/libft/get_next_line.c	/^char	*build_remain(char *remain, char *str, int *ret)$/;"	f
-builtin_fd_set	srcs/builtins/builtin_utils.c	/^void	builtin_fd_set(int *in_fd, int *out_fd, int *std_fd)$/;"	f
+builtin_fd_set	srcs/bonus/builtins/builtin_utils_bonus.c	/^void	builtin_fd_set(int *in_fd, int *out_fd, int *std_fd)$/;"	f
+builtin_fd_set	srcs/mandatory/builtins/builtin_utils.c	/^void	builtin_fd_set(int *in_fd, int *out_fd, int *std_fd)$/;"	f
 c_args	includes/structures.h	/^	char		**c_args;$/;"	m	struct:s_cmd_pack
-cd_home	srcs/builtins/builtin_utils.c	/^int	cd_home(t_env_pack *pack)$/;"	f
-check_bracket	srcs/parse/bracket.c	/^t_token	*check_bracket(t_token *start, t_token *end)$/;"	f
-check_center_error	srcs/parse/check_ast_error.c	/^void	check_center_error(t_ast *ast, t_token *center)$/;"	f
-check_end	srcs/expand/wildcard.c	/^int	check_end(char *filename, char *pattern, t_mark mark, int i)$/;"	f
-check_env_name	srcs/builtins/builtin_utils.c	/^int	check_env_name(char *name)$/;"	f
-check_error	srcs/parse/check_ast_error.c	/^int	check_error(t_ast *ast)$/;"	f
-check_file_access	srcs/expand/wildcard.c	/^char	*check_file_access(int idx, char *filename, char *suffix)$/;"	f
-check_front_center	srcs/expand/wildcard.c	/^int	check_front_center(char *filename, char *pattern, t_mark *mark, int i)$/;"	f
-check_if_single_pair	srcs/parse/bracket.c	/^int	check_if_single_pair(t_token *start, t_token *end)$/;"	f
-check_is_builtin	srcs/builtins/builtin_exec.c	/^enum e_b_type	check_is_builtin(char *arg)$/;"	f
-check_n_add	srcs/builtins/do_builtin2.c	/^void	check_n_add(t_env_pack *pack, char *arg, char *ptr, int *res)$/;"	f
-check_redirection_error	srcs/parse/check_ast_error.c	/^void	check_redirection_error(t_ast *ast)$/;"	f
+cd_home	srcs/bonus/builtins/builtin_utils_bonus.c	/^int	cd_home(t_env_pack *pack)$/;"	f
+cd_home	srcs/mandatory/builtins/builtin_utils.c	/^int	cd_home(t_env_pack *pack)$/;"	f
+check_bracket	srcs/bonus/parse/bracket_bonus.c	/^t_token	*check_bracket(t_token *start, t_token *end)$/;"	f
+check_bracket	srcs/mandatory/parse/bracket.c	/^t_token	*check_bracket(t_token *start, t_token *end)$/;"	f
+check_center_error	srcs/bonus/parse/check_ast_error_bonus.c	/^void	check_center_error(t_ast *ast, t_token *center)$/;"	f
+check_center_error	srcs/mandatory/parse/check_ast_error.c	/^void	check_center_error(t_ast *ast, t_token *center)$/;"	f
+check_end	srcs/bonus/expand/wildcard_bonus.c	/^int	check_end(char *filename, char *pattern, t_mark mark, int i)$/;"	f
+check_end	srcs/mandatory/expand/wildcard.c	/^int	check_end(char *filename, char *pattern, t_mark mark, int i)$/;"	f
+check_env_name	srcs/bonus/builtins/builtin_utils_bonus.c	/^int	check_env_name(char *name)$/;"	f
+check_env_name	srcs/mandatory/builtins/builtin_utils.c	/^int	check_env_name(char *name)$/;"	f
+check_error	srcs/bonus/parse/check_ast_error_bonus.c	/^int	check_error(t_ast *ast)$/;"	f
+check_error	srcs/mandatory/parse/check_ast_error.c	/^int	check_error(t_ast *ast)$/;"	f
+check_file_access	srcs/bonus/expand/wildcard_bonus.c	/^char	*check_file_access(int idx, char *filename, char *suffix)$/;"	f
+check_file_access	srcs/mandatory/expand/wildcard.c	/^char	*check_file_access(int idx, char *filename, char *suffix)$/;"	f
+check_front_center	srcs/bonus/expand/wildcard_bonus.c	/^int	check_front_center(char *filename, char *pattern, t_mark *mark, int i)$/;"	f
+check_front_center	srcs/mandatory/expand/wildcard.c	/^int	check_front_center(char *filename, char *pattern, t_mark *mark, int i)$/;"	f
+check_if_single_pair	srcs/bonus/parse/bracket_bonus.c	/^int	check_if_single_pair(t_token *start, t_token *end)$/;"	f
+check_if_single_pair	srcs/mandatory/parse/bracket.c	/^int	check_if_single_pair(t_token *start, t_token *end)$/;"	f
+check_is_builtin	srcs/bonus/builtins/builtin_exec_bonus.c	/^enum e_b_type	check_is_builtin(char *arg)$/;"	f
+check_is_builtin	srcs/mandatory/builtins/builtin_exec.c	/^enum e_b_type	check_is_builtin(char *arg)$/;"	f
+check_n_add	srcs/bonus/builtins/do_builtin2_bonus.c	/^void	check_n_add(t_env_pack *pack, char *arg, char *ptr, int *res)$/;"	f
+check_n_add	srcs/mandatory/builtins/do_builtin2.c	/^void	check_n_add(t_env_pack *pack, char *arg, char *ptr, int *res)$/;"	f
+check_redirection_error	srcs/bonus/parse/check_ast_error_bonus.c	/^void	check_redirection_error(t_ast *ast)$/;"	f
+check_redirection_error	srcs/mandatory/parse/check_ast_error.c	/^void	check_redirection_error(t_ast *ast)$/;"	f
 check_remain	srcs/libft/get_next_line.c	/^int	check_remain(char *remain, char **newline)$/;"	f
-check_res	srcs/builtins/builtin_utils.c	/^int	check_res(int res, t_env_pack *pack, char *path, char **args)$/;"	f
-check_sign	srcs/builtins/builtin_utils.c	/^int	check_sign(char *str)$/;"	f
-check_tilde	srcs/expand/wildcard_utils.c	/^int	check_tilde(char *ptr, int q_flag)$/;"	f
-check_wildfixes	srcs/expand/wildcard.c	/^int	check_wildfixes(char *filename, __uint8_t type, char *pattern)$/;"	f
+check_res	srcs/bonus/builtins/builtin_utils_bonus.c	/^int	check_res(int res, t_env_pack *pack, char *path, char **args)$/;"	f
+check_res	srcs/mandatory/builtins/builtin_utils.c	/^int	check_res(int res, t_env_pack *pack, char *path, char **args)$/;"	f
+check_sign	srcs/bonus/builtins/builtin_utils_bonus.c	/^int	check_sign(char *str)$/;"	f
+check_sign	srcs/mandatory/builtins/builtin_utils.c	/^int	check_sign(char *str)$/;"	f
+check_wildfixes	srcs/bonus/expand/wildcard_bonus.c	/^int	check_wildfixes(char *filename, __uint8_t type, char *pattern)$/;"	f
+check_wildfixes	srcs/mandatory/expand/wildcard.c	/^int	check_wildfixes(char *filename, __uint8_t type, char *pattern)$/;"	f
 content	srcs/libft/libft.h	/^	void			*content;$/;"	m	struct:s_list
 count_words	srcs/libft/ft_split.c	/^static size_t	count_words(char const *str, char c)$/;"	f	file:
-delete_env	srcs/envs/env_utils.c	/^void	delete_env(char *name, t_env_pack *package)$/;"	f
-delete_quotes	srcs/expand/expand.c	/^void	delete_quotes(t_c_expand *exp)$/;"	f
+delete_env	srcs/bonus/envs/env_utils_bonus.c	/^void	delete_env(char *name, t_env_pack *package)$/;"	f
+delete_env	srcs/mandatory/envs/env_utils.c	/^void	delete_env(char *name, t_env_pack *package)$/;"	f
+delete_quotes	srcs/bonus/expand/expand_bonus.c	/^void	delete_quotes(t_c_expand *exp)$/;"	f
+delete_quotes	srcs/mandatory/expand/expand.c	/^void	delete_quotes(t_c_expand *exp)$/;"	f
 depths	includes/structures.h	/^	int			depths;$/;"	m	struct:s_info
 detact_f	srcs/libft/ft_printf.c	/^int	detact_f(char *format, va_list ap)$/;"	f
-do_cd	srcs/builtins/do_builtin.c	/^int	do_cd(char **args, t_env_pack *pack)$/;"	f
-do_echo	srcs/builtins/do_builtin.c	/^int	do_echo(char **args, t_env_pack *pack)$/;"	f
-do_env	srcs/builtins/do_builtin2.c	/^int	do_env(char **args, t_env_pack *pack)$/;"	f
-do_execution	srcs/execute/execute.c	/^void	do_execution(t_ast *tree, t_env_pack *pack, t_info *info)$/;"	f
-do_exit	srcs/builtins/do_builtin.c	/^int	do_exit(char **args, t_env_pack *pack)$/;"	f
-do_expand	srcs/expand/do_expand.c	/^void	do_expand(t_c_expand *exp, t_env_pack *pack)$/;"	f
-do_export	srcs/builtins/do_builtin2.c	/^int	do_export(char **args, t_env_pack *pack)$/;"	f
-do_heredoc	srcs/execute/redirections/do_heredoc.c	/^void	do_heredoc(t_redir *temp, char *f_path, t_env_pack *pack)$/;"	f
-do_pwd	srcs/builtins/do_builtin.c	/^int	do_pwd(char **args, t_env_pack *pack)$/;"	f
-do_unset	srcs/builtins/do_builtin2.c	/^int	do_unset(char **args, t_env_pack *pack)$/;"	f
-do_wildcard	srcs/expand/wildcard_utils.c	/^void	do_wildcard(t_c_expand *expand, int i, int bound)$/;"	f
+do_cd	srcs/bonus/builtins/do_builtin_bonus.c	/^int	do_cd(char **args, t_env_pack *pack)$/;"	f
+do_cd	srcs/mandatory/builtins/do_builtin.c	/^int	do_cd(char **args, t_env_pack *pack)$/;"	f
+do_echo	srcs/bonus/builtins/do_builtin_bonus.c	/^int	do_echo(char **args, t_env_pack *pack)$/;"	f
+do_echo	srcs/mandatory/builtins/do_builtin.c	/^int	do_echo(char **args, t_env_pack *pack)$/;"	f
+do_env	srcs/bonus/builtins/do_builtin2_bonus.c	/^int	do_env(char **args, t_env_pack *pack)$/;"	f
+do_env	srcs/mandatory/builtins/do_builtin2.c	/^int	do_env(char **args, t_env_pack *pack)$/;"	f
+do_execution	srcs/bonus/execute/execute_bonus.c	/^void	do_execution(t_ast *tree, t_env_pack *pack, t_info *info)$/;"	f
+do_execution	srcs/mandatory/execute/execute.c	/^void	do_execution(t_ast *tree, t_env_pack *pack, t_info *info)$/;"	f
+do_exit	srcs/bonus/builtins/do_builtin_bonus.c	/^int	do_exit(char **args, t_env_pack *pack)$/;"	f
+do_exit	srcs/mandatory/builtins/do_builtin.c	/^int	do_exit(char **args, t_env_pack *pack)$/;"	f
+do_expand	srcs/bonus/expand/do_expand_bonus.c	/^void	do_expand(t_c_expand *exp, t_env_pack *pack)$/;"	f
+do_expand	srcs/mandatory/expand/do_expand.c	/^void	do_expand(t_c_expand *exp, t_env_pack *pack)$/;"	f
+do_export	srcs/bonus/builtins/do_builtin2_bonus.c	/^int	do_export(char **args, t_env_pack *pack)$/;"	f
+do_export	srcs/mandatory/builtins/do_builtin2.c	/^int	do_export(char **args, t_env_pack *pack)$/;"	f
+do_heredoc	srcs/bonus/execute/redirections/do_heredoc_bonus.c	/^void	do_heredoc(t_redir *temp, char *f_path, t_env_pack *pack)$/;"	f
+do_heredoc	srcs/mandatory/execute/redirections/do_heredoc.c	/^void	do_heredoc(t_redir *temp, char *f_path, t_env_pack *pack)$/;"	f
+do_pwd	srcs/bonus/builtins/do_builtin_bonus.c	/^int	do_pwd(char **args, t_env_pack *pack)$/;"	f
+do_pwd	srcs/mandatory/builtins/do_builtin.c	/^int	do_pwd(char **args, t_env_pack *pack)$/;"	f
+do_unset	srcs/bonus/builtins/do_builtin2_bonus.c	/^int	do_unset(char **args, t_env_pack *pack)$/;"	f
+do_unset	srcs/mandatory/builtins/do_builtin2.c	/^int	do_unset(char **args, t_env_pack *pack)$/;"	f
+do_wildcard	srcs/bonus/expand/wildcard_utils_bonus.c	/^void	do_wildcard(t_c_expand *expand, int i, int bound)$/;"	f
+do_wildcard	srcs/mandatory/expand/wildcard_utils.c	/^void	do_wildcard(t_c_expand *expand, int i, int bound)$/;"	f
 e_b_type	includes/structures.h	/^enum	e_b_type$/;"	g
 e_type	includes/structures.h	/^enum	e_type$/;"	g
 end	includes/structures.h	/^	int	end;$/;"	m	struct:s_mark
 end	includes/structures.h	/^	struct s_token	*end;$/;"	m	struct:s_ast	typeref:struct:s_ast::s_token
 envp	includes/structures.h	/^	char	**envp;$/;"	m	struct:s_env_pack
 error	includes/structures.h	/^	char			*error;$/;"	m	struct:s_ast
-exec_builtin	srcs/builtins/builtin_exec.c	/^int	exec_builtin(char **args, t_env_pack *pack)$/;"	f
-exec_parent	srcs/execute/pipe_utils.c	/^void	exec_parent(t_info *info)$/;"	f
-execute	srcs/execute/execute.c	/^void	execute(t_ast *tree, t_env_pack *pack, t_info *info)$/;"	f
-execute_cmd	srcs/execute/execute.c	/^void	execute_cmd(t_cmd *cmd, t_env_pack *envs, t_info *info)$/;"	f
-execute_pipe	srcs/execute/execute.c	/^void	execute_pipe(t_ast *tree, t_env_pack *pack, t_info *info, int level)$/;"	f
+exec_builtin	srcs/bonus/builtins/builtin_exec_bonus.c	/^int	exec_builtin(char **args, t_env_pack *pack)$/;"	f
+exec_builtin	srcs/mandatory/builtins/builtin_exec.c	/^int	exec_builtin(char **args, t_env_pack *pack)$/;"	f
+exec_parent	srcs/bonus/execute/pipe_utils_bonus.c	/^void	exec_parent(t_info *info)$/;"	f
+exec_parent	srcs/mandatory/execute/pipe_utils.c	/^void	exec_parent(t_info *info)$/;"	f
+execute	srcs/bonus/execute/execute_bonus.c	/^void	execute(t_ast *tree, t_env_pack *pack, t_info *info)$/;"	f
+execute	srcs/mandatory/execute/execute.c	/^void	execute(t_ast *tree, t_env_pack *pack, t_info *info)$/;"	f
+execute_cmd	srcs/bonus/execute/execute_bonus.c	/^void	execute_cmd(t_cmd *cmd, t_env_pack *envs, t_info *info)$/;"	f
+execute_cmd	srcs/mandatory/execute/execute.c	/^void	execute_cmd(t_cmd *cmd, t_env_pack *envs, t_info *info)$/;"	f
+execute_pipe	srcs/bonus/execute/execute_bonus.c	/^void	execute_pipe(t_ast *tree, t_env_pack *pack, t_info *info, int level)$/;"	f
+execute_pipe	srcs/mandatory/execute/execute.c	/^void	execute_pipe(t_ast *tree, t_env_pack *pack, t_info *info, int level)$/;"	f
 exit_status	includes/structures.h	/^	int			exit_status;$/;"	m	struct:s_info
 exp_name	includes/structures.h	/^	char	*exp_name;$/;"	m	struct:s_exp_pair
 exp_num	includes/structures.h	/^	int			exp_num;$/;"	m	struct:s_expand
 exp_pos	includes/structures.h	/^	char	*exp_pos;$/;"	m	struct:s_exp_pair
 exp_ptrs	includes/structures.h	/^	t_exp_pair	**exp_ptrs;$/;"	m	struct:s_expand
-expand	srcs/expand/expand.c	/^char	**expand(char *data, t_env_pack *package, int flag)$/;"	f
-expand_add	srcs/expand/do_expand.c	/^void	expand_add(t_c_expand *expand, char *temp)$/;"	f
-expand_join	srcs/expand/do_expand.c	/^void	expand_join(t_c_expand *expand, char *temp)$/;"	f
-expand_wildcard	srcs/expand/wildcard.c	/^char	**expand_wildcard(char *arg)$/;"	f
+expand	srcs/bonus/expand/expand_bonus.c	/^char	**expand(char *data, t_env_pack *package, int flag)$/;"	f
+expand	srcs/mandatory/expand/expand.c	/^char	**expand(char *data, t_env_pack *package, int flag)$/;"	f
+expand_add	srcs/bonus/expand/do_expand_bonus.c	/^void	expand_add(t_c_expand *expand, char *temp)$/;"	f
+expand_add	srcs/mandatory/expand/do_expand.c	/^void	expand_add(t_c_expand *expand, char *temp)$/;"	f
+expand_join	srcs/bonus/expand/do_expand_bonus.c	/^void	expand_join(t_c_expand *expand, char *temp)$/;"	f
+expand_join	srcs/mandatory/expand/do_expand.c	/^void	expand_join(t_c_expand *expand, char *temp)$/;"	f
+expand_wildcard	srcs/bonus/expand/wildcard_bonus.c	/^char	**expand_wildcard(char *arg)$/;"	f
+expand_wildcard	srcs/mandatory/expand/wildcard.c	/^char	**expand_wildcard(char *arg)$/;"	f
 fd	includes/structures.h	/^	int			fd;$/;"	m	struct:s_redir
 filename	includes/structures.h	/^	char		**filename;$/;"	m	struct:s_redir
 fill_nbr	srcs/libft/ft_printf2.c	/^void	fill_nbr(char *str, long n, char format, size_t len)$/;"	f
-find_env	srcs/envs/env_utils.c	/^t_env	*find_env(char *name, t_env_pack *package)$/;"	f
-find_env_name	srcs/expand/expand_utils.c	/^char	*find_env_name(char *ptr)$/;"	f
+find_env	srcs/bonus/envs/env_utils_bonus.c	/^t_env	*find_env(char *name, t_env_pack *package)$/;"	f
+find_env	srcs/mandatory/envs/env_utils.c	/^t_env	*find_env(char *name, t_env_pack *package)$/;"	f
+find_env_name	srcs/bonus/expand/expand_utils_bonus.c	/^char	*find_env_name(char *ptr)$/;"	f
+find_env_name	srcs/mandatory/expand/expand_utils.c	/^char	*find_env_name(char *ptr)$/;"	f
 find_len	srcs/libft/ft_printf2.c	/^size_t	find_len(long n, int base)$/;"	f
 find_mem_len	srcs/libft/ft_printf2.c	/^size_t	find_mem_len(unsigned long long nb)$/;"	f
-find_position	srcs/expand/expand.c	/^void	find_position(t_c_expand *expand)$/;"	f
+find_position	srcs/bonus/expand/expand_bonus.c	/^void	find_position(t_c_expand *expand)$/;"	f
+find_position	srcs/mandatory/expand/expand.c	/^void	find_position(t_c_expand *expand)$/;"	f
 fork_num	includes/structures.h	/^	int			fork_num;$/;"	m	struct:s_info
 free_all	srcs/libft/get_next_line.c	/^void	*free_all(char **remain, char *newline)$/;"	f
-free_ast	srcs/parse/ast_utils.c	/^void	free_ast(t_ast **ast)$/;"	f
-free_cmd	srcs/execute/execute_utils2.c	/^void	free_cmd(t_cmd *cmd)$/;"	f
-free_envs	srcs/envs/env_utils.c	/^void	free_envs(t_env *head)$/;"	f
-free_expand	srcs/expand/expand.c	/^void	free_expand(t_c_expand *expand)$/;"	f
-free_inputs	srcs/testmain.c	/^void	free_inputs(t_token **tokens, t_ast **ast)$/;"	f
-free_node	srcs/parse/ast_utils.c	/^void	free_node(t_ast **node)$/;"	f
-free_token	srcs/parse/token_utils.c	/^void	free_token(t_token **token)$/;"	f
-free_tokens	srcs/parse/token_utils.c	/^void	free_tokens(t_token **tokens)$/;"	f
-ft_assert	srcs/execute/utils.c	/^void	ft_assert(int expression, const char *arg, int exit_num)$/;"	f
+free_ast	srcs/bonus/parse/ast_utils_bonus.c	/^void	free_ast(t_ast **ast)$/;"	f
+free_ast	srcs/mandatory/parse/ast_utils.c	/^void	free_ast(t_ast **ast)$/;"	f
+free_cmd	srcs/bonus/execute/execute_utils2_bonus.c	/^void	free_cmd(t_cmd *cmd)$/;"	f
+free_cmd	srcs/mandatory/execute/execute_utils2.c	/^void	free_cmd(t_cmd *cmd)$/;"	f
+free_envs	srcs/bonus/envs/env_utils_bonus.c	/^void	free_envs(t_env *head)$/;"	f
+free_envs	srcs/mandatory/envs/env_utils.c	/^void	free_envs(t_env *head)$/;"	f
+free_expand	srcs/bonus/expand/expand_bonus.c	/^void	free_expand(t_c_expand *expand)$/;"	f
+free_expand	srcs/mandatory/expand/expand.c	/^void	free_expand(t_c_expand *expand)$/;"	f
+free_inputs	srcs/bonus/main_bonus.c	/^void	free_inputs(t_token **tokens, t_ast **ast)$/;"	f
+free_inputs	srcs/mandatory/main.c	/^void	free_inputs(t_token **tokens, t_ast **ast)$/;"	f
+free_node	srcs/bonus/parse/ast_utils_bonus.c	/^void	free_node(t_ast **node)$/;"	f
+free_node	srcs/mandatory/parse/ast_utils.c	/^void	free_node(t_ast **node)$/;"	f
+free_token	srcs/bonus/parse/token_utils_bonus.c	/^void	free_token(t_token **token)$/;"	f
+free_token	srcs/mandatory/parse/token_utils.c	/^void	free_token(t_token **token)$/;"	f
+free_tokens	srcs/bonus/parse/token_utils_bonus.c	/^void	free_tokens(t_token **tokens)$/;"	f
+free_tokens	srcs/mandatory/parse/token_utils.c	/^void	free_tokens(t_token **tokens)$/;"	f
+ft_assert	srcs/bonus/execute/utils_bonus.c	/^void	ft_assert(int expression, const char *arg, int exit_num)$/;"	f
+ft_assert	srcs/mandatory/execute/utils.c	/^void	ft_assert(int expression, const char *arg, int exit_num)$/;"	f
 ft_atoi	srcs/libft/ft_atoi.c	/^int	ft_atoi(const char *str)$/;"	f
 ft_bzero	srcs/libft/ft_bzero.c	/^void	ft_bzero(void *s, size_t n)$/;"	f
 ft_calloc	srcs/libft/ft_calloc.c	/^void	*ft_calloc(size_t count, size_t size)$/;"	f
-ft_dup2	srcs/execute/pipe_utils.c	/^void	ft_dup2(t_info *info)$/;"	f
-ft_execve	srcs/execute/execute_utils2.c	/^void	ft_execve(t_cmd *cmd, t_env_pack *envs)$/;"	f
+ft_dup2	srcs/bonus/execute/pipe_utils_bonus.c	/^void	ft_dup2(t_info *info)$/;"	f
+ft_dup2	srcs/mandatory/execute/pipe_utils.c	/^void	ft_dup2(t_info *info)$/;"	f
+ft_execve	srcs/bonus/execute/execute_utils2_bonus.c	/^void	ft_execve(t_cmd *cmd, t_env_pack *envs)$/;"	f
+ft_execve	srcs/mandatory/execute/execute_utils2.c	/^void	ft_execve(t_cmd *cmd, t_env_pack *envs)$/;"	f
 ft_free_all	srcs/libft/ft_split.c	/^static char	**ft_free_all(char **strings)$/;"	f	file:
 ft_isalnum	srcs/libft/ft_isalnum.c	/^int	ft_isalnum(int c)$/;"	f
 ft_isalpha	srcs/libft/ft_isalpha.c	/^int	ft_isalpha(int c)$/;"	f
@@ -198,7 +265,8 @@ ft_memcmp	srcs/libft/ft_memcmp.c	/^int	ft_memcmp(const void *s1, const void *s2,
 ft_memcpy	srcs/libft/ft_memcpy.c	/^void	*ft_memcpy(void *dst, const void *src, size_t n)$/;"	f
 ft_memmove	srcs/libft/ft_memmove.c	/^void	*ft_memmove(void *dst, const void *src, size_t len)$/;"	f
 ft_memset	srcs/libft/ft_memset.c	/^void	*ft_memset(void *b, int c, size_t len)$/;"	f
-ft_perror	srcs/execute/utils2.c	/^void	ft_perror(const char *str, int exit_num)$/;"	f
+ft_perror	srcs/bonus/execute/utils2_bonus.c	/^void	ft_perror(const char *str, int exit_num)$/;"	f
+ft_perror	srcs/mandatory/execute/utils2.c	/^void	ft_perror(const char *str, int exit_num)$/;"	f
 ft_printf	srcs/libft/ft_printf.c	/^int	ft_printf(const char *format, ...)$/;"	f
 ft_putchar	srcs/libft/ft_printf.c	/^int	ft_putchar(int c)$/;"	f
 ft_putchar_fd	srcs/libft/ft_putchar_fd.c	/^void	ft_putchar_fd(char c, int fd)$/;"	f
@@ -226,81 +294,131 @@ ft_strtrim	srcs/libft/ft_strtrim.c	/^char	*ft_strtrim(char const *s1, char const
 ft_substr	srcs/libft/ft_substr.c	/^char	*ft_substr(char const *s, unsigned int start, size_t len)$/;"	f
 ft_tolower	srcs/libft/ft_tolower.c	/^int	ft_tolower(int c)$/;"	f
 ft_toupper	srcs/libft/ft_toupper.c	/^int	ft_toupper(int c)$/;"	f
-ft_wait	srcs/execute/pipe_utils.c	/^void	ft_wait(t_info *info, t_env_pack *pack)$/;"	f
-g_status	srcs/signal/signal.c	/^volatile sig_atomic_t	g_status = 0;$/;"	v
-generate_ast	srcs/parse/ast.c	/^void	generate_ast(t_ast **ast, t_token *start, t_token *end)$/;"	f
-get_bracket_flag	srcs/parse/bracket.c	/^int	get_bracket_flag(t_token **start, t_token **end, \\$/;"	f
-get_center	srcs/parse/center.c	/^t_token	*get_center(t_ast *ast, t_token *start, t_token *end)$/;"	f
-get_exitstat	srcs/execute/execute_utils.c	/^int	get_exitstat(t_env_pack *pack)$/;"	f
-get_filename	srcs/execute/redirections/heredoc_utils.c	/^char	*get_filename(void)$/;"	f
-get_heredoc_expval	srcs/execute/redirections/heredoc_utils.c	/^char	*get_heredoc_expval(char *ptr, t_env_pack *pack, int *i)$/;"	f
+ft_wait	srcs/bonus/execute/pipe_utils_bonus.c	/^void	ft_wait(t_info *info, t_env_pack *pack)$/;"	f
+ft_wait	srcs/mandatory/execute/pipe_utils.c	/^void	ft_wait(t_info *info, t_env_pack *pack)$/;"	f
+g_status	srcs/bonus/signal/signal_bonus.c	/^volatile sig_atomic_t	g_status = 0;$/;"	v
+g_status	srcs/mandatory/signal/signal.c	/^volatile sig_atomic_t	g_status = 0;$/;"	v
+generate_ast	srcs/bonus/parse/ast_bonus.c	/^void	generate_ast(t_ast **ast, t_token *start, t_token *end)$/;"	f
+generate_ast	srcs/mandatory/parse/ast.c	/^void	generate_ast(t_ast **ast, t_token *start, t_token *end)$/;"	f
+get_bracket_flag	srcs/bonus/parse/bracket_bonus.c	/^int	get_bracket_flag(t_token **start, t_token **end, \\$/;"	f
+get_bracket_flag	srcs/mandatory/parse/bracket.c	/^int	get_bracket_flag(t_token **start, t_token **end, \\$/;"	f
+get_center	srcs/bonus/parse/center_bonus.c	/^t_token	*get_center(t_ast *ast, t_token *start, t_token *end)$/;"	f
+get_center	srcs/mandatory/parse/center.c	/^t_token	*get_center(t_ast *ast, t_token *start, t_token *end)$/;"	f
+get_exitstat	srcs/bonus/execute/execute_utils_bonus.c	/^int	get_exitstat(t_env_pack *pack)$/;"	f
+get_exitstat	srcs/mandatory/execute/execute_utils.c	/^int	get_exitstat(t_env_pack *pack)$/;"	f
+get_filename	srcs/bonus/execute/redirections/heredoc_utils_bonus.c	/^char	*get_filename(void)$/;"	f
+get_filename	srcs/mandatory/execute/redirections/heredoc_utils.c	/^char	*get_filename(void)$/;"	f
+get_heredoc_expval	srcs/bonus/execute/redirections/heredoc_utils_bonus.c	/^char	*get_heredoc_expval(char *ptr, t_env_pack *pack, int *i)$/;"	f
+get_heredoc_expval	srcs/mandatory/execute/redirections/heredoc_utils.c	/^char	*get_heredoc_expval(char *ptr, t_env_pack *pack, int *i)$/;"	f
+get_home_dir	srcs/bonus/envs/env_utils_bonus.c	/^char	*get_home_dir(void)$/;"	f
+get_home_dir	srcs/mandatory/envs/env_utils.c	/^char	*get_home_dir(void)$/;"	f
 get_len	srcs/libft/ft_itoa.c	/^static void	get_len(int nb, int *len, int *sign)$/;"	f	file:
-get_line	srcs/signal/signal.c	/^char	*get_line(char *prompt, t_env_pack *pack)$/;"	f
-get_logical_exp	srcs/parse/center.c	/^t_token	*get_logical_exp(t_ast *ast, t_token *start, t_token *end)$/;"	f
-get_meta1	srcs/parse/get_token.c	/^int	get_meta1(char *line, char **string, t_type *type)$/;"	f
-get_meta2	srcs/parse/get_token.c	/^int	get_meta2(char *line, char **string, t_type *type)$/;"	f
+get_line	srcs/bonus/signal/signal_bonus.c	/^char	*get_line(char *prompt, t_env_pack *pack)$/;"	f
+get_line	srcs/mandatory/signal/signal.c	/^char	*get_line(char *prompt, t_env_pack *pack)$/;"	f
+get_logical_exp	srcs/bonus/parse/center_bonus.c	/^t_token	*get_logical_exp(t_ast *ast, t_token *start, t_token *end)$/;"	f
+get_logical_exp	srcs/mandatory/parse/center.c	/^t_token	*get_logical_exp(t_ast *ast, t_token *start, t_token *end)$/;"	f
+get_meta1	srcs/bonus/parse/get_token_bonus.c	/^int	get_meta1(char *line, char **string, t_type *type)$/;"	f
+get_meta1	srcs/mandatory/parse/get_token.c	/^int	get_meta1(char *line, char **string, t_type *type)$/;"	f
+get_meta2	srcs/bonus/parse/get_token_bonus.c	/^int	get_meta2(char *line, char **string, t_type *type)$/;"	f
+get_meta2	srcs/mandatory/parse/get_token.c	/^int	get_meta2(char *line, char **string, t_type *type)$/;"	f
 get_next_line	srcs/libft/get_next_line.c	/^char	*get_next_line(int fd)$/;"	f
-get_pipeline	srcs/parse/center.c	/^t_token	*get_pipeline(t_ast *ast, t_token *start, t_token *end)$/;"	f
-get_quote	srcs/parse/get_token.c	/^int	get_quote(char *line, int *flag, int *idx)$/;"	f
-get_type	srcs/parse/tokenizer.c	/^t_type	get_type(char *string, int i)$/;"	f
-get_waitstatus	srcs/execute/pipe_utils.c	/^void	get_waitstatus(t_info *info)$/;"	f
-get_word	srcs/parse/tokenizer.c	/^int	get_word(char *line, char **string, t_type *type)$/;"	f
+get_pipeline	srcs/bonus/parse/center_bonus.c	/^t_token	*get_pipeline(t_ast *ast, t_token *start, t_token *end)$/;"	f
+get_pipeline	srcs/mandatory/parse/center.c	/^t_token	*get_pipeline(t_ast *ast, t_token *start, t_token *end)$/;"	f
+get_quote	srcs/bonus/parse/get_token_bonus.c	/^int	get_quote(char *line, int *flag, int *idx)$/;"	f
+get_quote	srcs/mandatory/parse/get_token.c	/^int	get_quote(char *line, int *flag, int *idx)$/;"	f
+get_tilde_name	srcs/bonus/expand/wildcard_utils_bonus.c	/^char	*get_tilde_name(t_c_expand *expand, char *ptr)$/;"	f
+get_tilde_name	srcs/mandatory/expand/wildcard_utils.c	/^char	*get_tilde_name(t_c_expand *expand, char *ptr)$/;"	f
+get_type	srcs/bonus/parse/tokenizer_bonus.c	/^t_type	get_type(char *string, int i)$/;"	f
+get_type	srcs/mandatory/parse/tokenizer.c	/^t_type	get_type(char *string, int i)$/;"	f
+get_waitstatus	srcs/bonus/execute/pipe_utils_bonus.c	/^void	get_waitstatus(t_info *info)$/;"	f
+get_waitstatus	srcs/mandatory/execute/pipe_utils.c	/^void	get_waitstatus(t_info *info)$/;"	f
+get_word	srcs/bonus/parse/tokenizer_bonus.c	/^int	get_word(char *line, char **string, t_type *type)$/;"	f
+get_word	srcs/mandatory/parse/tokenizer.c	/^int	get_word(char *line, char **string, t_type *type)$/;"	f
 gnl_memcpy	srcs/libft/get_next_line_utils.c	/^void	*gnl_memcpy(void *dst, void *src, int n)$/;"	f
 gnl_strnlen	srcs/libft/get_next_line_utils.c	/^int	gnl_strnlen(char *str, int type)$/;"	f
 greater	srcs/libft/ft_memmove.c	/^static void	greater(unsigned char *dst, unsigned char *src, size_t len)$/;"	f	file:
 greater_address	srcs/libft/ft_memmove.c	/^static int	greater_address(void *dst, const void *src)$/;"	f	file:
-heredoc	srcs/execute/redirections/do_heredoc.c	/^int	heredoc(t_redir *target, t_env_pack *pack, char *filename)$/;"	f
-heredoc_expander	srcs/execute/redirections/do_heredoc.c	/^void	heredoc_expander(int fd, char *input, t_env_pack *pack, int flag)$/;"	f
-heredoc_q_flag	srcs/execute/redirections/redir_utils.c	/^int	heredoc_q_flag(char *str)$/;"	f
+heredoc	srcs/bonus/execute/redirections/do_heredoc_bonus.c	/^int	heredoc(t_redir *target, t_env_pack *pack, char *filename)$/;"	f
+heredoc	srcs/mandatory/execute/redirections/do_heredoc.c	/^int	heredoc(t_redir *target, t_env_pack *pack, char *filename)$/;"	f
+heredoc_expander	srcs/bonus/execute/redirections/do_heredoc_bonus.c	/^void	heredoc_expander(int fd, char *input, t_env_pack *pack, int flag)$/;"	f
+heredoc_expander	srcs/mandatory/execute/redirections/do_heredoc.c	/^void	heredoc_expander(int fd, char *input, t_env_pack *pack, int flag)$/;"	f
+heredoc_q_flag	srcs/bonus/execute/redirections/redir_utils_bonus.c	/^int	heredoc_q_flag(char *str)$/;"	f
+heredoc_q_flag	srcs/mandatory/execute/redirections/redir_utils.c	/^int	heredoc_q_flag(char *str)$/;"	f
 in_redirs	includes/structures.h	/^	t_redir		*in_redirs;$/;"	m	struct:s_cmd_pack
-init_ast	srcs/parse/ast_utils.c	/^t_ast	*init_ast(t_token *tokens)$/;"	f
-input_handler	srcs/testmain.c	/^void	input_handler(void)$/;"	f
+init_ast	srcs/bonus/parse/ast_utils_bonus.c	/^t_ast	*init_ast(t_token *tokens)$/;"	f
+init_ast	srcs/mandatory/parse/ast_utils.c	/^t_ast	*init_ast(t_token *tokens)$/;"	f
+input_handler	srcs/bonus/main_bonus.c	/^void	input_handler(void)$/;"	f
+input_handler	srcs/mandatory/main.c	/^void	input_handler(void)$/;"	f
 insert_num	srcs/libft/ft_itoa.c	/^static void	insert_num(int nb, char *num_string, int *i)$/;"	f	file:
-insert_strs	srcs/expand/wildcard_utils.c	/^char	**insert_strs(char **orig, char **new, int *i)$/;"	f
-is_dir	srcs/execute/execute_utils.c	/^int	is_dir(char *str)$/;"	f
-is_meta1	srcs/parse/meta.c	/^int	is_meta1(char c)$/;"	f
-is_meta2	srcs/parse/meta.c	/^int	is_meta2(char c)$/;"	f
-is_redirection	srcs/parse/ast_utils.c	/^int	is_redirection(t_type type)$/;"	f
-is_route	srcs/execute/execute_utils.c	/^int	is_route(char *str)$/;"	f
+insert_strs	srcs/bonus/expand/wildcard_utils_bonus.c	/^char	**insert_strs(char **orig, char **new, int *i)$/;"	f
+insert_strs	srcs/mandatory/expand/wildcard_utils.c	/^char	**insert_strs(char **orig, char **new, int *i)$/;"	f
+is_dir	srcs/bonus/execute/execute_utils_bonus.c	/^int	is_dir(char *str)$/;"	f
+is_dir	srcs/mandatory/execute/execute_utils.c	/^int	is_dir(char *str)$/;"	f
+is_meta1	srcs/bonus/parse/meta_bonus.c	/^int	is_meta1(char c)$/;"	f
+is_meta1	srcs/mandatory/parse/meta.c	/^int	is_meta1(char c)$/;"	f
+is_meta2	srcs/bonus/parse/meta_bonus.c	/^int	is_meta2(char c)$/;"	f
+is_meta2	srcs/mandatory/parse/meta.c	/^int	is_meta2(char c)$/;"	f
+is_redirection	srcs/bonus/parse/ast_utils_bonus.c	/^int	is_redirection(t_type type)$/;"	f
+is_redirection	srcs/mandatory/parse/ast_utils.c	/^int	is_redirection(t_type type)$/;"	f
+is_route	srcs/bonus/execute/execute_utils_bonus.c	/^int	is_route(char *str)$/;"	f
+is_route	srcs/mandatory/execute/execute_utils.c	/^int	is_route(char *str)$/;"	f
 is_set	srcs/libft/ft_strtrim.c	/^static int	is_set(char const *set, char c)$/;"	f	file:
 is_space	srcs/libft/ft_atoi.c	/^int	is_space(char c)$/;"	f
-join_remain	srcs/expand/do_expand.c	/^void	join_remain(t_c_expand *expand, int len)$/;"	f
+join_remain	srcs/bonus/expand/do_expand_bonus.c	/^void	join_remain(t_c_expand *expand, int len)$/;"	f
+join_remain	srcs/mandatory/expand/do_expand.c	/^void	join_remain(t_c_expand *expand, int len)$/;"	f
 last_pid	includes/structures.h	/^	pid_t		last_pid;$/;"	m	struct:s_info
-last_token	srcs/parse/token_utils.c	/^t_token	*last_token(t_token *list)$/;"	f
+last_token	srcs/bonus/parse/token_utils_bonus.c	/^t_token	*last_token(t_token *list)$/;"	f
+last_token	srcs/mandatory/parse/token_utils.c	/^t_token	*last_token(t_token *list)$/;"	f
 left	includes/structures.h	/^	struct s_ast	*left;$/;"	m	struct:s_ast	typeref:struct:s_ast::s_ast
-logical_exp	srcs/execute/execute.c	/^void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)$/;"	f
-main	srcs/testmain.c	/^int	main(int ac, char *av[], char *envp[])$/;"	f
-make_envp	srcs/execute/execute_utils.c	/^char	**make_envp(t_env_pack *envs)$/;"	f
-merge_strs	srcs/execute/utils.c	/^char	**merge_strs(char **orig, char **new_strs)$/;"	f
+logical_exp	srcs/bonus/execute/execute_bonus.c	/^void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)$/;"	f
+logical_exp	srcs/mandatory/execute/execute.c	/^void	logical_exp(t_ast *tree, t_env_pack *pack, t_info *info)$/;"	f
+main	srcs/bonus/main_bonus.c	/^int	main(int ac, char *av[], char *envp[])$/;"	f
+main	srcs/mandatory/main.c	/^int	main(int ac, char *av[], char *envp[])$/;"	f
+make_envp	srcs/bonus/execute/execute_utils_bonus.c	/^char	**make_envp(t_env_pack *envs)$/;"	f
+make_envp	srcs/mandatory/execute/execute_utils.c	/^char	**make_envp(t_env_pack *envs)$/;"	f
+merge_strs	srcs/bonus/execute/utils_bonus.c	/^char	**merge_strs(char **orig, char **new_strs)$/;"	f
+merge_strs	srcs/mandatory/execute/utils.c	/^char	**merge_strs(char **orig, char **new_strs)$/;"	f
 name	includes/structures.h	/^	char			*name;$/;"	m	struct:s_env
-new_token	srcs/parse/token_utils.c	/^t_token	*new_token(char *string, t_type type)$/;"	f
+new_token	srcs/bonus/parse/token_utils_bonus.c	/^t_token	*new_token(char *string, t_type type)$/;"	f
+new_token	srcs/mandatory/parse/token_utils.c	/^t_token	*new_token(char *string, t_type type)$/;"	f
 next	includes/structures.h	/^	struct s_token	*next;$/;"	m	struct:s_token	typeref:struct:s_token::s_token
 next	includes/structures.h	/^	t_redir		*next;$/;"	m	struct:s_redir
 next	srcs/libft/libft.h	/^	struct s_list	*next;$/;"	m	struct:s_list	typeref:struct:s_list::s_list
-only_wildcard	srcs/expand/wildcard_utils.c	/^void	only_wildcard(t_c_expand *expand)$/;"	f
-open_check	srcs/execute/redirections/redirections.c	/^int	open_check(t_redir *temp, int *exit_code)$/;"	f
+only_wildcard	srcs/bonus/expand/wildcard_utils_bonus.c	/^void	only_wildcard(t_c_expand *expand)$/;"	f
+only_wildcard	srcs/mandatory/expand/wildcard_utils.c	/^void	only_wildcard(t_c_expand *expand)$/;"	f
+open_check	srcs/bonus/execute/redirections/redirections_bonus.c	/^int	open_check(t_redir *temp, int *exit_code)$/;"	f
+open_check	srcs/mandatory/execute/redirections/redirections.c	/^int	open_check(t_redir *temp, int *exit_code)$/;"	f
 origin_head	includes/structures.h	/^	t_env	*origin_head;$/;"	m	struct:s_env_pack
 origin_last	includes/structures.h	/^	t_env	*origin_last;$/;"	m	struct:s_env_pack
 origin_next	includes/structures.h	/^	struct s_env	*origin_next;$/;"	m	struct:s_env	typeref:struct:s_env::s_env
 origin_prev	includes/structures.h	/^	struct s_env	*origin_prev;$/;"	m	struct:s_env	typeref:struct:s_env::s_env
 original	includes/structures.h	/^	char		*original;$/;"	m	struct:s_expand
 out_redirs	includes/structures.h	/^	t_redir		*out_redirs;$/;"	m	struct:s_cmd_pack
-path_join	srcs/execute/execute_utils.c	/^char	*path_join(char *path, char *arg)$/;"	f
+path_join	srcs/bonus/execute/execute_utils_bonus.c	/^char	*path_join(char *path, char *arg)$/;"	f
+path_join	srcs/mandatory/execute/execute_utils.c	/^char	*path_join(char *path, char *arg)$/;"	f
 pipe_fds	includes/structures.h	/^	int			pipe_fds[2];$/;"	m	struct:s_info
 prev	includes/structures.h	/^	struct s_token	*prev;$/;"	m	struct:s_token	typeref:struct:s_token::s_token
 prev_fd	includes/structures.h	/^	int			prev_fd;$/;"	m	struct:s_info
-print_ast	srcs/parse/ast_utils.c	/^void	print_ast(t_ast *ast)$/;"	f
-print_export	srcs/builtins/do_builtin2.c	/^int	print_export(t_env_pack *pack)$/;"	f
+print_ast	srcs/bonus/parse/ast_utils_bonus.c	/^void	print_ast(t_ast *ast)$/;"	f
+print_ast	srcs/mandatory/parse/ast_utils.c	/^void	print_ast(t_ast *ast)$/;"	f
+print_export	srcs/bonus/builtins/do_builtin2_bonus.c	/^int	print_export(t_env_pack *pack)$/;"	f
+print_export	srcs/mandatory/builtins/do_builtin2.c	/^int	print_export(t_env_pack *pack)$/;"	f
 q_flag	includes/structures.h	/^	char	q_flag;$/;"	m	struct:s_exp_pair
 redir_fds	includes/structures.h	/^	int			redir_fds[2];$/;"	m	struct:s_info
-redir_open	srcs/execute/redirections/redir_utils.c	/^void	redir_open(t_redir *temp)$/;"	f
-relative_execve	srcs/execute/execute_utils2.c	/^void	relative_execve(char **args, t_env_pack *envs, char **envp)$/;"	f
-remove_bracket	srcs/parse/bracket.c	/^void	remove_bracket(t_token **start, t_token **end)$/;"	f
-remove_space	srcs/parse/tokenizer.c	/^int	remove_space(char *line)$/;"	f
-reset_term	srcs/execute/redirections/heredoc_utils.c	/^void	reset_term(struct termios *term)$/;"	f
+redir_open	srcs/bonus/execute/redirections/redir_utils_bonus.c	/^void	redir_open(t_redir *temp)$/;"	f
+redir_open	srcs/mandatory/execute/redirections/redir_utils.c	/^void	redir_open(t_redir *temp)$/;"	f
+relative_execve	srcs/bonus/execute/execute_utils2_bonus.c	/^void	relative_execve(char **args, t_env_pack *envs, char **envp)$/;"	f
+relative_execve	srcs/mandatory/execute/execute_utils2.c	/^void	relative_execve(char **args, t_env_pack *envs, char **envp)$/;"	f
+remove_bracket	srcs/bonus/parse/bracket_bonus.c	/^void	remove_bracket(t_token **start, t_token **end)$/;"	f
+remove_bracket	srcs/mandatory/parse/bracket.c	/^void	remove_bracket(t_token **start, t_token **end)$/;"	f
+remove_space	srcs/bonus/parse/tokenizer_bonus.c	/^int	remove_space(char *line)$/;"	f
+remove_space	srcs/mandatory/parse/tokenizer.c	/^int	remove_space(char *line)$/;"	f
+reset_term	srcs/bonus/execute/redirections/heredoc_utils_bonus.c	/^void	reset_term(struct termios *term)$/;"	f
+reset_term	srcs/mandatory/execute/redirections/heredoc_utils.c	/^void	reset_term(struct termios *term)$/;"	f
 result	includes/structures.h	/^	char		**result;$/;"	m	struct:s_expand
 right	includes/structures.h	/^	struct s_ast	*right;$/;"	m	struct:s_ast	typeref:struct:s_ast::s_ast
-run_minishell	srcs/testmain.c	/^void	run_minishell(char *str, t_env_pack *pack)$/;"	f
+run_minishell	srcs/bonus/main_bonus.c	/^void	run_minishell(char *str, t_env_pack *pack)$/;"	f
+run_minishell	srcs/mandatory/main.c	/^void	run_minishell(char *str, t_env_pack *pack)$/;"	f
 s_ast	includes/structures.h	/^struct s_ast$/;"	s
 s_cmd_pack	includes/structures.h	/^struct s_cmd_pack$/;"	s
 s_env	includes/structures.h	/^struct s_env$/;"	s
@@ -312,35 +430,59 @@ s_list	srcs/libft/libft.h	/^typedef struct s_list$/;"	s
 s_mark	includes/structures.h	/^struct s_mark$/;"	s
 s_redir	includes/structures.h	/^struct s_redir$/;"	s
 s_token	includes/structures.h	/^struct s_token$/;"	s
-scan_for_wildcard	srcs/expand/wildcard_utils.c	/^int	scan_for_wildcard(char *str)$/;"	f
-scan_n_set_redirs	srcs/execute/redirections/redirections.c	/^int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)$/;"	f
-scan_n_setup	srcs/expand/expand.c	/^void	scan_n_setup(t_c_expand *expand, char *data)$/;"	f
-search_value	srcs/expand/do_expand.c	/^char	*search_value(t_exp_pair *pair, t_env_pack *pack)$/;"	f
-set_exit	srcs/execute/utils2.c	/^void	set_exit(t_env_pack *pack, int code)$/;"	f
-set_fds	srcs/execute/pipe_utils.c	/^void	set_fds(t_cmd *cmd, t_info *info)$/;"	f
-set_info	srcs/execute/execute_utils2.c	/^void	set_info(t_info *info)$/;"	f
-set_new_env	srcs/envs/build_env_pack.c	/^void	set_new_env(t_env_pack *pack, t_env *new)$/;"	f
-set_parse_error	srcs/parse/error.c	/^void	set_parse_error(t_ast *ast, char *string)$/;"	f
-set_shlvl	srcs/envs/env_utils.c	/^void	set_shlvl(t_env_pack *pack)$/;"	f
-set_start_end	srcs/parse/set_nodes.c	/^void	set_start_end(t_ast **ast, t_token *start, t_token *end)$/;"	f
-set_term	srcs/execute/redirections/heredoc_utils.c	/^void	set_term(struct termios *term)$/;"	f
-set_type_meta1	srcs/parse/meta.c	/^void	set_type_meta1(char c, int i, t_type *type)$/;"	f
-sig_handler	srcs/signal/signal.c	/^void	sig_handler(int signo)$/;"	f
-signal_dfl	srcs/signal/signal.c	/^void	signal_dfl(void)$/;"	f
-signal_ign	srcs/signal/signal.c	/^void	signal_ign(void)$/;"	f
-signal_readline	srcs/signal/signal.c	/^void	signal_readline(void)$/;"	f
+scan_for_wildcard	srcs/bonus/expand/wildcard_utils_bonus.c	/^int	scan_for_wildcard(char *str)$/;"	f
+scan_for_wildcard	srcs/mandatory/expand/wildcard_utils.c	/^int	scan_for_wildcard(char *str)$/;"	f
+scan_n_set_redirs	srcs/bonus/execute/redirections/redirections_bonus.c	/^int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)$/;"	f
+scan_n_set_redirs	srcs/mandatory/execute/redirections/redirections.c	/^int	scan_n_set_redirs(t_cmd *cmd, t_env_pack *pack)$/;"	f
+scan_n_setup	srcs/bonus/expand/expand_bonus.c	/^void	scan_n_setup(t_c_expand *expand, char *data)$/;"	f
+scan_n_setup	srcs/mandatory/expand/expand.c	/^void	scan_n_setup(t_c_expand *expand, char *data)$/;"	f
+search_value	srcs/bonus/expand/do_expand_bonus.c	/^char	*search_value(t_exp_pair *pair, t_env_pack *pack)$/;"	f
+search_value	srcs/mandatory/expand/do_expand.c	/^char	*search_value(t_exp_pair *pair, t_env_pack *pack)$/;"	f
+set_exit	srcs/bonus/execute/utils2_bonus.c	/^void	set_exit(t_env_pack *pack, int code)$/;"	f
+set_exit	srcs/mandatory/execute/utils2.c	/^void	set_exit(t_env_pack *pack, int code)$/;"	f
+set_fds	srcs/bonus/execute/pipe_utils_bonus.c	/^void	set_fds(t_cmd *cmd, t_info *info)$/;"	f
+set_fds	srcs/mandatory/execute/pipe_utils.c	/^void	set_fds(t_cmd *cmd, t_info *info)$/;"	f
+set_info	srcs/bonus/execute/execute_utils2_bonus.c	/^void	set_info(t_info *info)$/;"	f
+set_info	srcs/mandatory/execute/execute_utils2.c	/^void	set_info(t_info *info)$/;"	f
+set_new_env	srcs/bonus/envs/env_utils_bonus.c	/^void	set_new_env(t_env_pack *pack, t_env *new)$/;"	f
+set_new_env	srcs/mandatory/envs/env_utils.c	/^void	set_new_env(t_env_pack *pack, t_env *new)$/;"	f
+set_parse_error	srcs/bonus/parse/error_bonus.c	/^void	set_parse_error(t_ast *ast, char *string)$/;"	f
+set_parse_error	srcs/mandatory/parse/error.c	/^void	set_parse_error(t_ast *ast, char *string)$/;"	f
+set_shlvl	srcs/bonus/envs/build_env_pack_bonus.c	/^void	set_shlvl(t_env_pack *pack)$/;"	f
+set_shlvl	srcs/mandatory/envs/build_env_pack.c	/^void	set_shlvl(t_env_pack *pack)$/;"	f
+set_start_end	srcs/bonus/parse/set_nodes_bonus.c	/^void	set_start_end(t_ast **ast, t_token *start, t_token *end)$/;"	f
+set_start_end	srcs/mandatory/parse/set_nodes.c	/^void	set_start_end(t_ast **ast, t_token *start, t_token *end)$/;"	f
+set_term	srcs/bonus/execute/redirections/heredoc_utils_bonus.c	/^void	set_term(struct termios *term)$/;"	f
+set_term	srcs/mandatory/execute/redirections/heredoc_utils.c	/^void	set_term(struct termios *term)$/;"	f
+set_tilde	srcs/bonus/envs/build_env_pack_bonus.c	/^void	set_tilde(t_env_pack *pack)$/;"	f
+set_tilde	srcs/mandatory/envs/build_env_pack.c	/^void	set_tilde(t_env_pack *pack)$/;"	f
+set_type_meta1	srcs/bonus/parse/meta_bonus.c	/^void	set_type_meta1(char c, int i, t_type *type)$/;"	f
+set_type_meta1	srcs/mandatory/parse/meta.c	/^void	set_type_meta1(char c, int i, t_type *type)$/;"	f
+sig_handler	srcs/bonus/signal/signal_bonus.c	/^void	sig_handler(int signo)$/;"	f
+sig_handler	srcs/mandatory/signal/signal.c	/^void	sig_handler(int signo)$/;"	f
+signal_dfl	srcs/bonus/signal/signal_bonus.c	/^void	signal_dfl(void)$/;"	f
+signal_dfl	srcs/mandatory/signal/signal.c	/^void	signal_dfl(void)$/;"	f
+signal_ign	srcs/bonus/signal/signal_bonus.c	/^void	signal_ign(void)$/;"	f
+signal_ign	srcs/mandatory/signal/signal.c	/^void	signal_ign(void)$/;"	f
+signal_readline	srcs/bonus/signal/signal_bonus.c	/^void	signal_readline(void)$/;"	f
+signal_readline	srcs/mandatory/signal/signal.c	/^void	signal_readline(void)$/;"	f
 smaller	srcs/libft/ft_memmove.c	/^static void	smaller(unsigned char *dst, unsigned char *src, size_t len)$/;"	f	file:
-solo_builtin	srcs/builtins/builtin_exec.c	/^int	solo_builtin(t_cmd *cur, t_env_pack *pack)$/;"	f
+solo_builtin	srcs/bonus/builtins/builtin_exec_bonus.c	/^int	solo_builtin(t_cmd *cur, t_env_pack *pack)$/;"	f
+solo_builtin	srcs/mandatory/builtins/builtin_exec.c	/^int	solo_builtin(t_cmd *cur, t_env_pack *pack)$/;"	f
 sorted_head	includes/structures.h	/^	t_env	*sorted_head;$/;"	m	struct:s_env_pack
 sorted_next	includes/structures.h	/^	struct s_env	*sorted_next;$/;"	m	struct:s_env	typeref:struct:s_env::s_env
 sorted_prev	includes/structures.h	/^	struct s_env	*sorted_prev;$/;"	m	struct:s_env	typeref:struct:s_env::s_env
-split_free	srcs/execute/utils.c	/^void	split_free(char **split)$/;"	f
-split_len	srcs/execute/utils.c	/^int	split_len(char **split)$/;"	f
+split_free	srcs/bonus/execute/utils_bonus.c	/^void	split_free(char **split)$/;"	f
+split_free	srcs/mandatory/execute/utils.c	/^void	split_free(char **split)$/;"	f
+split_len	srcs/bonus/execute/utils_bonus.c	/^int	split_len(char **split)$/;"	f
+split_len	srcs/mandatory/execute/utils.c	/^int	split_len(char **split)$/;"	f
 start	includes/structures.h	/^	int	start;$/;"	m	struct:s_mark
 start	includes/structures.h	/^	struct s_token	*start;$/;"	m	struct:s_ast	typeref:struct:s_ast::s_token
 string	includes/structures.h	/^	char			*string;$/;"	m	struct:s_token
-syntax_error_parser	srcs/parse/error.c	/^void	syntax_error_parser(char *string, t_token **list)$/;"	f
-syntax_error_tokenizer	srcs/parse/error.c	/^void	syntax_error_tokenizer(char *string, t_token **list)$/;"	f
+syntax_error_parser	srcs/bonus/parse/error_bonus.c	/^void	syntax_error_parser(char *string, t_token **list)$/;"	f
+syntax_error_parser	srcs/mandatory/parse/error.c	/^void	syntax_error_parser(char *string, t_token **list)$/;"	f
+syntax_error_tokenizer	srcs/bonus/parse/error_bonus.c	/^void	syntax_error_tokenizer(char *string, t_token **list)$/;"	f
+syntax_error_tokenizer	srcs/mandatory/parse/error.c	/^void	syntax_error_tokenizer(char *string, t_token **list)$/;"	f
 t_ast	includes/structures.h	/^typedef struct s_ast		t_ast;$/;"	t	typeref:struct:s_ast
 t_builtin_ptr	includes/builtin.h	/^typedef int	(*t_builtin_ptr)(char **, t_env_pack *);$/;"	t
 t_c_expand	includes/structures.h	/^typedef struct s_expand		t_c_expand;	$/;"	t	typeref:struct:s_expand
@@ -354,15 +496,21 @@ t_mark	includes/structures.h	/^typedef struct s_mark		t_mark;$/;"	t	typeref:stru
 t_redir	includes/structures.h	/^typedef struct s_redir		t_redir;$/;"	t	typeref:struct:s_redir
 t_token	includes/structures.h	/^typedef struct s_token		t_token;$/;"	t	typeref:struct:s_token
 t_type	includes/structures.h	/^typedef enum e_type			t_type;$/;"	t	typeref:enum:e_type
-take_bracket	srcs/parse/center.c	/^t_token	*take_bracket(t_token *curr, t_token *start)$/;"	f
-tokcmp	srcs/parse/bracket.c	/^int	tokcmp(t_token *token1, t_token *token2)$/;"	f
-tokenizer	srcs/parse/tokenizer.c	/^t_token	*tokenizer(char *line)$/;"	f
-trim_quotes	srcs/execute/redirections/redir_utils.c	/^char	*trim_quotes(char *data)$/;"	f
+take_bracket	srcs/bonus/parse/center_bonus.c	/^t_token	*take_bracket(t_token *curr, t_token *start)$/;"	f
+take_bracket	srcs/mandatory/parse/center.c	/^t_token	*take_bracket(t_token *curr, t_token *start)$/;"	f
+tokcmp	srcs/bonus/parse/bracket_bonus.c	/^int	tokcmp(t_token *token1, t_token *token2)$/;"	f
+tokcmp	srcs/mandatory/parse/bracket.c	/^int	tokcmp(t_token *token1, t_token *token2)$/;"	f
+tokenizer	srcs/bonus/parse/tokenizer_bonus.c	/^t_token	*tokenizer(char *line)$/;"	f
+tokenizer	srcs/mandatory/parse/tokenizer.c	/^t_token	*tokenizer(char *line)$/;"	f
+trim_quotes	srcs/bonus/execute/redirections/redir_utils_bonus.c	/^char	*trim_quotes(char *data)$/;"	f
+trim_quotes	srcs/mandatory/execute/redirections/redir_utils.c	/^char	*trim_quotes(char *data)$/;"	f
 type	includes/structures.h	/^	enum e_type		type;$/;"	m	struct:s_ast	typeref:enum:s_ast::e_type
 type	includes/structures.h	/^	enum e_type		type;$/;"	m	struct:s_token	typeref:enum:s_token::e_type
 type	includes/structures.h	/^	enum e_type	type;$/;"	m	struct:s_redir	typeref:enum:s_redir::e_type
-update_list	srcs/parse/tokenizer.c	/^void	update_list(t_token **list, char *string, t_type type)$/;"	f
+update_list	srcs/bonus/parse/tokenizer_bonus.c	/^void	update_list(t_token **list, char *string, t_type type)$/;"	f
+update_list	srcs/mandatory/parse/tokenizer.c	/^void	update_list(t_token **list, char *string, t_type type)$/;"	f
 value	includes/structures.h	/^	char			*value;$/;"	m	struct:s_env
 wild_flag	includes/structures.h	/^	int			wild_flag;$/;"	m	struct:s_expand
 wild_num	includes/structures.h	/^	int			wild_num;$/;"	m	struct:s_expand
-write_heredoc	srcs/execute/redirections/do_heredoc.c	/^void	write_heredoc(t_redir *redir, t_env_pack *pack, int inf_fd)$/;"	f
+write_heredoc	srcs/bonus/execute/redirections/do_heredoc_bonus.c	/^void	write_heredoc(t_redir *redir, t_env_pack *pack, int inf_fd)$/;"	f
+write_heredoc	srcs/mandatory/execute/redirections/do_heredoc.c	/^void	write_heredoc(t_redir *redir, t_env_pack *pack, int inf_fd)$/;"	f
