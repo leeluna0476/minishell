@@ -6,12 +6,13 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:47:35 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/04 15:56:45 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/05 09:24:54 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
+
 # include "structures.h"
 
 // build_env_pack.c

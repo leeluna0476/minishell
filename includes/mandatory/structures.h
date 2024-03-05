@@ -6,12 +6,13 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 08:02:36 by seojilee          #+#    #+#             */
-/*   Updated: 2024/03/04 18:39:53 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/03/05 09:25:02 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+
 # include "../../srcs/libft/libft.h"
 
 typedef struct s_token		t_token;
