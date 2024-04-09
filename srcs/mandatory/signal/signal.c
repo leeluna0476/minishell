@@ -6,7 +6,7 @@
 /*   By: seojilee <seojilee@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 02:19:01 by seojilee          #+#    #+#             */
-/*   Updated: 2024/03/04 18:20:50 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:36:52 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ void	signal_readline(void)
 		g_status = -1;
 	}
 	else if (g_status == SIGQUIT)
-	{
-		signal(SIGQUIT, SIG_IGN);
 		g_status = 0;
-	}
 }
 
 void	signal_ign(void)
