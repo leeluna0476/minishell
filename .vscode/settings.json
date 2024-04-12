@@ -16,6 +16,10 @@
 		"env.h": "c",
 		"parser.h": "c",
 		"signal_handler.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"libft.h": "c",
+		"util.h": "c",
+		"stdio.h": "c",
+		"ios": "c"
 	}
 }

@@ -24,10 +24,10 @@ $(NAME): $(OBJS) $(PRINTF_OBJS)
 	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 
 clean:
-	$(RM) $(OBJS) $(PRINTF_OBJS) $(BONUS_OBJS)
+	@$(RM) $(OBJS) $(PRINTF_OBJS) $(BONUS_OBJS)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 
