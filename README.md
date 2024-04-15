@@ -1,6 +1,9 @@
 # 미니쉘 (minishell)
 ![](docs/pics/125.png)
-A little shell referring to bash.
+
+A little shell that mimics bash.
+
+---
 
 |Name|Version|
 |--|--|
