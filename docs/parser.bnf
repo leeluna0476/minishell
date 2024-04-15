@@ -1,0 +1,132 @@
+<script>             ::= <simple command>
+                      | <pipeline> 
+                      | <logical expression> 
+
+<logical expression> ::= <script> <logical symbol> <script> 
+                      |  '(' <script> <logical symbol> <script> ')'
+                      |  <logical expression> <logical symbol> <logical expression>
+                      | '(' <logical expression> <logical symbol> <logical expression> ')'
+
+<pipeline>           ::= <simple command>
+                      | <pipeline> '|' <pipeline>
+                      | '(' <pipeline> '|' <pipeline> ')'
+
+<simple command>     ::= <command> 
+                      | '(' <command> ')' 
+                      | <redirection>
+                      | <redirection> <command> 
+                      | <command> <redirection> 
+                      | '(' <redirection> <command> ')' 
+                      | '(' <command> <redirection> ')'
+
+<redirection>        ::= '<' <word> | '>' <word> | '<<' <word> | '>>' <word> | &<redirection>
+
+<command>            ::= <word> | <word> <command>
+
+<word>               ::= (string) | '"'(string)'"' | "'"(string)"'"
+
+<logical symbol>     ::= "&&" | "||"
+
+---
+
+(ls | cat -e | wc) && pwd
+<script>
+<logical expression>
+<script> <logical symbol> <script>
+<pipeline> <logical symbol> <simple command>
+<pipeline> "&&" <command>
+'(' <pipeline> '|' <pipeline> ')' "&&" <word>
+'(' <simple command> '|' <pipeline> ')' "&&" pwd
+'(' <command> '|' <pipeline> '|' <pipeline> ')' "&&" pwd
+'(' <word> '|' <simple command> '|' <simple command> ')' "&&" pwd
+'(' ls '|' <command> '|' <command> ')' "&&" pwd
+'(' ls '|' <word> <command> '|' <word> ')' "&&" pwd
+'(' ls '|' cat <word> '|' wc ')' "&&" pwd
+'(' ls '|' cat -e '|' wc ')' "&&" pwd
+... success
+
+(ls) > outfile
+<script>
+<logical expression>
+<simple command>
+... fail: 명령어를 감싸는 괄호 바깥에 <logical symbol>도 아니고 pipe도 아닌 무언가 있다.
+
+(ls)=a
+<script>
+<logical expression>
+<simple command>
+... fail: 명령어를 감싸는 괄호 바깥에 <logical symbol>도 아니고 pipe도 아닌 무언가 있다.
+
+echo "$A"''"hello"
+<script>
+<logical expression>
+<simple command>
+<command>
+echo <command>
+echo <word>
+echo "$A"''"hello"
+... success
+
+((ls && cat file) | cat -e)
+<script>
+<script> | <script>
+... fail: ls && cat file을 감싸는 괄호 외의 다른 괄호가 존재함.
+
+(ls && cat file) | wc -l
+<script>
+<script> | <script>
+<logical expression> | <simple command>
+( <logical expression> <logical symbol> <logical expression> ) | <simple command>
+( <simple command> && <simple command> ) | <simple command>
+( <command> && <command> ) | <word> <command>
+( <word> && <word> <command> ) | <word> <command>
+( <word> && <word> <word> ) | <word> <command>
+( <word> && <word> <word> ) | <word> <word>
+( ls && cat file ) | wc -l
+... success
+
+ls > outfile < infile < infile -> ok
+<script>
+<logical expression>
+<simple command>
+<simple command> <redirection>
+<simple command> <redirection> <redirection>
+<simple command> <redirection> <redirection> <redirection>
+<command> <redirection> <redirection> <redirection>
+<word> > <word> < <word> < <word>
+ls > outfile < infile < infile
+... success
+
+((ls)) -> error
+<script>
+<logical expression>
+<simple command>
+( <command> )
+... fail: <command>에는 괄호 생성 규칙이 없다.
+
+((ls) | ls) -> error
+<script>
+<script> | <script>
+<logical expression> | <logical expression>
+<simple command> | <simple command>
+... fail: <command>를 감싸는 괄호 외의 괄호가 들어왔다.
+
+((ls) && ls) -> ok
+<script>
+<logical expression>
+( <logical expression> <logical symbol> <logical expression> )
+( <simple command> <logical symbol> <simple command> )
+( ( <command> ) <logical symbol> <command> )
+( ( <word> ) <logical symbol> <word> )
+( ( ls ) && ls )
+... success
+
+(ls > outfile)
+<script>
+<logical expression>
+<simple command>
+( <simple command> <redirection> )
+( <command> > <word> )
+( <word> > <word> )
+( ls > outfile )
+... success
