@@ -17,4 +17,4 @@ cd minishell
 make
 ./minishell
 ```
-![](docs/pics/helloworld.png)
+<img src="docs/pics/helloworld.png" width="500"/>
