@@ -6,7 +6,7 @@
 /*   By: yusekim <yusekim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:08:22 by yusekim           #+#    #+#             */
-/*   Updated: 2024/03/04 15:39:05 by seojilee         ###   ########.fr       */
+/*   Updated: 2024/04/16 10:36:58 by seojilee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	do_cd(char **args, t_env_pack *pack)
 	char	*temp;
 	t_env	*target;
 
-	temp = getcwd(0, 0);
 	if (!args[1] || ft_strcmp(args[1], "~") == 0)
 		return (cd_home(pack));
 	else if (!ft_strcmp(args[1], "-"))
@@ -37,6 +36,7 @@ int	do_cd(char **args, t_env_pack *pack)
 	}
 	else
 		result = chdir(args[1]);
+	temp = getcwd(0, 0);
 	result = check_res(result, pack, temp, args);
 	free(temp);
 	return (result);
