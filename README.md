@@ -7,7 +7,7 @@ A little shell that mimics bash.
 
 |Name|Version|
 |--|--|
-|**미니쉘 (minishell)**|**1.0**|
+|**미니쉘 (minishell)**|**0.1.0**|
 |macOs Catalina|10.15.7|
 |GNU Readline|2.0.2|
 
